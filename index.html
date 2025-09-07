@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Minha Web Rádio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #101820;
+      color: #fff;
+      text-align: center;
+    }
+    header {
+      background: #ff6600;
+      padding: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    audio {
+      margin: 20px 0;
+      width: 80%;
+    }
+    section {
+      padding: 30px;
+    }
+    h2 {
+      color: #ffcc00;
+      margin-bottom: 15px;
+    }
+    .patrocinadores {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .patrocinadores img {
+      width: 150px;
+      border-radius: 8px;
+      transition: transform 0.2s;
+    }
+    .patrocinadores img:hover {
+      transform: scale(1.1);
+    }
+    footer {
+      background: #222;
+      padding: 15px;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>📻 Minha Web Rádio</header>
+
+  <section>
+    <h2>▶️ Ouça ao vivo</h2>
+    <audio controls autoplay>
+      <source src="http://seuservidor:porta/stream" type="audio/mpeg">
+      Seu navegador não suporta áudio online.
+    </audio>
+  </section>
+
+  <section>
+    <h2>📅 Programação</h2>
+    <p><strong>08:00 - 10:00</strong> | Bom Dia Música</p>
+    <p><strong>12:00 - 14:00</strong> | Almoço Musical</p>
+    <p><strong>18:00 - 20:00</strong> | Noite Sertaneja</p>
+    <p><strong>20:00 - 22:00</strong> | Rock Night</p>
+  </section>
+
+  <section>
+    <h2>🤝 Patrocinadores</h2>
+    <div class="patrocinadores">
+      <a href="https://site-do-patrocinador1.com" target="_blank">
+        <img src="https://via.placeholder.com/150x100.png?text=Patrocinador+1" alt="Patrocinador 1">
+      </a>
+      <a href="https://site-do-patrocinador2.com" target="_blank">
+        <img src="https://via.placeholder.com/150x100.png?text=Patrocinador+2" alt="Patrocinador 2">
+      </a>
+      <a href="https://site-do-patrocinador3.com" target="_blank">
+        <img src="https://via.placeholder.com/150x100.png?text=Patrocinador+3" alt="Patrocinador 3">
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    📲 Siga a gente nas redes sociais |
+    <a href="https://wa.me/5500000000000" style="color:#25D366;" target="_blank">WhatsApp</a> |
+    <a href="https://instagram.com" style="color:#E1306C;" target="_blank">Instagram</a>
+  </footer>
+
+</body>
+</html>
