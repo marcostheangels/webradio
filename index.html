@@ -11,7 +11,7 @@
 
   <style>
     :root {
-      --cor-fundo-transparente: rgba(26, 36, 53, 0.7);
+      --cor-fundo-transparente: rgba(26, 36, 53, 0.75);
       --cor-borda: rgba(255, 255, 255, 0.1);
       --cor-destaque: #ff6600;
       --cor-texto: #f1f5f9;
@@ -22,7 +22,6 @@
       margin: 0;
       font-family: 'Poppins', Arial, sans-serif;
       color: var(--cor-texto);
-      /* FUNDO COM IMAGEM E SOBREPOSIÇÃO */
       background-image: linear-gradient(rgba(18, 24, 31, 0.85), rgba(18, 24, 31, 0.85)), url(https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=2070&auto=format&fit=crop);
       background-size: cover;
       background-position: center;
@@ -38,7 +37,6 @@
       text-align: center;
     }
 
-    /* TÍTULO COM GRADIENTE ANIMADO */
     header h1 {
       font-size: 2.5rem;
       font-weight: 700;
@@ -56,7 +54,6 @@
       100% { background-position: -200% 0; }
     }
 
-    /* EFEITO GLASSMORPHISM (VIDRO) PARA OS CARDS */
     .glass-card {
       background-color: var(--cor-fundo-transparente);
       border-radius: 20px;
@@ -65,10 +62,9 @@
       margin-bottom: 2rem;
       box-shadow: 0 10px 30px var(--cor-sombra);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px); /* Suporte para Safari */
+      -webkit-backdrop-filter: blur(10px);
     }
 
-    /* PLAYER CARD ESTILIZADO */
     .player-logo {
       width: 150px;
       height: 150px;
@@ -79,47 +75,12 @@
       box-shadow: 0 0 20px var(--cor-destaque);
     }
 
-    .player-card h2 {
-      margin: 0;
-      font-size: 1.5rem;
-      font-weight: 600;
-    }
-
-    .player-card p {
-      margin: 0.25rem 0 1.5rem 0;
-      font-size: 1rem;
-      opacity: 0.8;
-    }
-
-    audio {
-      width: 100%;
-      margin-top: 1rem;
-      border-radius: 50px;
-    }
-    
-    /* RELÓGIO DIGITAL */
-    #clock {
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: var(--cor-texto);
-        letter-spacing: 2px;
-        text-shadow: 0 0 8px var(--cor-sombra);
-    }
-
-    /* SEÇÕES DE CONTEÚDO */
-    .content-section h3 {
-      font-size: 1.8rem;
-      color: var(--cor-destaque);
-      margin-top: 0;
-      margin-bottom: 1.5rem;
-    }
-    
-    /* GRADE DE PATROCINADORES INTERATIVA */
-    .sponsors-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 1.5rem;
-    }
+    .player-card h2 { margin: 0; font-size: 1.5rem; font-weight: 600; }
+    .player-card p { margin: 0.25rem 0 1.5rem 0; font-size: 1rem; opacity: 0.8; }
+    audio { width: 100%; margin-top: 1rem; border-radius: 50px; }
+    #clock { font-size: 2.5rem; font-weight: 700; color: var(--cor-texto); letter-spacing: 2px; text-shadow: 0 0 8px var(--cor-sombra); }
+    .content-section h3 { font-size: 1.8rem; color: var(--cor-destaque); margin-top: 0; margin-bottom: 1.5rem; }
+    .sponsors-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1.5rem; }
 
     .sponsors-grid a {
       display: block;
@@ -128,48 +89,61 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       border: 2px solid transparent;
     }
-
-    .sponsors-grid a:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px var(--cor-destaque);
-      border-color: var(--cor-destaque);
-    }
-
-    .sponsors-grid img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
+    .sponsors-grid a:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--cor-destaque); border-color: var(--cor-destaque); }
+    .sponsors-grid img { width: 100%; height: auto; display: block; }
     
-    /* RODAPÉ */
-    footer {
-      margin-top: 2rem;
-      padding: 1rem;
+    /* ESTILOS DO FORMULÁRIO DE PEDIDOS */
+    .request-form { display: flex; flex-direction: column; gap: 1rem; }
+    .request-form input, .request-form textarea {
+        background-color: rgba(0,0,0,0.3);
+        border: 1px solid var(--cor-borda);
+        border-radius: 10px;
+        padding: 0.8rem 1rem;
+        color: var(--cor-texto);
+        font-family: 'Poppins', sans-serif;
+        font-size: 1rem;
     }
-    
-    footer a {
-      color: var(--cor-texto);
-      text-decoration: none;
-      margin: 0 10px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: color 0.3s ease, transform 0.3s ease;
+    .request-form input::placeholder, .request-form textarea::placeholder { color: rgba(255,255,255,0.5); }
+    .request-form button {
+        background-color: var(--cor-destaque);
+        border: none;
+        border-radius: 10px;
+        padding: 0.8rem 1rem;
+        color: #fff;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
     }
+    .request-form button:hover { background-color: #e65c00; }
 
-    footer a:hover {
-      color: var(--cor-destaque);
-      transform: translateY(-2px);
+    /* BOTÕES DE COMPARTILHAMENTO */
+    .share-buttons { display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem; }
+    .share-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.6rem 1.2rem;
+        border-radius: 50px;
+        text-decoration: none;
+        color: #fff;
+        font-weight: 600;
+        transition: transform 0.2s ease;
     }
+    .share-button:hover { transform: scale(1.05); }
+    .whatsapp { background-color: #25D366; }
+    .facebook { background-color: #1877F2; }
+    .twitter { background-color: #1DA1F2; }
 
+    footer { margin-top: 2rem; padding: 1rem; }
+    footer a { color: var(--cor-texto); text-decoration: none; margin: 0 10px; display: inline-flex; align-items: center; gap: 8px; transition: color 0.3s ease, transform 0.3s ease; }
+    footer a:hover { color: var(--cor-destaque); transform: translateY(-2px); }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <header>
-      <h1>WEB RÁDIO MONTES CLAROS</h1>
-    </header>
+    <header><h1>WEB RÁDIO MONTES CLAROS</h1></header>
 
     <section class="glass-card player-card">
       <img src="IMG_20240502_201111.jpg" alt="Logo da Rádio" class="player-logo">
@@ -179,18 +153,24 @@
         <source src="https://stream.zeno.fm/kuza08w1pzzuv" type="audio/mpeg">
         Seu navegador não suporta áudio online.
       </audio>
+
+      <div class="share-buttons">
+          <a href="https://api.whatsapp.com/send?text=Estou%20ouvindo%20a%20Web%20Rádio%20Montes%20Claros!%20Ouve%20aí%20também:%20https://marcostheangels.github.io/webradio/" target="_blank" class="share-button whatsapp">WhatsApp</a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://marcostheangels.github.io/webradio/" target="_blank" class="share-button facebook">Facebook</a>
+          <a href="https://twitter.com/intent/tweet?url=https://marcostheangels.github.io/webradio/&text=Estou%20ouvindo%20a%20Web%20Rádio%20Montes%20Claros!" target="_blank" class="share-button twitter">Twitter</a>
+      </div>
     </section>
     
-    <section class="glass-card">
-        <div id="clock">Carregando...</div>
-    </section>
+    <section class="glass-card"><div id="clock">Carregando...</div></section>
 
     <section class="glass-card">
-      <h3>📅 Programação</h3>
-      <p><strong>08:00 - 10:00</strong> | Bom Dia Música</p>
-      <p><strong>12:00 - 14:00</strong> | Almoço Musical</p>
-      <p><strong>18:00 - 20:00</strong> | Noite Sertaneja</p>
-      <p><strong>20:00 - 22:00</strong> | Rock Night</p>
+        <h3>🎵 Peça sua Música</h3>
+        <form action="https://formspree.io/f/myzdlnqa" method="POST" class="request-form">
+            <input type="text" name="nome" placeholder="Seu Nome" required>
+            <input type="text" name="musica" placeholder="Nome da Música e Artista" required>
+            <textarea name="dedicatoria" rows="3" placeholder="Quer mandar um alô ou dedicatória?"></textarea>
+            <button type="submit">Enviar Pedido</button>
+        </form>
     </section>
 
     <section class="glass-card">
@@ -199,19 +179,10 @@
         <a href="#" target="_blank"><img src="IMG_20240502_201111.jpg" alt="Logo da Rádio"></a>
         <a href="#" target="_blank"><img src="me.jpg" alt="Patrocinador ME"></a>
         <a href="#" target="_blank"><img src="vitrine.jpg" alt="Patrocinador Vitrine"></a>
-        
-        ' e mude a imagem -->
-        </div>
+      </div>
     </section>
 
-    <footer>
-      <p>📲 Siga a gente nas redes sociais</p>
-      <a href="https://wa.me/5538998558528" target="_blank">
-        <svg fill="currentColor" width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16.6,14.2c-0.3-0.2-1.5-0.8-1.7-0.9c-0.2-0.1-0.4-0.1-0.6,0.1c-0.2,0.2-0.7,0.9-0.8,1c-0.1,0.2-0.2,0.2-0.4,0.1 c-0.2-0.1-1.1-0.4-2.1-1.3c-0.8-0.7-1.3-1.6-1.5-1.8c-0.2-0.3-0.1-0.4,0.1-0.6c0.1-0.1,0.2-0.3,0.4-0.4c0.1-0.1,0.2-0.2,0.2-0.4 c0.1-0.1,0.1-0.3,0-0.4c-0.1-0.1-0.6-1.5-0.8-2c-0.2-0.5-0.4-0.5-0.6-0.5c-0.2,0-0.4,0-0.6,0c-0.2,0-0.5,0.1-0.7,0.3 c-0.2,0.2-0.8,0.7-0.8,1.8c0,1.1,0.8,2.1,1,2.3c0.1,0.2,1.6,2.6,4,3.5c2.4,1,2.4,0.7,2.8,0.7c0.4,0,1.5-0.6,1.7-1.2 c0.2-0.6,0.2-1.1,0.1-1.2C17.1,14.4,16.8,14.3,16.6,14.2z M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10c5.5,0,10-4.5,10-10S17.5,2,12,2 M12,20.5c-4.7,0-8.5-3.8-8.5-8.5S7.3,3.5,12,3.5s8.5,3.8,8.5,8.5S16.7,20.5,12,20.5"></path></svg>
-        WhatsApp
-      </a>
-      <a href="#" target="_blank">Instagram</a>
-    </footer>
+    <footer><p>Siga a gente nas redes sociais</p></footer>
   </div>
 
   <script>
