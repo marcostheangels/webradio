@@ -1,196 +1,151 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>Web rádio Montes Claros - A Voz da Nossa Cultura e Música</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="stylesheet" href="assets/css/styles-2025.css" /> <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-		
-		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-		<script src="https://kit.fontawesome.com/SEU_KIT_FONT_AWESOME.js" crossorigin="anonymous"></script> </head>
-	<body class="landing is-preload">
 
-		<div id="page-wrapper">
 
-			<header id="header" class="alt">
-				<h1><a href="index.html">WEB RÁDIO MONTES CLAROS</a></h1>
-				<nav id="nav">
-					<ul>
-						<li class="special">
-							<a href="#menu" class="menuToggle"><span>Menu</span></a>
-							<div id="menu">
-								<ul>
-									<li><a href="index.html">Início</a></li>
-									<li><a href="#about">Sobre Nós</a></li>
-									<li><a href="#schedule">Programação</a></li>
-									<li><a href="#podcast">Podcasts</a></li>
-									<li><a href="#contact">Contato</a></li>
-									<li><a href="#" class="button primary small">OUÇA AGORA <i class="fas fa-play"></i></a></li>
-								</ul>
-							</div>
-						</li>
-					</ul>
-				</nav>
-			</header>
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Rádio Montes Claros</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('https://example.com/sua-imagem-de-fundo.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+        .header {
+            background: rgba(0, 123, 255, 0.8);
+            padding: 40px 0;
+            text-align: center;
+            border-bottom: 5px solid #0056b3;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .card {
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
+            border-radius: 25px;
+            transition: background-color 0.3s;
+        }
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            background: rgba(0, 123, 255, 0.8);
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        audio {
+            width: 100%;
+            border-radius: 5px;
+        }
+        #chat {
+            height: 300px;
+            width: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
 
-			<section id="banner" class="style-2025"> <div class="inner">
-					<span class="icon solid fa-headset fa-2x"></span> <h2>WEBRÁDIO MONTES CLAROS</h2>
-					<p>Sua companhia diária: música, notícias e cultura do norte de Minas.<br />
-					Sempre conectada a você.</p>
-					
-					<div class="player-container">
-						<h3>AO VIVO AGORA: O Melhor da Música!</h3>
-						<iframe 
-							src="https://player.zeno.fm/kuza08w1pzzuv" 
-							width="100%" 
-							height="120" 
-							frameborder="0" 
-							scrolling="no"
-							allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
-							allowfullscreen
-							loading="lazy">
-						</iframe>
-						<p class="listen-info">Sintonia digital, emoção real.</p>
-					</div>
-					
-					<ul class="actions stacked">
-						<li><a href="#about" class="button primary big scrolly">Conheça Nossa História</a></li>
-					</ul>
-				</div>
-			</section>
+    <header class="header">
+        <h1>Web Rádio Montes Claros</h1>
+        <p>O melhor da música, notícias e entretenimento</p>
+        <div id="clock" style="font-size: 1.5rem;"></div>
+    </header>
 
-			<section id="about" class="wrapper style1 special">
-				<div class="inner">
-					<header class="major">
-						<h2>A Sua Rádio, Conectada à Nossa Região.</h2>
-						<p>Desde 2024, a Webrádio Montes Claros tem sido a voz do norte de Minas,
-						trazendo uma programação diversificada que celebra nossa cultura, informa
-						e entretém. Mais do que música, somos a trilha sonora do seu dia a dia.</p>
-					</header>
-					<div class="features">
-						<section>
-							<span class="icon solid fa-globe-americas major"></span>
-							<h3>Conteúdo Local</h3>
-							<p>Notícias, eventos e histórias de Montes Claros e região, sempre atualizadas.</p>
-						</section>
-						<section>
-							<span class="icon solid fa-music major"></span>
-							<h3>Música de Qualidade</h3>
-							<p>Os maiores sucessos do momento e os clássicos que você ama, cuidadosamente selecionados.</p>
-						</section>
-						<section>
-							<span class="icon solid fa-comments major"></span>
-							<h3>Interatividade</h3>
-							<p>Participe, peça sua música, mande sua mensagem. Sua voz faz parte da nossa rádio!</p>
-						</section>
-						<section>
-							<span class="icon solid fa-mobile-alt major"></span>
-							<h3>Acesso em Qualquer Lugar</h3>
-							<p>Ouça no seu celular, tablet ou computador. A Webrádio MOC está sempre com você.</p>
-						</section>
-					</div>
-				</div>
-			</section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Agora tocando:</h5>
+                        <!-- URL do seu stream de áudio -->
+                        <audio controls autoplay>
+                            <source src="https://stream.zeno.fm/kuza08w1pzzuv" type="audio/mpeg">
+                            Seu navegador não suporta o elemento de áudio.
+                        </audio>
+                        <div id="listeners" style="margin-top: 10px;">
+                            Ouvintes Online: <span id="listenerCount">0</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Playlist Atual</h5>
+                        <ul>
+                            <li>Música 1 - Artista 1</li>
+                            <li>Música 2 - Artista 2</li>
+                            <li>Música 3 - Artista 3</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Chat ao Vivo</h5>
+                        <!-- Integrar um chat ao vivo (por exemplo, Tawk.to) -->
+                        <iframe id="chat" src="https://tawk.to/chat/ID_DO_CHAT" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Siga-nos nas Redes Sociais</h5>
+                        <a href="#" class="btn btn-custom"><i class="fab fa-facebook-f"></i> Facebook</a>
+                        <a href="#" class="btn btn-custom"><i class="fab fa-twitter"></i> Twitter</a>
+                        <a href="#" class="btn btn-custom"><i class="fab fa-youtube"></i> YouTube</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-			<section id="schedule" class="wrapper alt style2">
-				<section class="spotlight">
-					<div class="image"><img src="images/moc-news.jpg" alt="Montes Claros Notícias" /></div><div class="content">
-						<h2><span class="icon solid fa-podcast"></span> Manhã Conectada</h2>
-						<p class="schedule-time">Segunda a Sexta | 07h00 - 09h00</p>
-						<p>As notícias que impactam Montes Claros e o Brasil, entrevistas exclusivas e o melhor do MPB para começar seu dia com energia e informação.</p>
-						<ul class="actions stacked">
-							<li><a href="#" class="button primary small">Ver Detalhes</a></li>
-						</ul>
-					</div>
-				</section>
-				<section class="spotlight">
-					<div class="image"><img src="images/moc-music.jpg" alt="Música Montes Claros" /></div><div class="content">
-						<h2><span class="icon solid fa-headphones"></span> Tarde de Sucessos</h2>
-						<p class="schedule-time">Segunda a Sexta | 13h00 - 16h00</p>
-						<p>Os hits que bombam e os clássicos que não saem da memória. Sua tarde mais leve e divertida com a nossa seleção musical.</p>
-						<ul class="actions stacked">
-							<li><a href="#" class="button primary small">Pedir Música</a></li>
-						</ul>
-					</div>
-				</section>
-				<section class="spotlight">
-					<div class="image"><img src="images/moc-night.jpg" alt="Noite em Montes Claros" /></div><div class="content">
-						<h2><span class="icon solid fa-star"></span> Noite Vibe MOC</h2>
-						<p class="schedule-time">Todos os Dias | 20h00 - 22h00</p>
-						<p>Relaxe e aproveite o final do dia com uma playlist especial para a noite, repleta de boa música e mensagens positivas.</p>
-						<ul class="actions stacked">
-							<li><a href="#" class="button primary small">Ver Playlist</a></li>
-						</ul>
-					</div>
-				</section>
-			</section>
+    <footer>
+        <p>&copy; 2025 Web Rádio Montes Claros. Todos os direitos reservados.</p>
+    </footer>
 
-			<section id="podcast" class="wrapper style3 special">
-				<div class="inner">
-					<header class="major">
-						<h2><span class="icon solid fa-microphone-alt"></span> Nossos Podcasts</h2>
-						<p>Ouça os melhores momentos da nossa programação e conteúdos exclusivos<br />
-						disponíveis a qualquer hora, em qualquer lugar.</p>
-					</header>
-					<ul class="features">
-						<li>
-							<span class="icon solid fa-comment-dots major"></span>
-							<h3>Moc Debate</h3>
-							<p>Análises aprofundadas sobre política, economia e cultura local.</p>
-						</li>
-						<li>
-							<span class="icon solid fa-route major"></span>
-							<h3>Caminhos do Norte</h3>
-							<p>Descubra as histórias e curiosidades das cidades vizinhas e de Minas Gerais.</p>
-						</li>
-						<li>
-							<span class="icon solid fa-compact-disc major"></span>
-							<h3>Por Trás da Música</h3>
-							<p>Entrevistas com artistas e os bastidores das canções que amamos.</p>
-						</li>
-					</ul>
-					<ul class="actions stacked">
-						<li><a href="#" class="button primary big">Explorar Podcasts</a></li>
-					</ul>
-				</div>
-			</section>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Função para atualizar a hora
+        function updateClock() {
+            const now = new Date();
+            const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            document.getElementById('clock').textContent = now.toLocaleTimeString('pt-BR', options);
+        }
 
-			<section id="contact" class="wrapper style4">
-				<div class="inner">
-					<header>
-						<h2>Conecte-se com a gente!</h2>
-						<p>Sua participação é fundamental para a Webrádio Montes Claros. Mande seu alô, sua sugestão ou seu pedido musical.</p>
-					</header>
-					<ul class="actions stacked">
-						<li><a href="https://wa.me/SEU_NUMERO_WHATSAPP" target="_blank" class="button fit primary"><i class="fab fa-whatsapp"></i> Fale Conosco pelo WhatsApp</a></li>
-						<li><a href="mailto:contato@webradiomontesclaros.com.br" class="button fit"><i class="fas fa-envelope"></i> Envie um E-mail</a></li>
-					</ul>
-				</div>
-			</section>
+        // Simulando ouvintes online
+        function updateListeners() {
+            const listenerCount = Math.floor(Math.random() * 100); // Simula entre 0 e 99 ouvintes
+            document.getElementById('listenerCount').textContent = listenerCount;
+        }
 
-			<footer id="footer">
-				<ul class="icons">
-					<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-					<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-					<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-					<li><a href="mailto:contato@webradiomontesclaros.com.br" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-				</ul>
-				<ul class="copyright">
-					<li>&copy; 2024 Webrádio Montes Claros. Todos os direitos reservados.</li><li>Desenvolvido com <a href="http://html5up.net">HTML5 UP</a>.</li>
-				</ul>
-			</footer>
-
-		</div>
-
-		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/jquery.scrollex.min.js"></script>
-		<script src="assets/js/jquery.scrolly.min.js"></script>
-		<script src="assets/js/browser.min.js"></script>
-		<script src="assets/js/breakpoints.min.js"></script>
-		<script src="assets/js/util.js"></script>
-		<script src="assets/js/main.js"></script>
-
-	</body>
+        setInterval(updateClock, 1000); // Atualiza o relógio a cada segundo
+        setInterval(updateListeners, 5000); // Atualiza o número de ouvintes a cada 5 segundos
+        updateClock(); // Chama a função uma vez para iniciar imediatamente
+        updateListeners(); // Chama a função uma vez para iniciar o contador de ouvintes
+    </script>
+</body>
 </html>
