@@ -114,16 +114,14 @@
       opacity: 0;
       transition: opacity 0.3s ease, transform 0.3s ease;
       transform: scale(0.98);
-      pointer-events: none; /* Correção para permitir cliques */
+      pointer-events: none;
     }
     .glass-card:hover::before {
         opacity: 1;
         transform: scale(1);
     }
 
-    /* PLAYER CARD ESTILIZADO */
     .player-logo {
-      /* TAMANHO DA LOGO AJUSTADO AQUI */
       width: 180px; 
       height: 180px;
       border-radius: 50%;
@@ -288,5 +286,16 @@
     trackInfoElement.innerHTML = `<span>Agora Tocando:</span> As melhores da cidade - Vários Artistas`;
   </script>
 
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/68be73aea323af1923353bbf/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
 </body>
 </html>
