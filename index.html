@@ -11,18 +11,22 @@
 
   <style>
     :root {
-      --cor-fundo: #12181f;
-      --cor-card: #1e293b;
+      --cor-fundo-transparente: rgba(26, 36, 53, 0.7);
+      --cor-borda: rgba(255, 255, 255, 0.1);
       --cor-destaque: #ff6600;
-      --cor-texto: #e2e8f0;
-      --cor-sombra: rgba(0, 0, 0, 0.4);
+      --cor-texto: #f1f5f9;
+      --cor-sombra: rgba(0, 0, 0, 0.5);
     }
 
     body {
       margin: 0;
       font-family: 'Poppins', Arial, sans-serif;
-      background-color: var(--cor-fundo);
       color: var(--cor-texto);
+      /* FUNDO COM IMAGEM E SOBREPOSIÇÃO */
+      background-image: linear-gradient(rgba(18, 24, 31, 0.85), rgba(18, 24, 31, 0.85)), url(https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=2070&auto=format&fit=crop);
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
       display: flex;
       justify-content: center;
       padding: 2rem 1rem;
@@ -34,23 +38,37 @@
       text-align: center;
     }
 
+    /* TÍTULO COM GRADIENTE ANIMADO */
     header h1 {
-      color: var(--cor-destaque);
       font-size: 2.5rem;
       font-weight: 700;
       margin-bottom: 2rem;
-      text-shadow: 0 0 10px var(--cor-destaque);
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, var(--cor-destaque), var(--cor-texto), var(--cor-destaque));
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradient-animation 5s linear infinite;
     }
 
-    /* --- PLAYER CARD ESTILIZADO --- */
-    .player-card {
-      background-color: var(--cor-card);
+    @keyframes gradient-animation {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* EFEITO GLASSMORPHISM (VIDRO) PARA OS CARDS */
+    .glass-card {
+      background-color: var(--cor-fundo-transparente);
       border-radius: 20px;
+      border: 1px solid var(--cor-borda);
       padding: 2rem;
       margin-bottom: 2rem;
       box-shadow: 0 10px 30px var(--cor-sombra);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px); /* Suporte para Safari */
     }
 
+    /* PLAYER CARD ESTILIZADO */
     .player-logo {
       width: 150px;
       height: 150px;
@@ -58,6 +76,7 @@
       object-fit: cover;
       margin-bottom: 1rem;
       border: 4px solid var(--cor-destaque);
+      box-shadow: 0 0 20px var(--cor-destaque);
     }
 
     .player-card h2 {
@@ -78,44 +97,24 @@
       border-radius: 50px;
     }
     
-    /* --- RELÓGIO DIGITAL --- */
-    .clock-container {
-        background-color: var(--cor-card);
-        border-radius: 15px;
-        padding: 1rem;
-        margin-bottom: 2rem;
-        box-shadow: 0 5px 15px var(--cor-sombra);
-    }
-
+    /* RELÓGIO DIGITAL */
     #clock {
         font-size: 2.5rem;
         font-weight: 700;
-        color: var(--cor-destaque);
+        color: var(--cor-texto);
         letter-spacing: 2px;
+        text-shadow: 0 0 8px var(--cor-sombra);
     }
 
-    /* --- SEÇÕES DE CONTEÚDO --- */
-    .content-section {
-      background-color: var(--cor-card);
-      border-radius: 15px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 5px 15px var(--cor-sombra);
-    }
-
+    /* SEÇÕES DE CONTEÚDO */
     .content-section h3 {
       font-size: 1.8rem;
       color: var(--cor-destaque);
       margin-top: 0;
       margin-bottom: 1.5rem;
     }
-
-    .programacao p {
-      margin: 0.5rem 0;
-      font-size: 1rem;
-    }
     
-    /* --- GRADE DE PATROCINADORES --- */
+    /* GRADE DE PATROCINADORES INTERATIVA */
     .sponsors-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -124,15 +123,16 @@
 
     .sponsors-grid a {
       display: block;
-      background-color: rgba(0,0,0,0.2);
       border-radius: 10px;
       overflow: hidden;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 2px solid transparent;
     }
 
     .sponsors-grid a:hover {
       transform: scale(1.05);
-      box-shadow: 0 8px 25px var(--cor-sombra);
+      box-shadow: 0 0 20px var(--cor-destaque);
+      border-color: var(--cor-destaque);
     }
 
     .sponsors-grid img {
@@ -141,10 +141,10 @@
       display: block;
     }
     
-    /* --- RODAPÉ --- */
+    /* RODAPÉ */
     footer {
       margin-top: 2rem;
-      opacity: 0.8;
+      padding: 1rem;
     }
     
     footer a {
@@ -154,16 +154,12 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      transition: color 0.3s ease;
+      transition: color 0.3s ease, transform 0.3s ease;
     }
 
     footer a:hover {
       color: var(--cor-destaque);
-    }
-
-    .whatsapp-icon {
-      width: 20px;
-      height: 20px;
+      transform: translateY(-2px);
     }
 
   </style>
@@ -172,12 +168,12 @@
 
   <div class="container">
     <header>
-      <h1>📻 WEB RÁDIO MONTES CLAROS</h1>
+      <h1>WEB RÁDIO MONTES CLAROS</h1>
     </header>
 
-    <section class="player-card">
+    <section class="glass-card player-card">
       <img src="IMG_20240502_201111.jpg" alt="Logo da Rádio" class="player-logo">
-      <h2>AO VIVO AGORA</h2>
+      <h2>NO AR</h2>
       <p>A melhor programação, 24 horas no ar!</p>
       <audio controls autoplay>
         <source src="https://stream.zeno.fm/kuza08w1pzzuv" type="audio/mpeg">
@@ -185,11 +181,11 @@
       </audio>
     </section>
     
-    <div class="clock-container">
+    <section class="glass-card">
         <div id="clock">Carregando...</div>
-    </div>
+    </section>
 
-    <section class="content-section programacao">
+    <section class="glass-card">
       <h3>📅 Programação</h3>
       <p><strong>08:00 - 10:00</strong> | Bom Dia Música</p>
       <p><strong>12:00 - 14:00</strong> | Almoço Musical</p>
@@ -197,7 +193,7 @@
       <p><strong>20:00 - 22:00</strong> | Rock Night</p>
     </section>
 
-    <section class="content-section">
+    <section class="glass-card">
       <h3>🤝 Patrocinadores</h3>
       <div class="sponsors-grid">
         <a href="#" target="_blank"><img src="IMG_20240502_201111.jpg" alt="Logo da Rádio"></a>
@@ -211,30 +207,23 @@
     <footer>
       <p>📲 Siga a gente nas redes sociais</p>
       <a href="https://wa.me/5538998558528" target="_blank">
-        <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M18.423 5.576C16.483 3.636 13.843 2.5 11 2.5C5.203 2.5 0.5 7.203 0.5 13C0.5 14.827 1.012 16.57 1.938 18.062L0.5 23.5L6.115 22.088C7.552 22.887 9.22 23.5 11 23.5H11.001C16.798 23.5 21.5 18.797 21.5 13C21.5 10.157 20.364 7.517 18.423 5.576ZM11.001 21.5C9.453 21.5 7.954 21.054 6.678 20.246L6.264 20.003L2.512 21.488L4.01 17.818L3.743 17.394C2.825 15.983 2.5 14.384 2.5 13C2.5 8.31 6.31 4.5 11 4.5C13.206 4.5 15.228 5.367 16.821 6.96C18.413 8.553 19.5 10.575 19.5 13C19.5 17.69 15.69 21.5 11.001 21.5ZM15.862 14.65C15.589 14.504 14.331 13.875 14.083 13.784C13.834 13.692 13.663 13.647 13.491 13.919C13.319 14.191 12.822 14.787 12.676 14.959C12.53 15.131 12.384 15.153 12.111 15.008C11.838 14.862 10.923 14.542 9.838 13.59C9.001 12.868 8.42 12.012 8.248 11.74C8.076 11.468 8.203 11.341 8.326 11.22C8.437 11.111 8.574 10.925 8.719 10.753C8.865 10.581 8.911 10.459 9.002 10.264C9.094 10.069 9.048 9.902 8.981 9.78C8.913 9.658 8.416 8.399 8.221 7.903C8.025 7.407 7.828 7.498 7.683 7.498C7.561 7.498 7.415 7.498 7.269 7.498C7.123 7.498 6.85 7.566 6.633 7.838C6.416 8.11 5.918 8.584 5.918 9.78C5.918 10.976 6.656 12.126 6.792 12.298C6.928 12.47 8.358 14.737 10.574 15.688C12.79 16.639 13.504 16.273 13.978 16.228C14.453 16.183 15.474 15.576 15.722 14.902C15.971 14.228 15.971 13.67 15.862 14.65Z" fill="#25D366"/></svg>
+        <svg fill="currentColor" width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16.6,14.2c-0.3-0.2-1.5-0.8-1.7-0.9c-0.2-0.1-0.4-0.1-0.6,0.1c-0.2,0.2-0.7,0.9-0.8,1c-0.1,0.2-0.2,0.2-0.4,0.1 c-0.2-0.1-1.1-0.4-2.1-1.3c-0.8-0.7-1.3-1.6-1.5-1.8c-0.2-0.3-0.1-0.4,0.1-0.6c0.1-0.1,0.2-0.3,0.4-0.4c0.1-0.1,0.2-0.2,0.2-0.4 c0.1-0.1,0.1-0.3,0-0.4c-0.1-0.1-0.6-1.5-0.8-2c-0.2-0.5-0.4-0.5-0.6-0.5c-0.2,0-0.4,0-0.6,0c-0.2,0-0.5,0.1-0.7,0.3 c-0.2,0.2-0.8,0.7-0.8,1.8c0,1.1,0.8,2.1,1,2.3c0.1,0.2,1.6,2.6,4,3.5c2.4,1,2.4,0.7,2.8,0.7c0.4,0,1.5-0.6,1.7-1.2 c0.2-0.6,0.2-1.1,0.1-1.2C17.1,14.4,16.8,14.3,16.6,14.2z M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10c5.5,0,10-4.5,10-10S17.5,2,12,2 M12,20.5c-4.7,0-8.5-3.8-8.5-8.5S7.3,3.5,12,3.5s8.5,3.8,8.5,8.5S16.7,20.5,12,20.5"></path></svg>
         WhatsApp
       </a>
       <a href="#" target="_blank">Instagram</a>
     </footer>
-
   </div>
 
   <script>
     function updateClock() {
       const clockElement = document.getElementById('clock');
       const now = new Date();
-      // Obtendo a hora local de Montes Claros (fuso -3)
       const hours = String(now.getHours()).padStart(2, '0');
       const minutes = String(now.getMinutes()).padStart(2, '0');
       const seconds = String(now.getSeconds()).padStart(2, '0');
-      
       clockElement.textContent = `${hours}:${minutes}:${seconds}`;
     }
-
-    // Atualiza o relógio a cada segundo
     setInterval(updateClock, 1000);
-
-    // Inicia o relógio imediatamente ao carregar a página
     updateClock();
   </script>
 
