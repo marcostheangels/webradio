@@ -39,6 +39,7 @@
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
+    align-items: center; /* Garante alinhamento vertical se as imagens tiverem alturas diferentes */
   }
   .patrocinadores img {
     width: 150px;
@@ -58,12 +59,10 @@
     color: #fff;
     text-decoration: none;
     margin: 0 10px;
-    /* NOVO: Alinhamento para o ícone e texto */
     display: inline-flex;
     align-items: center;
-    gap: 8px; /* Espaço entre o ícone e o texto */
+    gap: 8px;
   }
-  /* NOVO: Estilo para o ícone SVG */
   .whatsapp-icon {
     width: 20px;
     height: 20px;
@@ -76,7 +75,7 @@
 
   <section>
     <h2>▶️ Música Ao Vivo 24 Horas</h2>
-    <audio controls>
+    <audio controls autoplay>
       <source src="https://stream.zeno.fm/kuza08w1pzzuv" type="audio/mpeg">
       Seu navegador não suporta áudio online.
     </audio>
@@ -97,17 +96,13 @@
       <a href="#" target="_blank">
         <img src="IMG_20240502_201111.jpg" alt="Logo da Rádio">
       </a>
-    </div>
-<div class="patrocinadores2">
       <a href="#" target="_blank">
         <img src="me.jpg" alt="patrocinador">
       </a>
-</div>
-<div class="patrocinadores3">
       <a href="#" target="_blank">
         <img src="vitrine.jpg" alt="patrocinador">
       </a>
-</div>
+    </div>
   </section>
 
   <footer>
