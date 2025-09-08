@@ -1,151 +1,292 @@
-
-
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Rádio Montes Claros</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background: url('https://example.com/sua-imagem-de-fundo.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: #fff;
-        }
-        .header {
-            background: rgba(0, 123, 255, 0.8);
-            padding: 40px 0;
-            text-align: center;
-            border-bottom: 5px solid #0056b3;
-        }
-        .container {
-            margin-top: 20px;
-        }
-        .card {
-            margin-bottom: 20px;
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            background-color: rgba(0, 0, 0, 0.7);
-        }
-        .card-body {
-            padding: 20px;
-        }
-        .btn-custom {
-            background-color: #007bff;
-            color: white;
-            border-radius: 25px;
-            transition: background-color 0.3s;
-        }
-        .btn-custom:hover {
-            background-color: #0056b3;
-        }
-        footer {
-            background: rgba(0, 123, 255, 0.8);
-            color: white;
-            text-align: center;
-            padding: 15px 0;
-            position: relative;
-            bottom: 0;
-            width: 100%;
-        }
-        audio {
-            width: 100%;
-            border-radius: 5px;
-        }
-        #chat {
-            height: 300px;
-            width: 100%;
-            border: none;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WEB RÁDIO MONTES CLAROS - A Sua Rádio da Cidade!</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --cor-fundo-transparente: rgba(26, 36, 53, 0.85);
+      --cor-borda: rgba(255, 255, 255, 0.15);
+      --cor-destaque: #ff6600;
+      --cor-secundaria: #00bcd4;
+      --cor-texto: #f0f8ff;
+      --cor-sombra: rgba(0, 0, 0, 0.6);
+      --glow-intensity: 0 0 15px var(--cor-destaque);
+      --glow-strong: 0 0 25px var(--cor-destaque), 0 0 40px var(--cor-destaque);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--cor-texto);
+      background: linear-gradient(135deg, #1a2a3a 0%, #0d1a2a 100%);
+      background-size: cover;
+      background-attachment: fixed;
+      display: flex;
+      justify-content: center;
+      padding: 2rem 1rem;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .background-effect {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.6;
+      background: linear-gradient(45deg, #100a20, #0a1a2a, #2a0a1a);
+      background-size: 400% 400%;
+      animation: background-gradient-animation 15s ease infinite;
+    }
+    @keyframes background-gradient-animation {
+        0% {background-position:0% 50%}
+        50% {background-position:100% 50%}
+        100% {background-position:0% 50%}
+    }
+
+    .container {
+      width: 100%;
+      max-width: 850px;
+      text-align: center;
+      z-index: 1;
+    }
+
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 2.5rem;
+      letter-spacing: 2px;
+      background: linear-gradient(90deg, var(--cor-destaque), var(--cor-secundaria), var(--cor-destaque));
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradient-animation 8s linear infinite, text-glow 1.5s ease-in-out infinite alternate;
+      text-shadow: none;
+    }
+
+    @keyframes gradient-animation {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    @keyframes text-glow {
+        0% { text-shadow: var(--glow-intensity); }
+        100% { text-shadow: var(--glow-strong); }
+    }
+
+    .glass-card {
+      background-color: var(--cor-fundo-transparente);
+      border-radius: 20px;
+      border: 1px solid var(--cor-borda);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 40px var(--cor-sombra);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 20px;
+      border: 2px solid transparent;
+      background: linear-gradient(45deg, var(--cor-destaque), var(--cor-secundaria)) border-box;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      transform: scale(0.98);
+      pointer-events: none; /* Correção para permitir cliques */
+    }
+    .glass-card:hover::before {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    /* PLAYER CARD ESTILIZADO */
+    .player-logo {
+      /* TAMANHO DA LOGO AJUSTADO AQUI */
+      width: 180px; 
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1.5rem;
+      border: 5px solid var(--cor-destaque);
+      box-shadow: 0 0 25px var(--cor-destaque);
+      animation: logo-pulse 2s infinite alternate ease-in-out;
+    }
+
+    @keyframes logo-pulse {
+        0% { box-shadow: 0 0 20px var(--cor-destaque); }
+        100% { box-shadow: 0 0 40px var(--cor-secundaria); }
+    }
+
+    .player-card h2 { margin: 0; font-size: 1.8rem; font-weight: 700; color: var(--cor-secundaria); }
+    
+    #listener-count {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        background-color: rgba(0,0,0,0.3);
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        font-size: 1rem;
+        font-weight: 600;
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+        border: 1px solid var(--cor-borda);
+    }
+    
+    #current-track-info { font-size: 1.2rem; font-weight: 600; margin-top: 0.5rem; color: var(--cor-texto); margin-bottom: 1.5rem; }
+    #current-track-info span { color: var(--cor-destaque); font-weight: 700; }
+    #clock { font-family: 'Orbitron', monospace; font-size: 3rem; font-weight: 700; color: var(--cor-secundaria); letter-spacing: 3px; text-shadow: 0 0 15px var(--cor-secundaria), 0 0 25px rgba(0,255,255,0.4); }
+    .content-section h3 { font-size: 2rem; color: var(--cor-destaque); margin-top: 0; margin-bottom: 1.8rem; text-shadow: var(--glow-intensity); }
+    .sponsors-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1.5rem; }
+    .sponsors-grid a { border-radius: 10px; border: 2px solid rgba(255,255,255,0.1); box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: all 0.3s ease; position: relative; overflow: hidden; }
+    .sponsors-grid a:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 10px 30px var(--cor-sombra), 0 0 20px var(--cor-destaque); border-color: var(--cor-destaque); }
+    .sponsors-grid img { width: 100%; height: auto; display: block; filter: grayscale(20%); transition: filter 0.3s ease; }
+    .sponsors-grid a:hover img { filter: grayscale(0%); }
+    .request-form { display: flex; flex-direction: column; gap: 1rem; }
+    .request-form input, .request-form textarea { background-color: rgba(0,0,0,0.4); border: 1px solid var(--cor-borda); border-radius: 10px; padding: 0.9rem 1.2rem; color: var(--cor-texto); font-family: 'Montserrat', sans-serif; font-size: 1rem; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+    .request-form input:focus, .request-form textarea:focus { outline: none; border-color: var(--cor-destaque); box-shadow: 0 0 10px var(--cor-destaque); }
+    .request-form button { background: linear-gradient(90deg, var(--cor-destaque), var(--cor-secundaria)); border: none; border-radius: 10px; padding: 0.9rem 1.2rem; color: #fff; font-size: 1.15rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.4); }
+    .request-form button:hover { transform: translateY(-3px); box-shadow: 0 8px 20px var(--cor-sombra), var(--glow-intensity); background: linear-gradient(90deg, var(--cor-secundaria), var(--cor-destaque)); }
+    .share-buttons { display: flex; justify-content: center; gap: 1.2rem; margin-top: 2rem; }
+    .share-button { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.7rem 1.4rem; border-radius: 50px; text-decoration: none; color: #fff; font-weight: 700; transition: transform 0.2s ease, box-shadow 0.3s ease; box-shadow: 0 3px 10px rgba(0,0,0,0.3); }
+    .share-button:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 6px 15px rgba(0,0,0,0.5); }
+    .whatsapp { background-color: #25D366; } .whatsapp:hover { box-shadow: 0 0 15px #25D366; } .facebook { background-color: #1877F2; } .facebook:hover { box-shadow: 0 0 15px #1877F2; } .twitter { background-color: #1DA1F2; } .twitter:hover { box-shadow: 0 0 15px #1DA1F2; }
+    footer { margin-top: 3rem; padding: 1.5rem; }
+    footer p { font-size: 1.1rem; margin-bottom: 1rem; opacity: 0.9; }
+    footer a { color: var(--cor-texto); text-decoration: none; margin: 0 12px; display: inline-flex; align-items: center; gap: 8px; transition: color 0.3s ease, transform 0.3s ease; }
+    footer a:hover { color: var(--cor-destaque); transform: translateY(-3px); }
+  </style>
 </head>
 <body>
+  <div class="background-effect"></div> 
 
-    <header class="header">
-        <h1>Web Rádio Montes Claros</h1>
-        <p>O melhor da música, notícias e entretenimento</p>
-        <div id="clock" style="font-size: 1.5rem;"></div>
+  <div class="container">
+    <header>
+      <h1>WEB RÁDIO MONTES CLAROS</h1>
     </header>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Agora tocando:</h5>
-                        <!-- URL do seu stream de áudio -->
-                        <audio controls autoplay>
-                            <source src="https://stream.zeno.fm/kuza08w1pzzuv" type="audio/mpeg">
-                            Seu navegador não suporta o elemento de áudio.
-                        </audio>
-                        <div id="listeners" style="margin-top: 10px;">
-                            Ouvintes Online: <span id="listenerCount">0</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Playlist Atual</h5>
-                        <ul>
-                            <li>Música 1 - Artista 1</li>
-                            <li>Música 2 - Artista 2</li>
-                            <li>Música 3 - Artista 3</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Chat ao Vivo</h5>
-                        <!-- Integrar um chat ao vivo (por exemplo, Tawk.to) -->
-                        <iframe id="chat" src="https://tawk.to/chat/ID_DO_CHAT" frameborder="0"></iframe>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Siga-nos nas Redes Sociais</h5>
-                        <a href="#" class="btn btn-custom"><i class="fab fa-facebook-f"></i> Facebook</a>
-                        <a href="#" class="btn btn-custom"><i class="fab fa-twitter"></i> Twitter</a>
-                        <a href="#" class="btn btn-custom"><i class="fab fa-youtube"></i> YouTube</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <section class="glass-card player-card">
+      <img src="IMG_20240502_201111.jpg" alt="Logo da Rádio" class="player-logo">
+      <h2>NO AR</h2>
+      
+      <div id="listener-count">
+        <svg fill="currentColor" width="20" height="20" viewBox="0 0 24 24"><path d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,4.5C17,4.5 21.27,7.61 23,12C21.27,16.39 17,19.5 12,19.5C7,19.5 2.73,16.39 1,12C2.73,7.61 7,4.5 12,4.5M3.18,12C4.83,15.36 8.24,17.5 12,17.5C15.76,17.5 19.17,15.36 20.82,12C19.17,8.64 15.76,6.5 12,6.5C8.24,6.5 4.83,8.64 3.18,12Z" /></svg>
+        <span id="listener-count-number">--</span>
+      </div>
+
+      <p id="current-track-info">As melhores da cidade - Vários Artistas</p>
+      
+      <audio controls autoplay>
+        <source src="https://stream.zeno.fm/kuza08w1pzzuv" type="audio/mpeg">
+        Seu navegador não suporta áudio online.
+      </audio>
+
+      <div class="share-buttons">
+          <a href="https://api.whatsapp.com/send?text=Sintonize%20na%20Web%20Rádio%20Montes%20Claros!%20A%20melhor%20música%20e%20informação.%20Ouça%20agora:%20https://marcostheangels.github.io/webradio/" target="_blank" class="share-button whatsapp">WhatsApp</a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://marcostheangels.github.io/webradio/&quote=Sintonize%20na%20Web%20Rádio%20Montes%20Claros!%20A%20melhor%20música%20e%20informação." target="_blank" class="share-button facebook">Facebook</a>
+          <a href="https://twitter.com/intent/tweet?url=https://marcostheangels.github.io/webradio/&text=Sintonize%20na%20Web%20Rádio%20Montes%20Claros!%20A%20melhor%20música%20e%20informação." target="_blank" class="share-button twitter">Twitter</a>
+      </div>
+    </section>
+    
+    <section class="glass-card">
+        <h3>⏰ Hora Certa</h3>
+        <div id="clock">Carregando...</div>
+    </section>
+
+    <section class="glass-card">
+        <h3>🎵 Peça sua Música</h3>
+        <form action="https://formspree.io/f/myzdlnqa" method="POST" class="request-form">
+            <input type="text" name="nome" placeholder="Seu Nome" required>
+            <input type="text" name="musica" placeholder="Nome da Música e Artista" required>
+            <textarea name="dedicatoria" rows="3" placeholder="Quer mandar um alô ou dedicatória?"></textarea>
+            <button type="submit">Enviar Pedido</button>
+        </form>
+    </section>
+
+    <section class="glass-card">
+      <h3>📅 Programação</h3>
+      <p><strong>08:00 - 10:00</strong> | Bom Dia Música</p>
+      <p><strong>12:00 - 14:00</strong> | Almoço Musical</p>
+      <p><strong>18:00 - 20:00</strong> | Noite Sertaneja</p>
+      <p><strong>20:00 - 22:00</strong> | Rock Night</p>
+    </section>
+
+    <section class="glass-card">
+      <h3>🤝 Patrocinadores</h3>
+      <div class="sponsors-grid">
+        <a href="#" target="_blank"><img src="IMG_20240502_201111.jpg" alt="Logo da Rádio"></a>
+        <a href="#" target="_blank"><img src="me.jpg" alt="Patrocinador ME"></a>
+        <a href="#" target="_blank"><img src="vitrine.jpg" alt="Patrocinador Vitrine"></a>
+      </div>
+    </section>
 
     <footer>
-        <p>&copy; 2025 Web Rádio Montes Claros. Todos os direitos reservados.</p>
+      <p>📲 Siga a gente nas redes sociais</p>
+      <a href="https://wa.me/5538998558528?text=Olá,%20Web%20Rádio%20Montes%20Claros!" target="_blank">
+        <svg class="whatsapp-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16.6,14.2c-0.3-0.2-1.5-0.8-1.7-0.9c-0.2-0.1-0.4-0.1-0.6,0.1c-0.2,0.2-0.7,0.9-0.8,1c-0.1,0.2-0.2,0.2-0.4,0.1 c-0.2-0.1-1.1-0.4-2.1-1.3c-0.8-0.7-1.3-1.6-1.5-1.8c-0.2-0.3-0.1-0.4,0.1-0.6c0.1-0.1,0.2-0.3,0.4-0.4c0.1-0.1,0.2-0.2,0.2-0.4 c0.1-0.1,0.1-0.3,0-0.4c-0.1-0.1-0.6-1.5-0.8-2c-0.2-0.5-0.4-0.5-0.6-0.5c-0.2,0-0.4,0-0.6,0c-0.2,0-0.5,0.1-0.7,0.3 c-0.2,0.2-0.8,0.7-0.8,1.8c0,1.1,0.8,2.1,1,2.3c0.1,0.2,1.6,2.6,4,3.5c2.4,1,2.4,0.7,2.8,0.7c0.4,0,1.5-0.6,1.7-1.2 c0.2-0.6,0.2-1.1,0.1-1.2C17.1,14.4,16.8,14.3,16.6,14.2z M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10c5.5,0,10-4.5,10-10S17.5,2,12,2 M12,20.5c-4.7,0-8.5-3.8-8.5-8.5S7.3,3.5,12,3.5s8.5,3.8,8.5,8.5S16.7,20.5,12,20.5"></path></svg>
+        WhatsApp
+      </a>
+      <a href="https://instagram.com/SEU_PERFIL_AQUI" target="_blank">Instagram</a>
     </footer>
+  </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        // Função para atualizar a hora
-        function updateClock() {
-            const now = new Date();
-            const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
-            document.getElementById('clock').textContent = now.toLocaleTimeString('pt-BR', options);
-        }
+  <script>
+    function updateClock() {
+      const clockElement = document.getElementById('clock');
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      clockElement.textContent = `${hours}:${minutes}:${seconds}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
 
-        // Simulando ouvintes online
-        function updateListeners() {
-            const listenerCount = Math.floor(Math.random() * 100); // Simula entre 0 e 99 ouvintes
-            document.getElementById('listenerCount').textContent = listenerCount;
-        }
+    async function updateListenerCount() {
+      const listenerCountElement = document.getElementById('listener-count-number');
+      const streamId = 'kuza08w1pzzuv';
+      const apiUrl = `https://proxy.zeno.fm/proxy/stations/${streamId}/stats`;
 
-        setInterval(updateClock, 1000); // Atualiza o relógio a cada segundo
-        setInterval(updateListeners, 5000); // Atualiza o número de ouvintes a cada 5 segundos
-        updateClock(); // Chama a função uma vez para iniciar imediatamente
-        updateListeners(); // Chama a função uma vez para iniciar o contador de ouvintes
-    </script>
+      try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) throw new Error('Erro ao buscar dados da API');
+        const data = await response.json();
+        const listeners = data.listeners || '0';
+        listenerCountElement.textContent = listeners;
+      } catch (error) {
+        console.error("Não foi possível atualizar os ouvintes:", error);
+        listenerCountElement.textContent = '--';
+      }
+    }
+    setInterval(updateListenerCount, 15000);
+    updateListenerCount();
+
+    // Placeholder para "Agora Tocando"
+    const trackInfoElement = document.getElementById('current-track-info');
+    trackInfoElement.innerHTML = `<span>Agora Tocando:</span> As melhores da cidade - Vários Artistas`;
+  </script>
+
 </body>
 </html>
