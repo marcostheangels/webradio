@@ -25,9 +25,19 @@
       margin: 0;
       font-family: 'Montserrat', sans-serif;
       color: var(--cor-texto);
-      background: linear-gradient(135deg, #1a2a3a 0%, #0d1a2a 100%);
+      
+      /* --- MUDANÇA PRINCIPAL AQUI --- */
+      /* A primeira linha (linear-gradient) cria um filtro escuro. */
+      /* A segunda linha (url) é a sua imagem de fundo. TROQUE A URL ABAIXO. */
+      background: 
+        linear-gradient(rgba(13, 26, 42, 0.85), rgba(13, 26, 42, 0.95)),
+        url('https://github.com/marcostheangels/webradio/blob/main/matriz.jpg'); /* <-- SUBSTITUA ESTE LINK PELO LINK DA SUA IMAGEM */
+
+      /* Estas propriedades garantem que a imagem cubra toda a tela e fique fixa */
       background-size: cover;
       background-attachment: fixed;
+      background-position: center center;
+      
       display: flex;
       justify-content: center;
       padding: 2rem 1rem;
@@ -249,15 +259,15 @@
           <img src="IMG_20240502_201111.jpg" alt="Logo da Rádio">
         </a>
         
-        <a href="https://github.com/marcostheangels/webradio/blob/main/Vitrine.jpg" target="_blank">
-          <img src="vitrine.jpg" alt="Patrocinadorvitrine">
+        <a href="#" target="_blank">
+          <img src="me.jpg" alt="Patrocinador ME">
         </a>
         
-        <a href="https://github.com/marcostheangels/webradio/blob/main/dj.jpg" target="_blank">
-          <img src="dj.jpg" alt="Patrocinadordj">
+        <a href="#" target="_blank">
+          <img src="vitrine.jpg" alt="Patrocinador Vitrine">
         </a>
-        </div>
 
+      </div>
     </section>
 
     <footer>
