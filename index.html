@@ -11,11 +11,11 @@
 
   <style>
     :root {
-      --cor-fundo-transparente: rgba(26, 36, 53, 0.85); /* Mais opaco para glassmorphism */
+      --cor-fundo-transparente: rgba(26, 36, 53, 0.85);
       --cor-borda: rgba(255, 255, 255, 0.15);
-      --cor-destaque: #ff6600; /* Laranja vibrante */
-      --cor-secundaria: #00bcd4; /* Azul ciano para contraste */
-      --cor-texto: #f0f8ff; /* Branco suave */
+      --cor-destaque: #ff6600;
+      --cor-secundaria: #00bcd4;
+      --cor-texto: #f0f8ff;
       --cor-sombra: rgba(0, 0, 0, 0.6);
       --glow-intensity: 0 0 15px var(--cor-destaque);
       --glow-strong: 0 0 25px var(--cor-destaque), 0 0 40px var(--cor-destaque);
@@ -23,22 +23,20 @@
 
     body {
       margin: 0;
-      font-family: 'Montserrat', sans-serif; /* Fonte mais moderna */
+      font-family: 'Montserrat', sans-serif;
       color: var(--cor-texto);
-      /* FUNDO ABSTRATO DINÂMICO - Exemplo com gradiente e fallback */
       background: linear-gradient(135deg, #1a2a3a 0%, #0d1a2a 100%);
       background-size: cover;
       background-attachment: fixed;
       display: flex;
       justify-content: center;
       padding: 2rem 1rem;
-      min-height: 100vh; /* Garante que o fundo ocupe toda a altura */
-      position: relative; /* Para o efeito de partículas */
-      overflow-x: hidden; /* Evita scroll horizontal */
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
     }
 
-    /* EFEITO DE PARTÍCULAS OU BACKGROUND MAIS DINÂMICO */
-    .background-effect { /* Placeholder para JS de partículas ou background animado */
+    .background-effect {
       position: fixed;
       top: 0;
       left: 0;
@@ -46,7 +44,6 @@
       height: 100%;
       z-index: -1;
       opacity: 0.6;
-      /* Exemplo de fundo com gradiente animado se não usar partículas */
       background: linear-gradient(45deg, #100a20, #0a1a2a, #2a0a1a);
       background-size: 400% 400%;
       animation: background-gradient-animation 15s ease infinite;
@@ -57,18 +54,16 @@
         100% {background-position:0% 50%}
     }
 
-
     .container {
       width: 100%;
-      max-width: 850px; /* Um pouco mais largo */
+      max-width: 850px;
       text-align: center;
-      z-index: 1; /* Garante que o conteúdo fique acima do fundo */
+      z-index: 1;
     }
 
-    /* TÍTULO COM GRADIENTE ANIMADO E BRILHO */
     header h1 {
-      font-family: 'Orbitron', sans-serif; /* Fonte futurista para o título */
-      font-size: 3rem; /* Maior */
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3rem;
       font-weight: 700;
       margin-bottom: 2.5rem;
       letter-spacing: 2px;
@@ -77,7 +72,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       animation: gradient-animation 8s linear infinite, text-glow 1.5s ease-in-out infinite alternate;
-      text-shadow: none; /* Remove a sombra padrão para o glow */
+      text-shadow: none;
     }
 
     @keyframes gradient-animation {
@@ -89,8 +84,6 @@
         100% { text-shadow: var(--glow-strong); }
     }
 
-
-    /* EFEITO GLASSMORPHISM (VIDRO) PARA OS CARDS COM BORDAS ANIMADAS */
     .glass-card {
       background-color: var(--cor-fundo-transparente);
       border-radius: 20px;
@@ -98,14 +91,14 @@
       padding: 2rem;
       margin-bottom: 2rem;
       box-shadow: 0 10px 40px var(--cor-sombra);
-      backdrop-filter: blur(15px); /* Mais blur */
+      backdrop-filter: blur(15px);
       -webkit-backdrop-filter: blur(15px);
       position: relative;
       overflow: hidden;
       transition: all 0.3s ease;
     }
 
-    .glass-card::before { /* Borda animada */
+    .glass-card::before {
       content: '';
       position: absolute;
       top: 0;
@@ -127,16 +120,15 @@
         transform: scale(1);
     }
 
-    /* PLAYER CARD ESTILIZADO */
     .player-logo {
-      width: 160px; /* Um pouco maior */
+      width: 160px;
       height: 160px;
       border-radius: 50%;
       object-fit: cover;
       margin-bottom: 1.5rem;
       border: 5px solid var(--cor-destaque);
       box-shadow: 0 0 25px var(--cor-destaque);
-      animation: logo-pulse 2s infinite alternate ease-in-out; /* Animação de pulso */
+      animation: logo-pulse 2s infinite alternate ease-in-out;
     }
 
     @keyframes logo-pulse {
@@ -145,9 +137,7 @@
     }
 
     .player-card h2 { margin: 0; font-size: 1.8rem; font-weight: 700; color: var(--cor-secundaria); }
-    .player-card p { margin: 0.5rem 0 1.5rem 0; font-size: 1.1rem; opacity: 0.9; }
-
-    /* NOVO: Estilo para o contador de ouvintes */
+    
     #listener-count {
         display: inline-flex;
         align-items: center;
@@ -157,156 +147,48 @@
         border-radius: 50px;
         font-size: 1rem;
         font-weight: 600;
-        margin-top: -1rem;
+        margin-top: 0.5rem;
         margin-bottom: 1rem;
         border: 1px solid var(--cor-borda);
     }
 
-    /* Estilo para "Agora Tocando" */
     #current-track-info {
-        font-size: 1.2rem;
-        font-weight: 600;
-        margin-top: 1rem;
-        color: var(--cor-texto);
+        font-size: 1.2rem; font-weight: 600; margin-top: 0.5rem; color: var(--cor-texto); margin-bottom: 1.5rem;
     }
-    #current-track-info span {
-        color: var(--cor-destaque);
-        font-weight: 700;
-    }
-
-
-    /* RELÓGIO DIGITAL APRIMORADO */
-    #clock {
-        font-family: 'Orbitron', monospace; /* Fonte digital */
-        font-size: 3rem; /* Maior */
-        font-weight: 700;
-        color: var(--cor-secundaria);
-        letter-spacing: 3px;
-        text-shadow: 0 0 15px var(--cor-secundaria), 0 0 25px rgba(0,255,255,0.4); /* Brilho neon */
-    }
-
-    /* SEÇÕES DE CONTEÚDO */
-    .content-section h3 {
-      font-size: 2rem; /* Maior */
-      color: var(--cor-destaque);
-      margin-top: 0;
-      margin-bottom: 1.8rem;
-      text-shadow: var(--glow-intensity);
-    }
+    #current-track-info span { color: var(--cor-destaque); font-weight: 700; }
     
-    /* GRADE DE PATROCINADORES INTERATIVA */
-    .sponsors-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Mais flexível */
-      gap: 1.5rem;
-    }
-
-    .sponsors-grid a {
-      border-radius: 10px;
-      border: 2px solid rgba(255,255,255,0.1);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .sponsors-grid a:hover {
-      transform: translateY(-5px) scale(1.05); /* Levanta um pouco e cresce */
-      box-shadow: 0 10px 30px var(--cor-sombra), 0 0 20px var(--cor-destaque);
-      border-color: var(--cor-destaque);
-    }
-
-    .sponsors-grid img {
-      width: 100%;
-      height: auto;
-      display: block;
-      filter: grayscale(20%); /* Levemente em preto e branco */
-      transition: filter 0.3s ease;
-    }
-    .sponsors-grid a:hover img {
-        filter: grayscale(0%); /* Colore ao passar o mouse */
-    }
-    
-    /* ESTILOS DO FORMULÁRIO DE PEDIDOS APRIMORADO */
+    #clock { font-family: 'Orbitron', monospace; font-size: 3rem; font-weight: 700; color: var(--cor-secundaria); letter-spacing: 3px; text-shadow: 0 0 15px var(--cor-secundaria), 0 0 25px rgba(0,255,255,0.4); }
+    .content-section h3 { font-size: 2rem; color: var(--cor-destaque); margin-top: 0; margin-bottom: 1.8rem; text-shadow: var(--glow-intensity); }
+    .sponsors-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1.5rem; }
+    .sponsors-grid a { border-radius: 10px; border: 2px solid rgba(255,255,255,0.1); box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: all 0.3s ease; position: relative; overflow: hidden; }
+    .sponsors-grid a:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 10px 30px var(--cor-sombra), 0 0 20px var(--cor-destaque); border-color: var(--cor-destaque); }
+    .sponsors-grid img { width: 100%; height: auto; display: block; filter: grayscale(20%); transition: filter 0.3s ease; }
+    .sponsors-grid a:hover img { filter: grayscale(0%); }
     .request-form { display: flex; flex-direction: column; gap: 1rem; }
-    .request-form input, .request-form textarea {
-        background-color: rgba(0,0,0,0.4);
-        border: 1px solid var(--cor-borda);
-        border-radius: 10px;
-        padding: 0.9rem 1.2rem;
-        color: var(--cor-texto);
-        font-family: 'Montserrat', sans-serif;
-        font-size: 1rem;
-        transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-    .request-form input:focus, .request-form textarea:focus {
-        outline: none;
-        border-color: var(--cor-destaque);
-        box-shadow: 0 0 10px var(--cor-destaque);
-    }
-    .request-form input::placeholder, .request-form textarea::placeholder { color: rgba(255,255,255,0.6); }
-    .request-form button {
-        background: linear-gradient(90deg, var(--cor-destaque), var(--cor-secundaria));
-        border: none;
-        border-radius: 10px;
-        padding: 0.9rem 1.2rem;
-        color: #fff;
-        font-size: 1.15rem;
-        font-weight: 700;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-    }
-    .request-form button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 20px var(--cor-sombra), var(--glow-intensity);
-        background: linear-gradient(90deg, var(--cor-secundaria), var(--cor-destaque));
-    }
-
-    /* BOTÕES DE COMPARTILHAMENTO APRIMORADOS */
+    .request-form input, .request-form textarea { background-color: rgba(0,0,0,0.4); border: 1px solid var(--cor-borda); border-radius: 10px; padding: 0.9rem 1.2rem; color: var(--cor-texto); font-family: 'Montserrat', sans-serif; font-size: 1rem; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+    .request-form input:focus, .request-form textarea:focus { outline: none; border-color: var(--cor-destaque); box-shadow: 0 0 10px var(--cor-destaque); }
+    .request-form button { background: linear-gradient(90deg, var(--cor-destaque), var(--cor-secundaria)); border: none; border-radius: 10px; padding: 0.9rem 1.2rem; color: #fff; font-size: 1.15rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.4); }
+    .request-form button:hover { transform: translateY(-3px); box-shadow: 0 8px 20px var(--cor-sombra), var(--glow-intensity); background: linear-gradient(90deg, var(--cor-secundaria), var(--cor-destaque)); }
     .share-buttons { display: flex; justify-content: center; gap: 1.2rem; margin-top: 2rem; }
-    .share-button {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.6rem;
-        padding: 0.7rem 1.4rem;
-        border-radius: 50px;
-        text-decoration: none;
-        color: #fff;
-        font-weight: 700;
-        transition: transform 0.2s ease, box-shadow 0.3s ease;
-        box-shadow: 0 3px 10px rgba(0,0,0,0.3);
-    }
+    .share-button { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.7rem 1.4rem; border-radius: 50px; text-decoration: none; color: #fff; font-weight: 700; transition: transform 0.2s ease, box-shadow 0.3s ease; box-shadow: 0 3px 10px rgba(0,0,0,0.3); }
     .share-button:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 6px 15px rgba(0,0,0,0.5); }
-    .whatsapp { background-color: #25D366; }
-    .whatsapp:hover { box-shadow: 0 0 15px #25D366; }
-    .facebook { background-color: #1877F2; }
-    .facebook:hover { box-shadow: 0 0 15px #1877F2; }
-    .twitter { background-color: #1DA1F2; }
-    .twitter:hover { box-shadow: 0 0 15px #1DA1F2; }
-
-    /* RODAPÉ */
+    .whatsapp { background-color: #25D366; } .whatsapp:hover { box-shadow: 0 0 15px #25D366; } .facebook { background-color: #1877F2; } .facebook:hover { box-shadow: 0 0 15px #1877F2; } .twitter { background-color: #1DA1F2; } .twitter:hover { box-shadow: 0 0 15px #1DA1F2; }
     footer { margin-top: 3rem; padding: 1.5rem; }
     footer p { font-size: 1.1rem; margin-bottom: 1rem; opacity: 0.9; }
     footer a { color: var(--cor-texto); text-decoration: none; margin: 0 12px; display: inline-flex; align-items: center; gap: 8px; transition: color 0.3s ease, transform 0.3s ease; }
     footer a:hover { color: var(--cor-destaque); transform: translateY(-3px); }
-
-    /* Ícones no rodapé */
-    footer .whatsapp-icon {
-      width: 22px;
-      height: 22px;
-    }
   </style>
 </head>
 <body>
   <div class="background-effect"></div> 
+
   <div class="container">
     <header>
       <h1>WEB RÁDIO MONTES CLAROS</h1>
     </header>
 
     <section class="glass-card player-card">
-      <img src="IMG_20240502_201111.jpg" alt="Logo da Rádio" class="player-logo">
+      <img src="IMG_20240201_201111.jpg" alt="Logo da Rádio" class="player-logo">
       <h2>NO AR</h2>
       
       <div id="listener-count">
@@ -338,7 +220,7 @@
         <form action="https://formspree.io/f/myzdlnqa" method="POST" class="request-form">
             <input type="text" name="nome" placeholder="Seu Nome" required>
             <input type="text" name="musica" placeholder="Nome da Música e Artista" required>
-            <textarea name="dedicatoria" rows="3" placeholder="Quer mandar um alô ?"></textarea>
+            <textarea name="dedicatoria" rows="3" placeholder="Quer mandar um alô ou dedicatória?"></textarea>
             <button type="submit">Enviar Pedido</button>
         </form>
     </section>
@@ -354,10 +236,10 @@
     <section class="glass-card">
       <h3>🤝 Patrocinadores</h3>
       <div class="sponsors-grid">
-        <a href="#" target="_blank"><img src="IMG_20240502_201111.jpg" alt="Logo da Rádio"></a>
+        <a href="#" target="_blank"><img src="IMG_20240201_201111.jpg" alt="Logo da Rádio"></a>
         <a href="#" target="_blank"><img src="me.jpg" alt="Patrocinador ME"></a>
         <a href="#" target="_blank"><img src="vitrine.jpg" alt="Patrocinador Vitrine"></a>
-        </div>
+      </div>
     </section>
 
     <footer>
@@ -382,44 +264,24 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Placeholder para "Agora Tocando"
-    const trackInfoElement = document.getElementById('current-track-info');
-    // Quando você tiver a integração real, esta linha será substituída.
-    
-    // NOVO: Função para buscar e atualizar os ouvintes
     async function updateListenerCount() {
       const listenerCountElement = document.getElementById('listener-count-number');
-      const streamId = 'kuza08w1pzzuv'; // ID do seu stream da Zeno
+      const streamId = 'kuza08w1pzzuv';
       const apiUrl = `https://proxy.zeno.fm/proxy/stations/${streamId}/stats`;
 
       try {
         const response = await fetch(apiUrl);
-        if (!response.ok) {
-          throw new Error('Erro ao buscar dados');
-        }
+        if (!response.ok) throw new Error('Erro ao buscar dados');
         const data = await response.json();
-        // A propriedade correta na API da Zeno é 'listeners'
-        const listeners = data.listeners || '0'; 
+        const listeners = data.listeners || '0';
         listenerCountElement.textContent = listeners;
       } catch (error) {
         console.error("Não foi possível atualizar os ouvintes:", error);
         listenerCountElement.textContent = '--';
       }
     }
-
-    // Atualiza os ouvintes a cada 15 segundos
     setInterval(updateListenerCount, 15000);
-
-    // Inicia a contagem de ouvintes imediatamente ao carregar a página
     updateListenerCount();
-
-
-    // Ajuste o link do Instagram no rodapé
-    const instagramLink = document.querySelector('footer a[href="https://instagram.com"]');
-    if (instagramLink) {
-        instagramLink.href = "https://instagram.com/seuperfil"; // Adicione o link real do seu Instagram aqui
-    }
   </script>
-
 </body>
 </html>
