@@ -114,15 +114,18 @@
       opacity: 0;
       transition: opacity 0.3s ease, transform 0.3s ease;
       transform: scale(0.98);
+      pointer-events: none; /* Correção para permitir cliques */
     }
     .glass-card:hover::before {
         opacity: 1;
         transform: scale(1);
     }
 
+    /* PLAYER CARD ESTILIZADO */
     .player-logo {
-      width: 160px;
-      height: 160px;
+      /* TAMANHO DA LOGO AJUSTADO AQUI */
+      width: 180px; 
+      height: 180px;
       border-radius: 50%;
       object-fit: cover;
       margin-bottom: 1.5rem;
@@ -151,12 +154,9 @@
         margin-bottom: 1rem;
         border: 1px solid var(--cor-borda);
     }
-
-    #current-track-info {
-        font-size: 1.2rem; font-weight: 600; margin-top: 0.5rem; color: var(--cor-texto); margin-bottom: 1.5rem;
-    }
-    #current-track-info span { color: var(--cor-destaque); font-weight: 700; }
     
+    #current-track-info { font-size: 1.2rem; font-weight: 600; margin-top: 0.5rem; color: var(--cor-texto); margin-bottom: 1.5rem; }
+    #current-track-info span { color: var(--cor-destaque); font-weight: 700; }
     #clock { font-family: 'Orbitron', monospace; font-size: 3rem; font-weight: 700; color: var(--cor-secundaria); letter-spacing: 3px; text-shadow: 0 0 15px var(--cor-secundaria), 0 0 25px rgba(0,255,255,0.4); }
     .content-section h3 { font-size: 2rem; color: var(--cor-destaque); margin-top: 0; margin-bottom: 1.8rem; text-shadow: var(--glow-intensity); }
     .sponsors-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1.5rem; }
@@ -188,7 +188,7 @@
     </header>
 
     <section class="glass-card player-card">
-      <img src="IMG_20240201_201111.jpg" alt="Logo da Rádio" class="player-logo">
+      <img src="IMG_20240502_201111.jpg" alt="Logo da Rádio" class="player-logo">
       <h2>NO AR</h2>
       
       <div id="listener-count">
@@ -236,7 +236,7 @@
     <section class="glass-card">
       <h3>🤝 Patrocinadores</h3>
       <div class="sponsors-grid">
-        <a href="#" target="_blank"><img src="IMG_20240201_201111.jpg" alt="Logo da Rádio"></a>
+        <a href="#" target="_blank"><img src="IMG_20240502_201111.jpg" alt="Logo da Rádio"></a>
         <a href="#" target="_blank"><img src="me.jpg" alt="Patrocinador ME"></a>
         <a href="#" target="_blank"><img src="vitrine.jpg" alt="Patrocinador Vitrine"></a>
       </div>
@@ -248,7 +248,7 @@
         <svg class="whatsapp-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16.6,14.2c-0.3-0.2-1.5-0.8-1.7-0.9c-0.2-0.1-0.4-0.1-0.6,0.1c-0.2,0.2-0.7,0.9-0.8,1c-0.1,0.2-0.2,0.2-0.4,0.1 c-0.2-0.1-1.1-0.4-2.1-1.3c-0.8-0.7-1.3-1.6-1.5-1.8c-0.2-0.3-0.1-0.4,0.1-0.6c0.1-0.1,0.2-0.3,0.4-0.4c0.1-0.1,0.2-0.2,0.2-0.4 c0.1-0.1,0.1-0.3,0-0.4c-0.1-0.1-0.6-1.5-0.8-2c-0.2-0.5-0.4-0.5-0.6-0.5c-0.2,0-0.4,0-0.6,0c-0.2,0-0.5,0.1-0.7,0.3 c-0.2,0.2-0.8,0.7-0.8,1.8c0,1.1,0.8,2.1,1,2.3c0.1,0.2,1.6,2.6,4,3.5c2.4,1,2.4,0.7,2.8,0.7c0.4,0,1.5-0.6,1.7-1.2 c0.2-0.6,0.2-1.1,0.1-1.2C17.1,14.4,16.8,14.3,16.6,14.2z M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10c5.5,0,10-4.5,10-10S17.5,2,12,2 M12,20.5c-4.7,0-8.5-3.8-8.5-8.5S7.3,3.5,12,3.5s8.5,3.8,8.5,8.5S16.7,20.5,12,20.5"></path></svg>
         WhatsApp
       </a>
-      <a href="https://instagram.com/seuperfil" target="_blank">Instagram</a>
+      <a href="https://instagram.com/SEU_PERFIL_AQUI" target="_blank">Instagram</a>
     </footer>
   </div>
 
@@ -271,7 +271,7 @@
 
       try {
         const response = await fetch(apiUrl);
-        if (!response.ok) throw new Error('Erro ao buscar dados');
+        if (!response.ok) throw new Error('Erro ao buscar dados da API');
         const data = await response.json();
         const listeners = data.listeners || '0';
         listenerCountElement.textContent = listeners;
@@ -282,6 +282,11 @@
     }
     setInterval(updateListenerCount, 15000);
     updateListenerCount();
+
+    // Placeholder para "Agora Tocando"
+    const trackInfoElement = document.getElementById('current-track-info');
+    trackInfoElement.innerHTML = `<span>Agora Tocando:</span> As melhores da cidade - Vários Artistas`;
   </script>
+
 </body>
 </html>
