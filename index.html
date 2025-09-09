@@ -21,159 +21,65 @@
       --glow-strong: 0 0 25px var(--cor-destaque), 0 0 40px var(--cor-destaque);
     }
 
-    /* Remove a linha de foco ao clicar */
-    *:focus {
-      outline: none;
-    }
+    *:focus { outline: none; }
 
     body {
       margin: 0;
       font-family: 'Montserrat', sans-serif;
       color: var(--cor-texto);
-      
-      background: 
-        linear-gradient(rgba(13, 26, 42, 0.55), rgba(13, 26, 42, 0.55)),
-        url('https://raw.githubusercontent.com/marcostheangels/webradio/main/matriz.jpg');
-
+      background: linear-gradient(rgba(13, 26, 42, 0.55), rgba(13, 26, 42, 0.55)), url('https://raw.githubusercontent.com/marcostheangels/webradio/main/matriz.jpg');
       background-size: cover;
       background-attachment: fixed;
       background-position: center center;
-      
       display: flex;
       justify-content: center;
       padding: 2rem 1rem;
       min-height: 100vh;
       position: relative;
       overflow-x: hidden;
-
-      /* Desabilita a seleção de texto na página toda */
-      -webkit-user-select: none; /* Safari */
-      -ms-user-select: none; /* IE 10+ e Edge */
-      user-select: none; /* Padrão */
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
     }
 
-    .background-effect {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      opacity: 0.6;
-      background: linear-gradient(45deg, #100a20, #0a1a2a, #2a0a1a);
-      background-size: 400% 400%;
-      animation: background-gradient-animation 15s ease infinite;
+    .background-effect { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.6; background: linear-gradient(45deg, #100a20, #0a1a2a, #2a0a1a); background-size: 400% 400%; animation: background-gradient-animation 15s ease infinite; }
+    @keyframes background-gradient-animation { 0% {background-position:0% 50%} 50% {background-position:100% 50%} 100% {background-position:0% 50%} }
+
+    .container { width: 100%; max-width: 1200px; text-align: center; z-index: 1; }
+
+    header h1 { font-family: 'Orbitron', sans-serif; font-size: 3rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 2px; background: linear-gradient(90deg, var(--cor-destaque), var(--cor-secundaria), var(--cor-destaque)); background-size: 200% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: gradient-animation 8s linear infinite, text-glow 1.5s ease-in-out infinite alternate; text-shadow: none; }
+    header .slogan { font-family: 'Montserrat', sans-serif; font-size: 1.25rem; font-weight: 600; color: var(--cor-secundaria); text-shadow: 0 0 8px var(--cor-secundaria); margin-bottom: 2.5rem; letter-spacing: 1px; }
+    @keyframes gradient-animation { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    @keyframes text-glow { from { text-shadow: var(--glow-intensity); } to { text-shadow: var(--glow-strong); } }
+
+    /* Novo Layout de 2 Colunas */
+    .main-layout {
+        display: flex;
+        gap: 2rem;
+        align-items: flex-start;
     }
-    @keyframes background-gradient-animation {
-        0% {background-position:0% 50%}
-        50% {background-position:100% 50%}
-        100% {background-position:0% 50%}
+    .main-content {
+        flex: 2; /* Ocupa 2/3 do espaço */
+        width: 66%; /* fallback */
+    }
+    .sidebar {
+        flex: 1; /* Ocupa 1/3 do espaço */
+        width: 33%; /* fallback */
+        position: sticky; /* Fica fixo ao rolar a página */
+        top: 2rem;
     }
 
-    .container {
-      width: 100%;
-      max-width: 850px;
-      text-align: center;
-      z-index: 1;
-    }
+    .glass-card { background-color: var(--cor-fundo-transparente); border-radius: 20px; border: 1px solid var(--cor-borda); padding: 2rem; margin-bottom: 2rem; box-shadow: 0 10px 40px var(--cor-sombra); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); position: relative; overflow: hidden; transition: all 0.3s ease; }
+    .glass-card:hover { border-color: transparent; }
+    .glass-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 20px; border: 2px solid transparent; background: linear-gradient(45deg, var(--cor-destaque), var(--cor-secundaria)) border-box; -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: 0; transition: opacity 0.3s ease, transform 0.3s ease; transform: scale(0.98); pointer-events: none; }
+    .glass-card:hover::before { opacity: 1; transform: scale(1); animation: card-border-glow 2s infinite alternate ease-in-out; }
+    @keyframes card-border-glow { from { border-image: linear-gradient(45deg, var(--cor-destaque) 0%, var(--cor-secundaria) 100%) 1; } to { border-image: linear-gradient(45deg, var(--cor-secundaria) 0%, var(--cor-destaque) 100%) 1; } }
 
-    header h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 3rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      letter-spacing: 2px;
-      background: linear-gradient(90deg, var(--cor-destaque), var(--cor-secundaria), var(--cor-destaque));
-      background-size: 200% 100%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: gradient-animation 8s linear infinite, text-glow 1.5s ease-in-out infinite alternate;
-      text-shadow: none;
-    }
-    
-    header .slogan {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: var(--cor-secundaria);
-        text-shadow: 0 0 8px var(--cor-secundaria);
-        margin-bottom: 2.5rem;
-        letter-spacing: 1px;
-    }
+    .player-logo { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; margin-bottom: 1.5rem; border: 5px solid var(--cor-destaque); box-shadow: 0 0 25px var(--cor-destaque); animation: logo-pulse 2s infinite alternate ease-in-out; }
+    @keyframes logo-pulse { from { box-shadow: 0 0 20px var(--cor-destaque); } to { box-shadow: 0 0 40px var(--cor-secundaria); } }
 
-    @keyframes gradient-animation {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
-    @keyframes text-glow {
-        0% { text-shadow: var(--glow-intensity); }
-        100% { text-shadow: var(--glow-strong); }
-    }
-
-    .glass-card {
-      background-color: var(--cor-fundo-transparente);
-      border-radius: 20px;
-      border: 1px solid var(--cor-borda);
-      padding: 2rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 10px 40px var(--cor-sombra);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .glass-card:hover {
-        border-color: transparent;
-    }
-
-    .glass-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-radius: 20px;
-      border: 2px solid transparent;
-      background: linear-gradient(45deg, var(--cor-destaque), var(--cor-secundaria)) border-box;
-      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity: 0;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      transform: scale(0.98);
-      pointer-events: none;
-    }
-    .glass-card:hover::before {
-        opacity: 1;
-        transform: scale(1);
-        animation: card-border-glow 2s infinite alternate ease-in-out;
-    }
-    @keyframes card-border-glow {
-        from { border-image: linear-gradient(45deg, var(--cor-destaque) 0%, var(--cor-secundaria) 100%) 1; }
-        to { border-image: linear-gradient(45deg, var(--cor-secundaria) 0%, var(--cor-destaque) 100%) 1; }
-    }
-
-    .player-logo {
-      width: 180px; 
-      height: 180px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 1.5rem;
-      border: 5px solid var(--cor-destaque);
-      box-shadow: 0 0 25px var(--cor-destaque);
-      animation: logo-pulse 2s infinite alternate ease-in-out;
-    }
-
-    @keyframes logo-pulse {
-        0% { box-shadow: 0 0 20px var(--cor-destaque); }
-        100% { box-shadow: 0 0 40px var(--cor-secundaria); }
-    }
-
-    .player-card h2 { margin: 0; font-size: 1.8rem; font-weight: 700; color: var(--cor-secundaria); margin-bottom: 1rem; }
-    #current-track-info { font-size: 1.2rem; font-weight: 600; color: var(--cor-texto); margin-bottom: 1.5rem; }
+    .player-card h2 { margin: 0; font-size: 1.8rem; font-weight: 700; color: var(--cor-secundaria); margin-bottom: 0.5rem; }
+    #current-track-info { font-size: 1.2rem; font-weight: 600; color: var(--cor-texto); margin-bottom: 1.5rem; min-height: 1.5rem; transition: all 0.5s ease; }
     #current-track-info span { color: var(--cor-destaque); font-weight: 700; }
     
     .player-socials { margin-top: 2rem; }
@@ -187,21 +93,24 @@
     .social-buttons .facebook:hover { color: #1877F2; border-color: #1877F2; box-shadow: 0 0 15px #1877F2; }
     .social-buttons .instagram:hover { color: #d6249f; border-color: #d6249f; box-shadow: 0 0 15px #d6249f; }
 
+    /* Letreiro de Notícias */
+    .news-ticker { background-color: var(--cor-fundo-transparente); border-radius: 10px; border: 1px solid var(--cor-borda); padding: 0.75rem; margin-bottom: 2rem; overflow: hidden; white-space: nowrap; }
+    .ticker-content { display: inline-block; padding-left: 100%; animation: scroll-ticker 25s linear infinite; }
+    .ticker-content span { font-weight: 700; color: var(--cor-destaque); margin-right: 1rem; margin-left: 2rem;}
+    @keyframes scroll-ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+
     #clock { font-family: 'Orbitron', monospace; font-size: 3rem; font-weight: 700; color: var(--cor-secundaria); letter-spacing: 3px; text-shadow: 0 0 15px var(--cor-secundaria), 0 0 25px rgba(0,255,255,0.4); }
-    .content-section h3 { font-size: 2rem; color: var(--cor-destaque); margin-top: 0; margin-bottom: 1.8rem; text-shadow: var(--glow-intensity); }
+    .content-section h3, .sponsors-section h3, .dj-section h3, .news-section h3, .events-section h3, .poll-section h3 { font-size: 2rem; color: var(--cor-destaque); margin-top: 0; margin-bottom: 1.8rem; text-shadow: var(--glow-intensity); }
     
-    /* Estilo do título da seção de patrocinadores */
     .sponsors-section h3 { display: flex; align-items: center; text-align: center; font-size: 1.8rem; }
     .sponsors-section h3::before, .sponsors-section h3::after { content: ''; flex: 1; border-bottom: 1px solid var(--cor-borda); }
     .sponsors-section h3:not(:empty)::before { margin-right: .75em; }
     .sponsors-section h3:not(:empty)::after { margin-left: .75em; }
-    
-    .sponsors-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1.5rem; }
+    .sponsors-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
     .sponsors-grid a { background: rgba(0,0,0,0.2); border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: all 0.3s ease; overflow: hidden; padding: 0.5rem; }
     .sponsors-grid a:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 10px 30px var(--cor-sombra), 0 0 20px var(--cor-destaque); border-color: var(--cor-destaque); }
     .sponsors-grid img { width: 100%; height: auto; display: block; filter: grayscale(20%); transition: filter 0.3s ease; border-radius: 6px; }
     .sponsors-grid a:hover img { filter: grayscale(0%); }
-    
     .cta-sponsors { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--cor-borda); }
     .cta-sponsors p { font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; }
     .cta-button { display: inline-block; background: linear-gradient(90deg, var(--cor-destaque), var(--cor-secundaria)); border: none; border-radius: 10px; padding: 0.8rem 1.5rem; color: #fff; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.4); text-decoration: none; }
@@ -213,37 +122,52 @@
     .request-form button { background: linear-gradient(90deg, var(--cor-destaque), var(--cor-secundaria)); border: none; border-radius: 10px; padding: 0.9rem 1.2rem; color: #fff; font-size: 1.15rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.4); }
     .request-form button:hover { transform: translateY(-3px); box-shadow: 0 8px 20px var(--cor-sombra), var(--glow-intensity); background: linear-gradient(90deg, var(--cor-secundaria), var(--cor-destaque)); }
 
-    /* Novo estilo para a Programação */
-    .schedule-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: rgba(0,0,0,0.2);
-        padding: 1rem 1.5rem;
-        border-radius: 10px;
-        margin-bottom: 1rem;
-        border-left: 4px solid var(--cor-destaque);
-        transition: all 0.3s ease;
-    }
-    .schedule-item:hover {
-        background-color: rgba(0,0,0,0.4);
-        transform: scale(1.02);
-        border-left-color: var(--cor-secundaria);
-    }
-    .schedule-time {
-        font-family: 'Orbitron', sans-serif;
-        font-weight: 700;
-        font-size: 1.1rem;
-        color: var(--cor-secundaria);
-    }
-    .schedule-title {
-        font-size: 1.1rem;
-        font-weight: 600;
-        color: var(--cor-texto);
-    }
+    .schedule-item { display: flex; justify-content: space-between; align-items: center; background-color: rgba(0,0,0,0.2); padding: 1rem 1.5rem; border-radius: 10px; margin-bottom: 1rem; border-left: 4px solid var(--cor-destaque); transition: all 0.3s ease; }
+    .schedule-item:hover { background-color: rgba(0,0,0,0.4); transform: scale(1.02); border-left-color: var(--cor-secundaria); }
+    .schedule-time { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--cor-secundaria); }
+    .schedule-title { font-size: 1.1rem; font-weight: 600; color: var(--cor-texto); }
+    
+    .dj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem; }
+    .dj-card { background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 10px; }
+    .dj-card img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--cor-secundaria); margin-bottom: 1rem; }
+    .dj-card h4 { margin: 0 0 0.5rem 0; font-size: 1.2rem; color: var(--cor-texto); }
+    .dj-card p { margin: 0; font-size: 0.9rem; color: var(--cor-secundaria); }
+
+    .news-item, .event-item { display: flex; gap: 1.5rem; text-align: left; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--cor-borda); }
+    .news-item:last-child, .event-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .news-item img, .event-item img { width: 100px; height: 100px; object-fit: cover; border-radius: 10px; }
+    .news-content h4, .event-content h4 { margin: 0 0 0.5rem 0; font-size: 1.2rem; }
+    .news-content p, .event-content p { margin: 0 0 0.5rem 0; font-size: 0.9rem; opacity: 0.8; }
+    .news-content a, .event-content a { color: var(--cor-destaque); text-decoration: none; font-weight: 600; }
+    .event-details { font-weight: 600; color: var(--cor-secundaria); }
+
+    .poll-placeholder { border: 2px dashed var(--cor-borda); border-radius: 10px; padding: 2rem; }
+    .poll-placeholder p { margin: 0 0 1rem 0; font-size: 1.1rem; }
     
     footer { margin-top: 3rem; padding: 1.5rem; }
     footer p { font-size: 1.1rem; margin-bottom: 1rem; opacity: 0.9; }
+
+    /* Responsividade para Layout */
+    @media (max-width: 992px) {
+        .main-layout {
+            flex-direction: column;
+        }
+        .main-content, .sidebar {
+            width: 100%;
+        }
+        .sidebar {
+            position: static; /* Remove o 'sticky' */
+        }
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 1rem 0.5rem; }
+      header h1 { font-size: 2rem; }
+      header .slogan { font-size: 1rem; }
+      .glass-card { padding: 1.5rem; }
+      .player-logo { width: 140px; height: 140px; }
+      .news-item, .event-item { flex-direction: column; align-items: center; text-align: center; }
+    }
   </style>
 </head>
 <body>
@@ -254,103 +178,120 @@
       <h1>WEB RÁDIO MONTES CLAROS</h1>
       <p class="slogan">Sintonizada em você.</p>
     </header>
+    
+    <div class="main-layout">
+        <div class="main-content">
+            <section class="glass-card player-card">
+              <img src="IMG_20240502_201111.jpg" alt="Logo da Rádio" class="player-logo">
+              <h2>NO AR</h2>
+              <p id="current-track-info"><span>Carregando música...</span></p>
+              <audio controls autoplay style="width: 100%;">
+                <source src="https://stream.zeno.fm/kuza08w1pzzuv" type="audio/mpeg">
+                Seu navegador não suporta áudio online.
+              </audio>
+              <div class="player-socials">
+                <p>📲 Siga a gente nas redes sociais</p>
+                <div class="social-buttons">
+                  <a href="https://wa.me/5538998558528?text=Olá,%20Web%20Rádio%20Montes%20Claros!" target="_blank" class="whatsapp" aria-label="WhatsApp"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M12 2a10 10 0 0 0-10 10c0 1.77.46 3.45 1.25 4.95L2 22l5.05-1.25c1.5.79 3.18 1.25 4.95 1.25 5.52 0 10-4.48 10-10S17.52 2 12 2zm3.95 12.35c-.2-.11-1.16-.57-1.34-.64s-.31-.1-.44.1-.51.64-.62.77c-.12.13-.23.15-.43.05s-.84-.31-1.6-.99c-.59-.53-1-1.18-1.12-1.38s0-.31.1-.42.22-.26.33-.39.15-.22.23-.37.04-.28-.04-.39c-.08-.11-.44-1.06-.6-1.45-.16-.39-.32-.34-.44-.34H7.85c-.12 0-.28.04-.42.23s-.53.52-.53 1.27.54 1.47.62 1.58 1.09 1.67 2.65 2.33c.38.16.69.26.93.33.24.07.46.06.63.03.2-.03.58-.24.66-.47.08-.23.08-.43.06-.47s-.08-.08-.16-.14z"/></svg></a>
+                  <a href="https://www.facebook.com/sharer/sharer.php?u=https://marcostheangels.github.io/webradio/" target="_blank" class="facebook" aria-label="Facebook"><svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.04c0 4.96 3.63 9.09 8.36 9.8V15.7h-2.1v-2.7h2.1v-2.1c0-2.3 1.4-3.57 3.47-3.57 1 0 1.8.08 2.05.12V8.92h-1.25c-1.2 0-1.4.57-1.4 1.4V13h2.62l-.42 2.7h-2.2V21.8C19.38 21.1 22 16.96 22 12.04 22 6.53 17.5 2.04 12 2.04z"/></svg></a>
+                  <a href="https://www.instagram.com/markim_miranda2024?igsh=MTJnYXYwazkyNWFpcw==" target="_blank" class="instagram" aria-label="Instagram"><svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.013 4.85.07c1.32.067 2.147.288 2.655.496.53.21.97.494 1.4.92.43.43.71.87 1.05 1.4.21.508.43 1.334.496 2.655.057 1.266.07 1.646.07 4.85s-.013 3.584-.07 4.85c-.067 1.32-.288 2.147-.496 2.655-.21.53-.494.97-.92 1.4-.43.43-.87.71-1.4 1.05-.508.21-1.334.43-2.655.496-1.266.057-1.646.07-4.85.07s-3.584-.013-4.85-.07c-1.32-.067-2.147-.288-2.655-.496-.53-.21-.97-.494-1.4-.92-.43-.43-.71-.87-1.05-1.4-.21-.508-.43-1.334-.496-2.655-.057-1.266-.07-1.646-.07-4.85s.013-3.584.07-4.85c.067-1.32.288 2.147.496 2.655.21-.53.494-.97.92-1.4.43-.43.87-.71 1.4-1.05.508-.21 1.334.43 2.655-.496C8.416 2.176 8.796 2.163 12 2.163zm0-2.163C8.74 0 8.337.013 7.052.071C5.77.138 4.7.358 3.868.694c-.65.65-1.13 1.4-1.496 2.322C.013 8.337 0 8.74 0 12c0 3.26.013 3.663.071 4.948.067 1.282.288 2.353.624 3.185.366.922.846 1.678 1.496 2.322s1.406 1.13 2.328 1.496c.832.336 1.903.556 3.185.623C8.337 23.987 8.74 24 12 24s3.663-.013 4.948-.071c1.282-.067 2.353-.288 3.185-.624.922-.366 1.678-.846 2.322-1.496.65-.65 1.13-1.406 1.496-2.328.336-.832.556-1.903.623-3.185.058-1.285.071-1.688.071-4.948s-.013-3.663-.071-4.948c-.067-1.282-.288-2.353-.624-3.185C22.94 1.06 22.46 0.58 21.81 0.694c-.65-.65-1.13-1.4-1.496-2.322-.336-.832-.556-1.903-.623-3.185C.013 8.337 0 8.74 0 12c0 3.26.013 3.663.071 4.948.067 1.282.288 2.353.624 3.185.366.922.846 1.678 1.496 2.322s1.406 1.13 2.328 1.496c.832.336 1.903.556 3.185.623C8.337 23.987 8.74 24 12 24s3.663-.013 4.948-.071c1.282-.067 2.353-.288 3.185-.624.922-.366 1.678-.846 2.322-1.496.65-.65 1.13-1.406 1.496-2.328.336-.832.556-1.903.623-3.185.058-1.285.071-1.688.071-4.948s-.013-3.663-.071-4.948c-.067-1.282-.288-2.353-.624-3.185C22.94 1.06 22.46 0.58 21.81 0.694zM12 5.839A6.161 6.161 0 1 0 18.161 12 6.168 6.168 0 0 0 12 5.839zm0 10.161A4 4 0 1 1 16 12a4 4 0 0 1-4 4zM18.42 5.56a1.44 1.44 0 1 0-1.44 1.44 1.44 1.44 0 0 0 1.44-1.44z"/></svg></a>
+                </div>
+              </div>
+            </section>
+            
+            <div class="news-ticker">
+                <div class="ticker-content">
+                    <span>EVENTO!</span> Show com Zé Vaqueiro no Parque de Exposições dia 15/09! Garanta seu ingresso! <span>ANUNCIE AQUI!</span> Entre em contato pelo WhatsApp e divulgue sua marca!
+                </div>
+            </div>
 
-    <section class="glass-card player-card">
-      <img src="IMG_20240502_201111.jpg" alt="Logo da Rádio" class="player-logo">
-      <h2>NO AR</h2>
+            <section class="glass-card">
+                <h3>⏰ Hora Certa</h3>
+                <div id="clock">Carregando...</div>
+            </section>
+        
+            <section class="glass-card">
+              <h3>💬 Sala de Bate-Papo</h3>
+              <p>Converse com outros ouvintes da rádio!</p>
+              <div class="chat-container"><script src="https://minnit.chat/js/embed.js?c=1752216300" defer></script><span style="display: none;" class="minnit-chat-sembed" data-chatname="https://organizations.minnit.chat/359182529081474/c/Main?embed" data-style="width:100%; height:500px; max-height:90vh;" data-version="1.52">Chat</span></div>
+            </section>
+        
+            <section class="glass-card dj-section">
+              <h3>🎙️ Nossos Locutores</h3>
+              <div class="dj-grid">
+                <div class="dj-card">
+                  <img src="https://сыщики.рф/wp-content/uploads/2021/01/unnamed.jpg" alt="Foto do Locutor 1">
+                  <h4>DJ Markim</h4>
+                  <p>Manhãs Musicais</p>
+                </div>
+              </div>
+            </section>
+            
+            <section class="glass-card">
+                <h3>📅 Programação</h3>
+                <div class="schedule-item"><span class="schedule-time">08:00 - 10:00</span><span class="schedule-title">Bom Dia Música</span></div>
+                <div class="schedule-item"><span class="schedule-time">12:00 - 14:00</span><span class="schedule-title">Almoço Musical</span></div>
+                <div class="schedule-item"><span class="schedule-time">18:00 - 20:00</span><span class="schedule-title">Noite Sertaneja</span></div>
+            </section>
 
-      <p id="current-track-info">As melhores da cidade - Vários Artistas</p>
+            <section class="glass-card events-section">
+                <h3>🗓️ Agenda de Montes Claros</h3>
+                <div class="event-item">
+                  <img src="https://www.temporadalivre.com/uploads/editor/pictures/632f05929141f/632f05929141f.webp" alt="Show Sertanejo">
+                  <div class="event-content">
+                    <h4>Show com Zé Vaqueiro</h4>
+                    <p class="event-details">📍 Parque de Exposições | 📅 15/09</p>
+                    <p>O maior show de piseiro da região chega a Montes Claros. Não perca!</p>
+                    <a href="#" target="_blank">Mais Informações</a>
+                  </div>
+                </div>
+            </section>
       
-      <audio controls autoplay style="width: 100%;">
-        <source src="https://stream.zeno.fm/kuza08w1pzzuv" type="audio/mpeg">
-        Seu navegador não suporta áudio online.
-      </audio>
-
-      <div class="player-socials">
-        <p>📲 Siga a gente nas redes sociais</p>
-        <div class="social-buttons">
-          <a href="https://wa.me/5538998558528?text=Olá,%20Web%20Rádio%20Montes%20Claros!" target="_blank" class="whatsapp" aria-label="WhatsApp">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M12 2a10 10 0 0 0-10 10c0 1.77.46 3.45 1.25 4.95L2 22l5.05-1.25c1.5.79 3.18 1.25 4.95 1.25 5.52 0 10-4.48 10-10S17.52 2 12 2zm3.95 12.35c-.2-.11-1.16-.57-1.34-.64s-.31-.1-.44.1-.51.64-.62.77c-.12.13-.23.15-.43.05s-.84-.31-1.6-.99c-.59-.53-1-1.18-1.12-1.38s0-.31.1-.42.22-.26.33-.39.15-.22.23-.37.04-.28-.04-.39c-.08-.11-.44-1.06-.6-1.45-.16-.39-.32-.34-.44-.34H7.85c-.12 0-.28.04-.42.23s-.53.52-.53 1.27.54 1.47.62 1.58 1.09 1.67 2.65 2.33c.38.16.69.26.93.33.24.07.46.06.63.03.2-.03.58-.24.66-.47.08-.23.08-.43.06-.47s-.08-.08-.16-.14z"/></svg>
-          </a>
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https://marcostheangels.github.io/webradio/" target="_blank" class="facebook" aria-label="Facebook">
-            <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.04c0 4.96 3.63 9.09 8.36 9.8V15.7h-2.1v-2.7h2.1v-2.1c0-2.3 1.4-3.57 3.47-3.57 1 0 1.8.08 2.05.12V8.92h-1.25c-1.2 0-1.4.57-1.4 1.4V13h2.62l-.42 2.7h-2.2V21.8C19.38 21.1 22 16.96 22 12.04 22 6.53 17.5 2.04 12 2.04z"/></svg>
-          </a>
-          <a href="https://www.instagram.com/markim_miranda2024?igsh=MTJnYXYwazkyNWFpcw==" target="_blank" class="instagram" aria-label="Instagram">
-            <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.013 4.85.07c1.32.067 2.147.288 2.655.496.53.21.97.494 1.4.92.43.43.71.87 1.05 1.4.21.508.43 1.334.496 2.655.057 1.266.07 1.646.07 4.85s-.013 3.584-.07 4.85c-.067 1.32-.288 2.147-.496 2.655-.21.53-.494.97-.92 1.4-.43.43-.87.71-1.4 1.05-.508.21-1.334.43-2.655.496-1.266.057-1.646.07-4.85.07s-3.584-.013-4.85-.07c-1.32-.067-2.147-.288-2.655-.496-.53-.21-.97-.494-1.4-.92-.43-.43-.71-.87-1.05-1.4-.21-.508-.43-1.334-.496-2.655-.057-1.266-.07-1.646-.07-4.85s.013-3.584.07-4.85c.067-1.32.288 2.147.496 2.655.21-.53.494-.97.92-1.4.43-.43.87-.71 1.4-1.05.508-.21 1.334.43 2.655-.496C8.416 2.176 8.796 2.163 12 2.163zm0-2.163C8.74 0 8.337.013 7.052.071 5.77.138 4.7.358 3.868.694 2.946 1.06 2.19 1.54 1.53 2.19c-.65.65-1.13 1.4-1.496 2.322-.336.832-.556 1.903-.623 3.185C.013 8.337 0 8.74 0 12c0 3.26.013 3.663.071 4.948.067 1.282.288 2.353.624 3.185.366.922.846 1.678 1.496 2.322.65.65 1.406 1.13 2.328 1.496.832.336 1.903.556 3.185.623C8.337 23.987 8.74 24 12 24s3.663-.013 4.948-.071c1.282-.067 2.353-.288 3.185-.624.922-.366 1.678-.846 2.322-1.496.65-.65 1.13-1.406 1.496-2.328.336-.832.556-1.903.623-3.185.058-1.285.071-1.688.071-4.948s-.013-3.663-.071-4.948c-.067-1.282-.288-2.353-.624-3.185C22.94 1.06 22.46 0.58 21.81 0.694 21.16 0.358 20.09 0.138 18.81 0.071 17.525.013 17.122 0 13.837 0zM12 5.839A6.161 6.161 0 1 0 18.161 12 6.168 6.168 0 0 0 12 5.839zm0 10.161A4 4 0 1 1 16 12a4 4 0 0 1-4 4zM18.42 5.56a1.44 1.44 0 1 0-1.44 1.44 1.44 1.44 0 0 0 1.44-1.44z"/></svg>
-          </a>
-        </div>
-      </div>
-    </section>
-    
-    <section class="glass-card">
-        <h3>⏰ Hora Certa</h3>
-        <div id="clock">Carregando...</div>
-    </section>
-    
-    <section class="glass-card">
-        <h3>📊 Total de Visitas na Página</h3>
-        <a href="https://www.hitwebcounter.com/" target="_blank">
-        <img src="https://hitwebcounter.com/counter/counter.php?page=21437865&style=0009&nbdigits=5&type=page&initCount=0" title="Website" Alt="Website"   border="0" /></a>
-    </section>
-
-    <section class="glass-card">
-        <h3>💬 Sala de Bate-Papo</h3>
-        <p>Converse com outros ouvintes da rádio!</p>
-        <div class="chat-container">
-          
-          <script src="https://minnit.chat/js/embed.js?c=1752216300" defer></script><span style="display: none;" class="minnit-chat-sembed" data-chatname="https://organizations.minnit.chat/359182529081474/c/Main?embed" data-style="width:100%; height:500px; max-height:90vh;" data-version="1.52">Chat</span>
-
-        </div>
-    </section>
-    
-    <section class="glass-card">
-        <h3>🎵 Peça sua Música</h3>
-        <form action="https://formspree.io/f/myzdlnqa" method="POST" class="request-form">
-            <input type="text" name="nome" placeholder="Seu Nome" required>
-            <input type="text" name="musica" placeholder="Nome da Música e Artista" required>
-            <textarea name="dedicatoria" rows="3" placeholder="Quer mandar um alô ou dedicatória?"></textarea>
-            <button type="submit">Enviar Pedido</button>
-        </form>
-    </section>
-
-    <section class="glass-card">
-        <h3>📅 Programação</h3>
-        <div class="schedule-item">
-            <span class="schedule-time">08:00 - 10:00</span>
-            <span class="schedule-title">Bom Dia Música</span>
-        </div>
-        <div class="schedule-item">
-            <span class="schedule-time">12:00 - 14:00</span>
-            <span class="schedule-title">Almoço Musical</span>
-        </div>
-        <div class="schedule-item">
-            <span class="schedule-time">18:00 - 20:00</span>
-            <span class="schedule-title">Noite Sertaneja</span>
-        </div>
-        <div class="schedule-item">
-            <span class="schedule-time">20:00 - 22:00</span>
-            <span class="schedule-title">Rock Night</span>
-        </div>
-    </section>
-
-    <section class="glass-card sponsors-section">
-      <h3>🌟 Nossos Parceiros 🌟</h3>
-      <div class="sponsors-grid">
+            <section class="glass-card news-section">
+                <h3>📰 Notícias da Cidade</h3>
+                <div class="news-item">
+                  <img src="https://f7j8i5j9.stackpathcdn.com/wp-content/uploads/2016/09/mercado-municipal-de-montes-claros-minas-gerais.jpg" alt="Notícia sobre o mercado">
+                  <div class="news-content">
+                    <h4>Mercado Municipal terá horário especial no feriado</h4>
+                    <p>A prefeitura anunciou o novo horário de funcionamento do Mercado Central para o feriado da Independência...</p>
+                    <a href="#" target="_blank">Leia a matéria completa</a>
+                  </div>
+                </div>
+            </section>
+      
+            <section class="glass-card poll-section">
+                <h3>🗳️ Enquete da Semana</h3>
+                <div class="poll-placeholder">
+                  <p>Aqui você pode colocar uma enquete interativa para seus ouvintes. É fácil de integrar com ferramentas como o Google Forms!</p>
+                  <a href="#" class="cta-button">Vote Aqui! (Exemplo)</a>
+                </div>
+            </section>
         
-        <a href="#" target="_blank">
-          <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/dj.jpg" alt="Patrocinador dj">
-        </a>
+            <section class="glass-card">
+                <h3>🎵 Peça sua Música</h3>
+                <form action="https://formspree.io/f/myzdlnqa" method="POST" class="request-form">
+                    <input type="text" name="nome" placeholder="Seu Nome" required>
+                    <input type="text" name="musica" placeholder="Nome da Música e Artista" required>
+                    <textarea name="dedicatoria" rows="3" placeholder="Quer mandar um alô ou dedicatória?"></textarea>
+                    <button type="submit">Enviar Pedido</button>
+                </form>
+            </section>
+        </div>
         
-        <a href="#" target="_blank">
-          <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/myh.jpg" alt="Patrocinador myh">
-        </a>
-        
-      </div>
-      <div class="cta-sponsors">
-        <p>Quer ver sua marca aqui? Fale conosco!</p>
-        <a href="https://wa.me/5538998558528?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20como%20patrocinar%20a%20rádio." class="cta-button">Seja um Patrocinador</a>
-      </div>
-    </section>
+        <aside class="sidebar">
+            <section class="glass-card sponsors-section">
+              <h3>🌟 Nossos Parceiros 🌟</h3>
+              <div class="sponsors-grid">
+                <a href="#" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/dj.jpg" alt="Patrocinador dj"></a>
+                <a href="#" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/myh.jpg" alt="Patrocinador myh"></a>
+              </div>
+              <div class="cta-sponsors">
+                <p>Quer ver sua marca aqui?</p>
+                <a href="https://wa.me/5538998558528?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20como%20patrocinar%20a%20rádio." class="cta-button">Seja um Patrocinador</a>
+              </div>
+            </section>
+        </aside>
+    </div>
 
     <footer>
       <p style="opacity: 0.7;">Desenvolvido por Marcos Albano Miranda De Araujo</p>
@@ -360,6 +301,7 @@
   <script>
     function updateClock() {
       const clockElement = document.getElementById('clock');
+      if (!clockElement) return;
       const now = new Date();
       const hours = String(now.getHours()).padStart(2, '0');
       const minutes = String(now.getMinutes()).padStart(2, '0');
@@ -369,9 +311,33 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Placeholder para "Agora Tocando"
-    const trackInfoElement = document.getElementById('current-track-info');
-    trackInfoElement.innerHTML = `<span>Agora Tocando:</span> As melhores da cidade - Vários Artistas`;
+    async function updateNowPlaying() {
+        const trackInfoElement = document.getElementById('current-track-info');
+        if (!trackInfoElement) return;
+        const streamId = 'kuza08w1pzzuv';
+        const apiUrl = `https://proxy.zeno.fm/proxy/stations/${streamId}/stats`;
+        const defaultMessage = '<span>Agora Tocando:</span> As melhores da cidade - Vários Artistas';
+
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                trackInfoElement.innerHTML = defaultMessage;
+                return;
+            }
+            const data = await response.json();
+            const songTitle = data.now_playing?.song?.text || data.stream_title || null;
+            if (songTitle && songTitle.includes(" - ")) {
+                 trackInfoElement.innerHTML = `<span>Agora Tocando:</span> ${songTitle}`;
+            } else {
+                 trackInfoElement.innerHTML = defaultMessage;
+            }
+        } catch (error) {
+            console.error("Erro ao buscar música:", error);
+            trackInfoElement.innerHTML = defaultMessage;
+        }
+    }
+    setInterval(updateNowPlaying, 15000); 
+    updateNowPlaying();
   </script>
 
 </body>
