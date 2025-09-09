@@ -146,12 +146,15 @@
     .news-content p, .event-content p { margin: 0 0 0.5rem 0; font-size: 0.9rem; opacity: 0.8; }
     .news-content a, .event-content a { color: var(--cor-destaque); text-decoration: none; font-weight: 600; }
     .event-details { font-weight: 600; color: var(--cor-secundaria); }
-
-    .poll-placeholder { border: 2px dashed var(--cor-borda); border-radius: 10px; padding: 2rem; }
-    .poll-placeholder p { margin: 0 0 1rem 0; font-size: 1.1rem; }
     
     footer { margin-top: 3rem; padding: 1.5rem; }
     footer p { font-size: 1.1rem; margin-bottom: 1rem; opacity: 0.9; }
+
+    /* Estilo para adaptar a enquete ao tema escuro */
+    #enquete-google {
+      border-radius: 15px; /* Deixa as bordas do formulário arredondadas */
+      filter: invert(95%) hue-rotate(180deg); /* A mágica do modo noturno */
+    }
 
     /* Responsividade para Layout */
     @media (max-width: 992px) {
@@ -181,7 +184,7 @@
     <div class="main-layout">
         <div class="main-content">
             <section class="glass-card player-card">
-              <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/dj.jpg" alt="Logo da Rádio" class="player-logo">
+              <img src="imagens/dj.jpg" alt="Logo da Rádio" class="player-logo">
               <h2>NO AR</h2>
               <p id="current-track-info"><span>Carregando música...</span></p>
               <audio controls autoplay style="width: 100%;">
@@ -221,7 +224,7 @@
               <h3>🎙️ Nossos Locutores</h3>
               <div class="dj-grid">
                 <div class="dj-card">
-                 <img src="imagens/locutor-dj.jpg" alt="DJ MARKIM">
+                 <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/dj.jpg" alt="Foto do Locutor Marcos Albano">
                   <h4>Marcos Albano</h4>
                   <p id="dj-program-name">Programação Musical</p>
                 </div>
@@ -241,7 +244,7 @@
             <section class="glass-card events-section">
                 <h3>🗓️ Agenda de Montes Claros</h3>
                 <div class="event-item">
-                  <img src="https://www.temporadalivre.com/uploads/editor/pictures/632f05929141f/632f05929141f.webp" alt="Show Sertanejo">
+                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/agenda.png" alt="Montes Claros">
                   <div class="event-content">
                     <h4>Show com Zé Vaqueiro</h4>
                     <p class="event-details">📍 Parque de Exposições | 📅 15/09</p>
@@ -255,7 +258,7 @@
             <section class="glass-card news-section">
                 <h3>📰 Notícias da Cidade</h3>
                 <div class="news-item">
-                  <img src="https://f7j8i5j9.stackpathcdn.com/wp-content/uploads/2016/09/mercado-municipal-de-montes-claros-minas-gerais.jpg" alt="Notícia sobre o mercado">
+                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/noticia.jpg">
                   <div class="news-content">
                     <h4>Mercado Municipal terá horário especial no feriado</h4>
                     <p>A prefeitura anunciou o novo horário de funcionamento do Mercado Central para o feriado da Independência...</p>
@@ -267,10 +270,8 @@
       
             <section class="glass-card poll-section">
                 <h3>🗳️ Enquete da Semana</h3>
-                <div class="poll-placeholder">
-                  <p>Aqui você pode colocar uma enquete interativa para seus ouvintes. É fácil de integrar com ferramentas como o Google Forms!</p>
-                  <a href="#" class="cta-button">Vote Aqui! (Exemplo)</a>
-                </div>
+                <iframe id="enquete-google" src="https://docs.google.com/forms/d/e/1FAIpQLSdt9n5gvPglfr6N3-Waw3xN-497REcwXP1pr9flu8QgLkuTvw/viewform?embedded=true" width="100%" height="450" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+
             </section>
         
             <section class="glass-card">
@@ -278,7 +279,7 @@
                 <form action="https://formspree.io/f/myzdlnqa" method="POST" class="request-form">
                     <input type="text" name="nome" placeholder="Seu Nome" required>
                     <input type="text" name="musica" placeholder="Nome da Música e Artista" required>
-                    <textarea name="dedicatoria" rows="3" placeholder="Quer mandar um alô ou dedicatória?"></textarea>
+                    <textarea name="dedicatoria" rows="3" placeholder="Quer mandar um alô ou oferecer uma música?"></textarea>
                     <button type="submit">Enviar Pedido</button>
                 </form>
             </section>
@@ -288,10 +289,22 @@
             <section class="glass-card sponsors-section">
               <h3>🌟 Nossos Parceiros 🌟</h3>
               <div class="sponsors-grid">
-                <a href="#" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/dj.jpg" alt="Patrocinador dj"></a>
-                <a href="#" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/myh.jpg" alt="Patrocinador myh"></a>
-                <a href="#" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/IMG-20250909-WA0036.jpg" alt="Patrocinador myh"></a>
-              </div>
+                <a href="#" target="_blank">
+          <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/myhouse.jpg" alt="Patrocinador MY HOUSE">
+        </a>
+        
+        <a href="#" target="_blank">
+          <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/dj.jpg" alt="Patrocinador dj">
+        </a>
+        
+        <a href="https://www.sitedonovoparceiro.com.br" target="_blank">
+          <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/markim.jpg" alt="Markim">
+        </a>
+        
+      </div>
+      <div class="cta-sponsors">
+        <p>Quer ver sua marca aqui?</p>
+        <a href="https://wa.me/5538998558528?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20como%20patrocinar%20a%20rádio." class="cta-button">Seja um Patrocinador</a>
               <div class="cta-sponsors">
                 <p>Quer ver sua marca aqui?</p>
                 <a href="https://wa.me/5538998558528?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20como%20patrocinar%20a%20rádio." class="cta-button">Seja um Patrocinador</a>
