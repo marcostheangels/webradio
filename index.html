@@ -187,10 +187,12 @@
     .social-buttons a:hover {
       transform: translateY(-5px) scale(1.05);
     }
+    .social-buttons .whatsapp {
+        background-color: #25D366;
+        border: none;
+    }
     .social-buttons .whatsapp:hover {
-      color: #25D366;
-      border-color: #25D366;
-      box-shadow: 0 0 15px #25D366;
+        filter: brightness(1.1);
     }
     .social-buttons .facebook:hover {
       color: #1877F2;
@@ -215,6 +217,7 @@
     .request-form input:focus, .request-form textarea:focus { outline: none; border-color: var(--cor-destaque); box-shadow: 0 0 10px var(--cor-destaque); }
     .request-form button { background: linear-gradient(90deg, var(--cor-destaque), var(--cor-secundaria)); border: none; border-radius: 10px; padding: 0.9rem 1.2rem; color: #fff; font-size: 1.15rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.4); }
     .request-form button:hover { transform: translateY(-3px); box-shadow: 0 8px 20px var(--cor-sombra), var(--glow-intensity); background: linear-gradient(90deg, var(--cor-secundaria), var(--cor-destaque)); }
+    
     footer { margin-top: 3rem; padding: 1.5rem; }
     footer p { font-size: 1.1rem; margin-bottom: 1rem; opacity: 0.9; }
   </style>
