@@ -45,6 +45,11 @@
       min-height: 100vh;
       position: relative;
       overflow-x: hidden;
+
+      /* Desabilita a seleção de texto na página toda */
+      -webkit-user-select: none; /* Safari */
+      -ms-user-select: none; /* IE 10+ e Edge */
+      user-select: none; /* Padrão */
     }
 
     .background-effect {
@@ -108,7 +113,7 @@
     .glass-card {
       background-color: var(--cor-fundo-transparente);
       border-radius: 20px;
-      border: 1px solid var(--cor-borda);
+      border: 1px solid var(--cor-borda); /* Borda padrão mais sutil */
       padding: 2rem;
       margin-bottom: 2rem;
       box-shadow: 0 10px 40px var(--cor-sombra);
@@ -119,6 +124,11 @@
       transition: all 0.3s ease;
     }
 
+    /* Efeito de borda gradiente ao passar o mouse */
+    .glass-card:hover {
+        border-color: transparent; /* Remove a borda padrão no hover para dar lugar à animada */
+    }
+
     .glass-card::before {
       content: '';
       position: absolute;
@@ -127,20 +137,27 @@
       right: 0;
       bottom: 0;
       border-radius: 20px;
-      border: 2px solid transparent;
+      border: 2px solid transparent; /* Inicialmente transparente */
       background: linear-gradient(45deg, var(--cor-destaque), var(--cor-secundaria)) border-box;
       -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
       mask-composite: exclude;
-      opacity: 0;
+      opacity: 0; /* Começa invisível */
       transition: opacity 0.3s ease, transform 0.3s ease;
-      transform: scale(0.98);
-      pointer-events: none;
+      transform: scale(0.98); /* Ligeiramente menor no início */
+      pointer-events: none; /* Garante que não interfere com cliques */
     }
     .glass-card:hover::before {
-        opacity: 1;
-        transform: scale(1);
+        opacity: 1; /* Fica visível no hover */
+        transform: scale(1); /* Expande para o tamanho normal */
+        animation: card-border-glow 2s infinite alternate ease-in-out; /* Animação de brilho */
     }
+    /* Animação para a borda do card */
+    @keyframes card-border-glow {
+        0% { border-image: linear-gradient(45deg, var(--cor-destaque) 0%, var(--cor-secundaria) 100%) 1; transform: scale(1); }
+        100% { border-image: linear-gradient(45deg, var(--cor-secundaria) 0%, var(--cor-destaque) 100%) 1; transform: scale(1.005); }
+    }
+
 
     .player-logo {
       width: 180px; 
@@ -199,7 +216,6 @@
     .social-buttons .whatsapp {
         background-color: #25D366;
         border: none;
-        color: #fff;
     }
     .social-buttons .whatsapp:hover {
         filter: brightness(1.1);
@@ -223,7 +239,20 @@
     .sponsors-grid img { width: 100%; height: auto; display: block; filter: grayscale(20%); transition: filter 0.3s ease; }
     .sponsors-grid a:hover img { filter: grayscale(0%); }
     .request-form { display: flex; flex-direction: column; gap: 1rem; }
-    .request-form input, .request-form textarea { background-color: rgba(0,0,0,0.4); border: 1px solid var(--cor-borda); border-radius: 10px; padding: 0.9rem 1.2rem; color: var(--cor-texto); font-family: 'Montserrat', sans-serif; font-size: 1rem; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+    .request-form input, .request-form textarea {
+      background-color: rgba(0,0,0,0.4);
+      border: 1px solid var(--cor-borda);
+      border-radius: 10px;
+      padding: 0.9rem 1.2rem;
+      color: var(--cor-texto);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      /* Permite a seleção de texto nestes campos */
+      -webkit-user-select: auto;
+      -ms-user-select: auto;
+      user-select: auto;
+    }
     .request-form input:focus, .request-form textarea:focus { outline: none; border-color: var(--cor-destaque); box-shadow: 0 0 10px var(--cor-destaque); }
     .request-form button { background: linear-gradient(90deg, var(--cor-destaque), var(--cor-secundaria)); border: none; border-radius: 10px; padding: 0.9rem 1.2rem; color: #fff; font-size: 1.15rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.4); }
     .request-form button:hover { transform: translateY(-3px); box-shadow: 0 8px 20px var(--cor-sombra), var(--glow-intensity); background: linear-gradient(90deg, var(--cor-secundaria), var(--cor-destaque)); }
@@ -256,13 +285,13 @@
         <p>📲 Siga a gente nas redes sociais</p>
         <div class="social-buttons">
           <a href="https://wa.me/5538998558528?text=Olá,%20Web%20Rádio%20Montes%20Claros!" target="_blank" class="whatsapp" aria-label="WhatsApp">
-            <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a10 10 0 0 0-10 10c0 1.77.46 3.45 1.25 4.95L2 22l5.05-1.25c1.5.79 3.18 1.25 4.95 1.25 5.52 0 10-4.48 10-10S17.52 2 12 2zm3.95 12.35c-.2-.11-1.16-.57-1.34-.64s-.31-.1-.44.1-.51.64-.62.77c-.12.13-.23.15-.43.05s-.84-.31-1.6-.99c-.59-.53-1-1.18-1.12-1.38s0-.31.1-.42.22-.26.33-.39.15-.22.23-.37.04-.28-.04-.39c-.08-.11-.44-1.06-.6-1.45-.16-.39-.32-.34-.44-.34H7.85c-.12 0-.28.04-.42.23s-.53.52-.53 1.27.54 1.47.62 1.58 1.09 1.67 2.65 2.33c.38.16.69.26.93.33.24.07.46.06.63.03.2-.03.58-.24.66-.47.08-.23.08-.43.06-.47s-.08-.08-.16-.14z"/></svg>
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M12 2a10 10 0 0 0-10 10c0 1.77.46 3.45 1.25 4.95L2 22l5.05-1.25c1.5.79 3.18 1.25 4.95 1.25 5.52 0 10-4.48 10-10S17.52 2 12 2zm3.95 12.35c-.2-.11-1.16-.57-1.34-.64s-.31-.1-.44.1-.51.64-.62.77c-.12.13-.23.15-.43.05s-.84-.31-1.6-.99c-.59-.53-1-1.18-1.12-1.38s0-.31.1-.42.22-.26.33-.39.15-.22.23-.37.04-.28-.04-.39c-.08-.11-.44-1.06-.6-1.45-.16-.39-.32-.34-.44-.34H7.85c-.12 0-.28.04-.42.23s-.53.52-.53 1.27.54 1.47.62 1.58 1.09 1.67 2.65 2.33c.38.16.69.26.93.33.24.07.46.06.63.03.2-.03.58-.24.66-.47.08-.23.08-.43.06-.47s-.08-.08-.16-.14z"/></svg>
           </a>
           <a href="https://www.facebook.com/sharer/sharer.php?u=https://marcostheangels.github.io/webradio/" target="_blank" class="facebook" aria-label="Facebook">
             <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.04c0 4.96 3.63 9.09 8.36 9.8V15.7h-2.1v-2.7h2.1v-2.1c0-2.3 1.4-3.57 3.47-3.57 1 0 1.8.08 2.05.12V8.92h-1.25c-1.2 0-1.4.57-1.4 1.4V13h2.62l-.42 2.7h-2.2V21.8C19.38 21.1 22 16.96 22 12.04 22 6.53 17.5 2.04 12 2.04z"/></svg>
           </a>
           <a href="https://www.instagram.com/markim_miranda2024?igsh=MTJnYXYwazkyNWFpcw==" target="_blank" class="instagram" aria-label="Instagram">
-            <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.013 4.85.07 1.32.067 2.147.288 2.655.496.53.21.97.494 1.4.92.43.43.71.87 1.05 1.4.21.508.43 1.334.496 2.655.057 1.266.07 1.646.07 4.85s-.013 3.584-.07 4.85c-.067 1.32-.288 2.147-.496 2.655-.21.53-.494.97-.92 1.4-.43.43-.87.71-1.4 1.05-.508.21-1.334.43-2.655.496-1.266.057-1.646.07-4.85.07s-3.584-.013-4.85-.07c-1.32-.067-2.147-.288-2.655-.496-.53-.21-.97-.494-1.4-.92-.43-.43-.71-.87-1.05-1.4-.21-.508-.43-1.334-.496-2.655-.057-1.266-.07-1.646-.07-4.85s.013-3.584.07-4.85c.067-1.32.288 2.147.496 2.655.21-.53.494-.97.92-1.4.43-.43.87-.71 1.4-1.05.508-.21 1.334.43 2.655.496C8.416 2.176 8.796 2.163 12 2.163zm0-2.163C8.74 0 8.337.013 7.052.071 5.77.138 4.7.358 3.868.694 2.946 1.06 2.19 1.54 1.53 2.19c-.65.65-1.13 1.4-1.496 2.322-.336.832-.556 1.903-.623 3.185C.013 8.337 0 8.74 0 12c0 3.26.013 3.663.071 4.948.067 1.282.288 2.353.624 3.185.366.922.846 1.678 1.496 2.322.65.65 1.406 1.13 2.328 1.496.832.336 1.903.556 3.185.623C8.337 23.987 8.74 24 12 24s3.663-.013 4.948-.071c1.282-.067 2.353-.288 3.185-.624.922-.366 1.678-.846 2.322-1.496.65-.65 1.13-1.406 1.496-2.328.336-.832.556-1.903.623-3.185.058-1.285.071-1.688.071-4.948s-.013-3.663-.071-4.948c-.067-1.282-.288-2.353-.624-3.185C22.94 1.06 22.46 0.58 21.81 0.694 21.16 0.358 20.09 0.138 18.81 0.071 17.525.013 17.122 0 13.837 0zM12 5.839A6.161 6.161 0 1 0 18.161 12 6.168 6.168 0 0 0 12 5.839zm0 10.161A4 4 0 1 1 16 12a4 4 0 0 1-4 4zM18.42 5.56a1.44 1.44 0 1 0-1.44 1.44 1.44 1.44 0 0 0 1.44-1.44z"/></svg>
+            <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.013 4.85.07c1.32.067 2.147.288 2.655.496.53.21.97.494 1.4.92.43.43.71.87 1.05 1.4.21.508.43 1.334.496 2.655.057 1.266.07 1.646.07 4.85s-.013 3.584-.07 4.85c-.067 1.32-.288 2.147-.496 2.655-.21.53-.494.97-.92 1.4-.43.43-.87.71-1.4 1.05-.508.21-1.334.43-2.655.496-1.266.057-1.646.07-4.85.07s-3.584-.013-4.85-.07c-1.32-.067-2.147-.288-2.655-.496-.53-.21-.97-.494-1.4-.92-.43-.43-.71-.87-1.05-1.4-.21-.508-.43-1.334-.496-2.655-.057-1.266-.07-1.646-.07-4.85s.013-3.584.07-4.85c.067-1.32.288 2.147.496 2.655.21-.53.494-.97.92-1.4.43-.43.87-.71 1.4-1.05.508-.21 1.334.43 2.655-.496C8.416 2.176 8.796 2.163 12 2.163zm0-2.163C8.74 0 8.337.013 7.052.071 5.77.138 4.7.358 3.868.694 2.946 1.06 2.19 1.54 1.53 2.19c-.65.65-1.13 1.4-1.496 2.322-.336.832-.556 1.903-.623 3.185C.013 8.337 0 8.74 0 12c0 3.26.013 3.663.071 4.948.067 1.282.288 2.353.624 3.185.366.922.846 1.678 1.496 2.322.65.65 1.406 1.13 2.328 1.496.832.336 1.903.556 3.185.623C8.337 23.987 8.74 24 12 24s3.663-.013 4.948-.071c1.282-.067 2.353-.288 3.185-.624.922-.366 1.678-.846 2.322-1.496.65-.65 1.13-1.406 1.496-2.328.336-.832.556-1.903.623-3.185.058-1.285.071-1.688.071-4.948s-.013-3.663-.071-4.948c-.067-1.282-.288-2.353-.624-3.185C22.94 1.06 22.46 0.58 21.81 0.694 21.16 0.358 20.09 0.138 18.81 0.071 17.525.013 17.122 0 13.837 0zM12 5.839A6.161 6.161 0 1 0 18.161 12 6.168 6.168 0 0 0 12 5.839zm0 10.161A4 4 0 1 1 16 12a4 4 0 0 1-4 4zM18.42 5.56a1.44 1.44 0 1 0-1.44 1.44 1.44 1.44 0 0 0 1.44-1.44z"/></svg>
           </a>
         </div>
       </div>
