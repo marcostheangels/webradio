@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WEB RÁDIO MONTES CLAROS - A Sua Rádio da Cidade!</title>
+  <title>WEB RÁDIO MONTES CLAROS - Sintonizada em você!</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,7 +71,7 @@
       font-family: 'Orbitron', sans-serif;
       font-size: 3rem;
       font-weight: 700;
-      margin-bottom: 2.5rem;
+      margin-bottom: 0.5rem;
       letter-spacing: 2px;
       background: linear-gradient(90deg, var(--cor-destaque), var(--cor-secundaria), var(--cor-destaque));
       background-size: 200% 100%;
@@ -79,6 +79,16 @@
       -webkit-text-fill-color: transparent;
       animation: gradient-animation 8s linear infinite, text-glow 1.5s ease-in-out infinite alternate;
       text-shadow: none;
+    }
+    
+    header .slogan {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--cor-secundaria);
+        text-shadow: 0 0 8px var(--cor-secundaria);
+        margin-bottom: 2.5rem;
+        letter-spacing: 1px;
     }
 
     @keyframes gradient-animation {
@@ -143,24 +153,41 @@
         100% { box-shadow: 0 0 40px var(--cor-secundaria); }
     }
 
-    .player-card h2 { margin: 0; font-size: 1.8rem; font-weight: 700; color: var(--cor-secundaria); }
+    .player-card h2 { margin: 0; font-size: 1.8rem; font-weight: 700; color: var(--cor-secundaria); margin-bottom: 1rem; }
     
-    #listener-count {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.6rem;
-        background-color: rgba(0,0,0,0.3);
-        padding: 0.5rem 1rem;
-        border-radius: 50px;
-        font-size: 1rem;
-        font-weight: 600;
-        margin-top: 0.5rem;
-        margin-bottom: 1rem;
-        border: 1px solid var(--cor-borda);
-    }
-    
-    #current-track-info { font-size: 1.2rem; font-weight: 600; margin-top: 0.5rem; color: var(--cor-texto); margin-bottom: 1.5rem; }
+    #current-track-info { font-size: 1.2rem; font-weight: 600; color: var(--cor-texto); margin-bottom: 1.5rem; }
     #current-track-info span { color: var(--cor-destaque); font-weight: 700; }
+    
+    .player-socials {
+        margin-top: 2rem;
+    }
+    .player-socials p {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        opacity: 0.9;
+    }
+    .player-social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    .player-social-icons a {
+      color: var(--cor-texto); 
+      text-decoration: none; 
+      transition: color 0.3s ease, transform 0.3s ease; 
+      font-size: 28px;
+    }
+    .player-social-icons a:hover { 
+      transform: translateY(-5px) scale(1.1); 
+    }
+    .player-social-icons .whatsapp-icon:hover { color: #25D366; }
+    .player-social-icons .instagram-icon:hover { 
+      background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .player-social-icons .facebook-icon:hover { color: #1877F2; }
+
     #clock { font-family: 'Orbitron', monospace; font-size: 3rem; font-weight: 700; color: var(--cor-secundaria); letter-spacing: 3px; text-shadow: 0 0 15px var(--cor-secundaria), 0 0 25px rgba(0,255,255,0.4); }
     .content-section h3 { font-size: 2rem; color: var(--cor-destaque); margin-top: 0; margin-bottom: 1.8rem; text-shadow: var(--glow-intensity); }
     .sponsors-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1.5rem; }
@@ -173,14 +200,8 @@
     .request-form input:focus, .request-form textarea:focus { outline: none; border-color: var(--cor-destaque); box-shadow: 0 0 10px var(--cor-destaque); }
     .request-form button { background: linear-gradient(90deg, var(--cor-destaque), var(--cor-secundaria)); border: none; border-radius: 10px; padding: 0.9rem 1.2rem; color: #fff; font-size: 1.15rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.4); }
     .request-form button:hover { transform: translateY(-3px); box-shadow: 0 8px 20px var(--cor-sombra), var(--glow-intensity); background: linear-gradient(90deg, var(--cor-secundaria), var(--cor-destaque)); }
-    .share-buttons { display: flex; justify-content: center; gap: 1.2rem; margin-top: 2rem; }
-    .share-button { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.7rem 1.4rem; border-radius: 50px; text-decoration: none; color: #fff; font-weight: 700; transition: transform 0.2s ease, box-shadow 0.3s ease; box-shadow: 0 3px 10px rgba(0,0,0,0.3); }
-    .share-button:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 6px 15px rgba(0,0,0,0.5); }
-    .whatsapp { background-color: #25D366; } .whatsapp:hover { box-shadow: 0 0 15px #25D366; } .facebook { background-color: #1877F2; } .facebook:hover { box-shadow: 0 0 15px #1877F2; } .twitter { background-color: #1DA1F2; } .twitter:hover { box-shadow: 0 0 15px #1DA1F2; }
     footer { margin-top: 3rem; padding: 1.5rem; }
     footer p { font-size: 1.1rem; margin-bottom: 1rem; opacity: 0.9; }
-    footer a { color: var(--cor-texto); text-decoration: none; margin: 0 12px; display: inline-flex; align-items: center; gap: 8px; transition: color 0.3s ease, transform 0.3s ease; }
-    footer a:hover { color: var(--cor-destaque); transform: translateY(-3px); }
   </style>
 </head>
 <body>
@@ -188,30 +209,34 @@
 
   <div class="container">
     <header>
-      <h1>WEB RADIO MONTES CLAROS</h1>
+      <h1>WEB RÁDIO MONTES CLAROS</h1>
+      <p class="slogan">Sintonizada em você.</p>
     </header>
 
     <section class="glass-card player-card">
       <img src="IMG_20240502_201111.jpg" alt="Logo da Rádio" class="player-logo">
       <h2>NO AR</h2>
-      
-      <div id="listener-count">
-        <svg fill="currentColor" width="20" height="20" viewBox="0 0 24 24"><path d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,4.5C17,4.5 21.27,7.61 23,12C21.27,16.39 17,19.5 12,19.5C7,19.5 2.73,16.39 1,12C2.73,7.61 7,4.5 12,4.5M3.18,12C4.83,15.36 8.24,17.5 12,17.5C15.76,17.5 19.17,15.36 20.82,12C19.17,8.64 15.76,6.5 12,6.5C8.24,6.5 4.83,8.64 3.18,12Z" /></svg>
-        <span id="listener-count-number">--</span>
-         &nbsp;Ouvintes Agora
-      </div>
 
       <p id="current-track-info">As melhores da cidade - Vários Artistas</p>
       
-      <audio controls autoplay>
+      <audio controls autoplay style="width: 100%;">
         <source src="https://stream.zeno.fm/kuza08w1pzzuv" type="audio/mpeg">
         Seu navegador não suporta áudio online.
       </audio>
 
-      <div class="share-buttons">
-          <a href="https://wa.me/5538998558528?text=Olá,%20Web%20Rádio%20Montes%20Claros!" target="_blank" class="share-button whatsapp">WhatsApp</a>
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https://marcostheangels.github.io/webradio/&quote=Sintonize%20na%20Web%20Rádio%20Montes%20Claros!%20A%20melhor%20música%20e%20informação." target="_blank" class="share-button facebook">Facebook</a>
-          <a href="https://twitter.com/intent/tweet?url=https://marcostheangels.github.io/webradio/&text=Sintonize%20na%20Web%20Rádio%20Montes%20Claros!%20A%20melhor%20música%20e%20informação." target="_blank" class="share-button twitter">Twitter</a>
+      <div class="player-socials">
+        <p>📲 Siga a gente nas redes sociais</p>
+        <div class="player-social-icons">
+          <a href="https://wa.me/5538998558528?text=Olá,%20Web%20Rádio%20Montes%20Claros!" target="_blank" class="whatsapp-icon" aria-label="WhatsApp">
+            <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22C17.51,22 22,17.51 22,12C22,6.49 17.51,2 12,2M16.4,15.31C16.22,15.44 15.2,14.93 14.8,14.75C14.4,14.56 13.1,13.95 12.88,13.85C12.67,13.75 12.5,13.7 12.33,13.9C12.15,14.1 11.64,14.68 11.5,14.83C11.36,14.97 11.22,15 10.93,14.9C10.64,14.8 9.61,14.44 8.5,13.46C7.6,12.68 7.06,11.73 6.92,11.48C6.78,11.24 6.88,11.13 7,11C7.1,10.89 7.21,10.76 7.33,10.63C7.45,10.5 7.5,10.38 7.58,10.24C7.66,10.1 7.62,9.94 7.56,9.8C7.5,9.66 7,8.44 6.78,7.93C6.56,7.42 6.34,7.5 6.18,7.5H6C5.85,7.5 5.6,7.54 5.38,7.72C5.16,7.9 4.5,8.44 4.5,9.5C4.5,10.56 5.4,11.5 5.5,11.65C5.6,11.8 7,14 9.35,15C11.7,16 12.38,15.65 12.63,15.54C12.88,15.43 13.91,14.86 14.13,14.72C14.35,14.58 14.5,14.54 14.64,14.64C14.78,14.73 15.3,15.25 15.44,15.39C15.58,15.53 15.72,15.58 15.84,15.53C15.96,15.48 16.58,15.15 16.73,14.96C16.88,14.77 16.73,14.58 16.65,14.46C16.58,14.34 16.5,14.23 16.4,15.31Z"></path></svg>
+          </a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://marcostheangels.github.io/webradio/" target="_blank" class="facebook-icon" aria-label="Facebook">
+            <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.04c0 4.96 3.63 9.09 8.36 9.8V15.7h-2.1v-2.7h2.1v-2.1c0-2.3 1.4-3.57 3.47-3.57 1 0 1.8.08 2.05.12V8.92h-1.25c-1.2 0-1.4.57-1.4 1.4V13h2.62l-.42 2.7h-2.2V21.8C19.38 21.1 22 16.96 22 12.04 22 6.53 17.5 2.04 12 2.04z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/markim_miranda2024?igsh=MTJnYXYwazkyNWFpcw==" target="_blank" class="instagram-icon" aria-label="Instagram">
+            <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.013 4.85.07c1.32.067 2.147.288 2.655.496.53.21.97.494 1.4.92.43.43.71.87 1.05 1.4.21.508.43 1.334.496 2.655.057 1.266.07 1.646.07 4.85s-.013 3.584-.07 4.85c-.067 1.32-.288 2.147-.496 2.655-.21.53-.494.97-.92 1.4-.43.43-.87.71-1.4 1.05-.508.21-1.334.43-2.655.496-1.266.057-1.646.07-4.85.07s-3.584-.013-4.85-.07c-1.32-.067-2.147-.288-2.655-.496-.53-.21-.97-.494-1.4-.92-.43-.43-.71-.87-1.05-1.4-.21-.508-.43-1.334-.496-2.655-.057-1.266-.07-1.646-.07-4.85s.013-3.584.07-4.85c.067-1.32.288 2.147.496 2.655.21-.53.494-.97.92-1.4.43-.43.87-.71 1.4-1.05.508-.21 1.334-.43 2.655-.496C8.416 2.176 8.796 2.163 12 2.163zm0-2.163C8.74 0 8.337.013 7.052.071 5.77.138 4.7.358 3.868.694 2.946 1.06 2.19 1.54 1.53 2.19c-.65.65-1.13 1.4-1.496 2.322-.336.832-.556 1.903-.623 3.185C.013 8.337 0 8.74 0 12c0 3.26.013 3.663.071 4.948.067 1.282.288 2.353.624 3.185.366.922.846 1.678 1.496 2.322.65.65 1.406 1.13 2.328 1.496.832.336 1.903.556 3.185.623C8.337 23.987 8.74 24 12 24s3.663-.013 4.948-.071c1.282-.067 2.353-.288 3.185-.624.922-.366 1.678-.846 2.322-1.496.65-.65 1.13-1.406 1.496-2.328.336-.832.556-1.903.623-3.185.058-1.285.071-1.688.071-4.948s-.013-3.663-.071-4.948c-.067-1.282-.288-2.353-.624-3.185C22.94 1.06 22.46 0.58 21.81 0.694 21.16 0.358 20.09 0.138 18.81 0.071 17.525.013 17.122 0 13.837 0zM12 5.839A6.161 6.161 0 1 0 18.161 12 6.168 6.168 0 0 0 12 5.839zm0 10.161A4 4 0 1 1 16 12a4 4 0 0 1-4 4zM18.42 5.56a1.44 1.44 0 1 0-1.44 1.44 1.44 1.44 0 0 0 1.44-1.44z"/></svg>
+          </a>
+        </div>
       </div>
     </section>
     
@@ -222,8 +247,8 @@
     
     <section class="glass-card">
         <h3>📊 Total de Visitas na Página</h3>
-        <a href="" target="_blank">
-        <img src="" title="Website" Alt="Website"   border="0" /></a>
+        <a href="https://www.hitwebcounter.com/" target="_blank">
+        <img src="https://hitwebcounter.com/counter/counter.php?page=21437865&style=0009&nbdigits=5&type=page&initCount=0" title="Website" Alt="Website"   border="0" /></a>
     </section>
 
     <section class="glass-card">
@@ -241,7 +266,7 @@
         <form action="https://formspree.io/f/myzdlnqa" method="POST" class="request-form">
             <input type="text" name="nome" placeholder="Seu Nome" required>
             <input type="text" name="musica" placeholder="Nome da Música e Artista" required>
-            <textarea name="dedicatoria" rows="3" placeholder="Quer mandar um alô ou oferecer uma música?"></textarea>
+            <textarea name="dedicatoria" rows="3" placeholder="Quer mandar um alô ou dedicatória?"></textarea>
             <button type="submit">Enviar Pedido</button>
         </form>
     </section>
@@ -270,12 +295,7 @@
     </section>
 
     <footer>
-      <p>📲 Siga a gente nas redes sociais</p>
-      <a href="https://wa.me/5538998558528?text=Olá,%20Web%20Rádio%20Montes%20Claros!" target="_blank">
-        <svg class="whatsapp-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16.6,14.2c-0.3-0.2-1.5-0.8-1.7-0.9c-0.2-0.1-0.4-0.1-0.6,0.1c-0.2,0.2-0.7,0.9-0.8,1c-0.1,0.2-0.2,0.2-0.4,0.1 c-0.2-0.1-1.1-0.4-2.1-1.3c-0.8-0.7-1.3-1.6-1.5-1.8c-0.2-0.3-0.1-0.4,0.1-0.6c0.1-0.1,0.2-0.3,0.4-0.4c0.1-0.1,0.2-0.2,0.2-0.4 c0.1-0.1,0.1-0.3,0-0.4c-0.1-0.1-0.6-1.5-0.8-2c-0.2-0.5-0.4-0.5-0.6-0.5c-0.2,0-0.4,0-0.6,0c-0.2,0-0.5,0.1-0.7,0.3 c-0.2,0.2-0.8,0.7-0.8,1.8c0,1.1,0.8,2.1,1,2.3c0.1,0.2,1.6,2.6,4,3.5c2.4,1,2.4,0.7,2.8,0.7c0.4,0,1.5-0.6,1.7-1.2 c0.2-0.6,0.2-1.1,0.1-1.2C17.1,14.4,16.8,14.3,16.6,14.2z M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10c5.5,0,10-4.5,10-10S17.5,2,12,2 M12,20.5c-4.7,0-8.5-3.8-8.5-8.5S7.3,3.5,12,3.5s8.5,3.8,8.5,8.5S16.7,20.5,12,20.5"></path></svg>
-        WhatsApp
-      </a>
-      <a href="https://www.instagram.com/markim_miranda2024?igsh=MTJnYXYwazkyNWFpcw==" target="_blank">Instagram</a>
+      <p style="margin-top: 2rem; opacity: 0.7;">Desenvolvido por Marcos Albano Miranda De Araujo</p>
     </footer>
   </div>
 
@@ -290,25 +310,6 @@
     }
     setInterval(updateClock, 1000);
     updateClock();
-
-    async function updateListenerCount() {
-      const listenerCountElement = document.getElementById('listener-count-number');
-      const streamId = 'kuza08w1pzzuv';
-      const apiUrl = `https://proxy.zeno.fm/proxy/stations/${streamId}/stats`;
-
-      try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) throw new Error('Erro ao buscar dados da API');
-        const data = await response.json();
-        const listeners = data.listeners || '0';
-        listenerCountElement.textContent = listeners;
-      } catch (error) {
-        console.error("Não foi possível atualizar os ouvintes:", error);
-        listenerCountElement.textContent = '--';
-      }
-    }
-    setInterval(updateListenerCount, 15000);
-    updateListenerCount();
 
     // Placeholder para "Agora Tocando"
     const trackInfoElement = document.getElementById('current-track-info');
