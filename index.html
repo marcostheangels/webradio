@@ -188,7 +188,7 @@
               <h2>NO AR</h2>
               <p id="current-track-info"><span>Carregando música...</span></p>
               <audio controls autoplay style="width: 100%;">
-                <source src="https://stream.zeno.fm/7heeu8w1pzzuv" type="audio/mpeg">
+                <source src="http://78.129.241.110:39382/stream" type="audio/mpeg">
                 Seu navegador não suporta áudio online.
               </audio>
               <div class="player-socials">
@@ -334,21 +334,36 @@
         const trackInfoElement = document.getElementById('current-track-info');
         if (!trackInfoElement) return;
 
-        // ID CORRETO da sua página pública, que mostra o nome da música.
-        const streamId = 'webradiodjmarkim';
+        const serverIp = "78.129.241.110";
+        const serverPort = "39382";
         
-        const apiUrl = `https://proxy.zeno.fm/proxy/stations/${streamId}/stats`;
+        // Usamos um proxy para evitar problemas de CORS (http vs https)
+        const apiUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`http://${serverIp}:${serverPort}/stats?sid=1`)}`;
         const defaultMessage = '<span>Agora Tocando:</span> As melhores da cidade - Vários Artistas';
+
         try {
             const response = await fetch(apiUrl);
             if (!response.ok) {
-                trackInfoElement.innerHTML = defaultMessage; return;
+                trackInfoElement.innerHTML = defaultMessage; 
+                return;
             }
             const data = await response.json();
-            const songTitle = data.now_playing?.song?.text || data.stream_title || null;
+            const xmlContent = data.contents;
+
+            // O servidor retorna os dados em XML, então precisamos extrair a informação
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlContent, "text/xml");
             
-            if (songTitle && songTitle.trim() !== "" && songTitle.trim().toLowerCase() !== "unknown") {
-                 trackInfoElement.innerHTML = `<span>Agora Tocando:</span> ${songTitle}`;
+            // Verificamos se o servidor está online (streamstatus === 1)
+            const streamStatus = xmlDoc.getElementsByTagName("STREAMSTATUS")[0]?.childNodes[0]?.nodeValue;
+
+            if (streamStatus === '1') {
+                const songTitle = xmlDoc.getElementsByTagName("SONGTITLE")[0]?.childNodes[0]?.nodeValue || null;
+                if (songTitle && songTitle.trim() !== "") {
+                    trackInfoElement.innerHTML = `<span>Agora Tocando:</span> ${songTitle}`;
+                } else {
+                    trackInfoElement.innerHTML = defaultMessage;
+                }
             } else {
                  trackInfoElement.innerHTML = defaultMessage;
             }
@@ -357,6 +372,7 @@
             trackInfoElement.innerHTML = defaultMessage;
         }
     }
+    
     setInterval(updateNowPlaying, 15000); 
     updateNowPlaying();
 
