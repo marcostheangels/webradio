@@ -331,19 +331,32 @@
     updateClock();
 
     async function updateNowPlaying() {
-        const trackInfoElement = document.getElementById('current-track-info');
-        if (!trackInfoElement) return;
+    const trackInfoElement = document.getElementById('current-track-info');
+    if (!trackInfoElement) return;
 
-        // IMPORTANTE: Substitua o texto 'SEU_ID_CORRETO_VAI_AQUI' pelo ID da sua rádio Zeno.fm
-        const streamId = 'kuza08w1pzzuv'; 
+    // ID CORRETO da sua página de estação, que mostra o nome da música.
+    const streamId = 'web-radio-montes-claros-a-melhor'; 
+    
+    const apiUrl = `https://proxy.zeno.fm/proxy/stations/${streamId}/stats`;
+    const defaultMessage = '<span>Agora Tocando:</span> As melhores da cidade - Vários Artistas';
+    try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            trackInfoElement.innerHTML = defaultMessage; return;
+        }
+        const data = await response.json();
+        const songTitle = data.now_playing?.song?.text || data.stream_title || null;
         
-        const apiUrl = `https://proxy.zeno.fm/proxy/stations/${streamId}/stats`;
-        const defaultMessage = '<span>Agora Tocando:</span> As melhores da cidade - Vários Artistas';
-        try {
-            const response = await fetch(apiUrl);
-            if (!response.ok) {
-                trackInfoElement.innerHTML = defaultMessage; return;
-            }
+        if (songTitle && songTitle.trim() !== "" && songTitle.trim().toLowerCase() !== "unknown") {
+             trackInfoElement.innerHTML = `<span>Agora Tocando:</span> ${songTitle}`;
+        } else {
+             trackInfoElement.innerHTML = defaultMessage;
+        }
+    } catch (error) {
+        console.error("Erro ao buscar música:", error);
+        trackInfoElement.innerHTML = defaultMessage;
+    }
+}
             const data = await response.json();
             const songTitle = data.now_playing?.song?.text || data.stream_title || null;
             
