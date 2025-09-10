@@ -188,7 +188,7 @@
               <h2>NO AR</h2>
               <p id="current-track-info"><span>Carregando música...</span></p>
               <audio controls autoplay style="width: 100%;">
-                <source src="https://stream.zeno.fm/kuza08w1pzzuv" type="audio/mpeg">
+                <source src="https://stream.zeno.fm/7heeu8w1pzzuv" type="audio/mpeg">
                 Seu navegador não suporta áudio online.
               </audio>
               <div class="player-socials">
@@ -331,36 +331,23 @@
     updateClock();
 
     async function updateNowPlaying() {
-    const trackInfoElement = document.getElementById('current-track-info');
-    if (!trackInfoElement) return;
+        const trackInfoElement = document.getElementById('current-track-info');
+        if (!trackInfoElement) return;
 
-    // ID CORRETO da sua página de estação, que mostra o nome da música.
-    const streamId = 'web-radio-montes-claros-a-melhor'; 
-    
-    const apiUrl = `https://proxy.zeno.fm/proxy/stations/${streamId}/stats`;
-    const defaultMessage = '<span>Agora Tocando:</span> As melhores da cidade - Vários Artistas';
-    try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-            trackInfoElement.innerHTML = defaultMessage; return;
-        }
-        const data = await response.json();
-        const songTitle = data.now_playing?.song?.text || data.stream_title || null;
+        // ID CORRETO da sua página pública, que mostra o nome da música.
+        const streamId = 'webradiodjmarkim';
         
-        if (songTitle && songTitle.trim() !== "" && songTitle.trim().toLowerCase() !== "unknown") {
-             trackInfoElement.innerHTML = `<span>Agora Tocando:</span> ${songTitle}`;
-        } else {
-             trackInfoElement.innerHTML = defaultMessage;
-        }
-    } catch (error) {
-        console.error("Erro ao buscar música:", error);
-        trackInfoElement.innerHTML = defaultMessage;
-    }
-}
+        const apiUrl = `https://proxy.zeno.fm/proxy/stations/${streamId}/stats`;
+        const defaultMessage = '<span>Agora Tocando:</span> As melhores da cidade - Vários Artistas';
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                trackInfoElement.innerHTML = defaultMessage; return;
+            }
             const data = await response.json();
             const songTitle = data.now_playing?.song?.text || data.stream_title || null;
             
-            if (songTitle && songTitle.trim() !== "") { // Checa se o título existe e não está vazio
+            if (songTitle && songTitle.trim() !== "" && songTitle.trim().toLowerCase() !== "unknown") {
                  trackInfoElement.innerHTML = `<span>Agora Tocando:</span> ${songTitle}`;
             } else {
                  trackInfoElement.innerHTML = defaultMessage;
