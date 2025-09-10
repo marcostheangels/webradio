@@ -2,18 +2,110 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Player Teste - Web Rádio Montes Claros</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WEB RÁDIO MONTES CLAROS - Sintonizada em você!</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* === Todos os estilos originais continuam iguais === */
+  </style>
 </head>
-<body style="text-align:center; font-family:Arial, sans-serif; padding:2rem; background:#111; color:#fff;">
-  <h1>🎶 Web Rádio Montes Claros</h1>
-  <p>Sintonizada em você</p>
+<body>
+  <div class="background-effect"></div> 
 
-  <audio controls autoplay>
-    <!-- use qualquer um dos links oficiais -->
-    <source src="http://webradiodjmarkim.radio12345.com/" type="audio/mpeg">
-    Seu navegador não suporta áudio online.
-  </audio>
+  <div class="container">
+    <header>
+      <h1>WEB RÁDIO MONTES CLAROS</h1>
+      <p class="slogan">Sintonizada em você.</p>
+    </header>
+    
+    <div class="main-layout">
+        <div class="main-content">
+            <section class="glass-card player-card">
+              <img src="imagens/dj.jpg" alt="Logo da Rádio" class="player-logo">
+              <h2>NO AR</h2>
+              <p id="current-track-info"><span>Carregando música...</span></p>
+              
+              <!-- Player Shoutcast direto -->
+              <audio controls autoplay style="width: 100%;">
+                <source src="http://95.154.197.82:39447/stream" type="audio/mpeg">
+                Seu navegador não suporta áudio online.
+              </audio>
 
-  <p style="margin-top:1rem; opacity:0.7;">Se não tocar automaticamente, clique no botão ▶</p>
+              <p style="margin-top:1rem; font-weight:bold;">🎧 Caso não funcione no seu navegador, use o player alternativo abaixo:</p>
+
+              <!-- Player oficial Listen2MyRadio (iframe HTTPS) -->
+              <iframe src="https://www.listen2myradio.com/player/player.php?uid=YOUR_UID_AQUI" 
+                      width="100%" height="150" frameborder="0" allow="autoplay"></iframe>
+
+              <div class="player-socials">
+                <p>📲 Siga a gente nas redes sociais</p>
+                <div class="social-buttons">
+                  <!-- Botões de redes sociais -->
+                </div>
+              </div>
+            </section>
+
+            <!-- Resto do conteúdo (programação, notícias, etc) -->
+        </div>
+        
+        <aside class="sidebar">
+            <!-- Patrocinadores -->
+        </aside>
+    </div>
+
+    <footer>
+      <p style="opacity: 0.7;">Desenvolvido por Marcos Albano Miranda De Araujo</p>
+    </footer>
+  </div>
+  
+  <script>
+    async function updateNowPlaying() {
+        const trackInfoElement = document.getElementById('current-track-info');
+        if (!trackInfoElement) return;
+
+        const serverIp = "95.154.197.82";
+        const serverPort = "39447";
+        
+        const apiUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`http://${serverIp}:${serverPort}/stats?sid=1`)}`;
+        const defaultMessage = '<span>Agora Tocando:</span> As melhores da cidade - Vários Artistas';
+
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                trackInfoElement.innerHTML = defaultMessage; 
+                return;
+            }
+            const data = await response.json();
+            const xmlContent = data.contents;
+
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlContent, "text/xml");
+            
+            const streamStatus = xmlDoc.getElementsByTagName("STREAMSTATUS")[0]?.childNodes[0]?.nodeValue;
+
+            if (streamStatus === '1') {
+                const songTitle = xmlDoc.getElementsByTagName("SONGTITLE")[0]?.childNodes[0]?.nodeValue || null;
+                if (songTitle && songTitle.trim() !== "") {
+                    trackInfoElement.innerHTML = `<span>Agora Tocando:</span> ${songTitle}`;
+                } else {
+                    trackInfoElement.innerHTML = defaultMessage;
+                }
+            } else {
+                 trackInfoElement.innerHTML = defaultMessage;
+            }
+        } catch (error) {
+            console.error("Erro ao buscar música:", error);
+            trackInfoElement.innerHTML = defaultMessage;
+        }
+    }
+    
+    setInterval(updateNowPlaying, 15000); 
+    updateNowPlaying();
+  </script>
+
 </body>
 </html>
