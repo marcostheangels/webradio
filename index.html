@@ -188,7 +188,7 @@
               <h2>NO AR</h2>
               <p id="current-track-info"><span>Carregando música...</span></p>
               <audio controls autoplay style="width: 100%;">
-                <source src="https://uk20freenew.listen2myradio.com/live.mp3?typeportmount=s1_39382_stream_528127750" type="audio/mpeg">
+                <source src="http://78.129.241.110:39382/stream" type="audio/mpeg">
                 Seu navegador não suporta áudio online.
               </audio>
               <div class="player-socials">
@@ -334,11 +334,11 @@
         const trackInfoElement = document.getElementById('current-track-info');
         if (!trackInfoElement) return;
 
-        const serverIp = "78.129.241.110";
+        const serverHost = "uk20freenew.listen2myradio.com";
         const serverPort = "39382";
         
         // Usamos um proxy para evitar problemas de CORS (http vs https)
-        const apiUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`http://${serverIp}:${serverPort}/stats?sid=1`)}`;
+        const apiUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`http://${serverHost}:${serverPort}/stats?sid=1`)}`;
         const defaultMessage = '<span>Agora Tocando:</span> As melhores da cidade - Vários Artistas';
 
         try {
