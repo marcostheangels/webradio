@@ -187,18 +187,10 @@
               <img src="imagens/dj.jpg" alt="Logo da Rádio" class="player-logo">
               <h2>NO AR</h2>
               <p id="current-track-info"><span>Carregando música...</span></p>
-              <!-- PLAYER: apontando para seu SHOUTCAST (95.154.197.82:39447) -->
               <audio controls autoplay style="width: 100%;">
-                <source src="http://95.154.197.82:39447/stream" type="audio/mpeg">
+                <source src="https://link.zeno.fm/7heeu8w1pzzuv" type="audio/mpeg">
                 Seu navegador não suporta áudio online.
               </audio>
-
-              <!--
-                IFRAME ALTERNATIVO (HTTPS) - Listen2MyRadio / Listen2MyRadio Player
-                Se quiser usar no GitHub Pages (HTTPS), ative o iframe e substitua YOUR_UID_AQUI pelo UID da sua conta Listen2MyRadio.
-                Exemplo: <iframe src="https://www.listen2myradio.com/player/player.php?uid=SEU_UID" width="100%" height="150" frameborder="0" allow="autoplay"></iframe>
-              -->
-
               <div class="player-socials">
                 <p>📲 Siga a gente nas redes sociais</p>
                 <div class="social-buttons">
@@ -338,67 +330,50 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // ======= updateNowPlaying (adaptado para SHOUTCAST + fallback Icecast) =======
     async function updateNowPlaying() {
         const trackInfoElement = document.getElementById('current-track-info');
         if (!trackInfoElement) return;
 
-        const serverIp = "95.154.197.82";
-        const serverPort = "39447";
+        const serverIp = "78.129.241.110";
+        const serverPort = "39382";
+        
+        // Usamos um proxy para evitar problemas de CORS (http vs https)
+        const apiUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`http://${serverIp}:${serverPort}/stats?sid=1`)}`;
         const defaultMessage = '<span>Agora Tocando:</span> As melhores da cidade - Vários Artistas';
 
-        // tenta /7.html (Shoutcast v1) via proxy
         try {
-            const url7 = `http://${serverIp}:${serverPort}/7.html`;
-            const proxy7 = `https://api.allorigins.win/get?url=${encodeURIComponent(url7)}`;
-            const r7 = await fetch(proxy7);
-            if (r7.ok) {
-                const j7 = await r7.json();
-                const txt = (j7.contents || "").replace(/\r?\n/g, '').trim();
-                if (txt) {
-                    const parts = txt.split(',');
-                    // normalmente o título está no index 2 (varia por versão). tentamos extrair um candidato razoável.
-                    if (parts.length >= 3) {
-                        let candidate = parts[2].trim().replace(/<[^>]*>/g,'').trim();
-                        if (candidate && candidate.toLowerCase() !== 'unknown') {
-                            trackInfoElement.innerHTML = `<span>Agora Tocando:</span> ${candidate}`;
-                            return;
-                        }
-                    }
-                }
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                trackInfoElement.innerHTML = defaultMessage; 
+                return;
             }
-        } catch (e) {
-            console.warn('Erro ao consultar /7.html:', e);
-        }
+            const data = await response.json();
+            const xmlContent = data.contents;
 
-        // se não deu, tenta /stats?sid=1 (Icecast-style XML) via proxy
-        try {
-            const statsUrl = `http://${serverIp}:${serverPort}/stats?sid=1`;
-            const proxyStats = `https://api.allorigins.win/get?url=${encodeURIComponent(statsUrl)}`;
-            const rStats = await fetch(proxyStats);
-            if (rStats.ok) {
-                const jStats = await rStats.json();
-                const xmlText = jStats.contents || '';
-                if (xmlText) {
-                    const parser = new DOMParser();
-                    const xmlDoc = parser.parseFromString(xmlText, "text/xml");
-                    const songTag = xmlDoc.getElementsByTagName("SONGTITLE")[0];
-                    const streamTitleTag = xmlDoc.getElementsByTagName("STREAMTITLE")[0];
-                    const s = (songTag?.textContent || streamTitleTag?.textContent || '').trim();
-                    if (s && s.toLowerCase() !== 'unknown') {
-                        trackInfoElement.innerHTML = `<span>Agora Tocando:</span> ${s}`;
-                        return;
-                    }
+            // O servidor retorna os dados em XML, então precisamos extrair a informação
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlContent, "text/xml");
+            
+            // Verificamos se o servidor está online (streamstatus === 1)
+            const streamStatus = xmlDoc.getElementsByTagName("STREAMSTATUS")[0]?.childNodes[0]?.nodeValue;
+
+            if (streamStatus === '1') {
+                const songTitle = xmlDoc.getElementsByTagName("SONGTITLE")[0]?.childNodes[0]?.nodeValue || null;
+                if (songTitle && songTitle.trim() !== "") {
+                    trackInfoElement.innerHTML = `<span>Agora Tocando:</span> ${songTitle}`;
+                } else {
+                    trackInfoElement.innerHTML = defaultMessage;
                 }
+            } else {
+                 trackInfoElement.innerHTML = defaultMessage;
             }
-        } catch (e) {
-            console.warn('Erro ao consultar stats XML:', e);
+        } catch (error) {
+            console.error("Erro ao buscar música:", error);
+            trackInfoElement.innerHTML = defaultMessage;
         }
-
-        // fallback
-        trackInfoElement.innerHTML = defaultMessage;
     }
-    setInterval(updateNowPlaying, 15000);
+    
+    setInterval(updateNowPlaying, 15000); 
     updateNowPlaying();
 
     function updateCurrentProgram() {
