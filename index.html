@@ -225,8 +225,8 @@
               <div class="dj-grid">
                 <div class="dj-card">
                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/dj.jpg" alt="Foto do Locutor DJ MARKIM 🎼🎧🎤">
-                  <h3>DJ MARKIM 🎼🎧🎤</h3>
-                  <p id="dj-program-name"<h3>PROGRAMAÇÃO MÚSICAL</h3>
+                  <h4>DJ MARKIM 🎼🎧🎤</h4>
+                  <p id="dj-program-name">Programação Musical</p>
                 </div>
               </div>
             </section>
@@ -331,24 +331,51 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-   async function updateNowPlaying() {
-    const trackInfoElement = document.getElementById('current-track-info');
-    if (!trackInfoElement) return;
+    async function updateNowPlaying() {
+        const trackInfoElement = document.getElementById('current-track-info');
+        if (!trackInfoElement) return;
 
-    try {
-        const response = await fetch('7heeu8w1pzzuv'); // substitua stationid
-        const data = await response.json();
-        const songTitle = data.song.title || 'As melhores da cidade - Vários Artistas';
-        trackInfoElement.innerHTML = `<span>Agora Tocando:</span> ${songTitle}`;
-    } catch (error) {
-        console.error(error);
-        trackInfoElement.innerHTML = '<span>Agora Tocando:</span> As melhores da cidade - Vários Artistas';
+        const serverIp = "78.129.241.110";
+        const serverPort = "39382";
+        
+        // Usamos um proxy para evitar problemas de CORS (http vs https)
+        const apiUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`http://${serverIp}:${serverPort}/stats?sid=1`)}`;
+        const defaultMessage = '<span>Agora Tocando:</span> As melhores da cidade - Vários Artistas';
+
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                trackInfoElement.innerHTML = defaultMessage; 
+                return;
+            }
+            const data = await response.json();
+            const xmlContent = data.contents;
+
+            // O servidor retorna os dados em XML, então precisamos extrair a informação
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlContent, "text/xml");
+            
+            // Verificamos se o servidor está online (streamstatus === 1)
+            const streamStatus = xmlDoc.getElementsByTagName("STREAMSTATUS")[0]?.childNodes[0]?.nodeValue;
+
+            if (streamStatus === '1') {
+                const songTitle = xmlDoc.getElementsByTagName("SONGTITLE")[0]?.childNodes[0]?.nodeValue || null;
+                if (songTitle && songTitle.trim() !== "") {
+                    trackInfoElement.innerHTML = `<span>Agora Tocando:</span> ${songTitle}`;
+                } else {
+                    trackInfoElement.innerHTML = defaultMessage;
+                }
+            } else {
+                 trackInfoElement.innerHTML = defaultMessage;
+            }
+        } catch (error) {
+            console.error("Erro ao buscar música:", error);
+            trackInfoElement.innerHTML = defaultMessage;
+        }
     }
-}
-}
-
-setInterval(updateNowPlaying, 15000); 
-updateNowPlaying();
+    
+    setInterval(updateNowPlaying, 15000); 
+    updateNowPlaying();
 
     function updateCurrentProgram() {
         const programElement = document.getElementById('dj-program-name');
@@ -377,5 +404,4 @@ updateNowPlaying();
   </script>
 
 </body>
-
 </html>
