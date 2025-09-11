@@ -340,7 +340,7 @@
         
         // Usamos um proxy para evitar problemas de CORS (http vs https)
         const apiUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`http://${serverIp}:${serverPort}/stats?sid=1`)}`;
-        const defaultMessage = '<span>Agora Tocando:</span> As melhores da cidade - Vários Artistas';
+        const defaultMessage = '<span>Agora Tocando:</span> As melhores da cidade - <p id="dj-program-name">Programação Musical</p>';
 
         try {
             const response = await fetch(apiUrl);
