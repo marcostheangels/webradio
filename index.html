@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WEB RÁDIO MONTES CLAROS - Sintonizada em você!</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f2f2f2; margin: 0; padding: 0; }
+    header { background: #ff6600; color: #fff; padding: 20px; text-align: center; }
+    main { padding: 20px; }
+    .programacao { font-size: 24px; font-weight: bold; text-align: center; margin-bottom: 20px; }
+    .player { text-align: center; margin-bottom: 20px; }
+    footer { background: #333; color: #fff; text-align: center; padding: 10px; position: fixed; width: 100%; bottom: 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>WEB RÁDIO MONTES CLAROS</h1>
+    <p>Sintonizada em você!</p>
+  </header>
+
+  <main>
+    <div class="programacao" id="programacao">Carregando música...</div>
+
+    <div class="player">
+      <audio controls autoplay>
+        <source src="http://link.zeno.fm/7heeu8w1pzzuv/stream.mp3" type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
+      </audio>
+    </div>
+
+    <div class="parceiros">
+      <h2>Parceiros</h2>
+      <ul>
+        <li>Parceiro 1</li>
+        <li>Parceiro 2</li>
+        <li>Parceiro 3</li>
+      </ul>
+    </div>
+
+    <div class="agenda">
+      <h2>Agenda</h2>
+      <p>Confira os próximos programas e eventos.</p>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 Web Rádio Montes Claros
+  </footer>
+
+  <script>
+    const URL_CURRENT_SONG = 'https://webradio-vercel-g1rq1hxmj-marcos-s-projects-5fa75459.vercel.app/api/currentSong';
+
+    async function atualizarProgramacao() {
+      try {
+        const response = await fetch(URL_CURRENT_SONG, { cache: "no-store" });
+        if (!response.ok) throw new Error('Não foi possível carregar a música.');
+        const texto = await response.text();
+        document.getElementById('programacao').innerText = texto.trim();
+      } catch (err) {
+        document.getElementById('programacao').innerText = 'Erro ao carregar a música.';
+        console.error(err);
+      }
+    }
+
+    atualizarProgramacao();
+    setInterval(atualizarProgramacao, 15000);
+  </script>
+</body>
+</html>
