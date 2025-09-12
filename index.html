@@ -335,51 +335,64 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    async function updateNowPlaying() {
-        const trackInfoElement = document.getElementById('current-track-info');
-        if (!trackInfoElement) return;
+    // ---> INÍCIO DO NOVO CÓDIGO PARA O NOME DA MÚSICA <---
 
-        const serverIp = "78.129.241.110";
-        const serverPort = "39382";
-        
-        // Usamos um proxy para evitar problemas de CORS (http vs https)
-        const apiUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`http://${serverIp}:${serverPort}/stats?sid=1`)}`;
-        const defaultMessage = '<span>Agora Tocando:</span> As melhores da cidade - <p id="dj-program-name">Programação Musical</p>';
-
-        try {
-            const response = await fetch(apiUrl);
-            if (!response.ok) {
-                trackInfoElement.innerHTML = defaultMessage; 
-                return;
-            }
-            const data = await response.json();
-            const xmlContent = data.contents;
-
-            // O servidor retorna os dados em XML, então precisamos extrair a informação
-            const parser = new DOMParser();
-            const xmlDoc = parser.parseFromString(xmlContent, "text/xml");
-            
-            // Verificamos se o servidor está online (streamstatus === 1)
-            const streamStatus = xmlDoc.getElementsByTagName("STREAMSTATUS")[0]?.childNodes[0]?.nodeValue;
-
-            if (streamStatus === '1') {
-                const songTitle = xmlDoc.getElementsByTagName("SONGTITLE")[0]?.childNodes[0]?.nodeValue || null;
-                if (songTitle && songTitle.trim() !== "") {
-                    trackInfoElement.innerHTML = `<span>Agora Tocando:</span> ${songTitle}`;
-                } else {
-                    trackInfoElement.innerHTML = defaultMessage;
-                }
-            } else {
-                 trackInfoElement.innerHTML = defaultMessage;
-            }
-        } catch (error) {
-            console.error("Erro ao buscar música:", error);
-            trackInfoElement.innerHTML = defaultMessage;
-        }
-    }
+// Esta é a nossa nova função. Ela vai buscar o nome da música do seu servidor Caster.fm
+async function updateNowPlaying() {
+    // 1. Primeiro, ele encontra no seu site o lugar onde o nome da música deve aparecer.
+    const songTitleElement = document.getElementById('current-track-info');
     
-    setInterval(updateNowPlaying, 15000); 
-    updateNowPlaying();
+    // 2. Esta é a URL mágica que nos dá as informações da sua rádio.
+    const statsUrl = "https://sapircast.caster.fm:16062/admin/publicstats.json";
+
+    try {
+        // 3. O script "visita" a URL para pegar os dados mais recentes.
+        const response = await fetch(statsUrl, { cache: "no-store" });
+        const data = await response.json();
+        let songText = "Programação Musical"; // Uma mensagem padrão caso não encontre a música
+
+        // 4. LEMBRA DA NOSSA INVESTIGAÇÃO? Esta é a lógica que descobrimos.
+        // Ela procura a informação no SEGUNDO item da lista que o servidor envia.
+        if (data && data.length > 1 && data[1].source) {
+            const sourceObject = data[1].source; 
+            const streamKey = Object.keys(sourceObject)[0];
+            
+            if (streamKey && sourceObject[streamKey] && sourceObject[streamKey]["display-title"]) {
+                songText = sourceObject[streamKey]["display-title"];
+            }
+        }
+        
+        // 5. Finalmente, ele escreve o nome da música na página, mantendo seu estilo original.
+        songTitleElement.innerHTML = `<span>Agora Tocando:</span> ${songText}`;
+
+    } catch (error) {
+        // Se a rádio estiver offline ou der algum erro, ele mostra uma mensagem amigável.
+        console.error("Erro ao buscar dados da rádio Caster.fm:", error);
+        songTitleElement.innerHTML = `<span>No Ar:</span> Programação Musical`;
+    }
+}
+
+// 6. Aqui, mandamos a função rodar pela primeira vez...
+updateNowPlaying();
+// ...e depois, mandamos ela rodar de novo a cada 10 segundos para manter o nome sempre atualizado.
+setInterval(updateNowPlaying, 10000);
+
+
+// 7. Este código extra garante que o player de áudio seja conectado à sua rádio.
+// Ele espera a página carregar completamente antes de fazer qualquer coisa.
+document.addEventListener('DOMContentLoaded', () => {
+    // Encontra o player de áudio que modificamos no Passo 1.
+    const radioPlayer = document.getElementById('radio-player');
+    
+    // A URL da sua transmissão de áudio.
+    const streamUrl = "https://sapircast.caster.fm:16062/BJvGA?token=7cf90a3776fc2c0196ea01d61c7bdad8";
+
+    if (radioPlayer) {
+        // Define o "endereço" do player para a sua rádio, fazendo-a tocar.
+        radioPlayer.src = streamUrl;
+    }
+});
+
 
     function updateCurrentProgram() {
         const programElement = document.getElementById('dj-program-name');
