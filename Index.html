@@ -369,7 +369,7 @@ async function updateNowPlaying() {
         // 3. O script "visita" a URL para pegar os dados mais recentes.
         const response = await fetch(statsUrl, { cache: "no-store" });
         const data = await response.json();
-        let songText = "Flashback"; // Uma mensagem padrão caso não encontre a música
+        let songText = "Modão Da Madrugada"; // Uma mensagem padrão caso não encontre a música
 
         // 4. LEMBRA DA NOSSA INVESTIGAÇÃO? Esta é a lógica que descobrimos.
         // Ela procura a informação no SEGUNDO item da lista que o servidor envia.
