@@ -136,7 +136,6 @@
     .news-item:last-child, .event-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
     .news-item .cta-button, .event-item .cta-button { margin-top: 1rem; }
     
-    /* MODIFICAÇÃO AQUI: Tamanho da imagem de notícias */
     .news-item img { 
         width: 100px; 
         height: 100px; 
@@ -144,14 +143,20 @@
         border-radius: 10px; 
         flex-shrink: 0;
     }
-    /* MODIFICAÇÃO AQUI: Tamanho da imagem de eventos foi aumentado */
     .event-item img { 
-        width: 180px; /* Aumentado de 100px para 180px */
-        height: 180px; /* Aumentado de 100px para 180px */
+        width: 180px;
+        height: 180px;
         object-fit: cover; 
         border-radius: 10px; 
         flex-shrink: 0;
     }
+    
+    .event-item img[alt="cartaz madeirada"] {
+        width: 100%; /* Faz a segunda imagem ocupar toda a largura */
+        height: auto; /* Mantém a proporção */
+        margin-top: 1rem; /* Adiciona um espaço acima */
+    }
+
 
     .news-content h4, .event-content h4 { margin: 0 0 0.5rem 0; font-size: 1.2rem; }
     .news-content p, .event-content p { margin: 0 0 0.5rem 0; font-size: 0.9rem; opacity: 0.8; }
@@ -161,19 +166,17 @@
     footer { margin-top: 3rem; padding: 1.5rem; }
     footer p { font-size: 1.1rem; margin-bottom: 1rem; opacity: 0.9; }
 
-    /* Estilo para adaptar a enquete ao tema escuro */
     #enquete-google {
-      border-radius: 15px; /* Deixa as bordas do formulário arredondadas */
-      filter: invert(95%) hue-rotate(180deg); /* A mágica do modo noturno */
+      border-radius: 15px;
+      filter: invert(95%) hue-rotate(180deg);
     }
 
-    /* Responsividade para Layout */
     @media (max-width: 992px) {
         .main-layout { flex-direction: column; }
         .main-content, .sidebar { width: 100%; }
         .sidebar { position: static; }
         .event-item {
-          align-items: center; /* Centraliza a imagem e o texto quando empilhados */
+          align-items: center;
         }
     }
     @media (max-width: 600px) {
@@ -219,18 +222,18 @@
                 <div class="ticker-content">
                     <span>EVENTO!</span> 🚨 SEGUNDA 15/09/2025 🚨
 
-💃🏽🕺🏽VEM PRO FORRO DO GALPÃO O FORRÓ DO MADERADA
+                    💃🏽🕺🏽VEM PRO FORRO DO GALPÃO O FORRÓ DO MADERADA
 
-💃🏽 mulheres não pagam até 20:30
+                    💃🏽 mulheres não pagam até 20:30
 
-🎁Shows
-GAROTO SEDUÇÃO 
-ELIAS MADERADA 
-GLEISSON RODRIGUES 
-LUCAS CARDOSO 
-E CONVIDADOS 
+                    🎁Shows
+                    GAROTO SEDUÇÃO 
+                    ELIAS MADERADA 
+                    GLEISSON RODRIGUES 
+                    LUCAS CARDOSO 
+                    E CONVIDADOS 
 
-*Av Castelar prates 395 Major prates no visual bar* <span>ANUNCIE AQUI!</span> Entre em contato pelo WhatsApp e divulgue sua marca!
+                    *Av Castelar prates 395 Major prates no visual bar* <span>ANUNCIE AQUI!</span> Entre em contato pelo WhatsApp e divulgue sua marca!
                 </div>
             </div>
 
@@ -283,10 +286,11 @@ E CONVIDADOS
                     GLEISSON RODRIGUES 
                     LUCAS CARDOSO 
                     E CONVIDADOS!!!
-                    </div>
-                    <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/madeirada.jpg" alt="cartaz madeirada">
-                    </div>
-                </section>
+                    </p>
+                  </div>
+                </div>
+                <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/madeirada.jpg" alt="cartaz madeirada">
+            </section>
       
             <section class="glass-card news-section">
                 <h3>📰 Notícias da Cidade</h3>
@@ -317,30 +321,28 @@ E CONVIDADOS
               <h3>🌟 Nossos Parceiros 🌟</h3>
               <div class="sponsors-grid">
                 <a href="#" target="_blank">
-          <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/myhouse.jpg" alt="Patrocinador MY HOUSE">
-        </a>
-        
-        <a href="#" target="_blank">
-          <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/dj.jpg" alt="Patrocinador dj">
-        </a>
-        
-        <a href="https://wa.me/5538998558528" target="_blank">
-          <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/markim.jpg" alt="Markim">
-        </a>
+                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/myhouse.jpg" alt="Patrocinador MY HOUSE">
+                </a>
+                
+                <a href="#" target="_blank">
+                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/dj.jpg" alt="Patrocinador dj">
+                </a>
+                
+                <a href="https://wa.me/5538998558528" target="_blank">
+                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/markim.jpg" alt="Markim">
+                </a>
 
-        <a href="https://wa.me/5538984093639" target="_blank">
-          <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/maderada.jpg" alt="Maderada">
-        </a>
-        
-        <a href="https://wa.me/5538988429992" target="_blank">
-          <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/vitrine.jpg" alt="Lala">
-        </a>
+                <a href="https://wa.me/5538984093639" target="_blank">
+                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/maderada.jpg" alt="Maderada">
+                </a>
+                
+                <a href="https://wa.me/5538988429992" target="_blank">
+                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/vitrine.jpg" alt="Lala">
+                </a>
 
-      </div>
-      <div class="cta-sponsors">
-       <p>Quer ver sua marca aqui?</p>
-        <a href="https://wa.me/5538998558528?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20como%20patrocinar%20a%20rádio.">
+              </div>
               <div class="cta-sponsors">
+                <p>Quer ver sua marca aqui?</p>
                 <a href="https://wa.me/5538998558528?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20como%20patrocinar%20a%20rádio." class="cta-button">Seja um Patrocinador</a>
               </div>
             </section>
@@ -365,70 +367,50 @@ E CONVIDADOS
     setInterval(updateClock, 1000);
     updateClock();
 
-    // ---> INÍCIO DO NOVO CÓDIGO PARA O NOME DA MÚSICA <---
+    async function updateNowPlaying() {
+        const songTitleElement = document.getElementById('current-track-info');
+        const statsUrl = "https://sapircast.caster.fm:16062/admin/publicstats.json";
 
-// Esta é a nossa nova função. Ela vai buscar o nome da música do seu servidor Caster.fm
-async function updateNowPlaying() {
-    // 1. Primeiro, ele encontra no seu site o lugar onde o nome da música deve aparecer.
-    const songTitleElement = document.getElementById('current-track-info');
-    
-    // 2. Esta é a URL mágica que nos dá as informações da sua rádio.
-    const statsUrl = "https://sapircast.caster.fm:16062/admin/publicstats.json";
+        try {
+            const response = await fetch(statsUrl, { cache: "no-store" });
+            const data = await response.json();
+            let songText = "Programação Musical"; 
 
-    try {
-        // 3. O script "visita" a URL para pegar os dados mais recentes.
-        const response = await fetch(statsUrl, { cache: "no-store" });
-        const data = await response.json();
-        let songText = "Modão Da Madrugada"; // Uma mensagem padrão caso não encontre a música
-
-        // 4. LEMBRA DA NOSSA INVESTIGAÇÃO? Esta é a lógica que descobrimos.
-        // Ela procura a informação no SEGUNDO item da lista que o servidor envia.
-        if (data && data.length > 1 && data[1].source) {
-            const sourceObject = data[1].source; 
-            const streamKey = Object.keys(sourceObject)[0];
-            
-            if (streamKey && sourceObject[streamKey] && sourceObject[streamKey]["display-title"]) {
-                songText = sourceObject[streamKey]["display-title"];
+            if (data && data.length > 1 && data[1].source) {
+                const sourceObject = data[1].source; 
+                const streamKey = Object.keys(sourceObject)[0];
+                
+                if (streamKey && sourceObject[streamKey] && sourceObject[streamKey]["display-title"]) {
+                    songText = sourceObject[streamKey]["display-title"];
+                }
             }
+            
+            songTitleElement.innerHTML = `<span>Agora Tocando:</span> ${songText}`;
+
+        } catch (error) {
+            console.error("Erro ao buscar dados da rádio Caster.fm:", error);
+            songTitleElement.innerHTML = `<span>No Ar:</span> Programação Musical`;
         }
-        
-        // 5. Finalmente, ele escreve o nome da música na página, mantendo seu estilo original.
-        songTitleElement.innerHTML = `<span>Agora Tocando:</span> ${songText}`;
-
-    } catch (error) {
-        // Se a rádio estiver offline ou der algum erro, ele mostra uma mensagem amigável.
-        console.error("Erro ao buscar dados da rádio Caster.fm:", error);
-        songTitleElement.innerHTML = `<span>No Ar:</span> Programação Musical`;
     }
-}
 
-// 6. Aqui, mandamos a função rodar pela primeira vez...
-updateNowPlaying();
-// ...e depois, mandamos ela rodar de novo a cada 10 segundos para manter o nome sempre atualizado.
-setInterval(updateNowPlaying, 10000);
+    updateNowPlaying();
+    setInterval(updateNowPlaying, 10000);
 
+    document.addEventListener('DOMContentLoaded', () => {
+        const radioPlayer = document.getElementById('radio-player');
+        const streamUrl = "https://sapircast.caster.fm:16062/BJvGA?token=7cf90a3776fc2c0196ea01d61c7bdad8";
 
-// 7. Este código extra garante que o player de áudio seja conectado à sua rádio.
-// Ele espera a página carregar completamente antes de fazer qualquer coisa.
-document.addEventListener('DOMContentLoaded', () => {
-    // Encontra o player de áudio que modificamos no Passo 1.
-    const radioPlayer = document.getElementById('radio-player');
-    
-    // A URL da sua transmissão de áudio.
-    const streamUrl = "https://sapircast.caster.fm:16062/BJvGA?token=7cf90a3776fc2c0196ea01d61c7bdad8";
-
-    if (radioPlayer) {
-        // Define o "endereço" do player para a sua rádio, fazendo-a tocar.
-        radioPlayer.src = streamUrl;
-    }
-});
+        if (radioPlayer) {
+            radioPlayer.src = streamUrl;
+        }
+    });
 
 
     function updateCurrentProgram() {
         const programElement = document.getElementById('dj-program-name');
         if (!programElement) return;
         const currentHour = new Date().getHours();
-        let programName = "Modão Da Madrugada"; // Padrão
+        let programName = "Modão Da Madrugada";
 
         if (currentHour >= 5 && currentHour < 9) {
             programName = "Modão Da Madrugada";
@@ -440,9 +422,9 @@ document.addEventListener('DOMContentLoaded', () => {
             programName = "Sofrência Musical";
         } else if (currentHour >= 19 && currentHour < 22) {
             programName = "Pop Rock";
-        } else if (currentHour >= 22 || currentHour < 4) { // Ajustado para cobrir a virada da noite
+        } else if (currentHour >= 22 || currentHour < 4) {
             programName = "Forró";
-        } else if (currentHour >= 4 && currentHour < 5) { // Ajustado para Flashback
+        } else if (currentHour >= 4 && currentHour < 5) {
              programName = "Flashback";
         }
         
