@@ -135,13 +135,24 @@
     .news-item, .event-item { display: flex; gap: 1.5rem; text-align: left; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--cor-borda); }
     .news-item:last-child, .event-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
     .news-item .cta-button, .event-item .cta-button { margin-top: 1rem; }
-    .news-item img, .event-item img { 
+    
+    /* MODIFICAÇÃO AQUI: Tamanho da imagem de notícias */
+    .news-item img { 
         width: 100px; 
         height: 100px; 
         object-fit: cover; 
         border-radius: 10px; 
         flex-shrink: 0;
     }
+    /* MODIFICAÇÃO AQUI: Tamanho da imagem de eventos foi aumentado */
+    .event-item img { 
+        width: 180px; /* Aumentado de 100px para 180px */
+        height: 180px; /* Aumentado de 100px para 180px */
+        object-fit: cover; 
+        border-radius: 10px; 
+        flex-shrink: 0;
+    }
+
     .news-content h4, .event-content h4 { margin: 0 0 0.5rem 0; font-size: 1.2rem; }
     .news-content p, .event-content p { margin: 0 0 0.5rem 0; font-size: 0.9rem; opacity: 0.8; }
     .news-content a, .event-content a { color: var(--cor-destaque); text-decoration: none; font-weight: 600; }
@@ -161,6 +172,9 @@
         .main-layout { flex-direction: column; }
         .main-content, .sidebar { width: 100%; }
         .sidebar { position: static; }
+        .event-item {
+          align-items: center; /* Centraliza a imagem e o texto quando empilhados */
+        }
     }
     @media (max-width: 600px) {
       body { padding: 1rem 0.5rem; }
@@ -259,9 +273,8 @@ E CONVIDADOS
                 <h3>🗓️ Agenda de Montes Claros</h3>
                 <div class="event-item">
                   <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/agenda.png" alt="Montes Claros">
-                  
                   <div class="event-content">
-                  <h4>💃🏽🕺🏽VEM PRO FORRO DO GALPÃO O FORRÓ DO MADERADA </h4>
+                    <h4>💃🏽🕺🏽VEM PRO FORRO DO GALPÃO O FORRÓ DO MADERADA </h4>
                     <p class="event-details">Av Castelar prates 395 Major prates no visual bar*</p>
                     <p>🎁Shows
                     GAROTO
@@ -269,11 +282,12 @@ E CONVIDADOS
                     ELIAS MADERADA 
                     GLEISSON RODRIGUES 
                     LUCAS CARDOSO 
-                    E CONVIDADOS 
+                    E CONVIDADOS!!!
                     </div>
                     <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/madeirada.jpg" alt="cartaz madeirada">
                     </div>
-                    </section>
+                </section>
+      
             <section class="glass-card news-section">
                 <h3>📰 Notícias da Cidade</h3>
                 <div class="news-item">
@@ -318,8 +332,8 @@ E CONVIDADOS
           <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/maderada.jpg" alt="Maderada">
         </a>
         
-          <a href="https://wa.me/5538988429992" target="_blank">
-          <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/vitrine.jpg" alt="lala">
+        <a href="https://wa.me/5538988429992" target="_blank">
+          <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/vitrine.jpg" alt="Lala">
         </a>
 
       </div>
@@ -416,7 +430,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentHour = new Date().getHours();
         let programName = "Modão Da Madrugada"; // Padrão
 
-        if (currentHour >= 6 && currentHour < 9) {
+        if (currentHour >= 5 && currentHour < 9) {
             programName = "Modão Da Madrugada";
         } else if (currentHour >= 9 && currentHour < 12) {
             programName = "Mistura Musical";
@@ -426,8 +440,10 @@ document.addEventListener('DOMContentLoaded', () => {
             programName = "Sofrência Musical";
         } else if (currentHour >= 19 && currentHour < 22) {
             programName = "Pop Rock";
-        } else if (currentHour >= 22 && currentHour < 24) {
+        } else if (currentHour >= 22 || currentHour < 4) { // Ajustado para cobrir a virada da noite
             programName = "Forró";
+        } else if (currentHour >= 4 && currentHour < 5) { // Ajustado para Flashback
+             programName = "Flashback";
         }
         
         programElement.textContent = programName;
