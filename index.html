@@ -203,7 +203,20 @@
             
             <div class="news-ticker">
                 <div class="ticker-content">
-                    <span>EVENTO!</span> Show com Zé Vaqueiro no Parque de Exposições dia 15/09! Garanta seu ingresso! <span>ANUNCIE AQUI!</span> Entre em contato pelo WhatsApp e divulgue sua marca!
+                    <span>EVENTO!</span> *🚨 SEGUNDA 🚨*
+
+*💃🏽🕺🏽VEM PRO FORRO DO GALPÃO O FORRÓ DO MADERADA*
+
+*💃🏽 mulheres não pagam até 20:30*
+
+*🎁Shows*
+GAROTO SEDUÇÃO 
+ELIAS MADERADA 
+GLEISSON RODRIGUES 
+LUCAS CARDOSO 
+E CONVIDADOS 
+
+*Av Castelar prates 395 Major prates no visual bar* <span>ANUNCIE AQUI!</span> Entre em contato pelo WhatsApp e divulgue sua marca!
                 </div>
             </div>
 
@@ -247,9 +260,16 @@
                 <div class="event-item">
                   <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/agenda.png" alt="Montes Claros">
                   <div class="event-content">
-                    <h4>Show com Zé Vaqueiro</h4>
-                    <p class="event-details">📍 Parque de Exposições | 📅 15/09</p>
-                    <p>O maior show de piseiro da região chega a Montes Claros. Não perca!</p>
+                    <h4>*💃🏽🕺🏽VEM PRO FORRO DO GALPÃO O FORRÓ DO MADERADA* </h4>
+                    <p class="event-details">Av Castelar prates 395 Major prates no visual bar*</p>
+                    <p>*🎁Shows
+                    *GAROTO
+                    SEDUÇÃO 
+                    ELIAS MADERADA 
+                    GLEISSON RODRIGUES 
+                    LUCAS CARDOSO 
+                    E CONVIDADOS 
+                    </p>
                     <a href="https://www.montesclaros.mg.gov.br/noticias" target="_blank">Mais Informações</a>
                   </div>
                 </div>
@@ -261,8 +281,8 @@
                 <div class="news-item">
                   <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/noticia.jpg">
                   <div class="news-content">
-                    <h4>Mercado Municipal terá horário especial no feriado</h4>
-                    <p>A prefeitura anunciou o novo horário de funcionamento do Mercado Central para o feriado da Independência...</p>
+                    <h4>NÃO PERCA O PASSO - Calendário das corridas de rua de Montes Claros terá 11 provas até o fim de novembro</h4>
+                    <p>A partir deste domingo, 14, Montes Claros receberá uma sequência relevante de eventos de corridas de rua para a alegria dos adeptos da modalidade. Serão 11 provas entre os dias 14 de setembro e 30 de novembro. É bom aproveitar a oportunidade, uma vez que no mês de dezembro, tradicionalmente, as provas de corrida de rua fazem uma pausa e retornam apenas no fim do 1º trimestre....</p>
                     <a href="https://www.montesclaros.mg.gov.br/noticias" target="_blank">Leia a matéria completa</a>
                   </div>
                 </div>
@@ -349,7 +369,7 @@ async function updateNowPlaying() {
         // 3. O script "visita" a URL para pegar os dados mais recentes.
         const response = await fetch(statsUrl, { cache: "no-store" });
         const data = await response.json();
-        let songText = "Programação Musical"; // Uma mensagem padrão caso não encontre a música
+        let songText = "Flashback"; // Uma mensagem padrão caso não encontre a música
 
         // 4. LEMBRA DA NOSSA INVESTIGAÇÃO? Esta é a lógica que descobrimos.
         // Ela procura a informação no SEGUNDO item da lista que o servidor envia.
@@ -398,7 +418,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const programElement = document.getElementById('dj-program-name');
         if (!programElement) return;
         const currentHour = new Date().getHours();
-        let programName = "Programação Musical"; // Padrão
+        let programName = "Flashback"; // Padrão
 
         if (currentHour >= 6 && currentHour < 9) {
             programName = "O Fino Da Roça";
