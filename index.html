@@ -186,6 +186,11 @@
       filter: invert(95%) hue-rotate(180deg);
     }
 
+    /* Regra de CSS para esconder o link de atribuição do contador */
+    .online-users-section a[href="https://24counter.com"] {
+        display: none !important;
+    }
+
     @media (max-width: 992px) {
         .main-layout { flex-direction: column; }
         .main-content, .sidebar { width: 100%; }
@@ -383,9 +388,8 @@
             <section class="glass-card online-users-section">
               <h3>📡 Visitantes Online</h3>
               <div style="text-align:center;">
-                <script type="text/javascript" src="//www.supercounters.com/fc.js"></script>
-                <script type="text/javascript">sc_pageview_C("1758066558", "000000", "ff6600");</script>
-                </div>
+                <a target="_blank" href="https://24counter.com/cc_stats/1757967685/"><img alt="free counter" border="0" src="https://24counter.com/online/ccc.php?id=1757967685"></a><br><a href="https://24counter.com" style="display: none;">free counter</a>
+              </div>
             </section>
 
             <section class="glass-card sponsors-section">
