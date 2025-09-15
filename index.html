@@ -113,12 +113,13 @@
     @keyframes scroll-ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
     #clock { font-family: 'Orbitron', monospace; font-size: 3rem; font-weight: 700; color: var(--cor-secundaria); letter-spacing: 3px; text-shadow: 0 0 15px var(--cor-secundaria), 0 0 25px rgba(0,255,255,0.4); }
-    .content-section h3, .sponsors-section h3, .dj-section h3, .news-section h3, .events-section h3, .poll-section h3 { font-size: 2rem; color: var(--cor-destaque); margin-top: 0; margin-bottom: 1.8rem; text-shadow: var(--glow-intensity); }
+    .content-section h3, .sponsors-section h3, .dj-section h3, .news-section h3, .events-section h3, .poll-section h3, .online-users-section h3 { font-size: 2rem; color: var(--cor-destaque); margin-top: 0; margin-bottom: 1.8rem; text-shadow: var(--glow-intensity); }
     
-    .sponsors-section h3 { display: flex; align-items: center; text-align: center; font-size: 1.8rem; }
-    .sponsors-section h3::before, .sponsors-section h3::after { content: ''; flex: 1; border-bottom: 1px solid var(--cor-borda); }
-    .sponsors-section h3:not(:empty)::before { margin-right: .75em; }
-    .sponsors-section h3:not(:empty)::after { margin-left: .75em; }
+    .sponsors-section h3, .online-users-section h3 { display: flex; align-items: center; text-align: center; font-size: 1.8rem; }
+    .sponsors-section h3::before, .sponsors-section h3::after, .online-users-section h3::before, .online-users-section h3::after { content: ''; flex: 1; border-bottom: 1px solid var(--cor-borda); }
+    .sponsors-section h3:not(:empty)::before, .online-users-section h3:not(:empty)::before { margin-right: .75em; }
+    .sponsors-section h3:not(:empty)::after, .online-users-section h3:not(:empty)::after { margin-left: .75em; }
+    
     .sponsors-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
     .sponsors-grid a { background: rgba(0,0,0,0.2); border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: all 0.3s ease; overflow: hidden; padding: 0.5rem; }
     .sponsors-grid a:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 10px 30px var(--cor-sombra), 0 0 20px var(--cor-destaque); border-color: var(--cor-destaque); }
@@ -227,7 +228,7 @@
     <div class="main-layout">
         <div class="main-content">
             <section class="glass-card player-card">
-              <img src="imagens/dj.jpg" alt="Logo da Rádio" class="player-logo">
+              <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/dj.jpg" alt="Logo da Rádio" class="player-logo">
               <h2>NO AR</h2>
               <p id="current-track-info"><span>Carregando música...</span></p>
               <audio controls autoplay style="width: 100%;">
@@ -379,6 +380,13 @@
         </div>
         
         <aside class="sidebar">
+            <section class="glass-card online-users-section">
+              <h3>📡 Visitantes Online</h3>
+              <a href="https://www.free-counters.org/free-hit-counter.html" target="_blank">
+                <img src="https://www.free-counters.org/count-123.pl?page=1264426&style=14&nb_digits=5" alt="Free Hit Counter" style="border:none; margin: 0 auto; display: block;" >
+              </a>
+              </section>
+
             <section class="glass-card sponsors-section">
               <h3>🌟 Nossos Parceiros 🌟</h3>
               <div class="sponsors-grid">
