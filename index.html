@@ -3,17 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  </div>
-  </section>
-  
   <title>WEB RÁDIO MONTES CLAROS - Sintonizada em você!</title>
-  
-               <div class="news-ticker">
-                <div class="ticker-content">
-                <span> WEB RÀDIO MONTES CLAROS A N° 1 EM AUDIÊNCIA! <span>ANUNCIE AQUI!</span> Entre em contato pelo WhatsApp e divulgue sua marca!
-              </div>
-              </section>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,6 +19,11 @@
       --cor-sombra: rgba(0, 0, 0, 0.6);
       --glow-intensity: 0 0 15px var(--cor-destaque);
       --glow-strong: 0 0 25px var(--cor-destaque), 0 0 40px var(--cor-destaque);
+    }
+
+    /* --- MELHORIA DE COMPATIBILIDADE --- */
+    *, *::before, *::after {
+      box-sizing: border-box;
     }
 
     *:focus { outline: none; }
@@ -50,6 +45,15 @@
       -webkit-user-select: none;
       -ms-user-select: none;
       user-select: none;
+      /* --- MELHORIA DE COMPATIBILIDADE --- */
+      overflow-wrap: break-word; 
+    }
+
+    /* --- MELHORIA DE COMPATIBILIDADE --- */
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
     }
 
     .background-effect { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.6; background: linear-gradient(45deg, #100a20, #0a1a2a, #2a0a1a); background-size: 400% 400%; animation: background-gradient-animation 15s ease infinite; }
@@ -62,7 +66,6 @@
     @keyframes gradient-animation { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
     @keyframes text-glow { from { text-shadow: var(--glow-intensity); } to { text-shadow: var(--glow-strong); } }
 
-    /* Novo Layout de 2 Colunas */
     .main-layout {
         display: flex;
         gap: 2rem;
@@ -71,12 +74,14 @@
     .main-content {
         flex: 2; 
         width: 66%;
+        min-width: 0; /* Ajuda a previnir overflow em containers flex */
     }
     .sidebar {
         flex: 1;
         width: 33%;
         position: sticky;
         top: 2rem;
+        min-width: 0; /* Ajuda a previnir overflow em containers flex */
     }
 
     .glass-card { background-color: var(--cor-fundo-transparente); border-radius: 20px; border: 1px solid var(--cor-borda); padding: 2rem; margin-bottom: 2rem; box-shadow: 0 10px 40px var(--cor-sombra); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); position: relative; overflow: hidden; transition: all 0.3s ease; }
@@ -85,7 +90,7 @@
     .glass-card:hover::before { opacity: 1; transform: scale(1); animation: card-border-glow 2s infinite alternate ease-in-out; }
     @keyframes card-border-glow { from { border-image: linear-gradient(45deg, var(--cor-destaque) 0%, var(--cor-secundaria) 100%) 1; } to { border-image: linear-gradient(45deg, var(--cor-secundaria) 0%, var(--cor-destaque) 100%) 1; } }
 
-    .player-logo { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; margin-bottom: 1.5rem; border: 5px solid var(--cor-destaque); box-shadow: 0 0 25px var(--cor-destaque); animation: logo-pulse 2s infinite alternate ease-in-out; }
+    .player-logo { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; margin: 0 auto 1.5rem auto; border: 5px solid var(--cor-destaque); box-shadow: 0 0 25px var(--cor-destaque); animation: logo-pulse 2s infinite alternate ease-in-out; }
     @keyframes logo-pulse { from { box-shadow: 0 0 20px var(--cor-destaque); } to { box-shadow: 0 0 40px var(--cor-secundaria); } }
 
     .player-card h2 { margin: 0; font-size: 1.8rem; font-weight: 700; color: var(--cor-secundaria); margin-bottom: 0.5rem; }
@@ -102,23 +107,23 @@
     .social-buttons .instagram:hover { color: #d6249f; border-color: #d6249f; box-shadow: 0 0 15px #d6249f; }
     .social-buttons .whatsapp:hover { color: #25D366; border-color: #25D366; box-shadow: 0 0 15px #25D366; }
 
-    /* Letreiro de Notícias */
     .news-ticker { background-color: var(--cor-fundo-transparente); border-radius: 10px; border: 1px solid var(--cor-borda); padding: 0.75rem; margin-bottom: 2rem; overflow: hidden; white-space: nowrap; }
     .ticker-content { display: inline-block; padding-left: 100%; animation: scroll-ticker 25s linear infinite; }
     .ticker-content span { font-weight: 700; color: var(--cor-destaque); margin-right: 1rem; margin-left: 2rem;}
     @keyframes scroll-ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
     #clock { font-family: 'Orbitron', monospace; font-size: 3rem; font-weight: 700; color: var(--cor-secundaria); letter-spacing: 3px; text-shadow: 0 0 15px var(--cor-secundaria), 0 0 25px rgba(0,255,255,0.4); }
-    .content-section h3, .sponsors-section h3, .dj-section h3, .news-section h3, .events-section h3, .poll-section h3 { font-size: 2rem; color: var(--cor-destaque); margin-top: 0; margin-bottom: 1.8rem; text-shadow: var(--glow-intensity); }
+    .content-section h3, .sponsors-section h3, .dj-section h3, .news-section h3, .events-section h3, .poll-section h3, .online-users-section h3 { font-size: 2rem; color: var(--cor-destaque); margin-top: 0; margin-bottom: 1.8rem; text-shadow: var(--glow-intensity); }
     
-    .sponsors-section h3 { display: flex; align-items: center; text-align: center; font-size: 1.8rem; }
-    .sponsors-section h3::before, .sponsors-section h3::after { content: ''; flex: 1; border-bottom: 1px solid var(--cor-borda); }
-    .sponsors-section h3:not(:empty)::before { margin-right: .75em; }
-    .sponsors-section h3:not(:empty)::after { margin-left: .75em; }
+    .sponsors-section h3, .online-users-section h3 { display: flex; align-items: center; text-align: center; font-size: 1.8rem; }
+    .sponsors-section h3::before, .sponsors-section h3::after, .online-users-section h3::before, .online-users-section h3::after { content: ''; flex: 1; border-bottom: 1px solid var(--cor-borda); }
+    .sponsors-section h3:not(:empty)::before, .online-users-section h3:not(:empty)::before { margin-right: .75em; }
+    .sponsors-section h3:not(:empty)::after, .online-users-section h3:not(:empty)::after { margin-left: .75em; }
+    
     .sponsors-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
     .sponsors-grid a { background: rgba(0,0,0,0.2); border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: all 0.3s ease; overflow: hidden; padding: 0.5rem; }
     .sponsors-grid a:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 10px 30px var(--cor-sombra), 0 0 20px var(--cor-destaque); border-color: var(--cor-destaque); }
-    .sponsors-grid img { width: 100%; height: auto; display: block; filter: grayscale(20%); transition: filter 0.3s ease; border-radius: 6px; }
+    .sponsors-grid img { width: 100%; filter: grayscale(20%); transition: filter 0.3s ease; border-radius: 6px; }
     .sponsors-grid a:hover img { filter: grayscale(0%); }
     .cta-sponsors { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--cor-borda); }
     .cta-sponsors p { font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; }
@@ -126,32 +131,48 @@
     .cta-button:hover { transform: translateY(-3px); box-shadow: 0 8px 20px var(--cor-sombra), var(--glow-intensity); background: linear-gradient(90deg, var(--cor-secundaria), var(--cor-destaque)); }
     
     .request-form { display: flex; flex-direction: column; gap: 1rem; }
-    .request-form input, .request-form textarea { background-color: rgba(0,0,0,0.4); border: 1px solid var(--cor-borda); border-radius: 10px; padding: 0.9rem 1.2rem; color: var(--cor-texto); font-family: 'Montserrat', sans-serif; font-size: 1rem; transition: border-color 0.3s ease, box-shadow 0.3s ease; -webkit-user-select: auto; -ms-user-select: auto; user-select: auto; }
+    .request-form input, .request-form textarea { width: 100%; background-color: rgba(0,0,0,0.4); border: 1px solid var(--cor-borda); border-radius: 10px; padding: 0.9rem 1.2rem; color: var(--cor-texto); font-family: 'Montserrat', sans-serif; font-size: 1rem; transition: border-color 0.3s ease, box-shadow 0.3s ease; -webkit-user-select: auto; -ms-user-select: auto; user-select: auto; }
     .request-form input:focus, .request-form textarea:focus { outline: none; border-color: var(--cor-destaque); box-shadow: 0 0 10px var(--cor-destaque); }
     .request-form button { background: linear-gradient(90deg, var(--cor-destaque), var(--cor-secundaria)); border: none; border-radius: 10px; padding: 0.9rem 1.2rem; color: #fff; font-size: 1.15rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.4); }
     .request-form button:hover { transform: translateY(-3px); box-shadow: 0 8px 20px var(--cor-sombra), var(--glow-intensity); background: linear-gradient(90deg, var(--cor-secundaria), var(--cor-destaque)); }
 
     .schedule-item { display: flex; justify-content: space-between; align-items: center; background-color: rgba(0,0,0,0.2); padding: 1rem 1.5rem; border-radius: 10px; margin-bottom: 1rem; border-left: 4px solid var(--cor-destaque); transition: all 0.3s ease; }
     .schedule-item:hover { background-color: rgba(0,0,0,0.4); transform: scale(1.02); border-left-color: var(--cor-secundaria); }
-    .schedule-time { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--cor-secundaria); }
-    .schedule-title { font-size: 1.1rem; font-weight: 600; color: var(--cor-texto); }
+    .schedule-time { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--cor-secundaria); white-space: nowrap; padding-right: 1rem; }
+    .schedule-title { font-size: 1.1rem; font-weight: 600; color: var(--cor-texto); text-align: right; }
     
     .dj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem; }
     .dj-card { background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 10px; text-align: center;}
-    .dj-card img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--cor-secundaria); margin-bottom: 1rem; }
+    .dj-card img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--cor-secundaria); margin: 0 auto 1rem auto; }
     .dj-card h4 { margin: 0 0 0.5rem 0; font-size: 1.2rem; color: var(--cor-texto); }
     .dj-card p { margin: 0; font-size: 0.9rem; color: var(--cor-secundaria); transition: all 0.5s ease; }
 
     .news-item, .event-item { display: flex; gap: 1.5rem; text-align: left; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--cor-borda); }
     .news-item:last-child, .event-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
     .news-item .cta-button, .event-item .cta-button { margin-top: 1rem; }
-    .news-item img, .event-item img { 
+    
+    .news-item img { 
         width: 100px; 
         height: 100px; 
         object-fit: cover; 
         border-radius: 10px; 
         flex-shrink: 0;
     }
+    .event-item img { 
+        width: 180px;
+        height: 180px;
+        object-fit: cover; 
+        border-radius: 10px; 
+        flex-shrink: 0;
+        margin: 0 auto;
+    }
+    
+    .event-item img[alt="cartaz madeirada"] {
+        width: 100%;
+        height: auto;
+        margin-top: 1rem;
+    }
+
     .news-content h4, .event-content h4 { margin: 0 0 0.5rem 0; font-size: 1.2rem; }
     .news-content p, .event-content p { margin: 0 0 0.5rem 0; font-size: 0.9rem; opacity: 0.8; }
     .news-content a, .event-content a { color: var(--cor-destaque); text-decoration: none; font-weight: 600; }
@@ -160,17 +181,23 @@
     footer { margin-top: 3rem; padding: 1.5rem; }
     footer p { font-size: 1.1rem; margin-bottom: 1rem; opacity: 0.9; }
 
-    /* Estilo para adaptar a enquete ao tema escuro */
     #enquete-google {
-      border-radius: 15px; /* Deixa as bordas do formulário arredondadas */
-      filter: invert(95%) hue-rotate(180deg); /* A mágica do modo noturno */
+      border-radius: 15px;
+      filter: invert(95%) hue-rotate(180deg);
     }
 
-    /* Responsividade para Layout */
+    /* Regra de CSS para esconder o link de atribuição do contador */
+    .online-users-section a[href="https://24counter.com"] {
+        display: none !important;
+    }
+
     @media (max-width: 992px) {
         .main-layout { flex-direction: column; }
         .main-content, .sidebar { width: 100%; }
         .sidebar { position: static; }
+        .event-item {
+          align-items: center;
+        }
     }
     @media (max-width: 600px) {
       body { padding: 1rem 0.5rem; }
@@ -179,8 +206,20 @@
       .glass-card { padding: 1.5rem; }
       .player-logo { width: 140px; height: 140px; }
       .news-item, .event-item { flex-direction: column; align-items: center; text-align: center; }
+      .schedule-item { flex-direction: column; gap: 0.5rem; }
+      .schedule-time { padding-right: 0; }
     }
   </style>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JKDH8V8Y81"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-JKDH8V8Y81');
+  </script>
+
 </head>
 <body>
   <div class="background-effect"></div> 
@@ -194,7 +233,7 @@
     <div class="main-layout">
         <div class="main-content">
             <section class="glass-card player-card">
-              <img src="imagens/logoradio.png" alt="Logo da Rádio" class="player-logo">
+              <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/logoradio.jpg" alt="Logo da Rádio" class="player-logo">
               <h2>NO AR</h2>
               <p id="current-track-info"><span>Carregando música...</span></p>
               <audio controls autoplay style="width: 100%;">
@@ -215,22 +254,20 @@
                 <div class="ticker-content">
                     <span>EVENTO!</span> 🚨 SEGUNDA 15/09/2025 🚨
 
-💃🏽🕺🏽VEM PRO FORRO DO GALPÃO O FORRÓ DO MADERADA
+                    💃🏽🕺🏽VEM PRO FORRO DO GALPÃO O FORRÓ DO MADERADA
 
-💃🏽 mulheres não pagam até 20:30
+                    💃🏽 mulheres não pagam até 20:30
 
-🎁Shows
-GAROTO SEDUÇÃO 
-ELIAS MADERADA 
-GLEISSON RODRIGUES 
-LUCAS CARDOSO 
-E CONVIDADOS 
+                    🎁Shows
+                    GAROTO SEDUÇÃO 
+                    ELIAS MADERADA 
+                    GLEISSON RODRIGUES 
+                    LUCAS CARDOSO 
+                    E CONVIDADOS 
 
-*Av Castelar prates 395 Major prates no visual bar* <span>ANUNCIE AQUI!</span> Entre em contato pelo WhatsApp e divulgue sua marca!
-                
+                    *Av Castelar prates 395 Major prates no visual bar* <span>ANUNCIE AQUI!</span> Entre em contato pelo WhatsApp e divulgue sua marca!
                 </div>
-            </section>
-              
+            </div>
 
             <section class="glass-card">
                 <h3>⏰ Hora Certa</h3>
@@ -273,21 +310,56 @@ E CONVIDADOS
                   <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/agenda.png" alt="Montes Claros">
                   <div class="event-content">
                     <h4>💃🏽🕺🏽VEM PRO FORRO DO GALPÃO O FORRÓ DO MADERADA </h4>
-                    <p class="event-details">Av Castelar prates 395 Major prates no visual bar*</p>
+                    <p class="event-details">Rua Machado De Assis 549 Vilage Do Lago 1*</p>
                     <p>🎁Shows
                     GAROTO
                     SEDUÇÃO 
                     ELIAS MADERADA 
                     GLEISSON RODRIGUES 
                     LUCAS CARDOSO 
-                    E CONVIDADOS 
+                    E CONVIDADOS!!!
                     </p>
-                    <a href="https://www.montesclaros.mg.gov.br/noticias" target="_blank">Mais Informações</a>
                   </div>
                 </div>
-                <a href="https://www.montesclaros.mg.gov.br/noticias" target="_blank" class="cta-button" style="margin-top: 1rem;">Ver Agenda Completa</a>
+                <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/madeirada.jpg" alt="cartaz madeirada">
             </section>
-      
+
+                <section class="glass-card events-section">
+                  <div class="event-item">
+                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/agenda.png" alt="Montes Claros">
+                  <div class="event-content">
+                    <h4> VEM PRO FORRO DO BAR DO PARAGUAI  </h4>
+                    <p class="event-details">Rua Machado De Assis 549 - Vilage Do lago 1*</p>
+                    <p>Shows
+                    EDIMILSON BATISTA
+                    NANNE BARBOSA
+                    ALEX MORENO
+                    ALAN SILVA
+                    REGYS BOYS 
+                    JERRY JEFFERSON
+                    CARLINHOS SOUSA 
+                    SIDNEY RODRIGUES 
+                    MARCELINHO DOS TECLADOS
+                  </p>
+                  </div>
+                </div>
+                <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/paraguai.jpg" alt="cartaz paraguai">
+            </section>
+
+                  <section class="glass-card events-section">
+                  <div class="event-item">
+                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/agenda.png" alt="Montes Claros">
+                  <div class="event-content">
+                    <h4> Vitrine shows e Eventos Inauguração do bailão Da Quarta  </h4>
+                    <p class="event-details">Av. Francisco Peres 161 Em Frente a Lagoa Da Pampulha*</p>
+                    <p>Shows
+                    LIRA SHOW E CONVIDADOS
+                  </p>
+                  </div>
+                </div>
+                <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/lala1.jpg" alt="cartaz lala">
+            </section>
+
             <section class="glass-card news-section">
                 <h3>📰 Notícias da Cidade</h3>
                 <div class="news-item">
@@ -313,35 +385,46 @@ E CONVIDADOS
         </div>
         
         <aside class="sidebar">
+            <section class="glass-card online-users-section">
+              <h3>📡 Visitantes Online</h3>
+              <div style="text-align:center;">
+                <a target="_blank" href="https://24counter.com/cc_stats/1757967685/"><img alt="free counter" border="0" src="https://24counter.com/online/ccc.php?id=1757967685"></a><br><a href="https://24counter.com" style="display: none;">free counter</a>
+              </div>
+            </section>
+
             <section class="glass-card sponsors-section">
               <h3>🌟 Nossos Parceiros 🌟</h3>
               <div class="sponsors-grid">
                 <a href="#" target="_blank">
-          <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/myhouse.jpg" alt="Patrocinador MY HOUSE">
-        </a>
-        
-        <a href="#" target="_blank">
-          <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/dj.jpg" alt="Patrocinador dj">
-        </a>
-        
-        <a href="https://wa.me/5538998558528" target="_blank">
-          <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/markim.jpg" alt="Markim">
-        </a>
+                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/myhouse.jpg" alt="Patrocinador MY HOUSE">
+                </a>
+                
+                <a href="#" target="_blank">
+                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/dj.jpg" alt="Patrocinador dj">
+                </a>
+                
+                <a href="https://wa.me/5538998558528" target="_blank">
+                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/markim.jpg" alt="Markim">
+                </a>
 
-        <a href="https://wa.me/5538984093639" target="_blank">
-          <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/maderada.jpg" alt="Maderada">
-        </a>
-        
-        <a href="https://wa.me/5538991963125" target="_blank">
-          <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/djdaniel.png" alt="dj daniel">
-          
-        </a>
-        
-      </div>
-      <div class="cta-sponsors">
-       <p>Quer ver sua marca aqui?</p>
-        <a href="https://wa.me/5538998558528?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20como%20patrocinar%20a%20rádio.">
+                <a href="https://wa.me/5538984093639" target="_blank">
+                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/maderada.jpg" alt="Maderada">
+                </a>
+                
+                <a href="https://wa.me/5538988429992" target="_blank">
+                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/Vitrine.jpg" alt="Lala">
+                </a>
+
+                <a href="https://wa.me/5538991963125" target="_blank">
+                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/djdaniel.png" alt="Dj Daniel">
+                </a>
+
+                <a href="https://wa.me/5538998565414" target="_blank">
+                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/logoparaguai.jpg" alt="Patrocinador Paraguai">
+                </a>
+              </div>
               <div class="cta-sponsors">
+                <p>Quer ver sua marca aqui?</p>
                 <a href="https://wa.me/5538998558528?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20como%20patrocinar%20a%20rádio." class="cta-button">Seja um Patrocinador</a>
               </div>
             </section>
@@ -366,72 +449,52 @@ E CONVIDADOS
     setInterval(updateClock, 1000);
     updateClock();
 
-    // ---> INÍCIO DO NOVO CÓDIGO PARA O NOME DA MÚSICA <---
+    async function updateNowPlaying() {
+        const songTitleElement = document.getElementById('current-track-info');
+        const statsUrl = "https://sapircast.caster.fm:16062/admin/publicstats.json";
 
-// Esta é a nossa nova função. Ela vai buscar o nome da música do seu servidor Caster.fm
-async function updateNowPlaying() {
-    // 1. Primeiro, ele encontra no seu site o lugar onde o nome da música deve aparecer.
-    const songTitleElement = document.getElementById('current-track-info');
-    
-    // 2. Esta é a URL mágica que nos dá as informações da sua rádio.
-    const statsUrl = "https://sapircast.caster.fm:16062/admin/publicstats.json";
+        try {
+            const response = await fetch(statsUrl, { cache: "no-store" });
+            const data = await response.json();
+            let songText = "Programação Musical"; 
 
-    try {
-        // 3. O script "visita" a URL para pegar os dados mais recentes.
-        const response = await fetch(statsUrl, { cache: "no-store" });
-        const data = await response.json();
-        let songText = "Modão Da Madrugada"; // Uma mensagem padrão caso não encontre a música
-
-        // 4. LEMBRA DA NOSSA INVESTIGAÇÃO? Esta é a lógica que descobrimos.
-        // Ela procura a informação no SEGUNDO item da lista que o servidor envia.
-        if (data && data.length > 1 && data[1].source) {
-            const sourceObject = data[1].source; 
-            const streamKey = Object.keys(sourceObject)[0];
-            
-            if (streamKey && sourceObject[streamKey] && sourceObject[streamKey]["display-title"]) {
-                songText = sourceObject[streamKey]["display-title"];
+            if (data && data.length > 1 && data[1].source) {
+                const sourceObject = data[1].source; 
+                const streamKey = Object.keys(sourceObject)[0];
+                
+                if (streamKey && sourceObject[streamKey] && sourceObject[streamKey]["display-title"]) {
+                    songText = sourceObject[streamKey]["display-title"];
+                }
             }
+            
+            songTitleElement.innerHTML = `<span>Agora Tocando:</span> ${songText}`;
+
+        } catch (error) {
+            console.error("Erro ao buscar dados da rádio Caster.fm:", error);
+            songTitleElement.innerHTML = `<span>No Ar:</span> Programação Musical`;
         }
-        
-        // 5. Finalmente, ele escreve o nome da música na página, mantendo seu estilo original.
-        songTitleElement.innerHTML = `<span>Agora Tocando:</span> ${songText}`;
-
-    } catch (error) {
-        // Se a rádio estiver offline ou der algum erro, ele mostra uma mensagem amigável.
-        console.error("Erro ao buscar dados da rádio Caster.fm:", error);
-        songTitleElement.innerHTML = `<span>No Ar:</span> Programação Musical`;
     }
-}
 
-// 6. Aqui, mandamos a função rodar pela primeira vez...
-updateNowPlaying();
-// ...e depois, mandamos ela rodar de novo a cada 10 segundos para manter o nome sempre atualizado.
-setInterval(updateNowPlaying, 10000);
+    updateNowPlaying();
+    setInterval(updateNowPlaying, 10000);
 
+    document.addEventListener('DOMContentLoaded', () => {
+        const radioPlayer = document.getElementById('radio-player');
+        const streamUrl = "https://sapircast.caster.fm:16062/BJvGA?token=7cf90a3776fc2c0196ea01d61c7bdad8";
 
-// 7. Este código extra garante que o player de áudio seja conectado à sua rádio.
-// Ele espera a página carregar completamente antes de fazer qualquer coisa.
-document.addEventListener('DOMContentLoaded', () => {
-    // Encontra o player de áudio que modificamos no Passo 1.
-    const radioPlayer = document.getElementById('radio-player');
-    
-    // A URL da sua transmissão de áudio.
-    const streamUrl = "https://sapircast.caster.fm:16062/BJvGA?token=7cf90a3776fc2c0196ea01d61c7bdad8";
-
-    if (radioPlayer) {
-        // Define o "endereço" do player para a sua rádio, fazendo-a tocar.
-        radioPlayer.src = streamUrl;
-    }
-});
+        if (radioPlayer) {
+            radioPlayer.src = streamUrl;
+        }
+    });
 
 
     function updateCurrentProgram() {
         const programElement = document.getElementById('dj-program-name');
         if (!programElement) return;
         const currentHour = new Date().getHours();
-        let programName = "Modão Da Madrugada"; // Padrão
+        let programName = "Modão Da Madrugada";
 
-        if (currentHour >= 6 && currentHour < 9) {
+        if (currentHour >= 5 && currentHour < 9) {
             programName = "Modão Da Madrugada";
         } else if (currentHour >= 9 && currentHour < 12) {
             programName = "Mistura Musical";
@@ -441,8 +504,10 @@ document.addEventListener('DOMContentLoaded', () => {
             programName = "Sofrência Musical";
         } else if (currentHour >= 19 && currentHour < 22) {
             programName = "Pop Rock";
-        } else if (currentHour >= 22 && currentHour < 24) {
+        } else if (currentHour >= 22 || currentHour < 4) {
             programName = "Forró";
+        } else if (currentHour >= 4 && currentHour < 5) {
+             programName = "Flashback";
         }
         
         programElement.textContent = programName;
