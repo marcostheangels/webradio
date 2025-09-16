@@ -58,29 +58,42 @@
 
     .container { width: 100%; max-width: 1200px; text-align: center; z-index: 1; }
 
-    /* --- ESTILO DO TÍTULO ATUALIZADO --- */
+    /* --- ESTILO DO TÍTULO ATUALIZADO (ESTILO DA FOTO) --- */
     header h1 {
         font-family: 'Orbitron', sans-serif;
         font-size: 3rem;
         font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
         margin-bottom: 0.5rem;
-        letter-spacing: 2px;
     }
+
+    /* Estilo para "WEB RÁDIO" - mais sutil */
     header h1 .h1-part1 {
-        color: rgba(224, 229, 240, 0.65);
-        text-shadow: 0 2px 5px rgba(0,0,0,0.5);
-        font-weight: 400;
+        color: #2c3144; /* Cor interna escura */
+        font-weight: 600;
+        /* Sombra para criar um contorno suave e um brilho fraco */
+        text-shadow:
+            /* Contorno claro */
+            -1px -1px 2px rgba(0, 229, 255, 0.3),
+            1px -1px 2px rgba(0, 229, 255, 0.3),
+            -1px 1px 2px rgba(0, 229, 255, 0.3),
+            1px 1px 2px rgba(0, 229, 255, 0.3),
+            /* Sombra escura para profundidade */
+            2px 2px 5px rgba(0,0,0,0.8);
     }
+
+    /* Estilo para "MONTES CLAROS" - mais destacado */
     header h1 .h1-part2 {
-        background: linear-gradient(90deg, var(--cor-destaque), var(--cor-secundaria), var(--cor-destaque));
-        background-size: 200% 100%;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: gradient-flow 8s linear infinite, text-pulse 2s ease-in-out infinite alternate;
-        text-shadow: 
-            0 1px 0 #0f121d, 0 2px 0 #0f121d, 0 3px 0 #0f121d, 0 4px 0 #0f121d, 
-            0 5px 0 #0f121d, 0 6px 0 #0f121d, 0 7px 0 #0f121d, 0 8px 0 #0f121d, 
-            0 0 10px var(--cor-secundaria), 0 0 20px var(--cor-destaque);
+        color: #2c3144; /* Mesma cor interna escura */
+         /* Sombra mais forte para efeito 3D destacado */
+        text-shadow:
+            /* Contorno ciano bem definido e brilhante */
+            0 0 1px rgba(255,255,255,0.8),
+            0 0 4px var(--cor-secundaria),
+            0 0 8px var(--cor-secundaria),
+            /* Sombra escura mais forte para destacar */
+            2px 2px 6px rgba(0,0,0,1);
     }
     /* --- FIM DO ESTILO DO TÍTULO --- */
 
@@ -88,19 +101,6 @@
         font-family: 'Montserrat', sans-serif; font-size: 1.25rem; font-weight: 600; 
         color: var(--cor-secundaria); text-shadow: 0 0 8px var(--cor-secundaria); 
         margin-bottom: 2.5rem; letter-spacing: 1px; 
-    }
-    @keyframes gradient-flow { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-    @keyframes text-pulse { 
-        from { text-shadow: 
-            0 1px 0 #0f121d, 0 2px 0 #0f121d, 0 3px 0 #0f121d, 0 4px 0 #0f121d, 
-            0 5px 0 #0f121d, 0 6px 0 #0f121d, 0 7px 0 #0f121d, 0 8px 0 #0f121d, 
-            0 0 10px var(--cor-secundaria), 0 0 20px var(--cor-destaque); 
-        } 
-        to { text-shadow: 
-            0 1px 0 #0f121d, 0 2px 0 #0f121d, 0 3px 0 #0f121d, 0 4px 0 #0f121d, 
-            0 5px 0 #0f121d, 0 6px 0 #0f121d, 0 7px 0 #0f121d, 0 8px 0 #0f121d, 
-            0 0 20px var(--cor-secundaria), 0 0 40px var(--cor-destaque); 
-        } 
     }
 
     .main-layout { display: flex; gap: 2rem; align-items: flex-start; }
@@ -236,10 +236,11 @@
         .main-content, .sidebar { width: 100%; }
         .sidebar { position: static; }
         .event-item { align-items: center; }
+        header h1 { font-size: 2.5rem; }
     }
     @media (max-width: 600px) {
       body { padding: 1rem 0.5rem; }
-      header h1 { font-size: 2rem; }
+      header h1 { font-size: 1.8rem; letter-spacing: 0; }
       header .slogan { font-size: 1rem; }
       .glass-card { padding: 1.5rem; }
       .news-item, .event-item { flex-direction: column; align-items: center; text-align: center; }
@@ -303,13 +304,20 @@
             
             <div class="news-ticker">
                 <div class="ticker-content">
-                    <span>EVENTO!</span> 🚨 SEGUNDA 22/09/2025 🚨
+                    <span>EVENTO!</span> 
                     💃🏽🕺🏽TEM FORRO DO GALPÃO O FORRÓ DO MADERADA 💃🏽🕺🏽
-                     🚨 SÁBADO 20/09/2025 🚨 
-                     🚨 QUARTA 24/09/2025 🚨
+                             SEGUNDA 22/09/2025 
+
+                     
                      💃🏽🕺🏽 FORRÓ DO VITRINE SHOWS E EVENTOS 💃🏽🕺🏽
-                     🚨 SEXTA-FEIRA 26/09/2025 🚨
+                           SEXTA FEIRA 19/09/2025
+                             SÁBADO 20/09/2025  
+                           QUARTA FEIRA 24/09/2025
+
+                     
                      💃🏽🕺🏽 FORRÓ BAR DO PARAGUAI 💃🏽🕺🏽
+                         SEXTA-FEIRA 26/09/2025 
+
                     <span>ANUNCIE AQUI!</span> Entre em contato pelo WhatsApp e divulgue sua marca!
                 </div>
             </div>
