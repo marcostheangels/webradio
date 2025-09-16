@@ -3,39 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WEB RÁDIO MONTES CLAROS - Sintonizada em você!</title>
+  <title>Rádio Montes Claros | Sua Sintonia Digital</title>
   
+  <meta property="og:title" content="Rádio Montes Claros | Sua Sintonia Digital" />
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content="A rádio web de Montes Claros, sintonizada em você. Peça sua música, participe do chat e fique por dentro dos eventos da cidade." />
+  <meta property="og:image" content="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/logoradio.png" />
+  <meta property="og:url" content="URL_DO_SEU_SITE_AQUI" /> 
+  <meta name="twitter:card" content="summary_large_image">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
+    /* ==============================================
+    === ESTILO COMPLETO E FINAL - RÁDIO MOC ===
+    ==============================================
+    */
     :root {
-      --cor-fundo-transparente: rgba(26, 36, 53, 0.85);
-      --cor-borda: rgba(255, 255, 255, 0.15);
-      --cor-destaque: #ff6600;
-      --cor-secundaria: #00bcd4;
-      --cor-texto: #f0f8ff;
-      --cor-sombra: rgba(0, 0, 0, 0.6);
-      --glow-intensity: 0 0 15px var(--cor-destaque);
-      --glow-strong: 0 0 25px var(--cor-destaque), 0 0 40px var(--cor-destaque);
+      --cor-fundo-transparente: rgba(15, 18, 30, 0.75);
+      --cor-borda: rgba(255, 255, 255, 0.1);
+      --cor-destaque: #c039ff; /* Roxo vibrante */
+      --cor-secundaria: #00e5ff; /* Ciano elétrico */
+      --cor-texto: #e0e5f0;
+      --cor-sombra: rgba(0, 0, 0, 0.5);
+      --glow-intensity: 0 0 10px var(--cor-destaque);
+      --glow-strong: 0 0 20px var(--cor-destaque), 0 0 30px var(--cor-destaque);
     }
 
-    /* --- MELHORIA DE COMPATIBILIDADE --- */
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
-
+    *, *::before, *::after { box-sizing: border-box; }
     *:focus { outline: none; }
 
     body {
       margin: 0;
       font-family: 'Montserrat', sans-serif;
       color: var(--cor-texto);
-      background: linear-gradient(rgba(13, 26, 42, 0.55), rgba(13, 26, 42, 0.55)), url('https://raw.githubusercontent.com/marcostheangels/webradio/main/matriz.jpg');
-      background-size: cover;
-      background-attachment: fixed;
-      background-position: center center;
+      background-color: #0d0f1a;
       display: flex;
       justify-content: center;
       padding: 2rem 1rem;
@@ -45,53 +49,93 @@
       -webkit-user-select: none;
       -ms-user-select: none;
       user-select: none;
-      /* --- MELHORIA DE COMPATIBILIDADE --- */
       overflow-wrap: break-word; 
     }
 
-    /* --- MELHORIA DE COMPATIBILIDADE --- */
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-    }
+    img { max-width: 100%; height: auto; display: block; }
 
-    .background-effect { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.6; background: linear-gradient(45deg, #100a20, #0a1a2a, #2a0a1a); background-size: 400% 400%; animation: background-gradient-animation 15s ease infinite; }
-    @keyframes background-gradient-animation { 0% {background-position:0% 50%} 50% {background-position:100% 50%} 100% {background-position:0% 50%} }
+    .background-aurora {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+        opacity: 0.5;
+        background: radial-gradient(circle at 10% 20%, var(--cor-destaque), transparent 40%),
+                    radial-gradient(circle at 80% 70%, var(--cor-secundaria), transparent 40%);
+        animation: aurora-animation 20s ease-in-out infinite alternate;
+    }
+    @keyframes aurora-animation {
+        0% { transform: scale(1) rotate(0deg); opacity: 0.4; }
+        50% { transform: scale(1.5) rotate(20deg); opacity: 0.7; }
+        100% { transform: scale(1) rotate(0deg); opacity: 0.4; }
+    }
 
     .container { width: 100%; max-width: 1200px; text-align: center; z-index: 1; }
 
-    header h1 { font-family: 'Orbitron', sans-serif; font-size: 3rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 2px; background: linear-gradient(90deg, var(--cor-destaque), var(--cor-secundaria), var(--cor-destaque)); background-size: 200% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: gradient-animation 8s linear infinite, text-glow 1.5s ease-in-out infinite alternate; text-shadow: none; }
-    header .slogan { font-family: 'Montserrat', sans-serif; font-size: 1.25rem; font-weight: 600; color: var(--cor-secundaria); text-shadow: 0 0 8px var(--cor-secundaria); margin-bottom: 2.5rem; letter-spacing: 1px; }
-    @keyframes gradient-animation { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-    @keyframes text-glow { from { text-shadow: var(--glow-intensity); } to { text-shadow: var(--glow-strong); } }
-
-    .main-layout {
-        display: flex;
-        gap: 2rem;
-        align-items: flex-start;
+    header h1 { 
+        font-family: 'Orbitron', sans-serif; font-size: 3rem; font-weight: 700; 
+        margin-bottom: 0.5rem; letter-spacing: 2px; 
+        background: linear-gradient(90deg, var(--cor-destaque), var(--cor-secundaria), var(--cor-destaque)); 
+        background-size: 200% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+        animation: gradient-flow 8s linear infinite, text-pulse 2s ease-in-out infinite alternate; 
+        text-shadow: 
+            0 1px 0 #0f121d, 
+            0 2px 0 #0f121d, 
+            0 3px 0 #0f121d, 
+            0 4px 0 #0f121d, 
+            0 5px 0 #0f121d, 
+            0 6px 0 #0f121d, 
+            0 7px 0 #0f121d, 
+            0 8px 0 #0f121d, 
+            0 0 10px var(--cor-secundaria), 
+            0 0 20px var(--cor-destaque); /* Efeito 3D e Glow */
     }
-    .main-content {
-        flex: 2; 
-        width: 66%;
-        min-width: 0; /* Ajuda a previnir overflow em containers flex */
+    header .slogan { 
+        font-family: 'Montserrat', sans-serif; font-size: 1.25rem; font-weight: 600; 
+        color: var(--cor-secundaria); text-shadow: 0 0 8px var(--cor-secundaria); 
+        margin-bottom: 2.5rem; letter-spacing: 1px; 
     }
-    .sidebar {
-        flex: 1;
-        width: 33%;
-        position: sticky;
-        top: 2rem;
-        min-width: 0; /* Ajuda a previnir overflow em containers flex */
+    @keyframes gradient-flow { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    @keyframes text-pulse { 
+        from { text-shadow: 
+            0 1px 0 #0f121d, 
+            0 2px 0 #0f121d, 
+            0 3px 0 #0f121d, 
+            0 4px 0 #0f121d, 
+            0 5px 0 #0f121d, 
+            0 6px 0 #0f121d, 
+            0 7px 0 #0f121d, 
+            0 8px 0 #0f121d, 
+            0 0 10px var(--cor-secundaria), 
+            0 0 20px var(--cor-destaque); 
+        } 
+        to { text-shadow: 
+            0 1px 0 #0f121d, 
+            0 2px 0 #0f121d, 
+            0 3px 0 #0f121d, 
+            0 4px 0 #0f121d, 
+            0 5px 0 #0f121d, 
+            0 6px 0 #0f121d, 
+            0 7px 0 #0f121d, 
+            0 8px 0 #0f121d, 
+            0 0 20px var(--cor-secundaria), 
+            0 0 40px var(--cor-destaque); 
+        } 
     }
 
-    .glass-card { background-color: var(--cor-fundo-transparente); border-radius: 20px; border: 1px solid var(--cor-borda); padding: 2rem; margin-bottom: 2rem; box-shadow: 0 10px 40px var(--cor-sombra); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); position: relative; overflow: hidden; transition: all 0.3s ease; }
-    .glass-card:hover { border-color: transparent; }
-    .glass-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 20px; border: 2px solid transparent; background: linear-gradient(45deg, var(--cor-destaque), var(--cor-secundaria)) border-box; -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0); -webkit-mask-composite: exclude; mask-composite: exclude; opacity: 0; transition: opacity 0.3s ease, transform 0.3s ease; transform: scale(0.98); pointer-events: none; }
-    .glass-card:hover::before { opacity: 1; transform: scale(1); animation: card-border-glow 2s infinite alternate ease-in-out; }
-    @keyframes card-border-glow { from { border-image: linear-gradient(45deg, var(--cor-destaque) 0%, var(--cor-secundaria) 100%) 1; } to { border-image: linear-gradient(45deg, var(--cor-secundaria) 0%, var(--cor-destaque) 100%) 1; } }
+    .main-layout { display: flex; gap: 2rem; align-items: flex-start; }
+    .main-content { flex: 2; width: 66%; min-width: 0; }
+    .sidebar { flex: 1; width: 33%; position: sticky; top: 2rem; min-width: 0; }
 
-    .player-logo { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; margin: 0 auto 1.5rem auto; border: 5px solid var(--cor-destaque); box-shadow: 0 0 25px var(--cor-destaque); animation: logo-pulse 2s infinite alternate ease-in-out; }
-    @keyframes logo-pulse { from { box-shadow: 0 0 20px var(--cor-destaque); } to { box-shadow: 0 0 40px var(--cor-secundaria); } }
+    .glass-card { 
+        background-color: var(--cor-fundo-transparente); border-radius: 20px; 
+        border: 1px solid var(--cor-borda); padding: 2rem; margin-bottom: 2rem; 
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); backdrop-filter: blur(12px); 
+        -webkit-backdrop-filter: blur(12px); position: relative; overflow: hidden; 
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .glass-card:hover { 
+        transform: translateY(-5px);
+        border-color: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 12px 40px var(--cor-sombra);
+    }
 
     .player-card h2 { margin: 0; font-size: 1.8rem; font-weight: 700; color: var(--cor-secundaria); margin-bottom: 0.5rem; }
     #current-track-info { font-size: 1.2rem; font-weight: 600; color: var(--cor-texto); margin-bottom: 1.5rem; min-height: 1.5rem; transition: all 0.5s ease; }
@@ -101,12 +145,12 @@
     .player-socials p { font-size: 1.1rem; margin-bottom: 1rem; opacity: 0.9; }
     .social-buttons { display: flex; justify-content: center; gap: 20px; }
     .social-buttons a { display: inline-flex; justify-content: center; align-items: center; width: 45px; height: 45px; border-radius: 50%; background-color: rgba(0, 0, 0, 0.25); border: 1px solid var(--cor-borda); color: var(--cor-texto); text-decoration: none; transition: all 0.3s ease; }
-    .social-buttons svg { width: 24px; height: 24px; }
+    .social-buttons svg { width: 22px; height: 22px; }
     .social-buttons a:hover { transform: translateY(-5px) scale(1.05); }
     .social-buttons .facebook:hover { color: #1877F2; border-color: #1877F2; box-shadow: 0 0 15px #1877F2; }
     .social-buttons .instagram:hover { color: #d6249f; border-color: #d6249f; box-shadow: 0 0 15px #d6249f; }
     .social-buttons .whatsapp:hover { color: #25D366; border-color: #25D366; box-shadow: 0 0 15px #25D366; }
-
+    
     .news-ticker { background-color: var(--cor-fundo-transparente); border-radius: 10px; border: 1px solid var(--cor-borda); padding: 0.75rem; margin-bottom: 2rem; overflow: hidden; white-space: nowrap; }
     .ticker-content { display: inline-block; padding-left: 100%; animation: scroll-ticker 25s linear infinite; }
     .ticker-content span { font-weight: 700; color: var(--cor-destaque); margin-right: 1rem; margin-left: 2rem;}
@@ -120,11 +164,22 @@
     .sponsors-section h3:not(:empty)::before, .online-users-section h3:not(:empty)::before { margin-right: .75em; }
     .sponsors-section h3:not(:empty)::after, .online-users-section h3:not(:empty)::after { margin-left: .75em; }
     
-    .sponsors-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+    .sponsors-grid { 
+      display: grid; 
+      grid-template-columns: 1fr; 
+      gap: 1.5rem;
+      align-items: start;
+    }
     .sponsors-grid a { background: rgba(0,0,0,0.2); border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: all 0.3s ease; overflow: hidden; padding: 0.5rem; }
     .sponsors-grid a:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 10px 30px var(--cor-sombra), 0 0 20px var(--cor-destaque); border-color: var(--cor-destaque); }
-    .sponsors-grid img { width: 100%; filter: grayscale(20%); transition: filter 0.3s ease; border-radius: 6px; }
-    .sponsors-grid a:hover img { filter: grayscale(0%); }
+    .sponsors-grid img { 
+        width: 100%;
+        height: auto;
+        filter: grayscale(20%); 
+        border-radius: 6px; 
+        transition: all 0.4s ease; 
+    }
+    
     .cta-sponsors { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--cor-borda); }
     .cta-sponsors p { font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; }
     .cta-button { display: inline-block; background: linear-gradient(90deg, var(--cor-destaque), var(--cor-secundaria)); border: none; border-radius: 10px; padding: 0.8rem 1.5rem; color: #fff; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.4); text-decoration: none; }
@@ -149,30 +204,16 @@
 
     .news-item, .event-item { display: flex; gap: 1.5rem; text-align: left; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--cor-borda); }
     .news-item:last-child, .event-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-    .news-item .cta-button, .event-item .cta-button { margin-top: 1rem; }
-    
-    .news-item img { 
-        width: 100px; 
-        height: 100px; 
-        object-fit: cover; 
-        border-radius: 10px; 
-        flex-shrink: 0;
-    }
+    .news-item img { width: 100px; height: 100px; object-fit: cover; border-radius: 10px; flex-shrink: 0;}
     .event-item img { 
-        width: 180px;
-        height: 180px;
+        width: 100px; /* Ajuste para ter o mesmo tamanho */
+        height: 100px; /* Ajuste para ter o mesmo tamanho */
         object-fit: cover; 
         border-radius: 10px; 
-        flex-shrink: 0;
+        flex-shrink: 0; 
         margin: 0 auto;
     }
-    
-    .event-item img[alt="cartaz madeirada"] {
-        width: 100%;
-        height: auto;
-        margin-top: 1rem;
-    }
-
+    .event-item img[alt="cartaz madeirada"], .event-item img[alt="cartaz paraguai"], .event-item img[alt="cartaz lala"], .event-item img[alt="cartaz vitrine"] { width: 100%; height: auto; margin-top: 1rem; }
     .news-content h4, .event-content h4 { margin: 0 0 0.5rem 0; font-size: 1.2rem; }
     .news-content p, .event-content p { margin: 0 0 0.5rem 0; font-size: 0.9rem; opacity: 0.8; }
     .news-content a, .event-content a { color: var(--cor-destaque); text-decoration: none; font-weight: 600; }
@@ -181,30 +222,105 @@
     footer { margin-top: 3rem; padding: 1.5rem; }
     footer p { font-size: 1.1rem; margin-bottom: 1rem; opacity: 0.9; }
 
-    #enquete-google {
-      border-radius: 15px;
-      filter: invert(95%) hue-rotate(180deg);
+    #enquete-google { border-radius: 15px; filter: invert(95%) hue-rotate(180deg); }
+    .online-users-section a[href="https://24counter.com"] { display: none !important; }
+
+    /* --- ESTILOS DO PLAYER --- */
+    .player-logo {
+        width: 180px; height: 180px; border-radius: 50%; object-fit: cover; 
+        margin: 0 auto 1.5rem auto; border: 5px solid var(--cor-destaque); 
+        box-shadow: 0 0 25px var(--cor-destaque); 
+        animation: spin 10s linear infinite;
+        animation-play-state: paused;
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .custom-player {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    .player-controls {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      width: 100%;
+      justify-content: center;
+    }
+    .control-button {
+      background: linear-gradient(145deg, var(--cor-destaque), var(--cor-secundaria));
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+    .control-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px var(--cor-sombra), var(--glow-strong);
+    }
+    .control-button svg { width: 28px; height: 28px; }
+    .volume-control { display: flex; align-items: center; gap: 0.75rem; }
+    .volume-control svg { width: 24px; height: 24px; opacity: 0.8; }
+    .volume-slider {
+      -webkit-appearance: none; appearance: none;
+      width: 120px; height: 5px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 5px; outline: none; cursor: pointer;
+    }
+    .volume-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 15px; height: 15px;
+      background: var(--cor-secundaria);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--cor-secundaria);
     }
 
-    /* Regra de CSS para esconder o link de atribuição do contador */
-    .online-users-section a[href="https://24counter.com"] {
-        display: none !important;
+    /* --- ANIMAÇÕES DE ENTRADA --- */
+    @keyframes fadeInSlideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .glass-card {
+      animation: fadeInSlideUp 0.8s ease-out forwards;
+      opacity: 0; 
+    }
+    .main-content .glass-card:nth-child(1) { animation-delay: 0.1s; }
+    .news-ticker { animation: fadeInSlideUp 0.8s ease-out forwards; animation-delay: 0.2s; opacity: 0;}
+    .main-content .glass-card:nth-child(3) { animation-delay: 0.3s; }
+    .main-content .glass-card:nth-child(4) { animation-delay: 0.4s; }
+    .main-content .glass-card:nth-child(5) { animation-delay: 0.5s; }
+    .sidebar .glass-card:nth-child(1) { animation-delay: 0.2s; }
+    .sidebar .glass-card:nth-child(2) { animation-delay: 0.3s; }
+
+    /* --- HOVER APRIMORADO PARA PARCEIROS --- */
+    .sponsors-grid a:hover img {
+      filter: grayscale(0%);
+      transform: scale(1.05);
     }
 
+    /* --- RESPONSIVIDADE --- */
     @media (max-width: 992px) {
         .main-layout { flex-direction: column; }
         .main-content, .sidebar { width: 100%; }
         .sidebar { position: static; }
-        .event-item {
-          align-items: center;
-        }
+        .event-item { align-items: center; }
     }
     @media (max-width: 600px) {
       body { padding: 1rem 0.5rem; }
       header h1 { font-size: 2rem; }
       header .slogan { font-size: 1rem; }
       .glass-card { padding: 1.5rem; }
-      .player-logo { width: 140px; height: 140px; }
       .news-item, .event-item { flex-direction: column; align-items: center; text-align: center; }
       .schedule-item { flex-direction: column; gap: 0.5rem; }
       .schedule-time { padding-right: 0; }
@@ -216,13 +332,12 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-JKDH8V8Y81');
   </script>
 
 </head>
 <body>
-  <div class="background-effect"></div> 
+  <div class="background-aurora"></div> 
 
   <div class="container">
     <header>
@@ -236,28 +351,31 @@
               <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/logoradio.png" alt="Logo da Rádio" class="player-logo">
               <h2>NO AR</h2>
               <p id="current-track-info"><span>Carregando música...</span></p>
-              <audio controls autoplay style="width: 100%;">
-                <source src="https://link.zeno.fm/7heeu8w1pzzuv" type="audio/mpeg">
-                Seu navegador não suporta áudio online.
+
+              <div class="custom-player">
+                <div class="player-controls">
+                  <button id="play-pause-btn" class="control-button" aria-label="Tocar/Pausar">
+                    <svg id="play-icon" viewBox="0 0 24 24" fill="currentColor" style="display: block;"><path d="M8 5v14l11-7z"></path></svg>
+                    <svg id="pause-icon" viewBox="0 0 24 24" fill="currentColor" style="display: none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+                  </button>
+                  <div class="volume-control">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path></svg>
+                    <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1" class="volume-slider">
+                  </div>
+                </div>
+              </div>
+              
+              <audio id="audio-player" autoplay>
+                  <source src="https://link.zeno.fm/7heeu8w1pzzuv" type="audio/mpeg">
+                  Seu navegador não suporta áudio online.
               </audio>
+              
               <div class="player-socials">
                 <p>📲 Siga a gente nas redes sociais</p>
                 <div class="social-buttons">
-                    <a href="https://wa.me/5538998558528" target="_blank" rel="noopener noreferrer" class="whatsapp" aria-label="WhatsApp">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12.04 2.01C6.58 2.01 2.13 6.46 2.13 12c0 1.77.46 3.45 1.28 4.95L2.01 22l5.19-1.4c1.47.76 3.12 1.18 4.84 1.18h.01c5.46 0 9.91-4.45 9.91-9.91 0-5.46-4.45-9.91-9.91-9.91zM12.04 20.28c-1.55 0-3.03-.4-4.32-1.12l-.31-.18-3.21.84.86-3.13-.2-.33a8.22 8.22 0 0 1-1.26-4.48c0-4.54 3.69-8.23 8.23-8.23 4.54 0 8.23 3.69 8.23 8.23 0 4.54-3.69 8.23-8.23 8.23zm4.49-5.93c-.26-.13-1.55-.77-1.79-.85-.24-.08-.42-.13-.59.13-.17.26-.68.85-.83 1.02-.15.17-.3.19-.56.06-.26-.13-1.09-.4-2.07-1.27-.76-.68-1.28-1.52-1.43-1.78-.15-.26-.02-.4.11-.53.12-.12.26-.3.39-.45.13-.15.17-.26.26-.43.08-.17.04-.31-.02-.44s-.59-1.43-.81-1.95c-.22-.52-.44-.45-.59-.46-.14-.01-.31-.01-.48-.01-.17 0-.43.06-.66.31-.22.26-.85.83-.85 2.02 0 1.19.87 2.34 1 2.5.13.17 1.73 2.65 4.19 3.7.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.06 1.55-1.04 1.77-2.04.22-1-.15-1.52-.26-1.65z"></path>
-                        </svg>
-                    </a>
-                    <a href="https://www.facebook.com/SEUPERFIL" target="_blank" rel="noopener noreferrer" class="facebook" aria-label="Facebook">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M22.675 0h-21.35C.59 0 0 .59 0 1.325v21.35C0 23.41.59 24 1.325 24H12.82v-9.29H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h5.694c.735 0 1.325-.59 1.325-1.325V1.325C24 .59 23.41 0 22.675 0z"></path>
-                        </svg>
-                    </a>
-                    <a href="https://www.instagram.com/SEUPERFIL" target="_blank" rel="noopener noreferrer" class="instagram" aria-label="Instagram">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.286.058 1.694.072 4.948.072s3.662-.014 4.948-.072c4.354-.199 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"></path>
-                        </svg>
-                    </a>
+                    <a href="https://wa.me/5538998558528" target="_blank" rel="noopener noreferrer" class="whatsapp" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2.01C6.58 2.01 2.13 6.46 2.13 12c0 1.77.46 3.45 1.28 4.95L2.01 22l5.19-1.4c1.47.76 3.12 1.18 4.84 1.18h.01c5.46 0 9.91-4.45 9.91-9.91 0-5.46-4.45-9.91-9.91-9.91zM12.04 20.28c-1.55 0-3.03-.4-4.32-1.12l-.31-.18-3.21.84.86-3.13-.2-.33a8.22 8.22 0 0 1-1.26-4.48c0-4.54 3.69-8.23 8.23-8.23 4.54 0 8.23 3.69 8.23 8.23 0 4.54-3.69 8.23-8.23 8.23zm4.49-5.93c-.26-.13-1.55-.77-1.79-.85-.24-.08-.42-.13-.59.13-.17.26-.68.85-.83 1.02-.15.17-.3.19-.56.06-.26-.13-1.09-.4-2.07-1.27-.76-.68-1.28-1.52-1.43-1.78-.15-.26-.02-.4.11-.53.12-.12.26-.3.39-.45.13-.15.17-.26.26-.43.08-.17.04-.31-.02-.44s-.59-1.43-.81-1.95c-.22-.52-.44-.45-.59-.46-.14-.01-.31-.01-.48-.01-.17 0-.43.06-.66.31-.22.26-.85.83-.85 2.02 0 1.19.87 2.34 1 2.5.13.17 1.73 2.65 4.19 3.7.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.06 1.55-1.04 1.77-2.04.22-1-.15-1.52-.26-1.65z"></path></svg></a>
+                    <a href="https://www.facebook.com/SEUPERFIL" target="_blank" rel="noopener noreferrer" class="facebook" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.675 0h-21.35C.59 0 0 .59 0 1.325v21.35C0 23.41.59 24 1.325 24H12.82v-9.29H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h5.694c.735 0 1.325-.59 1.325-1.325V1.325C24 .59 23.41 0 22.675 0z"></path></svg></a>
+                    <a href="https://www.instagram.com/SEUPERFIL" target="_blank" rel="noopener noreferrer" class="instagram" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.286.058 1.694.072 4.948.072s3.662-.014 4.948-.072c4.354-.199 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"></path></svg></a>
                 </div>
               </div>
             </section>
@@ -266,14 +384,11 @@
                 <div class="ticker-content">
                     <span>EVENTO!</span> 🚨 SEGUNDA 22/09/2025 🚨
                     💃🏽🕺🏽TEM FORRO DO GALPÃO O FORRÓ DO MADERADA 💃🏽🕺🏽
-
                      🚨 SÁBADO 20/09/2025 🚨 
-                     🚨 QUATRA 24/09/2025 🚨
+                     🚨 QUARTA 24/09/2025 🚨
                      💃🏽🕺🏽 FORRÓ DO VITRINE SHOWS E EVENTOS 💃🏽🕺🏽
-
-                     🚨 SEXTA FEIRA 26/09/2025 🚨
+                     🚨 SEXTA-FEIRA 26/09/2025 🚨
                      💃🏽🕺🏽 FORRÓ BAR DO PARAGUAI 💃🏽🕺🏽
-
                     <span>ANUNCIE AQUI!</span> Entre em contato pelo WhatsApp e divulgue sua marca!
                 </div>
             </div>
@@ -312,9 +427,7 @@
                 <div class="schedule-item"><span class="schedule-time">22:00 - 00:00</span><span class="schedule-title">Forró</span></div>
                 <div class="schedule-item"><span class="schedule-time">00:00 - 04:00</span><span class="schedule-title">Flashback</span></div>
             </section>
-
             
-
             <section class="glass-card events-section">
                 <h3>🗓️ Agenda de Montes Claros</h3>
                 <div class="event-item">
@@ -322,102 +435,62 @@
                   <div class="event-content">
                     <h4>💃🏽🕺🏽VEM PRO FORRO DO GALPÃO O FORRÓ DO MADERADA </h4>
                     <p class="event-details">Av Castelar prates 395 Major prates no visual bar*</p>
-                    <p>🚨 SEGUNDA 🚨
-
-                      💃🏽🕺🏽VEM PRO FORRO DO GALPÃO O FORRÓ DO MADERADA
-                      💃🏽 🕺💃🕺💃
-
-                      🎁Shows:
-
-                      JU REIS 
-                      ELIAS MADERADA
-                      JACSON FERREIRA 
-                      LUIZ CHEFÃO 
-                      GILBERTO LIMA
-                      E CONVIDADOS 
-
-                    </p>
+                    <p>🚨 SEGUNDA 🚨 💃🏽🕺🏽VEM PRO FORRO DO GALPÃO O FORRÓ DO MADERADA 💃🏽 🕺💃🕺💃 🎁Shows: JU REIS, ELIAS MADERADA, JACSON FERREIRA, LUIZ CHEFÃO, GILBERTO LIMA E CONVIDADOS</p>
                   </div>
                 </div>
                 <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/cartazmaderada.jpg" alt="cartaz madeirada">
             </section>
 
-                <section class="glass-card events-section">
+             <section class="glass-card events-section">
                   <div class="event-item">
                   <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/agenda.png" alt="Montes Claros">
                   <div class="event-content">
                     <h4> VEM PRO FORRO DO BAR DO PARAGUAI  </h4>
                     <p class="event-details">Rua Machado De Assis 549 - Vilage Do lago 1*</p>
-                    <p>Shows
-                    EDIMILSON BATISTA
-                    NANNE BARBOSA
-                    ALEX MORENO
-                    ALAN SILVA
-                    REGYS BOYS 
-                    JERRY JEFFERSON
-                    CARLINHOS SOUSA 
-                    SIDNEY RODRIGUES 
-                    MARCELINHO DOS TECLADOS
-                  </p>
+                    <p>Shows: EDIMILSON BATISTA, NANNE BARBOSA, ALEX MORENO, ALAN SILVA, REGYS BOYS, JERRY JEFFERSON, CARLINHOS SOUSA, SIDNEY RODRIGUES, MARCELINHO DOS TECLADOS</p>
                   </div>
                 </div>
                 <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/paraguai.jpg" alt="cartaz paraguai">
             </section>
 
-                  <section class="glass-card events-section">
-                  <div class="event-item">
-                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/agenda.png" alt="Montes Claros">
-                  <div class="event-content">
-                    <h4> Vitrine shows e Eventos Inauguração do bailão Da Quarta  </h4>
-                    <p class="event-details">Av. Francisco Peres 161 Em Frente a Lagoa Da Pampulha*</p>
-                    <p>Shows
-                    LIRA SHOW E CONVIDADOS
-                  </p>
-                  </div>
-                </div>
-                <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/lala1.jpg" alt="cartaz lala">
+            <section class="glass-card events-section">
+              <div class="event-item">
+              <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/agenda.png" alt="Montes Claros">
+              <div class="event-content">
+                <h4> Vitrine shows e Eventos Inauguração do bailão Da Quarta  </h4>
+                <p class="event-details">Av. Francisco Peres 161 Em Frente a Lagoa Da Pampulha*</p>
+                <p>Shows: LIRA SHOW E CONVIDADOS</p>
+              </div>
+            </div>
+            <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/lala1.jpg" alt="cartaz lala">
             </section>
 
-                  <section class="glass-card events-section">
-                  <div class="event-item">
-                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/agenda.png" alt="cartaz lala">
-                  <div class="event-content">
+            <section class="glass-card events-section">
+              <div class="event-item">
+              <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/agenda.png" alt="Montes Claros">
+              <div class="event-content">
                     <h4> Vitrine Shows e Eventos </h4>
-                    <p class="event-details"> Localização: Av Francisco Peres, 161 - Guarujá (Em frente a Lagoa da Pampulha </p>
-                    <p>🎊Convide os amigos e venha curtir conosco! 🎊
-
-                       Atrações:
-                     🎤Diego Café
-                     🎤Hernane Moreira 
-                     🎤Gilson dos Teclados
-
-                           𝐈𝐍𝐆𝐑𝐄𝐒𝐒𝐎𝐒:
-
-                        R$ 15 MULHERES
-                        R$ 20 HOMENS
-
-
-                        📱 Informações
-                    (38) 98842-9992 (Lala)
-                      @vitrinedanceshow
-
-
-                  Melhor Acústica da cidade - Pista de Dança Ampla - Ambiente Climatizado
-
-                              Todas as sextas e sábados, a partir das 20h!
-                  </p>
+                    <p class="event-details">Localização: Av Francisco Peres, 161 - Guarujá (Em frente a Lagoa da Pampulha</p>
+                    <p>🎊Convide os amigos e venha curtir conosco!</p>
+                      </p>🎊 Atrações:</p>
+                       🎤Diego Café 
+                       🎤Hernane Moreira 
+                       🎤Gilson dos Teclados. 
+                  </p>INGRESSOS: R$ 15 MULHERES, R$ 20 HOMENS.</p>
+                     </p>Informações (38) 98842-9992 (Lala).</p> 
+                </p>Todas as sextas e sábados, a partir das 20h!</p>
                   </div>
                 </div>
-                <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/cartazvitrine.jpg" alt="cartaz lala">
+                <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/cartazvitrine.jpg" alt="cartaz vitrine">
             </section>
 
             <section class="glass-card news-section">
                 <h3>📰 Notícias da Cidade</h3>
                 <div class="news-item">
-                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/noticia.jpg">
+                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/noticia.jpg" alt="Notícia sobre corridas de rua">
                   <div class="news-content">
-                    <h4>NÃO PERCA O PASSO - Calendário das corridas de rua de Montes Claros terá 11 provas até o fim de novembro</h4>
-                    <p>A partir deste domingo, 14, Montes Claros receberá uma sequência relevante de eventos de corridas de rua para a alegria dos adeptos da modalidade. Serão 11 provas entre os dias 14 de setembro e 30 de novembro. É bom aproveitar a oportunidade, uma vez que no mês de dezembro, tradicionalmente, as provas de corrida de rua fazem uma pausa e retornam apenas no fim do 1º trimestre....</p>
+                    <h4>NÃO PERCA O PASSO - Calendário das corridas de rua de Montes Claros</h4>
+                    <p>A partir deste domingo, 14, Montes Claros receberá uma sequência relevante de eventos de corridas de rua para a alegria dos adeptos da modalidade...</p>
                     <a href="https://www.montesclaros.mg.gov.br/noticias" target="_blank">Leia a matéria completa</a>
                   </div>
                 </div>
@@ -439,40 +512,20 @@
             <section class="glass-card online-users-section">
               <h3>📡 Visitantes Online</h3>
               <div style="text-align:center;">
-                <a target="_blank" href="https://24counter.com/cc_stats/1757967685/"><img alt="free counter" border="0" src="https://24counter.com/online/ccc.php?id=1757967685"></a><br><a href="https://24counter.com" style="display: none;">free counter</a>
+                <a target="_blank" href="https://24counter.com/cc_stats/1757967685/"><img alt="free counter" border="0" src="https://24counter.com/online/ccc.php?id=1757967685"></a>
               </div>
             </section>
 
             <section class="glass-card sponsors-section">
               <h3>🌟 Nossos Parceiros 🌟</h3>
               <div class="sponsors-grid">
-                <a href="#" target="_blank">
-                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/myhouse.jpg" alt="Patrocinador MY HOUSE">
-                </a>
-                
-                <a href="#" target="_blank">
-                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/dj.jpg" alt="Patrocinador dj">
-                </a>
-                
-                <a href="https://wa.me/5538998558528" target="_blank">
-                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/markim.jpg" alt="Markim">
-                </a>
-
-                <a href="https://wa.me/5538984093639" target="_blank">
-                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/maderada.jpg" alt="Maderada">
-                </a>
-                
-                <a href="https://wa.me/5538988429992" target="_blank">
-                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/Vitrine.jpg" alt="Lala">
-                </a>
-
-                <a href="https://wa.me/5538991963125" target="_blank">
-                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/djdaniel.png" alt="Dj Daniel">
-                </a>
-
-                <a href="https://wa.me/5538998565414" target="_blank">
-                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/logoparaguai.jpg" alt="Patrocinador Paraguai">
-                </a>
+                <a href="#" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/myhouse.jpg" alt="Patrocinador MY HOUSE"></a>
+                <a href="#" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/dj.jpg" alt="Patrocinador dj"></a>
+                <a href="https://wa.me/5538998558528" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/markim.jpg" alt="Markim"></a>
+                <a href="https://wa.me/5538984093639" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/maderada.jpg" alt="Maderada"></a>
+                <a href="https://wa.me/5538988429992" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/Vitrine.jpg" alt="Lala"></a>
+                <a href="https://wa.me/5538991963125" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/djdaniel.png" alt="Dj Daniel"></a>
+                <a href="https://wa.me/5538998565414" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/logoparaguai.jpg" alt="Patrocinador Paraguai"></a>
               </div>
               <div class="cta-sponsors">
                 <p>Quer ver sua marca aqui?</p>
@@ -502,69 +555,87 @@
 
     async function updateNowPlaying() {
         const songTitleElement = document.getElementById('current-track-info');
-        const statsUrl = "https://sapircast.caster.fm:16062/admin/publicstats.json";
+        const statsUrl = "https://stream.zeno.fm/api/internal/live/now-playing?stream=7heeu8w1pzzuv";
 
         try {
             const response = await fetch(statsUrl, { cache: "no-store" });
             const data = await response.json();
-            let songText = "Programação Musical"; 
-
-            if (data && data.length > 1 && data[1].source) {
-                const sourceObject = data[1].source; 
-                const streamKey = Object.keys(sourceObject)[0];
-                
-                if (streamKey && sourceObject[streamKey] && sourceObject[streamKey]["display-title"]) {
-                    songText = sourceObject[streamKey]["display-title"];
-                }
-            }
-            
+            let songText = data.now_playing || "Programação Musical";
             songTitleElement.innerHTML = `<span>Agora Tocando:</span> ${songText}`;
-
         } catch (error) {
-            console.error("Erro ao buscar dados da rádio Caster.fm:", error);
+            console.error("Erro ao buscar dados da rádio:", error);
             songTitleElement.innerHTML = `<span>No Ar:</span> Programação Musical`;
         }
     }
-
     updateNowPlaying();
-    setInterval(updateNowPlaying, 10000);
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const radioPlayer = document.getElementById('radio-player');
-        const streamUrl = "https://sapircast.caster.fm:16062/BJvGA?token=7cf90a3776fc2c0196ea01d61c7bdad8";
-
-        if (radioPlayer) {
-            radioPlayer.src = streamUrl;
-        }
-    });
-
+    setInterval(updateNowPlaying, 15000);
 
     function updateCurrentProgram() {
         const programElement = document.getElementById('dj-program-name');
         if (!programElement) return;
         const currentHour = new Date().getHours();
-        let programName = "Modão Da Madrugada";
+        let programName;
 
-        if (currentHour >= 5 && currentHour < 9) {
-            programName = "Modão Da Madrugada";
-        } else if (currentHour >= 9 && currentHour < 12) {
-            programName = "Mistura Musical";
-        } else if (currentHour >= 12 && currentHour < 15) {
-            programName = "Tarde Do Pagode";
-        } else if (currentHour >= 15 && currentHour < 18) {
-            programName = "Sofrência Musical";
-        } else if (currentHour >= 19 && currentHour < 22) {
-            programName = "Pop Rock";
-        } else if (currentHour >= 22 || currentHour < 4) {
-            programName = "Forró";
-        } else if (currentHour >= 4 && currentHour < 5) {
-             programName = "Flashback";
-        }
+        if (currentHour >= 5 && currentHour < 9) { programName = "Modão Da Madrugada"; } 
+        else if (currentHour >= 9 && currentHour < 12) { programName = "Mistura Musical"; } 
+        else if (currentHour >= 12 && currentHour < 15) { programName = "Tarde Do Pagode"; } 
+        else if (currentHour >= 15 && currentHour < 19) { programName = "Sofrência Musical"; }
+        else if (currentHour >= 19 && currentHour < 22) { programName = "Pop Rock"; } 
+        else if (currentHour >= 22) { programName = "Forró"; } 
+        else { programName = "Flashback"; }
         
         programElement.textContent = programName;
     }
     setInterval(updateCurrentProgram, 60000);
     updateCurrentProgram();
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const audioPlayer = document.getElementById('audio-player');
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const playIcon = document.getElementById('play-icon');
+        const pauseIcon = document.getElementById('pause-icon');
+        const volumeSlider = document.getElementById('volume-slider');
+        const playerLogo = document.querySelector('.player-logo'); 
+
+        function updatePlayPauseIcon() {
+            if (audioPlayer.paused) {
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+                if (playerLogo) playerLogo.style.animationPlayState = 'paused';
+            } else {
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+                if (playerLogo) playerLogo.style.animationPlayState = 'running';
+            }
+        }
+
+        playPauseBtn.addEventListener('click', () => {
+            if (audioPlayer.paused) {
+                audioPlayer.play().catch(error => console.error("Erro ao tocar o áudio:", error));
+            } else {
+                audioPlayer.pause();
+            }
+        });
+
+        volumeSlider.addEventListener('input', () => {
+            audioPlayer.volume = volumeSlider.value;
+        });
+        
+        audioPlayer.volume = volumeSlider.value;
+
+        audioPlayer.addEventListener('play', updatePlayPauseIcon);
+        audioPlayer.addEventListener('pause', updatePlayPauseIcon);
+        audioPlayer.addEventListener('volumechange', () => {
+             volumeSlider.value = audioPlayer.volume;
+        });
+
+        audioPlayer.play().then(() => {
+            updatePlayPauseIcon();
+        }).catch(error => {
+            console.log("Autoplay bloqueado pelo navegador. O usuário precisa interagir para iniciar.");
+            updatePlayPauseIcon();
+        });
+    });
   </script>
 
 </body>
