@@ -270,6 +270,7 @@
             <section class="glass-card player-card">
               <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/logoradio.png" alt="Logo da Rádio" class="player-logo">
               <h2>NO AR</h2>
+              <h3 id="current-program-name" style="color: var(--cor-destaque); text-shadow: var(--glow-intensity); margin-top: 0; margin-bottom: 1rem; font-size: 1.5rem;">Carregando...</h3>
               <p id="current-track-info"><span>Carregando música...</span></p>
 
               <div class="custom-player">
@@ -327,27 +328,16 @@
                 <script src="https://minnit.chat/js/embed.js?c=1752216300" defer></script>
               </div>
             </section>
-        
-            <section class="glass-card dj-section">
-              <h3>🎙️ Nossos Locutores</h3>
-              <div class="dj-grid">
-                <div class="dj-card">
-                 <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/dj.jpg" alt="Foto do Locutor DJ MARKIM 🎼🎧🎤">
-                  <h4>DJ MARKIM 🎼🎧🎤</h4>
-                  <p id="dj-program-name">Programação Musical</p>
-                </div>
-              </div>
-            </section>
             
             <section class="glass-card">
                 <h3>📅 Programação</h3>
-                <div class="schedule-item"><span class="schedule-time">05:00 - 08:00</span><span class="schedule-title">Modão Da Madrugada</span></div>
+                <div class="schedule-item"><span class="schedule-time">00:00 - 05:00</span><span class="schedule-title">Flashback</span></div>
+                <div class="schedule-item"><span class="schedule-time">05:00 - 09:00</span><span class="schedule-title">Modão Da Madrugada</span></div>
                 <div class="schedule-item"><span class="schedule-time">09:00 - 12:00</span><span class="schedule-title">Mistura Musical</span></div>
                 <div class="schedule-item"><span class="schedule-time">12:00 - 15:00</span><span class="schedule-title">Tarde Do Pagode</span></div>
-                <div class="schedule-item"><span class="schedule-time">15:00 - 18:00</span><span class="schedule-title">Sofrência Musical</span></div>
+                <div class="schedule-item"><span class="schedule-time">15:00 - 19:00</span><span class="schedule-title">Sofrência Musical</span></div>
                 <div class="schedule-item"><span class="schedule-time">19:00 - 22:00</span><span class="schedule-title">Pop Rock</span></div>
                 <div class="schedule-item"><span class="schedule-time">22:00 - 00:00</span><span class="schedule-title">Forró</span></div>
-                <div class="schedule-item"><span class="schedule-time">00:00 - 04:00</span><span class="schedule-title">Flashback</span></div>
             </section>
             
             <section class="glass-card events-section">
@@ -492,18 +482,17 @@ modalidade...</p>
     setInterval(updateNowPlaying, 10000); // Atualiza a cada 10 segundos
 
     function updateCurrentProgram() {
-        const programElement = document.getElementById('dj-program-name');
+        const programElement = document.getElementById('current-program-name');
         if (!programElement) return;
         const currentHour = new Date().getHours();
-        let programName = "Modão Da Madrugada";
+        let programName = "Flashback"; // Horários da madrugada (0, 1, 2, 3, 4)
 
         if (currentHour >= 5 && currentHour < 9) { programName = "Modão Da Madrugada"; } 
         else if (currentHour >= 9 && currentHour < 12) { programName = "Mistura Musical"; } 
         else if (currentHour >= 12 && currentHour < 15) { programName = "Tarde Do Pagode"; } 
-        else if (currentHour >= 15 && currentHour < 18) { programName = "Sofrência Musical"; } 
+        else if (currentHour >= 15 && currentHour < 19) { programName = "Sofrência Musical"; } 
         else if (currentHour >= 19 && currentHour < 22) { programName = "Pop Rock"; } 
-        else if (currentHour >= 22 || currentHour < 4) { programName = "Forró"; } 
-        else if (currentHour >= 4 && currentHour < 5) { programName = "Flashback"; }
+        else if (currentHour >= 22) { programName = "Forró"; } // Horários 22 e 23
         
         programElement.textContent = programName;
     }
