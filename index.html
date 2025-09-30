@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Rádio Web Montes Claros, a sua sintonia digital. Ouça ao vivo a melhor programação de música, participe de promoções e fique por dentro dos eventos da cidade.">
+  
   <title>Rádio Montes Claros | Sua Sintonia Digital</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,6 +12,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
+    /* NOTA DE OTIMIZAÇÃO: Para um site em produção, é recomendado mover todo este CSS 
+      para um arquivo externo (ex: style.css) e linká-lo aqui. 
+      Isso melhora o cache do navegador e a organização do projeto.
+    */
     :root {
       --cor-fundo-transparente: rgba(15, 18, 30, 0.75);
       --cor-borda: rgba(255, 255, 255, 0.1);
@@ -43,6 +49,17 @@
 
     img { max-width: 100%; height: auto; display: block; }
 
+    /* --- Animação de entrada suave --- */
+    .fade-in-section {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in-section.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
     .background-aurora {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
         opacity: 0.5;
@@ -58,44 +75,21 @@
 
     .container { width: 100%; max-width: 1200px; text-align: center; z-index: 1; }
 
-    /* --- ESTILO DO TÍTULO ATUALIZADO (ESTILO DA FOTO) --- */
     header h1 {
-        font-family: 'Orbitron', sans-serif;
-        font-size: 3rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 0.5rem;
+        font-family: 'Orbitron', sans-serif; font-size: 3rem; font-weight: 700;
+        text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;
     }
-
-    /* Estilo para "WEB RÁDIO" - mais sutil */
     header h1 .h1-part1 {
-        color: #2c3144; /* Cor interna escura */
-        font-weight: 600;
-        /* Sombra para criar um contorno suave e um brilho fraco */
-        text-shadow:
-            /* Contorno claro */
-            -1px -1px 2px rgba(0, 229, 255, 0.3),
-            1px -1px 2px rgba(0, 229, 255, 0.3),
-            -1px 1px 2px rgba(0, 229, 255, 0.3),
-            1px 1px 2px rgba(0, 229, 255, 0.3),
-            /* Sombra escura para profundidade */
-            2px 2px 5px rgba(0,0,0,0.8);
+        color: #2c3144; font-weight: 600;
+        text-shadow: -1px -1px 2px rgba(0, 229, 255, 0.3), 1px -1px 2px rgba(0, 229, 255, 0.3),
+                     -1px 1px 2px rgba(0, 229, 255, 0.3), 1px 1px 2px rgba(0, 229, 255, 0.3),
+                     2px 2px 5px rgba(0,0,0,0.8);
     }
-
-    /* Estilo para "MONTES CLAROS" - mais destacado */
     header h1 .h1-part2 {
-        color: #2c3144; /* Mesma cor interna escura */
-         /* Sombra mais forte para efeito 3D destacado */
-        text-shadow:
-            /* Contorno ciano bem definido e brilhante */
-            0 0 1px rgba(255,255,255,0.8),
-            0 0 4px var(--cor-secundaria),
-            0 0 8px var(--cor-secundaria),
-            /* Sombra escura mais forte para destacar */
-            2px 2px 6px rgba(0,0,0,1);
+        color: #2c3144;
+        text-shadow: 0 0 1px rgba(255,255,255,0.8), 0 0 4px var(--cor-secundaria),
+                     0 0 8px var(--cor-secundaria), 2px 2px 6px rgba(0,0,0,1);
     }
-    /* --- FIM DO ESTILO DO TÍTULO --- */
 
     header .slogan { 
         font-family: 'Montserrat', sans-serif; font-size: 1.25rem; font-weight: 600; 
@@ -140,12 +134,11 @@
     @keyframes scroll-ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
     #clock { font-family: 'Orbitron', monospace; font-size: 3rem; font-weight: 700; color: var(--cor-secundaria); letter-spacing: 3px; text-shadow: 0 0 15px var(--cor-secundaria), 0 0 25px rgba(0,255,255,0.4); }
-    .content-section h3, .sponsors-section h3, .dj-section h3, .news-section h3, .events-section h3, .poll-section h3, .online-users-section h3 { font-size: 2rem; color: var(--cor-destaque); margin-top: 0; margin-bottom: 1.8rem; text-shadow: var(--glow-intensity); }
-    
-    .sponsors-section h3, .online-users-section h3 { display: flex; align-items: center; text-align: center; font-size: 1.8rem; }
-    .sponsors-section h3::before, .sponsors-section h3::after, .online-users-section h3::before, .online-users-section h3::after { content: ''; flex: 1; border-bottom: 1px solid var(--cor-borda); }
-    .sponsors-section h3:not(:empty)::before, .online-users-section h3:not(:empty)::before { margin-right: .75em; }
-    .sponsors-section h3:not(:empty)::after, .online-users-section h3:not(:empty)::after { margin-left: .75em; }
+    .content-section h3 { font-size: 2rem; color: var(--cor-destaque); margin-top: 0; margin-bottom: 1.8rem; text-shadow: var(--glow-intensity); }
+    .sidebar-section h3 { display: flex; align-items: center; text-align: center; font-size: 1.8rem; color: var(--cor-destaque); margin-top: 0; margin-bottom: 1.8rem; text-shadow: var(--glow-intensity);}
+    .sidebar-section h3::before, .sidebar-section h3::after { content: ''; flex: 1; border-bottom: 1px solid var(--cor-borda); }
+    .sidebar-section h3:not(:empty)::before { margin-right: .75em; }
+    .sidebar-section h3:not(:empty)::after { margin-left: .75em; }
     
     .sponsors-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: start; }
     .sponsors-grid a { background: rgba(0,0,0,0.2); border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: all 0.3s ease; overflow: hidden; padding: 0.5rem; }
@@ -163,29 +156,35 @@
     .request-form input:focus, .request-form textarea:focus { outline: none; border-color: var(--cor-destaque); box-shadow: 0 0 10px var(--cor-destaque); }
     .request-form button { background: linear-gradient(90deg, var(--cor-destaque), var(--cor-secundaria)); border: none; border-radius: 10px; padding: 0.9rem 1.2rem; color: #fff; font-size: 1.15rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.4); }
     .request-form button:hover { transform: translateY(-3px); box-shadow: 0 8px 20px var(--cor-sombra), var(--glow-intensity); background: linear-gradient(90deg, var(--cor-secundaria), var(--cor-destaque)); }
+    .request-form button:disabled { cursor: not-allowed; background: #555; }
+    #form-status { margin-top: 1rem; font-weight: 600; min-height: 1.5rem; }
 
     .schedule-item { display: flex; justify-content: space-between; align-items: center; background-color: rgba(0,0,0,0.2); padding: 1rem 1.5rem; border-radius: 10px; margin-bottom: 1rem; border-left: 4px solid var(--cor-destaque); transition: all 0.3s ease; }
     .schedule-item:hover { background-color: rgba(0,0,0,0.4); transform: scale(1.02); border-left-color: var(--cor-secundaria); }
     .schedule-time { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--cor-secundaria); white-space: nowrap; padding-right: 1rem; }
     .schedule-title { font-size: 1.1rem; font-weight: 600; color: var(--cor-texto); text-align: right; }
-    
-    .dj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem; }
-    .dj-card { background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 10px; text-align: center;}
-    .dj-card img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--cor-secundaria); margin: 0 auto 1rem auto; }
-    .dj-card h4 { margin: 0 0 0.5rem 0; font-size: 1.2rem; color: var(--cor-texto); }
-    .dj-card p { margin: 0; font-size: 0.9rem; color: var(--cor-secundaria); transition: all 0.5s ease; }
-
-    .news-item, .event-item { display: flex; gap: 1.5rem; text-align: left; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--cor-borda); }
-    .news-item:last-child, .event-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        
+    .news-item { display: flex; gap: 1.5rem; text-align: left; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--cor-borda); }
+    .news-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
     .news-item img { width: 100px; height: 100px; object-fit: cover; border-radius: 10px; flex-shrink: 0;}
-    .event-item img { width: 100px; height: 100px; object-fit: cover; border-radius: 10px; flex-shrink: 0; margin: 0 auto; }
-    .event-item img[alt="cartaz madeirada"], .event-item img[alt="cartaz paraguai"], .event-item img[alt="cartaz lala"], .event-item img[alt="cartaz vitrine"] { width: 100%; height: auto; margin-top: 1rem; }
-    .news-content h4, .event-content h4 { margin: 0 0 0.5rem 0; font-size: 1.2rem; }
-    .news-content p, .event-content p { margin: 0 0 0.5rem 0; font-size: 0.9rem; opacity: 0.8; }
-    .news-content a, .event-content a { color: var(--cor-destaque); text-decoration: none; font-weight: 600; }
-    .event-details { font-weight: 600; color: var(--cor-secundaria); }
+    .news-content h4 { margin: 0 0 0.5rem 0; font-size: 1.2rem; }
+    .news-content p { margin: 0 0 0.5rem 0; font-size: 0.9rem; opacity: 0.8; }
+    .news-content a { color: var(--cor-destaque); text-decoration: none; font-weight: 600; }
     
-    footer { margin-top: 3rem; padding: 1.5rem; }
+    /* --- Estilos da Agenda de Eventos Melhorada --- */
+    .events-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+    .event-card { background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 15px; text-align: center; }
+    .event-card h4 { margin-top:0; font-size: 1.4rem; color: var(--cor-secundaria); }
+    .event-card p { margin-bottom: 0.75rem; }
+    .event-details { font-weight: 600; }
+    .event-poster { border-radius: 10px; margin-top: 1rem; }
+    .calendar-button { margin-top: 1rem; display: inline-block; background-color: rgba(0,0,0,0.3); border: 1px solid var(--cor-borda); padding: 0.6rem 1.2rem; border-radius: 8px; text-decoration: none; color: var(--cor-texto); font-weight: 600; transition: all 0.3s ease; }
+    .calendar-button:hover { background-color: var(--cor-destaque); border-color: var(--cor-destaque); color: #fff; transform: translateY(-3px); }
+    @media (min-width: 768px) {
+      .events-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    
+    footer { margin-top: 3rem; padding: 1.5rem; text-align: center; }
     footer p { font-size: 1.1rem; margin-bottom: 1rem; opacity: 0.9; }
 
     /* --- ESTILOS DO PLAYER CUSTOMIZADO --- */
@@ -233,7 +232,6 @@
         .main-layout { flex-direction: column; }
         .main-content, .sidebar { width: 100%; }
         .sidebar { position: static; }
-        .event-item { align-items: center; }
         header h1 { font-size: 2.5rem; }
     }
     @media (max-width: 600px) {
@@ -241,9 +239,10 @@
       header h1 { font-size: 1.8rem; letter-spacing: 0; }
       header .slogan { font-size: 1rem; }
       .glass-card { padding: 1.5rem; }
-      .news-item, .event-item { flex-direction: column; align-items: center; text-align: center; }
+      .news-item { flex-direction: column; align-items: center; text-align: center; }
       .schedule-item { flex-direction: column; gap: 0.5rem; }
       .schedule-time { padding-right: 0; }
+      .events-grid { grid-template-columns: 1fr; }
     }
   </style>
   
@@ -267,8 +266,8 @@
     
     <div class="main-layout">
         <div class="main-content">
-            <section class="glass-card player-card">
-              <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/logoradio.png" alt="Logo da Rádio" class="player-logo">
+            <section class="glass-card player-card fade-in-section">
+              <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/logoradio.png" alt="Logo da Rádio Montes Claros, com um design circular e moderno" class="player-logo">
               <h2>NO AR</h2>
               <h3 id="current-program-name" style="color: var(--cor-destaque); text-shadow: var(--glow-intensity); margin-top: 0; margin-bottom: 1rem; font-size: 1.5rem;">Carregando...</h3>
               <p id="current-track-info"><span>Carregando música...</span></p>
@@ -286,7 +285,7 @@
                 </div>
               </div>
               
-              <audio id="audio-player" autoplay>
+              <audio id="audio-player" preload="none">
                   <source src="https://link.zeno.fm/7heeu8w1pzzuv" type="audio/mpeg">
                   Seu navegador não suporta áudio online.
               </audio>
@@ -294,43 +293,36 @@
               <div class="player-socials">
                 <p>📲 Siga a gente nas redes sociais</p>
                 <div class="social-buttons">
-                    <a href="https://wa.me/5538998558528" target="_blank" rel="noopener noreferrer" class="whatsapp" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2.01C6.58 2.01 2.13 6.46 2.13 12c0 1.77.46 3.45 1.28 4.95L2.01 22l5.19-1.4c1.47.76 3.12 1.18 4.84 1.18h.01c5.46 0 9.91-4.45 9.91-9.91 0-5.46-4.45-9.91-9.91-9.91zM12.04 20.28c-1.55 0-3.03-.4-4.32-1.12l-.31-.18-3.21.84.86-3.13-.2-.33a8.22 8.22 0 0 1-1.26-4.48c0-4.54 3.69-8.23 8.23-8.23 4.54 0 8.23 3.69 8.23 8.23 0 4.54-3.69 8.23-8.23 8.23zm4.49-5.93c-.26-.13-1.55-.77-1.79-.85-.24-.08-.42-.13-.59.13-.17.26-.68.85-.83 1.02-.15.17-.3.19-.56.06-.26-.13-1.09-.4-2.07-1.27-.76-.68-1.28-1.52-1.43-1.78-.15-.26-.02-.4.11-.53.12-.12.26-.3.39-.45.13-.15.17-.26.26-.43.08-.17.04-.31-.02-.44s-.59-1.43-.81-1.95c-.22-.52-.44-.45-.59-.46-.14-.01-.31-.01-.48-.01-.17 0-.43.06-.66.31-.22.26-.85.83-.85 2.02 0 1.19.87 2.34 1 2.5.13.17 1.73 2.65 4.19 3.7.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.06 1.55-1.04 1.77-2.04.22-1-.15-1.52-.26-1.65z"></path></svg></a>
-                    <a href="https://www.facebook.com/SEUPERFIL" target="_blank" rel="noopener noreferrer" class="facebook" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.675 0h-21.35C.59 0 0 .59 0 1.325v21.35C0 23.41.59 24 1.325 24H12.82v-9.29H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h5.694c.735 0 1.325-.59 1.325-1.325V1.325C24 .59 23.41 0 22.675 0z"></path></svg></a>
-                    <a href="https://www.instagram.com/SEUPERFIL" target="_blank" rel="noopener noreferrer" class="instagram" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.286.058 1.694.072 4.948.072s3.662-.014 4.948-.072c4.354-.199 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"></path></svg></a>
+                    <a href="https://wa.me/5538998558528" target="_blank" rel="noopener noreferrer" class="whatsapp" aria-label="Link para o WhatsApp da rádio"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2.01C6.58 2.01 2.13 6.46 2.13 12c0 1.77.46 3.45 1.28 4.95L2.01 22l5.19-1.4c1.47.76 3.12 1.18 4.84 1.18h.01c5.46 0 9.91-4.45 9.91-9.91 0-5.46-4.45-9.91-9.91-9.91zM12.04 20.28c-1.55 0-3.03-.4-4.32-1.12l-.31-.18-3.21.84.86-3.13-.2-.33a8.22 8.22 0 0 1-1.26-4.48c0-4.54 3.69-8.23 8.23-8.23 4.54 0 8.23 3.69 8.23 8.23 0 4.54-3.69 8.23-8.23 8.23zm4.49-5.93c-.26-.13-1.55-.77-1.79-.85-.24-.08-.42-.13-.59.13-.17.26-.68.85-.83 1.02-.15.17-.3.19-.56.06-.26-.13-1.09-.4-2.07-1.27-.76-.68-1.28-1.52-1.43-1.78-.15-.26-.02-.4.11-.53.12-.12.26-.3.39-.45.13-.15.17-.26.26-.43.08-.17.04-.31-.02-.44s-.59-1.43-.81-1.95c-.22-.52-.44-.45-.59-.46-.14-.01-.31-.01-.48-.01-.17 0-.43.06-.66.31-.22.26-.85.83-.85 2.02 0 1.19.87 2.34 1 2.5.13.17 1.73 2.65 4.19 3.7.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.06 1.55-1.04 1.77-2.04.22-1-.15-1.52-.26-1.65z"></path></svg></a>
+                    <a href="https://www.facebook.com/SEUPERFIL" target="_blank" rel="noopener noreferrer" class="facebook" aria-label="Link para o Facebook da rádio"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.675 0h-21.35C.59 0 0 .59 0 1.325v21.35C0 23.41.59 24 1.325 24H12.82v-9.29H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h5.694c.735 0 1.325-.59 1.325-1.325V1.325C24 .59 23.41 0 22.675 0z"></path></svg></a>
+                    <a href="https://www.instagram.com/SEUPERFIL" target="_blank" rel="noopener noreferrer" class="instagram" aria-label="Link para o Instagram da rádio"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.286.058 1.694.072 4.948.072s3.662-.014 4.948-.072c4.354-.199 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"></path></svg></a>
                 </div>
               </div>
             </section>
             
-            <div class="news-ticker">
+            <div class="news-ticker fade-in-section">
                 <div class="ticker-content">
-                    <span>EVENTO!</span> 
-                    
-                     💃🏽🕺🏽 FORRÓ DO VITRINE SHOWS E EVENTOS 💃🏽🕺🏽
-                         SÁBADO 27/09/2025
-
-
-                      💃🏽🕺🏽 FORRÓ NO GALPÃO 💃🏽🕺🏽
-                         SEGUNDA-FEIRA 29/09/2025
-
+                    <span>EVENTO!</span> 💃🏽🕺🏽 FORRÓ DO VITRINE SHOWS E EVENTOS - SÁBADO 27/09/2025
+                    <span>IMPERDÍVEL!</span> 💃🏽🕺🏽 FORRÓ NO GALPÃO - SEGUNDA-FEIRA 29/09/2025
                     <span>ANUNCIE AQUI!</span> Entre em contato pelo WhatsApp e divulgue sua marca!
                 </div>
             </div>
 
-            <section class="glass-card">
-                <h3>⏰ Hora Certa</h3>
+            <section class="glass-card fade-in-section">
+                <h3 class="content-section">⏰ Hora Certa</h3>
                 <div id="clock">Carregando...</div>
             </section>
         
-            <section class="glass-card">
-              <h3>💬 Sala de Bate-Papo</h3>
-              <div class="chat-container">
-                <span class="minnit-chat-sembed" data-chatname="https://organizations.minnit.chat/359182529081474/c/Main?embed" data-style="width:100%; height:500px; max-height:90vh;" data-version="1.52"></span>
-                <script src="https://minnit.chat/js/embed.js?c=1752216300" defer></script>
-              </div>
+            <section class="glass-card fade-in-section">
+                <h3 class="content-section">💬 Sala de Bate-Papo</h3>
+                <div class="chat-container">
+                    <span class="minnit-chat-sembed" data-chatname="https://organizations.minnit.chat/359182529081474/c/Main?embed" data-style="width:100%; height:500px; max-height:90vh;" data-version="1.52"></span>
+                    <script src="https://minnit.chat/js/embed.js?c=1752216300" defer></script>
+                </div>
             </section>
             
-            <section class="glass-card">
-                <h3>📅 Programação</h3>
+            <section class="glass-card fade-in-section">
+                <h3 class="content-section">📅 Programação</h3>
                 <div class="schedule-item"><span class="schedule-time">00:00 - 05:00</span><span class="schedule-title">Flashback</span></div>
                 <div class="schedule-item"><span class="schedule-time">05:00 - 09:00</span><span class="schedule-title">Modão Da Madrugada</span></div>
                 <div class="schedule-item"><span class="schedule-time">09:00 - 12:00</span><span class="schedule-title">Mistura Musical</span></div>
@@ -340,92 +332,95 @@
                 <div class="schedule-item"><span class="schedule-time">22:00 - 00:00</span><span class="schedule-title">Forró</span></div>
             </section>
             
-            <section class="glass-card events-section">
-                <h3>🗓️ Agenda de Montes Claros</h3>
-                <div class="event-item">
-                  
-                </section>
-
-            <section class="glass-card events-section">
-              <div class="event-item">
-              <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/agenda.png" alt="Montes Claros">
-              <div class="event-content">
-                <h4> Vitrine Shows e Eventos 27/09/2025 Sabado </h4>
-                <p class="event-details">Av. Francisco Peres 161 Em Frente a Lagoa Da Pampulha*</p>
-                <p>Shows: Atrações:
-                          🎤Marcelo Moreno
-                          🎤Jú Reis
-                          🎤Forró Xinela</p>
-              </div>
-            </div>
-            <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/lalacartazsabado.jpeg" alt="cartaz lala">
+            <section class="glass-card fade-in-section">
+                <h3 class="content-section">🗓️ Agenda de Montes Claros</h3>
+                <div class="events-grid">
+                    <div class="event-card">
+                        <h4>Vitrine Shows e Eventos</h4>
+                        <p class="event-details">Sábado, 27/09/2025</p>
+                        <p>Atrações: 🎤Marcelo Moreno, 🎤Jú Reis, 🎤Forró Xinela</p>
+                        <p><small>Local: Av. Francisco Peres 161, em frente à Lagoa da Pampulha</small></p>
+                        <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/lalacartazsabado.jpeg" alt="Cartaz do evento no Vitrine Shows com as atrações Marcelo Moreno, Jú Reis e Forró Xinela" class="event-poster">
+                        <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Forr%C3%B3+no+Vitrine+Shows&dates=20250927T220000/20250928T040000&details=Atra%C3%A7%C3%B5es%3A+Marcelo+Moreno%2C+J%C3%BA+Reis%2C+Forr%C3%B3+Xinela&location=Av.+Francisco+Peres+161+-+Montes+Claros" target="_blank" rel="noopener noreferrer" class="calendar-button">Adicionar ao Calendário</a>
+                    </div>
+                    <div class="event-card">
+                        <h4>Forró do Galpão</h4>
+                        <p class="event-details">Segunda-feira, 29/09/2025</p>
+                        <p>Atrações: 🎤Nilsinho Baladeiro, 🎤Wanderson Neves, 🎤Junior Sedução, e mais!</p>
+                        <p><small>Local: Av. Castelar Prates 395, Major Prates (Visual Bar)</small></p>
+                        <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/maderadasegundafeira.jpeg" alt="Cartaz do Forró do Galpão com diversas atrações de forró" class="event-poster">
+                        <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Forr%C3%B3+do+Galp%C3%A3o&dates=20250929T210000/20250930T030000&details=Shows+com+Nilsinho+Baladeiro%2C+Wanderson+Neves%2C+Junior+Sedu%C3%A7%C3%A3o+e+muito+mais.&location=Av.+Castelar+Prates+395+-+Major+Prates+(Visual+Bar)" target="_blank" rel="noopener noreferrer" class="calendar-button">Adicionar ao Calendário</a>
+                    </div>
+                </div>
             </section>
-              
-
-            <section class="glass-card events-section">
-              <div class="event-item">
-              <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/agenda.png" alt="Montes Claros">
-              <div class="event-content">
-                <h4> FORRÓ DO GALPÃO 29/09/2025 SEGUNDA FEIRA </h4>
-                <p class="event-details">Av. Castelar Prates 395 Major Prates (Visual Bar)*</p>
-                <p>Shows: Atrações:
-
-                          🎤NILSINHO BALADEIRO
-                          🎤WANDERSON NEVES
-                          🎤JUNIOR SEDUÇÃO
-                          🎤ELIAS MADERADA
-                          🎤LUIZ CHEFÃO
-                          🎤CID SOUZA </p>
-              </div>
-            </div>
-            <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/maderadasegundafeira.jpeg" alt="cartaz maderada">
-            </section>
-
-
-            <section class="glass-card news-section">
-                <h3>📰 Notícias da Cidade</h3>
+            
+            <section class="glass-card fade-in-section">
+                <h3 class="content-section">📻 Notícias da Rádio</h3>
                 <div class="news-item">
-                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/noticia.jpg" alt="Notícia sobre corridas de rua">
+                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/logoradio.png" alt="Logo da Rádio Montes Claros">
                   <div class="news-content">
-                    <h4>NÃO PERCA O PASSO - Calendário das corridas de rua de Montes Claros</h4>
-                    <p>A partir deste domingo, 14, Montes Claros receberá uma sequência relevante de eventos de corridas de rua para a alegria dos adeptos da
-modalidade...</p>
-                    <a href="https://www.montesclaros.mg.gov.br/noticias" target="_blank">Leia a matéria completa</a>
+                    <h4>Vem aí: Nova Programação de Fim de Ano!</h4>
+                    <p>Fique ligado! Estamos preparando uma programação especial para celebrar as festas de fim de ano com muita música boa, promoções e a participação dos nossos ouvintes. Aguarde novidades em breve!</p>
                   </div>
                 </div>
-                <a href="https://www.montesclaros.mg.gov.br/noticias" target="_blank" class="cta-button" style="margin-top: 1rem;">Ver Mais Notícias</a>
+                 <div class="news-item">
+                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/microfone.jpg" alt="Microfone de estúdio de rádio">
+                  <div class="news-content">
+                    <h4>Participe e Ganhe Prêmios!</h4>
+                    <p>Mande sua mensagem em nosso WhatsApp durante o programa "Mistura Musical" e concorra a prêmios exclusivos dos nossos parceiros. Sua participação faz a nossa alegria!</p>
+                  </div>
+                </div>
+            </section>
+
+            <section class="glass-card fade-in-section">
+                <h3 class="content-section">📰 Notícias da Cidade</h3>
+                <div class="news-item">
+                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/noticia.jpg" alt="Imagem de pessoas correndo em uma maratona de rua">
+                  <div class="news-content">
+                    <h4>NÃO PERCA O PASSO - Calendário das corridas de rua de Montes Claros</h4>
+                    <p>A partir deste domingo, 14, Montes Claros receberá uma sequência relevante de eventos de corridas de rua para a alegria dos adeptos da modalidade...</p>
+                    <a href="https://www.montesclaros.mg.gov.br/noticias" target="_blank" rel="noopener noreferrer">Leia a matéria completa</a>
+                  </div>
+                </div>
+                <a href="https://www.montesclaros.mg.gov.br/noticias" target="_blank" rel="noopener noreferrer" class="cta-button" style="margin-top: 1rem;">Ver Mais Notícias</a>
             </section>
         
-            <section class="glass-card">
-                <h3>🎵 Peça sua Música</h3>
-                <form action="https://formspree.io/f/myzdlnqa" method="POST" class="request-form">
+            <section class="glass-card fade-in-section">
+                <h3 class="content-section">🎵 Peça sua Música</h3>
+                <form id="music-request-form" action="https://formspree.io/f/myzdlnqa" method="POST" class="request-form">
                     <input type="text" name="nome" placeholder="Seu Nome" required>
                     <input type="text" name="musica" placeholder="Nome da Música e Artista" required>
                     <textarea name="dedicatoria" rows="3" placeholder="Quer mandar um alô ou oferecer uma música?"></textarea>
                     <button type="submit">Enviar Pedido</button>
+                    <div id="form-status"></div>
                 </form>
             </section>
         </div>
         
         <aside class="sidebar">
-            <section class="glass-card online-users-section">
+            <section class="glass-card sidebar-section fade-in-section">
               <h3>📡 Visitantes Online</h3>
               <div style="text-align:center;">
-                <a target="_blank" href="https://24counter.com/cc_stats/1757967685/"><img alt="free counter" border="0" src="https://24counter.com/online/ccc.php?id=1757967685"></a>
+                <a target="_blank" href="https://24counter.com/cc_stats/1757967685/"><img alt="Contador de visitantes online" border="0" src="https://24counter.com/online/ccc.php?id=1757967685"></a>
               </div>
             </section>
+            
+            <section class="glass-card sidebar-section fade-in-section">
+              <h3>📊 Enquete da Semana</h3>
+              <iframe src="https://strawpoll.com/embed/QrgewErEXyp" style="width:100%;height:450px;border:0;">Carregando enquete...</iframe>
+              </section>
 
-            <section class="glass-card sponsors-section">
-              <h3>🌟 Nossos Parceiros 🌟</h3>
+            <section class="glass-card sidebar-section fade-in-section">
+              <h3>🌟 Nossos Parceiros</h3>
               <div class="sponsors-grid">
-                <a href="#" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/myhouse.jpg" alt="Patrocinador MY HOUSE"></a>
-                <a href="#" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/dj.jpg" alt="Patrocinador dj"></a>
-                <a href="https://wa.me/5538998558528" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/markim.jpg" alt="Markim"></a>
-                <a href="https://wa.me/5538984093639" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/maderada.jpg" alt="Maderada"></a>
-                <a href="https://wa.me/5538988429992" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/Vitrine.jpg" alt="Lala"></a>
-                <a href="https://wa.me/5538991963125" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/djdaniel.png" alt="Dj Daniel"></a>
-                <a href="https://wa.me/5538998565414" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/logoparaguai.jpg" alt="Patrocinador Paraguai"></a>
-                <a href="https://wa.me/5538998541647" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/junior.jpg" alt="Patrocinador Junior Sedeção"></a>
+                <a href="#" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/myhouse.jpg" alt="Logotipo do parceiro My House"></a>
+                <a href="#" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/dj.jpg" alt="Logotipo de um DJ parceiro"></a>
+                <a href="https://wa.me/5538998558528" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/markim.jpg" alt="Foto do parceiro Markim Divulgações"></a>
+                <a href="https://wa.me/5538984093639" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/maderada.jpg" alt="Foto do cantor parceiro Maderada"></a>
+                <a href="https://wa.me/5538988429992" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/Vitrine.jpg" alt="Logotipo do parceiro Vitrine Shows e Eventos"></a>
+                <a href="https://wa.me/5538991963125" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/djdaniel.png" alt="Foto do parceiro DJ Daniel"></a>
+                <a href="https://wa.me/5538998565414" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/logoparaguai.jpg" alt="Logotipo do parceiro Paraguai Shows"></a>
+                <a href="https://wa.me/5538998541647" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/junior.jpg" alt="Foto do cantor parceiro Junior Sedução"></a>
               </div>
               <div class="cta-sponsors">
                 <p>Quer ver sua marca aqui?</p>
@@ -441,66 +436,82 @@ modalidade...</p>
   </div>
   
   <script>
-    function updateClock() {
-      const clockElement = document.getElementById('clock');
-      if (!clockElement) return;
-      const now = new Date();
-      const hours = String(now.getHours()).padStart(2, '0');
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const seconds = String(now.getSeconds()).padStart(2, '0');
-      clockElement.textContent = `${hours}:${minutes}:${seconds}`;
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-
-    // FUNÇÃO ATUALIZADA PARA CASTER.FM
-    async function updateNowPlaying() {
-        const songTitleElement = document.getElementById('current-track-info');
-        const statsUrl = "https://sapircast.caster.fm:11278/admin/publicstats.json";
-
-        try {
-            // AVISO: Esta chamada pode falhar devido à política de CORS do Caster.fm
-            const response = await fetch(statsUrl, { cache: "no-store" });
-            const data = await response.json();
-            let songText = "Programação Musical"; 
-
-            // Lógica para extrair o nome da música do JSON do Caster.fm
-            if (data && data.length > 1 && data[1].source) {
-                const sourceObject = data[1].source; 
-                const streamKey = Object.keys(sourceObject)[0];
-                if (streamKey && sourceObject[streamKey] && sourceObject[streamKey]["display-title"]) {
-                    songText = sourceObject[streamKey]["display-title"];
-                }
-            }
-            songTitleElement.innerHTML = `<span>Agora Tocando:</span> ${songText}`;
-        } catch (error) {
-            console.error("Erro ao buscar dados da rádio Caster.fm:", error);
-            songTitleElement.innerHTML = `<span>No Ar:</span> Programação Musical`;
-        }
-    }
-    updateNowPlaying();
-    setInterval(updateNowPlaying, 10000); // Atualiza a cada 10 segundos
-
-    function updateCurrentProgram() {
-        const programElement = document.getElementById('current-program-name');
-        if (!programElement) return;
-        const currentHour = new Date().getHours();
-        let programName = "Flashback"; // Horários da madrugada (0, 1, 2, 3, 4)
-
-        if (currentHour >= 5 && currentHour < 9) { programName = "Modão Da Madrugada"; } 
-        else if (currentHour >= 9 && currentHour < 12) { programName = "Mistura Musical"; } 
-        else if (currentHour >= 12 && currentHour < 15) { programName = "Tarde Do Pagode"; } 
-        else if (currentHour >= 15 && currentHour < 19) { programName = "Sofrência Musical"; } 
-        else if (currentHour >= 19 && currentHour < 22) { programName = "Pop Rock"; } 
-        else if (currentHour >= 22) { programName = "Forró"; } // Horários 22 e 23
-        
-        programElement.textContent = programName;
-    }
-    setInterval(updateCurrentProgram, 60000);
-    updateCurrentProgram();
-
-    // SCRIPT PARA CONTROLAR O PLAYER CUSTOMIZADO
     document.addEventListener('DOMContentLoaded', () => {
+
+        // --- FUNÇÃO DO RELÓGIO ---
+        function updateClock() {
+            const clockElement = document.getElementById('clock');
+            if (!clockElement) return;
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            clockElement.textContent = `${hours}:${minutes}:${seconds}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // --- FUNÇÃO DE MÚSICA NO AR (CORRIGIDA PARA CASTER.FM) ---
+        async function updateNowPlaying() {
+            const songTitleElement = document.getElementById('current-track-info');
+            // URL do servidor de estatísticas do Caster.fm
+            const statsUrl = "https://sapircast.caster.fm:11278/admin/publicstats.json";
+            const defaultText = `<span>No Ar:</span> Programação Musical`;
+
+            if (!songTitleElement) return;
+
+            try {
+                const response = await fetch(statsUrl, { cache: "no-store" });
+                 if (!response.ok) {
+                    throw new Error(`Erro na API: ${response.status}`);
+                }
+                const data = await response.json();
+                let songText = "Programação Musical";
+
+                // Lógica original para extrair o nome da música do JSON do Caster.fm
+                if (data && data.length > 1 && data[1].source) {
+                    const sourceObject = data[1].source; 
+                    const streamKey = Object.keys(sourceObject)[0];
+                    if (streamKey && sourceObject[streamKey] && sourceObject[streamKey]["display-title"]) {
+                        songText = sourceObject[streamKey]["display-title"];
+                    }
+                }
+                
+                if (songText && songText.trim() !== "" && songText !== "Programação Musical") {
+                   songTitleElement.innerHTML = `<span>Tocando Agora:</span> ${songText}`;
+                } else {
+                   songTitleElement.innerHTML = defaultText;
+                }
+
+            } catch (error) {
+                console.error("Erro ao buscar dados da rádio Caster.fm:", error);
+                songTitleElement.innerHTML = defaultText;
+            }
+        }
+        // Executa a função imediatamente e depois a cada 10 segundos
+        updateNowPlaying();
+        setInterval(updateNowPlaying, 10000);
+
+        // --- FUNÇÃO PARA ATUALIZAR O NOME DO PROGRAMA ATUAL ---
+        function updateCurrentProgram() {
+            const programElement = document.getElementById('current-program-name');
+            if (!programElement) return;
+            const currentHour = new Date().getHours();
+            let programName = "Flashback"; // Padrão da madrugada
+
+            if (currentHour >= 5 && currentHour < 9) { programName = "Modão Da Madrugada"; } 
+            else if (currentHour >= 9 && currentHour < 12) { programName = "Mistura Musical"; } 
+            else if (currentHour >= 12 && currentHour < 15) { programName = "Tarde Do Pagode"; } 
+            else if (currentHour >= 15 && currentHour < 19) { programName = "Sofrência Musical"; } 
+            else if (currentHour >= 19 && currentHour < 22) { programName = "Pop Rock"; } 
+            else if (currentHour >= 22) { programName = "Forró"; }
+            
+            programElement.textContent = programName;
+        }
+        setInterval(updateCurrentProgram, 60000);
+        updateCurrentProgram();
+
+        // --- SCRIPT PARA CONTROLAR O PLAYER CUSTOMIZADO ---
         const audioPlayer = document.getElementById('audio-player');
         const playPauseBtn = document.getElementById('play-pause-btn');
         const playIcon = document.getElementById('play-icon');
@@ -537,15 +548,78 @@ modalidade...</p>
         audioPlayer.addEventListener('play', updatePlayPauseIcon);
         audioPlayer.addEventListener('pause', updatePlayPauseIcon);
         audioPlayer.addEventListener('volumechange', () => {
-             volumeSlider.value = audioPlayer.volume;
+             if (volumeSlider) volumeSlider.value = audioPlayer.volume;
         });
 
-        audioPlayer.play().then(() => {
-            updatePlayPauseIcon();
-        }).catch(error => {
-            console.log("Autoplay bloqueado pelo navegador. O usuário precisa interagir para iniciar.");
-            updatePlayPauseIcon();
-        });
+        // Tenta tocar o áudio. Alguns navegadores bloqueiam o autoplay.
+        // O usuário precisará clicar no play se o autoplay falhar.
+        const playPromise = audioPlayer.play();
+        if (playPromise !== undefined) {
+            playPromise.then(_ => {
+                updatePlayPauseIcon();
+            }).catch(error => {
+                console.log("Autoplay bloqueado pelo navegador. Interação do usuário necessária.");
+                updatePlayPauseIcon();
+            });
+        }
+        
+        // --- SCRIPT PARA O FORMULÁRIO DE MÚSICA (SEM RECARREGAR A PÁGINA) ---
+        const form = document.getElementById('music-request-form');
+        const formStatus = document.getElementById('form-status');
+
+        async function handleSubmit(event) {
+            event.preventDefault();
+            const submitButton = form.querySelector('button');
+            const data = new FormData(event.target);
+            
+            submitButton.disabled = true;
+            submitButton.textContent = 'Enviando...';
+            formStatus.style.color = 'var(--cor-secundaria)';
+            formStatus.textContent = '';
+
+            try {
+                const response = await fetch(event.target.action, {
+                    method: form.method,
+                    body: data,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    formStatus.style.color = '#25D366'; // Verde
+                    formStatus.textContent = "Pedido enviado com sucesso! Obrigado!";
+                    form.reset();
+                } else {
+                    throw new Error('Erro na rede ou resposta não OK');
+                }
+            } catch (error) {
+                formStatus.style.color = '#ff4d4d'; // Vermelho
+                formStatus.textContent = "Opa! Algo deu errado. Tente novamente mais tarde.";
+                console.error('Erro no envio do formulário:', error);
+            } finally {
+                 submitButton.disabled = false;
+                 submitButton.textContent = 'Enviar Pedido';
+            }
+        }
+        if(form) form.addEventListener("submit", handleSubmit);
+        
+        // --- SCRIPT PARA ANIMAÇÃO DE SCROLL (FADE-IN) ---
+        const sections = document.querySelectorAll('.fade-in-section');
+        if (sections.length > 0) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.1 // A animação começa quando 10% do elemento está visível
+            });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        }
+
     });
   </script>
 
