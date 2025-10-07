@@ -407,9 +407,10 @@
                             Seu navegador não suporta a tag de vídeo.
                         </video>
                         <h4>CLEIDE TUR</h4>
-                    
+                    </div>
                 </div>
             </section>
+
             <section class="glass-card fade-in-section">
                 <h3 class="content-section">📣 Nossos Anunciantes</h3>
                 <div class="gallery-grid">
@@ -451,18 +452,16 @@
             </section>
 
             <section class="glass-card fade-in-section">
-                <h3 class="content-section">📰 Notícias da Cidade</h3>
-                <div class="news-item">
-                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/noticia.jpg" alt="Imagem de pessoas correndo em uma maratona de rua">
-                  <div class="news-content">
-                    <h4>NÃO PERCA O PASSO - Calendário das corridas de rua de Montes Claros</h4>
-                    <p>A partir deste domingo, 14, Montes Claros receberá uma sequência relevante de eventos de corridas de rua para a alegria dos adeptos da modalidade...</p>
-                    <a href="https://www.montesclaros.mg.gov.br/noticias" target="_blank" rel="noopener noreferrer">Leia a matéria completa</a>
-                  </div>
+                <h3 class="content-section">📰 Notícias de Montes Claros</h3>
+                
+                <div id="noticias-cidade-container">
+                    <p>Carregando as últimas notícias...</p>
                 </div>
-                <a href="https://www.montesclaros.mg.gov.br/noticias" target="_blank" rel="noopener noreferrer" class="cta-button" style="margin-top: 1rem;">Ver Mais Notícias</a>
+
+                <a href="https://www.montesclaros.mg.gov.br/noticias" target="_blank" rel="noopener noreferrer" class="cta-button" style="margin-top: 1.5rem;">
+                    Ver Todas as Notícias
+                </a>
             </section>
-        
             <section class="glass-card fade-in-section">
                 <h3 class="content-section">🎵 Peça sua Música</h3>
                 <form id="music-request-form" action="https://formspree.io/f/myzdlnqa" method="POST" class="request-form">
@@ -698,6 +697,68 @@
                 observer.observe(section);
             });
         }
+
+        // --- SCRIPT PARA BUSCAR NOTÍCIAS DA PREFEITURA (RSS) ---
+        async function fetchCityNews() {
+            const newsContainer = document.getElementById('noticias-cidade-container');
+            if (!newsContainer) return;
+
+            const rssFeedUrl = "https://www.montesclaros.mg.gov.br/noticias/feed";
+            const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssFeedUrl)}`;
+
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                if (data.status === 'ok' && data.items) {
+                    // LÓGICA ATUALIZADA PARA FILTRAR PELA DATA DE HOJE
+                    const today = new Date();
+                    const todayString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+
+                    const todaysNews = data.items.filter(item => {
+                        const itemDate = new Date(item.pubDate);
+                        const itemDateString = `${itemDate.getFullYear()}-${String(itemDate.getMonth() + 1).padStart(2, '0')}-${String(itemDate.getDate()).padStart(2, '0')}`;
+                        return itemDateString === todayString;
+                    });
+                    
+                    newsContainer.innerHTML = ''; // Limpa a mensagem de "Carregando..."
+
+                    if (todaysNews.length > 0) {
+                        const newsToDisplay = todaysNews.slice(0, 5); // Pega até 5 notícias de hoje
+
+                        newsToDisplay.forEach(item => {
+                            const newsItem = document.createElement('div');
+                            newsItem.className = 'news-item';
+
+                            const tempDiv = document.createElement('div');
+                            tempDiv.innerHTML = item.description;
+                            const imageUrl = tempDiv.querySelector('img') ? tempDiv.querySelector('img').src : 'https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/noticia.jpg';
+                            const descriptionText = tempDiv.innerText.substring(0, 150) + '...';
+
+                            newsItem.innerHTML = `
+                                <img src="${imageUrl}" alt="Imagem da notícia" style="width:100px; height:100px; object-fit: cover; border-radius: 10px; flex-shrink: 0;">
+                                <div class="news-content">
+                                    <h4>${item.title}</h4>
+                                    <p>${descriptionText}</p>
+                                    <a href="${item.link}" target="_blank" rel="noopener noreferrer">Leia a matéria completa</a>
+                                </div>
+                            `;
+                            newsContainer.appendChild(newsItem);
+                        });
+                    } else {
+                        newsContainer.innerHTML = '<p>Nenhuma notícia da cidade foi publicada hoje.</p>';
+                    }
+
+                } else {
+                    newsContainer.innerHTML = '<p>Não foi possível carregar as notícias no momento.</p>';
+                }
+            } catch (error) {
+                console.error("Erro ao buscar notícias:", error);
+                newsContainer.innerHTML = '<p>Erro de conexão ao buscar notícias. Tente novamente mais tarde.</p>';
+            }
+        }
+        
+        fetchCityNews(); // Chama a função para buscar as notícias
 
     });
   </script>
