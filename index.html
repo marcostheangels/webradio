@@ -498,7 +498,7 @@
                 <a href="https://wa.me/5538991963125" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/djdaniel.png" alt="Foto do parceiro DJ Daniel"></a>
                 <a href="https://wa.me/5538998565414" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/logoparaguai.jpg" alt="Logotipo do parceiro Paraguai Shows"></a>
                 <a href="https://wa.me/5538998541647" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/junior.jpg" alt="Foto do cantor parceiro Junior Sedução"></a>
-                <a href="https://wa.me/5538998541647" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/cleidepatrocinadora.jpeg" alt="parceiro Cleide Turismo"></a>
+                <a href="https://wa.me/5538997440909" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/cleidepatrocinadora.jpeg" alt="parceiro Cleide Turismo"></a>
               </div>
               <div class="cta-sponsors">
                 <p>Quer ver sua marca aqui?</p>
@@ -698,13 +698,13 @@
             });
         }
 
-        // --- NOVO SCRIPT PARA BUSCAR NOTÍCIAS DIRETAMENTE DA PÁGINA ---
+        // --- SCRIPT CORRIGIDO PARA BUSCAR NOTÍCIAS DIRETAMENTE DA PÁGINA ---
         async function fetchCityNewsFromHTML() {
             const newsContainer = document.getElementById('noticias-cidade-container');
             if (!newsContainer) return;
 
             const targetUrl = 'https://www.montesclaros.mg.gov.br/noticias';
-            // Usando um proxy CORS público e confiável para buscar o conteúdo da página
+            // Usando um proxy CORS público para buscar o conteúdo da página
             const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`;
 
             try {
@@ -714,50 +714,57 @@
                 }
                 const htmlString = await response.text();
 
-                // Usando o DOMParser para transformar a string HTML em um documento pesquisável
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(htmlString, 'text/html');
 
-                // Analisando a estrutura da página para encontrar os artigos de notícia
-                // Esta classe '.card-noticias' parece ser o contêiner de cada notícia
+                // CORREÇÃO: Usando a classe correta '.card-noticias'
                 const newsArticles = doc.querySelectorAll('.card-noticias');
 
                 newsContainer.innerHTML = ''; // Limpa a mensagem "Carregando..."
 
                 if (newsArticles.length > 0) {
                     let newsCount = 0;
+                    const today = new Date();
+                    const todayString = today.toLocaleDateString('pt-BR'); // Formato "07/10/2025"
+
                     newsArticles.forEach(article => {
-                        if (newsCount >= 5) return; // Limita a 5 notícias
+                        if (newsCount >= 5) return; 
 
-                        const linkElement = article.querySelector('a');
-                        const imgElement = article.querySelector('img');
-                        const titleElement = article.querySelector('h4');
-                        const dateElement = article.querySelector('.data-noticia');
+                        const dateElement = article.querySelector('.badge');
+                        const newsDate = dateElement ? dateElement.textContent.split(' - ')[0].trim() : '';
 
-                        if (linkElement && imgElement && titleElement) {
-                            const link = linkElement.href;
-                            const imageUrl = imgElement.src;
-                            const title = titleElement.textContent.trim();
-                            const date = dateElement ? dateElement.textContent.trim() : '';
-                            
-                            // Criação do HTML para a notícia
-                            const newsItem = document.createElement('div');
-                            newsItem.className = 'news-item';
-                            newsItem.innerHTML = `
-                                <img src="${imageUrl}" alt="Imagem da notícia" style="width:100px; height:100px; object-fit: cover; border-radius: 10px; flex-shrink: 0;">
-                                <div class="news-content">
-                                    <h4>${title}</h4>
-                                    <p>${date}</p>
-                                    <a href="${link}" target="_blank" rel="noopener noreferrer">Leia a matéria completa</a>
-                                </div>
-                            `;
-                            newsContainer.appendChild(newsItem);
-                            newsCount++;
+                        // Verifica se a notícia é de hoje
+                        if (newsDate === todayString) {
+                            const linkElement = article.querySelector('a');
+                            const imgElement = article.querySelector('img');
+                            // CORREÇÃO: Imagem está no atributo 'data-src'
+                            const imageUrl = imgElement ? imgElement.getAttribute('data-src') : 'https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/noticia.jpg';
+                            const titleElement = article.querySelector('h2.title-small');
+
+                            if (linkElement && titleElement) {
+                                const link = linkElement.href;
+                                const title = titleElement.textContent.trim();
+                                
+                                const newsItem = document.createElement('div');
+                                newsItem.className = 'news-item';
+                                newsItem.innerHTML = `
+                                    <img src="${imageUrl}" alt="Imagem da notícia" style="width:100px; height:100px; object-fit: cover; border-radius: 10px; flex-shrink: 0;">
+                                    <div class="news-content">
+                                        <h4>${title}</h4>
+                                        <p>${newsDate}</p>
+                                        <a href="${link}" target="_blank" rel="noopener noreferrer">Leia a matéria completa</a>
+                                    </div>
+                                `;
+                                newsContainer.appendChild(newsItem);
+                                newsCount++;
+                            }
                         }
                     });
-                     if (newsCount === 0) {
-                        newsContainer.innerHTML = '<p>Não foi possível extrair as notícias. A estrutura do site pode ter mudado.</p>';
+
+                    if (newsCount === 0) {
+                        newsContainer.innerHTML = '<p>Nenhuma notícia da cidade foi publicada hoje.</p>';
                     }
+
                 } else {
                     newsContainer.innerHTML = '<p>Nenhuma notícia encontrada na página da prefeitura.</p>';
                 }
@@ -767,7 +774,7 @@
             }
         }
 
-        fetchCityNewsFromHTML(); // Chama a nova função
+        fetchCityNewsFromHTML(); // Chama a nova função corrigida
 
     });
   </script>
