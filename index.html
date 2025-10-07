@@ -698,67 +698,76 @@
             });
         }
 
-        // --- SCRIPT PARA BUSCAR NOTÍCIAS DA PREFEITURA (RSS) ---
-        async function fetchCityNews() {
+        // --- NOVO SCRIPT PARA BUSCAR NOTÍCIAS DIRETAMENTE DA PÁGINA ---
+        async function fetchCityNewsFromHTML() {
             const newsContainer = document.getElementById('noticias-cidade-container');
             if (!newsContainer) return;
 
-            const rssFeedUrl = "https://www.montesclaros.mg.gov.br/noticias/feed";
-            const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssFeedUrl)}`;
+            const targetUrl = 'https://www.montesclaros.mg.gov.br/noticias';
+            // Usando um proxy CORS público e confiável para buscar o conteúdo da página
+            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`;
 
             try {
-                const response = await fetch(apiUrl);
-                const data = await response.json();
+                const response = await fetch(proxyUrl);
+                if (!response.ok) {
+                    throw new Error(`Erro na rede: ${response.statusText}`);
+                }
+                const htmlString = await response.text();
 
-                if (data.status === 'ok' && data.items) {
-                    // LÓGICA ATUALIZADA PARA FILTRAR PELA DATA DE HOJE
-                    const today = new Date();
-                    const todayString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+                // Usando o DOMParser para transformar a string HTML em um documento pesquisável
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(htmlString, 'text/html');
 
-                    const todaysNews = data.items.filter(item => {
-                        const itemDate = new Date(item.pubDate);
-                        const itemDateString = `${itemDate.getFullYear()}-${String(itemDate.getMonth() + 1).padStart(2, '0')}-${String(itemDate.getDate()).padStart(2, '0')}`;
-                        return itemDateString === todayString;
-                    });
-                    
-                    newsContainer.innerHTML = ''; // Limpa a mensagem de "Carregando..."
+                // Analisando a estrutura da página para encontrar os artigos de notícia
+                // Esta classe '.card-noticias' parece ser o contêiner de cada notícia
+                const newsArticles = doc.querySelectorAll('.card-noticias');
 
-                    if (todaysNews.length > 0) {
-                        const newsToDisplay = todaysNews.slice(0, 5); // Pega até 5 notícias de hoje
+                newsContainer.innerHTML = ''; // Limpa a mensagem "Carregando..."
 
-                        newsToDisplay.forEach(item => {
+                if (newsArticles.length > 0) {
+                    let newsCount = 0;
+                    newsArticles.forEach(article => {
+                        if (newsCount >= 5) return; // Limita a 5 notícias
+
+                        const linkElement = article.querySelector('a');
+                        const imgElement = article.querySelector('img');
+                        const titleElement = article.querySelector('h4');
+                        const dateElement = article.querySelector('.data-noticia');
+
+                        if (linkElement && imgElement && titleElement) {
+                            const link = linkElement.href;
+                            const imageUrl = imgElement.src;
+                            const title = titleElement.textContent.trim();
+                            const date = dateElement ? dateElement.textContent.trim() : '';
+                            
+                            // Criação do HTML para a notícia
                             const newsItem = document.createElement('div');
                             newsItem.className = 'news-item';
-
-                            const tempDiv = document.createElement('div');
-                            tempDiv.innerHTML = item.description;
-                            const imageUrl = tempDiv.querySelector('img') ? tempDiv.querySelector('img').src : 'https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/noticia.jpg';
-                            const descriptionText = tempDiv.innerText.substring(0, 150) + '...';
-
                             newsItem.innerHTML = `
                                 <img src="${imageUrl}" alt="Imagem da notícia" style="width:100px; height:100px; object-fit: cover; border-radius: 10px; flex-shrink: 0;">
                                 <div class="news-content">
-                                    <h4>${item.title}</h4>
-                                    <p>${descriptionText}</p>
-                                    <a href="${item.link}" target="_blank" rel="noopener noreferrer">Leia a matéria completa</a>
+                                    <h4>${title}</h4>
+                                    <p>${date}</p>
+                                    <a href="${link}" target="_blank" rel="noopener noreferrer">Leia a matéria completa</a>
                                 </div>
                             `;
                             newsContainer.appendChild(newsItem);
-                        });
-                    } else {
-                        newsContainer.innerHTML = '<p>Nenhuma notícia da cidade foi publicada hoje.</p>';
+                            newsCount++;
+                        }
+                    });
+                     if (newsCount === 0) {
+                        newsContainer.innerHTML = '<p>Não foi possível extrair as notícias. A estrutura do site pode ter mudado.</p>';
                     }
-
                 } else {
-                    newsContainer.innerHTML = '<p>Não foi possível carregar as notícias no momento.</p>';
+                    newsContainer.innerHTML = '<p>Nenhuma notícia encontrada na página da prefeitura.</p>';
                 }
             } catch (error) {
-                console.error("Erro ao buscar notícias:", error);
-                newsContainer.innerHTML = '<p>Erro de conexão ao buscar notícias. Tente novamente mais tarde.</p>';
+                console.error("Erro ao buscar e processar notícias da página:", error);
+                newsContainer.innerHTML = '<p>Não foi possível carregar as notícias no momento.</p>';
             }
         }
-        
-        fetchCityNews(); // Chama a função para buscar as notícias
+
+        fetchCityNewsFromHTML(); // Chama a nova função
 
     });
   </script>
