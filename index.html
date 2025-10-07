@@ -47,7 +47,7 @@
       overflow-wrap: break-word; 
     }
 
-    img { max-width: 100%; height: auto; display: block; }
+    img, video { max-width: 100%; height: auto; display: block; }
 
     /* --- Animação de entrada suave --- */
     .fade-in-section {
@@ -180,9 +180,40 @@
     .event-poster { border-radius: 10px; margin-top: 1rem; }
     .calendar-button { margin-top: 1rem; display: inline-block; background-color: rgba(0,0,0,0.3); border: 1px solid var(--cor-borda); padding: 0.6rem 1.2rem; border-radius: 8px; text-decoration: none; color: var(--cor-texto); font-weight: 600; transition: all 0.3s ease; }
     .calendar-button:hover { background-color: var(--cor-destaque); border-color: var(--cor-destaque); color: #fff; transform: translateY(-3px); }
-    @media (min-width: 768px) {
-      .events-grid { grid-template-columns: repeat(2, 1fr); }
+    
+    /* --- INÍCIO: ESTILOS DAS NOVAS SEÇÕES --- */
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
     }
+    .video-item, .ad-item {
+        background: rgba(0,0,0,0.2);
+        border-radius: 15px;
+        padding: 1rem;
+        transition: all 0.3s ease;
+        text-decoration: none; /* Remove sublinhado de links */
+        color: var(--cor-texto);
+    }
+    .video-item:hover, .ad-item:hover {
+        transform: translateY(-5px) scale(1.03);
+        box-shadow: 0 8px 25px var(--cor-sombra);
+    }
+    .video-item video {
+        width: 100%;
+        border-radius: 10px;
+    }
+    .video-item h4 {
+        margin: 1rem 0 0.5rem 0;
+        font-size: 1.2rem;
+        color: var(--cor-secundaria);
+    }
+    .ad-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+    /* --- FIM: ESTILOS DAS NOVAS SEÇÕES --- */
     
     footer { margin-top: 3rem; padding: 1.5rem; text-align: center; }
     footer p { font-size: 1.1rem; margin-bottom: 1rem; opacity: 0.9; }
@@ -228,6 +259,10 @@
       box-shadow: 0 0 10px var(--cor-secundaria);
     }
 
+    @media (min-width: 768px) {
+      .events-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
     @media (max-width: 992px) {
         .main-layout { flex-direction: column; }
         .main-content, .sidebar { width: 100%; }
@@ -243,6 +278,7 @@
       .schedule-item { flex-direction: column; gap: 0.5rem; }
       .schedule-time { padding-right: 0; }
       .events-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
     }
   </style>
   
@@ -334,19 +370,68 @@
             <section class="glass-card fade-in-section">
                 <h3 class="content-section">🗓️ Agenda de Montes Claros</h3>
                 <div class="events-grid">
-                <div class="event-card">
+                    <div class="event-card">
                         <h4>Vitrine Shows e Eventos</h4>
                         <p class="event-details">Quarta-feira, 08/10/2025</p>
                         <p>Atrações: 🎤Lyra Show, 🎤Rosa Caldeira, 🎤Marcelinho dos teclados ,🎤Rick Dançarino</p>
                         <p><small>Local: Av. Francisco Peres 161, em frente à Lagoa da Pampulha</small></p>
                         <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/cartazlalaquarta.jpeg" alt="Cartaz vitrine shows e eventos" class="event-poster">
                         <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Forr%C3%B3+do+Galp%C3%A3o&dates=20250929T210000/20250930T030000&details=Shows+com+Lyra+Show%2C+Rosa+Caldeira%2C+Cid+Souza%C3%A7%C3%A3o+e+muito+mais.&location=Av.+Francisco+Peres+161+-+Montes+Claros" target="_blank" rel="noopener noreferrer" class="calendar-button">Adicionar ao Calendário</a>
+                    </div>
                 </div>
-         
-
-        </div>
             </section>
-            
+
+            <section class="glass-card fade-in-section">
+                <h3 class="content-section">🎬 Nossos Patrocinadores em Vídeo</h3>
+                <div class="gallery-grid">
+                    
+                    <div class="video-item">
+                        <video controls poster="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/cleideturvideo1.jpeg">
+                            <source src="https://raw.githubusercontent.com/marcostheangels/webradio/main/videos/videocleide1.mp4" type="video/mp4">
+                            Seu navegador não suporta a tag de vídeo.
+                        </video>
+                        <h4>CLEIDE TUR</h4>
+                    </div>
+
+                    <div class="video-item">
+                        <video controls poster="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/cleideturvideo2.jpeg">
+                            <source src="https://raw.githubusercontent.com/marcostheangels/webradio/main/videos/videocleide2.mp4" type="video/mp4">
+                            Seu navegador não suporta a tag de vídeo.
+                        </video>
+                        <h4>CLEIDE TUR</h4>
+                    </div>
+
+                    <div class="video-item">
+                        <video controls poster="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/cleideturvideo3.jpeg">
+                            <source src="https://raw.githubusercontent.com/marcostheangels/webradio/main/videos/videocleide3.mp4" type="video/mp4">
+                            Seu navegador não suporta a tag de vídeo.
+                        </video>
+                        <h4>CLEIDE TUR</h4>
+                    
+                </div>
+            </section>
+            <section class="glass-card fade-in-section">
+                <h3 class="content-section">📣 Nossos Anunciantes</h3>
+                <div class="gallery-grid">
+
+                    <a href="https://wa.me/5538997440909" target="_blank" rel="noopener noreferrer" class="ad-item">
+                        <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/anuncios/cleideanuncio1.jpeg" alt="Anúncio 1">
+                    </a>
+
+                    <a href="https://wa.me/5538997440909" target="_blank" rel="noopener noreferrer" class="ad-item">
+                        <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/anuncios/cleideanuncio2.jpeg" alt="Anúncio 2">
+                    </a>
+
+                    <a href="https://wa.me/5538997440909" target="_blank" rel="noopener noreferrer" class="ad-item">
+                        <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/anuncios/cleideanuncio3.jpeg" alt="Anúncio 3">
+                    </a>
+
+                    <a href="https://wa.me/5538997440909" target="_blank" rel="noopener noreferrer" class="ad-item">
+                        <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/anuncios/cleideanuncio4.jpeg" alt="Anúncio 4">
+                    </a>
+
+                </div>
+            </section>
             <section class="glass-card fade-in-section">
                 <h3 class="content-section">📻 Notícias da Rádio</h3>
                 <div class="news-item">
@@ -414,7 +499,7 @@
                 <a href="https://wa.me/5538991963125" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/djdaniel.png" alt="Foto do parceiro DJ Daniel"></a>
                 <a href="https://wa.me/5538998565414" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/logoparaguai.jpg" alt="Logotipo do parceiro Paraguai Shows"></a>
                 <a href="https://wa.me/5538998541647" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/junior.jpg" alt="Foto do cantor parceiro Junior Sedução"></a>
-<a href="https://wa.me/5538997440909" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/cleidepatrocinadora.jpeg" alt="parceiro Cleide Turismo"></a>
+                <a href="https://wa.me/5538998541647" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/cleidepatrocinadora.jpeg" alt="parceiro Cleide Turismo"></a>
               </div>
               <div class="cta-sponsors">
                 <p>Quer ver sua marca aqui?</p>
