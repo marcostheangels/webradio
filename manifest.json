@@ -1,0 +1,22 @@
+{
+  "name": "Rádio Web Montes Claros",
+  "short_name": "Rádio MOC",
+  "description": "Sua sintonia digital em Montes Claros",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0d0f1a",
+  "theme_color": "#c039ff",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/logodaradio.jpeg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/logodaradio.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
