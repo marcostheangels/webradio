@@ -582,8 +582,8 @@
         // --- FUNÇÃO DE MÚSICA NO AR (CORRIGIDA PARA CASTER.FM) ---
         async function updateNowPlaying() {
             const songTitleElement = document.getElementById('current-track-info');
-            // URL do servidor de estatísticas do Caster.fm
-            const statsUrl = "https://sapircast.caster.fm:16062/admin/publicstats.json";
+            // URL com "Cache Buster" (?t=...) para forçar a atualização dos nomes das músicas
+            const statsUrl = `https://sapircast.caster.fm:16062/admin/publicstats.json?t=${Date.now()}`;
             const defaultText = `<span>No Ar:</span> Programação Musical`;
 
             if (!songTitleElement) return;
@@ -596,7 +596,6 @@
                 const data = await response.json();
                 let songText = "Programação Musical";
 
-                // Lógica original para extrair o nome da música do JSON do Caster.fm
                 if (data && data.length > 1 && data[1].source) {
                     const sourceObject = data[1].source; 
                     const streamKey = Object.keys(sourceObject)[0];
@@ -616,9 +615,9 @@
                 songTitleElement.innerHTML = defaultText;
             }
         }
-        // Executa a função imediatamente e depois a cada 10 segundos
+        // Executa a função imediatamente e depois a cada 5 segundos (intervalo reduzido)
         updateNowPlaying();
-        setInterval(updateNowPlaying, 10000);
+        setInterval(updateNowPlaying, 5000);
 
         // --- FUNÇÃO PARA ATUALIZAR O NOME DO PROGRAMA ATUAL ---
         function updateCurrentProgram() {
