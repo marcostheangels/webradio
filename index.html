@@ -358,21 +358,25 @@
             <section class="glass-card fade-in-section">
                 <h3 class="content-section">📅 Programação</h3>
                 <div class="schedule-item"><span class="schedule-time">00:00 - 04:59</span><span class="schedule-title">FLASHBACK</span></div>
-                <div class="schedule-item"><span class="schedule-time">05:00 - 06:59</span><span class="schedule-title">MODA DE VIOLA</span></div>
-                <div class="schedule-item"><span class="schedule-time">07:00 - 07:59</span><span class="schedule-title">SERTANEJO UNIVERSITÁRIO</span></div>
+                <div class="schedule-item"><span class="schedule-time">05:00 - 05:59</span><span class="schedule-title">MODA DE VIOLA</span></div>
+                <div class="schedule-item"><span class="schedule-time">06:00 - 06:59</span><span class="schedule-title">SERTANEJO UNIVERSITÁRIO</span></div>
+                <div class="schedule-item"><span class="schedule-time">07:00 - 07:59</span><span class="schedule-title">MPB</span></div>
                 <div class="schedule-item"><span class="schedule-time">08:00 - 08:59</span><span class="schedule-title">POP HITS</span></div>
                 <div class="schedule-item"><span class="schedule-time">09:00 - 09:59</span><span class="schedule-title">FUNK / TIK TOK</span></div>
-                <div class="schedule-item"><span class="schedule-time">10:00 - 10:59</span><span class="schedule-title">MPB</span></div>
-                <div class="schedule-item"><span class="schedule-time">11:00 - 11:59</span><span class="schedule-title">SOFRÊNCIA MUSICAL</span></div>
-                <div class="schedule-item"><span class="schedule-time">12:00 - 12:59</span><span class="schedule-title">PAGODE</span></div>
-                <div class="schedule-item"><span class="schedule-time">13:00 - 14:59</span><span class="schedule-title">MISTURA MUSICAL</span></div>
-                <div class="schedule-item"><span class="schedule-time">15:00 - 16:59</span><span class="schedule-title">ROCK / POP ROCK</span></div>
-                <div class="schedule-item"><span class="schedule-time">17:00 - 18:59</span><span class="schedule-title">ELETRÔNICAS</span></div>
-                <div class="schedule-item"><span class="schedule-time">19:00 - 19:59</span><span class="schedule-title">PEGADINHA DO MUÇÃO</span></div>
-                <div class="schedule-item"><span class="schedule-time">20:00 - 20:59</span><span class="schedule-title">REGGAE</span></div>
-                <div class="schedule-item"><span class="schedule-time">21:00 - 21:59</span><span class="schedule-title">AXÉ</span></div>
-                <div class="schedule-item"><span class="schedule-time">22:00 - 22:59</span><span class="schedule-title">FORRÓ / PISEIRO</span></div>
-                <div class="schedule-item"><span class="schedule-time">23:00 - 23:59</span><span class="schedule-title">INTERNACIONAL</span></div>
+                <div class="schedule-item"><span class="schedule-time">10:00 - 10:59</span><span class="schedule-title">SOFRÊNCIA MUSICAL</span></div>
+                <div class="schedule-item"><span class="schedule-time">11:00 - 11:59</span><span class="schedule-title">PAGODE</span></div>
+                <div class="schedule-item"><span class="schedule-time">12:00 - 12:59</span><span class="schedule-title">MISTURA MUSICAL</span></div>
+                <div class="schedule-item"><span class="schedule-time">13:00 - 13:59</span><span class="schedule-title">ROCK / POP ROCK</span></div>
+                <div class="schedule-item"><span class="schedule-time">14:00 - 14:59</span><span class="schedule-title">ELETRÔNICAS</span></div>
+                <div class="schedule-item"><span class="schedule-time">15:00 - 15:59</span><span class="schedule-title">PEGADINHA DO MUÇÃO</span></div>
+                <div class="schedule-item"><span class="schedule-time">16:00 - 16:59</span><span class="schedule-title">REGGAE</span></div>
+                <div class="schedule-item"><span class="schedule-time">17:00 - 17:59</span><span class="schedule-title">AXÉ</span></div>
+                <div class="schedule-item"><span class="schedule-time">18:00 - 18:59</span><span class="schedule-title">FORRÓ / PISEIRO</span></div>
+                <div class="schedule-item"><span class="schedule-time">19:00 - 19:59</span><span class="schedule-title">INTERNACIONAL</span></div>
+                <div class="schedule-item"><span class="schedule-time">20:00 - 20:59</span><span class="schedule-title">TRAP MUSIC</span></div>
+                <div class="schedule-item"><span class="schedule-time">21:00 - 21:59</span><span class="schedule-title">NOITE GOSPEL</span></div>
+                <div class="schedule-item"><span class="schedule-time">22:00 - 22:59</span><span class="schedule-title">REGGAETON</span></div>
+                <div class="schedule-item"><span class="schedule-time">23:00 - 23:59</span><span class="schedule-title">HIP HOP / RAP</span></div>
             </section>
             
             <section class="glass-card fade-in-section">
@@ -635,21 +639,25 @@
             const currentHour = new Date().getHours();
             let programName = "Flashback"; // Padrão da madrugada
 
-            if (currentHour >= 5 && currentHour < 7) { programName = "Moda De Viola"; } 
-            else if (currentHour >= 7 && currentHour < 8) { programName = "Sertanejo Universitário"; } 
-            else if (currentHour >= 8 && currentHour < 9) { programName = "Pop Hits"; }
+            if (currentHour >= 5 && currentHour < 6) { programName = "Moda De Viola"; } 
+            else if (currentHour >= 6 && currentHour < 7) { programName = "Sertanejo Universitário"; } 
+            else if (currentHour >= 7 && currentHour < 8) { programName = "Mpb"; }
+            else if (currentHour >= 8 && currentHour < 9) { programName = "Pop Hits"; } 
             else if (currentHour >= 9 && currentHour < 10) { programName = "Funk / Tik Tok"; } 
-            else if (currentHour >= 10 && currentHour < 11) { programName = "Mpb"; } 
-            else if (currentHour >= 11 && currentHour < 12) { programName = "Sofrência Musical"; }
-            else if (currentHour >= 12 && currentHour < 13) { programName = "Pagode"; }
-            else if (currentHour >= 13 && currentHour < 15) { programName = "Mistura Musical"; }
-            else if (currentHour >= 15 && currentHour < 17) { programName = "Rock / Pop Rock"; }
-            else if (currentHour >= 17 && currentHour < 19) { programName = "Eletrônicas"; }
-            else if (currentHour >= 19 && currentHour < 20) { programName = "Pegadinha Do Mução"; }
-            else if (currentHour >= 20 && currentHour < 21) { programName = "Reggae"; }
-            else if (currentHour >= 21 && currentHour < 22) { programName = "Axé"; }
-            else if (currentHour >= 22 && currentHour < 23) { programName = "Forró / Piseiro"; }
-            else if (currentHour >= 23 && currentHour < 00) { programName = "Internacional Romântica"; } 
+            else if (currentHour >= 10 && currentHour < 11) { programName = "Sofrência Musical"; }
+            else if (currentHour >= 11 && currentHour < 12) { programName = "Pagode"; }
+            else if (currentHour >= 12 && currentHour < 13) { programName = "Mistura Musical"; }
+            else if (currentHour >= 13 && currentHour < 14) { programName = "Rock / Pop Rock"; }
+            else if (currentHour >= 14 && currentHour < 15) { programName = "Eletrônicas"; }
+            else if (currentHour >= 15 && currentHour < 16) { programName = "Pegadinha Do Mução"; }
+            else if (currentHour >= 16 && currentHour < 17) { programName = "Reggae"; }
+            else if (currentHour >= 17 && currentHour < 18) { programName = "Axé"; }
+            else if (currentHour >= 18 && currentHour < 19) { programName = "Forró / Piseiro"; }
+            else if (currentHour >= 19 && currentHour < 20) { programName = "Internacional"; } 
+            else if (currentHour >= 20 && currentHour < 21) { programName = "Trap Music"; }
+            else if (currentHour >= 21 && currentHour < 22) { programName = "Noite Gospel"; }
+            else if (currentHour >= 22 && currentHour < 23) { programName = "Reggaeton"; }
+            else if (currentHour >= 23 && currentHour < 00) { programName = "Hip Hop / Rap"; }
             else if (currentHour >= 00 && currentHour < 05) { programName = "FlashBack"; }
                         
             programElement.textContent = programName;
