@@ -321,10 +321,10 @@
     justify-content: center;
 ">
     <strong>🎧 Tocando agora:</strong>
-    <span id="song-title" style="margin-left: 8px;">Carregando música...</span>
+    <span id="song-title" style="margin-left: 8px;"></span>
 </div>
               <h3 id="current-program-name" style="color: var(--cor-destaque); text-shadow: var(--glow-intensity); margin-top: 0; margin-bottom: 1rem; font-size: 1.5rem;">Carregando...</h3>
-              <p id="current-track-info"><span>Carregando música...</span></p>
+              <p id="current-track-info"><span></span></p>
 
               <div class="custom-player">
                 <div class="player-controls">
@@ -872,7 +872,38 @@
         fetchCityNewsFromHTML(); // Chama a nova função corrigida
 
     });
-  </script>
+
+const ZENO_API = 'https://api.zeno.fm/mounts/metadata/subscribe/7heeu8w1pzzuv';
+
+function updateNowPlaying() {
+    const songElement = document.getElementById('song-title');
+    
+    // Usa EventSource para Server-Sent Events
+    const eventSource = new EventSource(ZENO_API);
+    
+    eventSource.onmessage = function(event) {
+        try {
+            const data = JSON.parse(event.data);
+            const streamTitle = data.streamTitle || 'Música não identificada';
+            songElement.textContent = streamTitle;
+            songElement.classList.remove('music-loading');
+        } catch (error) {
+            console.error('Erro ao parsear dados:', error);
+        }
+    };
+    
+    eventSource.onerror = function(error) {
+        console.error('Erro na conexão SSE:', error);
+        eventSource.close();
+        // Tenta reconectar após 5 segundos
+        setTimeout(updateNowPlaying, 5000);
+    };
+}
+
+// Inicia a conexão
+updateNowPlaying();
+
+</script>
 
 </body>
 </html>
