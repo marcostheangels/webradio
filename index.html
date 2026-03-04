@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Rádio Web Montes Claros, a sua sintonia digital. Ouça ao vivo a melhor programação de música, participe de promoções e fique por dentro dos eventos da cidade.">
+  <meta name="description" content="Rádio Montes Claros, a sua sintonia digital. Ouça ao vivo a melhor programação de música, participe de promoções e fique por dentro dos eventos da cidade.">
   
   <title>Rádio Montes Claros | Sua Sintonia Digital</title>
   
@@ -296,7 +296,7 @@
 
   <div class="container">
     <header>
-      <h1><span class="h1-part1">WEB RÁDIO</span> <span class="h1-part2">MONTES CLAROS</span></h1>
+      <h1><span class="h1-part1">RÁDIO</span> <span class="h1-part2">MONTES CLAROS</span></h1>
       <p class="slogan">Sintonizada em você.</p>
     </header>
     
@@ -597,7 +597,7 @@
         async function updateNowPlaying() {
             const songTitleElement = document.getElementById('current-track-info');
             // URL com "Cache Buster" (?t=...) para forçar a atualização dos nomes das músicas
-            const statsUrl = `https://sapircast.caster.fm:16062/admin/publicstats.json?t=${Date.now()}`;
+            const statsUrl = `https://stream.zeno.fm/7heeu8w1pzzuv/admin/publicstats.json?t=${Date.now()}`;
             const defaultText = `<span>No Ar:</span> Programação Musical`;
 
             if (!songTitleElement) return;
