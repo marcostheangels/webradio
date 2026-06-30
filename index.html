@@ -7,7 +7,7 @@
   <title>Rádio Conexão Montes Claros | A Sintonia Oficial do Pagode</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
@@ -273,6 +273,127 @@
     .location-status { margin-top: 12px; font-size: 0.8rem; text-align: center; color: rgba(255,255,255,0.6); font-style: italic; }
     .location-status.listening { color: #25D366; font-weight: 700; font-style: normal; }
 
+    /* 🌍 CARD DE OUINTES ONLINE */
+    .listeners-card {
+      margin-top: 20px;
+      padding: 18px;
+      background: linear-gradient(135deg, rgba(255, 140, 0, 0.1), rgba(255, 204, 0, 0.05));
+      border: 1px solid rgba(255, 140, 0, 0.35);
+      border-radius: 14px;
+      text-align: left;
+    }
+    .listeners-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .listeners-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95rem;
+      color: var(--cor-secundaria);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+    .listeners-title .globe {
+      font-size: 1.3rem;
+      animation: spin-globe 8s linear infinite;
+      display: inline-block;
+    }
+    @keyframes spin-globe {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .listeners-total {
+      background: rgba(255, 140, 0, 0.2);
+      color: #fff;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border: 1px solid rgba(255, 140, 0, 0.4);
+      font-family: 'Orbitron', sans-serif;
+    }
+    .listeners-total .num {
+      color: var(--cor-secundaria);
+      font-size: 1.05rem;
+      margin-right: 4px;
+    }
+    .listeners-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-height: 220px;
+      overflow-y: auto;
+      background: rgba(0,0,0,0.3);
+      border-radius: 10px;
+      padding: 6px;
+    }
+    .listeners-list::-webkit-scrollbar { width: 6px; }
+    .listeners-list::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); border-radius: 3px; }
+    .listeners-list::-webkit-scrollbar-thumb { background: rgba(255, 140, 0, 0.5); border-radius: 3px; }
+    .listeners-list::-webkit-scrollbar-thumb:hover { background: rgba(255, 140, 0, 0.8); }
+    .listeners-list li {
+      padding: 9px 12px;
+      margin: 4px 0;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s;
+      border: 1px solid transparent;
+    }
+    .listeners-list li:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateX(4px);
+    }
+    .listeners-list li.me {
+      background: linear-gradient(135deg, rgba(37, 211, 102, 0.25), rgba(37, 211, 102, 0.1));
+      border: 1px solid rgba(37, 211, 102, 0.5);
+      font-weight: 700;
+    }
+    .listeners-list li .pin {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+    .listeners-list li .city-text {
+      flex-grow: 1;
+      color: #fff;
+    }
+    .listeners-list li.me .city-text {
+      color: #b9f6ca;
+    }
+    .listeners-list li .you-tag {
+      background: #25D366;
+      color: #000;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+    .listeners-empty {
+      padding: 20px;
+      text-align: center;
+      color: rgba(255,255,255,0.5);
+      font-style: italic;
+      font-size: 0.9rem;
+    }
+    .listeners-status {
+      margin-top: 10px;
+      font-size: 0.75rem;
+      text-align: center;
+      color: rgba(255,255,255,0.4);
+      font-style: italic;
+    }
+
     @media (max-width: 992px) {
         .main-layout { flex-direction: column; }
         .main-content, .sidebar { width: 100%; }
@@ -287,6 +408,7 @@
       .schedule-item { flex-direction: column; gap: 0.5rem; text-align: center; }
       .location-main { flex-direction: column; text-align: center; }
       .location-details { grid-template-columns: 1fr; }
+      .listeners-header { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
@@ -361,6 +483,25 @@
                   💡 Detectando sua cidade/região automaticamente...
                 </div>
               </div>
+
+              <!-- 🌍 CARD DE OUINTES ONLINE -->
+              <div class="listeners-card" id="listenersCard">
+                <div class="listeners-header">
+                  <div class="listeners-title">
+                    <span class="globe">🌎</span>
+                    <span>Ouvintes pelo Brasil Agora</span>
+                  </div>
+                  <div class="listeners-total">
+                    <span class="num" id="listenersCount">0</span> online
+                  </div>
+                </div>
+                <ul class="listeners-list" id="listenersList">
+                  <li class="listeners-empty">Conectando ao servidor...</li>
+                </ul>
+                <div class="listeners-status" id="listenersStatus">
+                  🟢 Atualização em tempo real
+                </div>
+              </div>
               
               <audio id="audio-player" preload="none">
                   <source src="https://stream.zeno.fm/7heeu8w1pzzuv" type="audio/mpeg">
@@ -370,7 +511,7 @@
               <div class="player-socials">
                 <p>📲 Peça seu Pagode e Siga a Conexão!</p>
                 <div class="social-buttons">
-                    <a href="https://wa.me/5538998558528" target="_blank" rel="noopener noreferrer" class="whatsapp" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2.01C6.58 2.01 2.13 6.46 2.13 12c0 1.77.46 3.45 1.28 4.95L2.01 22l5.19-1.4c1.47.76 3.12 1.18 4.84 1.18h.01c5.46 0 9.91-4.45 9.91-9.91s-4.45-9.91-9.91-9.91zM12.04 20.28c-1.55 0-3.03-.4-4.32-1.12l-.31-.18-3.21.84.86-3.13-.2-.33a8.22 8.22 0 0 1-1.26-4.48c0-4.54 3.69-8.23 8.23-8.23 4.54 0 8.23 3.69 8.23 8.23 0 4.54-3.69 8.23-8.23 8.23zm4.49-5.93c-.26-.13-1.55-.77-1.79-.85-.24-.08-.42-.13-.59.13-.17.26-.68.85-.83 1.02-.15.17-.3.19-.56.06-.26-.13-1.09-.4-2.07-1.27-.76-.68-1.28-1.52-1.43-1.78-.15-.26-.02-.4.11-.53.12-.12.26-.3.39-.45.13-.15.17-.26.26-.43.08-.17.04-.31-.02-.44s-.59-1.43-.81-1.95c-.22-.52-.44-.45-.59-.46-.14-.01-.31-.01-.48-.01-.17 0-.43.06-.66.31-.22.26-.85.83-.85 2.02 0 1.19.87 2.34 1 2.5.13.17 1.73 2.65 4.19 3.7.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.06 1.55-1.04 1.77-2.04.22-1-.15-1.52-.26-1.65z"></path></svg></a>
+                    <a href="https://wa.me/5538998558528" target="_blank" rel="noopener noreferrer" class="whatsapp" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2.01C6.58 2.01 2.13 6.46 2.13 12c0 1.77.46 3.45 1.28 4.95L2.01 22l5.19-1.4c1.47.76 3.12 1.18 4.84 1.18h.01c5.46 0 9.91-4.45 9.91-9.91s-4.45-9.91-9.91-9.91zM12.04 20.28c-1.55 0-3.03-.4-4.32-1.12l-.31-.18-3.21.84.86-3.13-.2-.33a8.22 8.22 0 0 1-1.26-4.48c0-4.54 3.69-8.23 8.23-8.23 4.54 0 8.23 3.69 8.23 8.23 0 4.54-3.69 8.23-8.23 8.23zm4.49-5.93c-.26-.13-1.55-.77-1.79-.85-.24-.08-.42-.13-.59.13-.17.26-.68.85-.83 1.02-.15.17-.3.19-.56.06-.26-.13-1.09-.4-2.07-1.27-.76-.68-1.28-1.52-1.43-1.78-.15-.26-.02-.4.11-.53.12-.12.26-.3.39-.45.13-.15.17-.26.26-.43.08-.17.04-.31-.02-.44s-.59-1.43-.81-1.95c-.22.52-.44-.45-.59-.46-.14-.01-.31-.01-.48-.01-.17 0-.43.06-.66.31-.22.26-.85.83-.85 2.02 0 1.19.87 2.34 1 2.5.13.17 1.73 2.65 4.19 3.7.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.06 1.55-1.04 1.77-2.04.22-1-.15-1.52-.26-1.65z"></path></svg></a>
                     <a href="https://www.facebook.com/marcostheangel/" target="_blank" rel="noopener noreferrer" class="facebook" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.675 0h-21.35C.59 0 0 .59 0 1.325v21.35C0 23.41.59 24 1.325 24H12.82v-9.29H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h5.694c.735 0 1.325-.59 1.325-1.325V1.325C24 .59 23.41 0 22.675 0z"></path></svg></a>
                     <a href="https://www.instagram.com/markim_miranda2024/" target="_blank" rel="noopener noreferrer" class="instagram" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-1.325.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.286-.057 1.694-.072 4.948-.072zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.286.058 1.694.072 4.948.072s3.662-.014 4.948-.072c4.354-.199 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"></path></svg></a>
                 </div>
@@ -487,6 +628,7 @@
         const database = firebase.database();
         const visitasRef = database.ref('radio/totalVisitas');
         const ouvintesRef = database.ref('radio/ouvintesAgora');
+        const listenersListRef = database.ref('listeners');
 
         const ouvintesEl = document.getElementById('ouvintes');
         const totalVisitasEl = document.getElementById('totalVisitas');
@@ -561,7 +703,7 @@
                         if (locationStatus) {
                             locationStatus.innerHTML = `✅ Detectado via ${api.name}`;
                         }
-                        return;
+                        return { city: info.city, state: info.state };
                     }
                 } catch (err) {
                     log(`❌ ${api.name} falhou:`, err.message);
@@ -575,6 +717,7 @@
             if (locationStatus) {
                 locationStatus.innerHTML = '⚠️ Detecção bloqueada';
             }
+            return null;
         }
 
         function getCountryFlag(countryCode) {
@@ -583,7 +726,131 @@
             return String.fromCodePoint(...codePoints);
         }
 
-        detectarLocalizacao();
+        // ============================================
+        // 🌍 SISTEMA DE OUINTES ONLINE EM TEMPO REAL
+        // ============================================
+        const myUserId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        let myUserRef = null;
+        let myLocationData = null;
+        let heartbeatInterval = null;
+
+        async function registerMyPresence(cityData) {
+            if (!cityData) return;
+            
+            myUserRef = listenersListRef.child(myUserId);
+            const locationText = cityData.state ? `${cityData.city}, ${cityData.state}` : cityData.city;
+            
+            try {
+                await myUserRef.set({
+                    city: cityData.city,
+                    state: cityData.state || '',
+                    location: locationText,
+                    lastSeen: firebase.database.ServerValue.TIMESTAMP
+                });
+                log('✅ Presença registrada:', locationText);
+            } catch (err) {
+                log('❌ Erro ao registrar presença:', err);
+            }
+        }
+
+        function startHeartbeat() {
+            if (heartbeatInterval) clearInterval(heartbeatInterval);
+            heartbeatInterval = setInterval(() => {
+                if (myUserRef) {
+                    myUserRef.update({
+                        lastSeen: firebase.database.ServerValue.TIMESTAMP
+                    }).catch(err => log('❌ Heartbeat erro:', err));
+                }
+            }, 30000);
+        }
+
+        function removeMyPresence() {
+            if (myUserRef) {
+                myUserRef.remove().catch(() => {});
+            }
+            if (heartbeatInterval) {
+                clearInterval(heartbeatInterval);
+                heartbeatInterval = null;
+            }
+        }
+
+        function displayListeners(snapshot) {
+            const list = document.getElementById('listenersList');
+            const countEl = document.getElementById('listenersCount');
+            
+            if (!list || !countEl) return;
+            
+            const data = snapshot.val() || {};
+            const now = Date.now();
+            const TIME_LIMIT = 5 * 60 * 1000; // 5 minutos
+            const activeListeners = [];
+            const cleanupPromises = [];
+
+            Object.entries(data).forEach(([id, listener]) => {
+                const lastSeen = listener.lastSeen || 0;
+                if (now - lastSeen < TIME_LIMIT && listener.city) {
+                    activeListeners.push({ id, ...listener });
+                } else if (lastSeen > 0) {
+                    cleanupPromises.push(listenersListRef.child(id).remove());
+                }
+            });
+
+            // Ordenar: EU primeiro, depois por cidade
+            activeListeners.sort((a, b) => {
+                if (a.id === myUserId) return -1;
+                if (b.id === myUserId) return 1;
+                return (a.location || '').localeCompare(b.location || '');
+            });
+
+            countEl.textContent = activeListeners.length;
+            list.innerHTML = '';
+
+            if (activeListeners.length === 0) {
+                const li = document.createElement('li');
+                li.className = 'listeners-empty';
+                li.textContent = '🌍 Nenhum ouvinte online no momento. Seja o primeiro!';
+                list.appendChild(li);
+            } else {
+                activeListeners.forEach(listener => {
+                    const li = document.createElement('li');
+                    if (listener.id === myUserId) li.classList.add('me');
+                    
+                    const pinEmoji = listener.id === myUserId ? '🎵' : '📍';
+                    li.innerHTML = `
+                        <span class="pin">${pinEmoji}</span>
+                        <span class="city-text">${listener.location || listener.city}</span>
+                        ${listener.id === myUserId ? '<span class="you-tag">VOCÊ</span>' : ''}
+                    `;
+                    list.appendChild(li);
+                });
+            }
+
+            Promise.all(cleanupPromises).catch(() => {});
+        }
+
+        function setupListenersRealtime() {
+            listenersListRef.on('value', displayListeners, (err) => {
+                log('❌ Erro no listener:', err);
+                const list = document.getElementById('listenersList');
+                if (list) {
+                    list.innerHTML = '<li class="listeners-empty">⚠️ Erro ao conectar. Recarregue a página.</li>';
+                }
+            });
+        }
+
+        // Detectar localização e registrar presença
+        detectarLocalizacao().then(cityData => {
+            myLocationData = cityData;
+            if (cityData) {
+                registerMyPresence(cityData);
+                startHeartbeat();
+            }
+            setupListenersRealtime();
+        });
+
+        // Remover presença ao sair
+        window.addEventListener('beforeunload', removeMyPresence);
+        window.addEventListener('pagehide', removeMyPresence);
 
         // ============================================
         // 🔧 FUNÇÕES AUXILIARES
