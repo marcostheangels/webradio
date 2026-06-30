@@ -273,114 +273,327 @@
     .location-status { margin-top: 12px; font-size: 0.8rem; text-align: center; color: rgba(255,255,255,0.6); font-style: italic; }
     .location-status.listening { color: #25D366; font-weight: 700; font-style: normal; }
 
-    /* 🌍 CARD DE OUINTES ONLINE */
+    /* 🌍 CARD DE OUINTES ONLINE - MELHORADO */
     .listeners-card {
       margin-top: 20px;
-      padding: 18px;
-      background: linear-gradient(135deg, rgba(255, 140, 0, 0.1), rgba(255, 204, 0, 0.05));
-      border: 1px solid rgba(255, 140, 0, 0.35);
-      border-radius: 14px;
+      padding: 20px;
+      background: linear-gradient(135deg, rgba(255, 140, 0, 0.08), rgba(255, 204, 0, 0.04));
+      border: 1px solid rgba(255, 140, 0, 0.3);
+      border-radius: 16px;
       text-align: left;
+      position: relative;
+      overflow: hidden;
     }
+    .listeners-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(255,140,0,0.15), transparent 70%);
+      pointer-events: none;
+    }
+
     .listeners-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 12px;
+      margin-bottom: 15px;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 10px;
+      position: relative;
     }
     .listeners-title {
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 0.95rem;
+      gap: 10px;
+      font-size: 1rem;
       color: var(--cor-secundaria);
       text-transform: uppercase;
       letter-spacing: 1px;
       font-weight: 700;
     }
     .listeners-title .globe {
-      font-size: 1.3rem;
+      font-size: 1.5rem;
       animation: spin-globe 8s linear infinite;
       display: inline-block;
+      filter: drop-shadow(0 0 6px rgba(255,140,0,0.6));
     }
     @keyframes spin-globe {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
     .listeners-total {
-      background: rgba(255, 140, 0, 0.2);
+      background: linear-gradient(135deg, rgba(255, 140, 0, 0.3), rgba(255, 204, 0, 0.2));
       color: #fff;
-      padding: 4px 12px;
+      padding: 6px 14px;
       border-radius: 20px;
       font-size: 0.85rem;
       font-weight: 700;
-      border: 1px solid rgba(255, 140, 0, 0.4);
-      font-family: 'Orbitron', sans-serif;
+      border: 1px solid rgba(255, 140, 0, 0.5);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .listeners-total .live-dot {
+      width: 8px;
+      height: 8px;
+      background: #ff4757;
+      border-radius: 50%;
+      animation: pulse-live 1.2s infinite;
+      box-shadow: 0 0 8px #ff4757;
+    }
+    @keyframes pulse-live {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.4); }
     }
     .listeners-total .num {
       color: var(--cor-secundaria);
-      font-size: 1.05rem;
-      margin-right: 4px;
+      font-size: 1.15rem;
+      font-family: 'Orbitron', sans-serif;
+      text-shadow: 0 0 8px rgba(255, 204, 0, 0.5);
     }
+
+    /* 🗺️ MAPA DO BRASIL */
+    .listeners-map {
+      position: relative;
+      background: linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2));
+      border-radius: 12px;
+      padding: 15px 10px 10px;
+      margin-bottom: 15px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.05);
+      min-height: 180px;
+    }
+    .brazil-map-svg {
+      width: 100%;
+      max-width: 280px;
+      height: auto;
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+    }
+    .brazil-state {
+      fill: rgba(255, 255, 255, 0.08);
+      stroke: rgba(255, 140, 0, 0.4);
+      stroke-width: 0.5;
+      transition: all 0.3s;
+    }
+    .brazil-state.has-listener {
+      fill: rgba(255, 140, 0, 0.5);
+      stroke: var(--cor-destaque);
+      stroke-width: 1;
+      filter: drop-shadow(0 0 4px rgba(255, 140, 0, 0.8));
+    }
+    .map-pulse-dot {
+      fill: #ff4757;
+      animation: pulse-map-dot 1.5s ease-in-out infinite;
+      filter: drop-shadow(0 0 6px #ff4757);
+    }
+    @keyframes pulse-map-dot {
+      0%, 100% { opacity: 1; r: 4; }
+      50% { opacity: 0.5; r: 7; }
+    }
+    .map-tooltip {
+      position: absolute;
+      background: rgba(0,0,0,0.95);
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      pointer-events: none;
+      white-space: nowrap;
+      border: 1px solid var(--cor-destaque);
+      display: none;
+      z-index: 10;
+    }
+    .map-legend {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 8px;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.6);
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .legend-dot.active { background: var(--cor-destaque); box-shadow: 0 0 6px var(--cor-destaque); }
+
+    /* 📋 LISTA DE OUINTES */
     .listeners-list {
       list-style: none;
-      padding: 0;
+      padding: 8px;
       margin: 0;
-      max-height: 220px;
+      max-height: 240px;
       overflow-y: auto;
       background: rgba(0,0,0,0.3);
       border-radius: 10px;
-      padding: 6px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
     }
     .listeners-list::-webkit-scrollbar { width: 6px; }
     .listeners-list::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); border-radius: 3px; }
     .listeners-list::-webkit-scrollbar-thumb { background: rgba(255, 140, 0, 0.5); border-radius: 3px; }
-    .listeners-list::-webkit-scrollbar-thumb:hover { background: rgba(255, 140, 0, 0.8); }
-    .listeners-list li {
-      padding: 9px 12px;
-      margin: 4px 0;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 8px;
-      font-size: 0.9rem;
+
+    .listener-item {
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 10px;
+      font-size: 0.85rem;
       display: flex;
       align-items: center;
       gap: 10px;
       transition: all 0.3s;
       border: 1px solid transparent;
+      animation: slide-in 0.4s ease-out;
     }
-    .listeners-list li:hover {
-      background: rgba(255, 255, 255, 0.1);
-      transform: translateX(4px);
+    @keyframes slide-in {
+      from { opacity: 0; transform: translateX(-10px); }
+      to { opacity: 1; transform: translateX(0); }
     }
-    .listeners-list li.me {
-      background: linear-gradient(135deg, rgba(37, 211, 102, 0.25), rgba(37, 211, 102, 0.1));
+    .listener-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateX(3px);
+      border-color: rgba(255, 140, 0, 0.3);
+    }
+    .listener-item.me {
+      background: linear-gradient(135deg, rgba(37, 211, 102, 0.2), rgba(37, 211, 102, 0.08));
       border: 1px solid rgba(37, 211, 102, 0.5);
-      font-weight: 700;
+      box-shadow: 0 0 12px rgba(37, 211, 102, 0.2);
     }
-    .listeners-list li .pin {
-      font-size: 1rem;
-      opacity: 0.8;
-    }
-    .listeners-list li .city-text {
-      flex-grow: 1;
+    .listener-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
       color: #fff;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      text-transform: uppercase;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
     }
-    .listeners-list li.me .city-text {
-      color: #b9f6ca;
+    .listener-item.me .listener-avatar {
+      background: linear-gradient(135deg, #25D366, #128C7E) !important;
+      animation: avatar-pulse 2s infinite;
     }
-    .listeners-list li .you-tag {
+    @keyframes avatar-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+      50% { box-shadow: 0 0 0 8px rgba(37, 211, 102, 0); }
+    }
+    .listener-info { flex-grow: 1; min-width: 0; }
+    .listener-city {
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .listener-state {
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 0.72rem;
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .you-tag {
       background: #25D366;
       color: #000;
-      padding: 2px 8px;
-      border-radius: 10px;
-      font-size: 0.7rem;
+      padding: 2px 7px;
+      border-radius: 8px;
+      font-size: 0.65rem;
       font-weight: 800;
       letter-spacing: 0.5px;
+      flex-shrink: 0;
     }
+
+    /* 📊 RANKING */
+    .listeners-ranking {
+      margin-top: 12px;
+      padding: 10px 12px;
+      background: rgba(0,0,0,0.25);
+      border-radius: 10px;
+      font-size: 0.8rem;
+    }
+    .ranking-title {
+      color: var(--cor-secundaria);
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .ranking-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .ranking-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 0;
+    }
+    .ranking-pos {
+      width: 18px;
+      text-align: center;
+      font-weight: 800;
+      color: var(--cor-destaque);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+    }
+    .ranking-pos.gold { color: #ffd700; text-shadow: 0 0 6px rgba(255,215,0,0.5); }
+    .ranking-pos.silver { color: #c0c0c0; }
+    .ranking-pos.bronze { color: #cd7f32; }
+    .ranking-bar-wrap {
+      flex-grow: 1;
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      height: 8px;
+      overflow: hidden;
+    }
+    .ranking-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--cor-destaque), var(--cor-secundaria));
+      border-radius: 10px;
+      transition: width 0.6s ease-out;
+      box-shadow: 0 0 6px rgba(255,140,0,0.5);
+    }
+    .ranking-name {
+      font-size: 0.78rem;
+      color: #fff;
+      font-weight: 600;
+      min-width: 90px;
+    }
+    .ranking-count {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--cor-secundaria);
+      font-size: 0.8rem;
+      font-weight: 700;
+      min-width: 25px;
+      text-align: right;
+    }
+
     .listeners-empty {
-      padding: 20px;
+      grid-column: 1 / -1;
+      padding: 30px 20px;
       text-align: center;
       color: rgba(255,255,255,0.5);
       font-style: italic;
@@ -388,7 +601,7 @@
     }
     .listeners-status {
       margin-top: 10px;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       text-align: center;
       color: rgba(255,255,255,0.4);
       font-style: italic;
@@ -409,6 +622,8 @@
       .location-main { flex-direction: column; text-align: center; }
       .location-details { grid-template-columns: 1fr; }
       .listeners-header { flex-direction: column; align-items: flex-start; }
+      .listeners-list { grid-template-columns: 1fr; }
+      .brazil-map-svg { max-width: 220px; }
     }
   </style>
 </head>
@@ -484,22 +699,73 @@
                 </div>
               </div>
 
-              <!-- 🌍 CARD DE OUINTES ONLINE -->
+              <!-- 🌍 CARD DE OUINTES ONLINE - MELHORADO -->
               <div class="listeners-card" id="listenersCard">
                 <div class="listeners-header">
                   <div class="listeners-title">
                     <span class="globe">🌎</span>
-                    <span>Ouvintes pelo Brasil Agora</span>
+                    <span>Ouvintes pelo Brasil</span>
                   </div>
                   <div class="listeners-total">
-                    <span class="num" id="listenersCount">0</span> online
+                    <span class="live-dot"></span>
+                    <span class="num" id="listenersCount">0</span>
+                    <span>ao vivo</span>
                   </div>
                 </div>
+
+                <!-- 🗺️ MAPA -->
+                <div class="listeners-map" id="listenersMap">
+                  <svg class="brazil-map-svg" viewBox="0 0 400 380" xmlns="http://www.w3.org/2000/svg">
+                    <g id="brazil-states">
+                      <path class="brazil-state" data-state="RR" d="M70,80 L120,75 L125,140 L75,145 Z"/>
+                      <path class="brazil-state" data-state="AP" d="M150,90 L200,85 L205,140 L155,145 Z"/>
+                      <path class="brazil-state" data-state="AM" d="M50,150 L200,145 L210,240 L60,245 Z"/>
+                      <path class="brazil-state" data-state="PA" d="M160,150 L280,145 L285,235 L165,240 Z"/>
+                      <path class="brazil-state" data-state="MA" d="M260,170 L320,165 L325,230 L265,235 Z"/>
+                      <path class="brazil-state" data-state="PI" d="M285,235 L335,230 L340,290 L290,295 Z"/>
+                      <path class="brazil-state" data-state="CE" d="M325,205 L370,200 L375,255 L330,260 Z"/>
+                      <path class="brazil-state" data-state="RN" d="M355,225 L390,222 L388,260 L355,263 Z"/>
+                      <path class="brazil-state" data-state="PB" d="M345,260 L385,257 L382,290 L345,293 Z"/>
+                      <path class="brazil-state" data-state="PE" d="M325,275 L375,272 L373,310 L325,313 Z"/>
+                      <path class="brazil-state" data-state="AL" d="M350,310 L380,308 L378,340 L350,342 Z"/>
+                      <path class="brazil-state" data-state="SE" d="M335,335 L365,333 L363,355 L335,357 Z"/>
+                      <path class="brazil-state" data-state="BA" d="M270,295 L325,290 L330,370 L275,375 Z"/>
+                      <path class="brazil-state" data-state="MT" d="M170,245 L260,240 L265,330 L175,335 Z"/>
+                      <path class="brazil-state" data-state="GO" d="M230,330 L290,325 L285,365 L235,370 Z"/>
+                      <path class="brazil-state" data-state="RO" d="M125,235 L185,232 L190,295 L130,298 Z"/>
+                      <path class="brazil-state" data-state="AC" d="M75,235 L130,232 L132,290 L78,293 Z"/>
+                      <path class="brazil-state" data-state="MS" d="M190,335 L245,332 L243,375 L195,378 Z"/>
+                      <path class="brazil-state" data-state="MG" d="M285,335 L355,330 L360,375 L290,378 Z"/>
+                      <path class="brazil-state" data-state="ES" d="M365,355 L385,353 L383,375 L365,376 Z"/>
+                      <path class="brazil-state" data-state="RJ" d="M340,375 L380,373 L378,395 L342,397 Z"/>
+                      <path class="brazil-state" data-state="SP" d="M285,375 L345,372 L343,400 L287,402 Z"/>
+                      <path class="brazil-state" data-state="PR" d="M250,395 L320,392 L318,415 L252,418 Z"/>
+                      <path class="brazil-state" data-state="SC" d="M280,415 L325,412 L322,430 L282,432 Z"/>
+                      <path class="brazil-state" data-state="RS" d="M255,430 L320,427 L318,455 L257,458 Z"/>
+                      <path class="brazil-state" data-state="TO" d="M225,245 L290,242 L285,290 L227,293 Z"/>
+                    </g>
+                    <g id="map-pulse-points"></g>
+                  </svg>
+                  <div class="map-tooltip" id="mapTooltip"></div>
+                  <div class="map-legend">
+                    <div class="legend-item"><span class="legend-dot active"></span> Estado com ouvinte</div>
+                    <div class="legend-item"><span class="legend-dot" style="background: rgba(255,255,255,0.2)"></span> Sem ouvintes</div>
+                  </div>
+                </div>
+
+                <!-- 📋 LISTA -->
                 <ul class="listeners-list" id="listenersList">
-                  <li class="listeners-empty">Conectando ao servidor...</li>
+                  <li class="listeners-empty">🌍 Conectando ao servidor...</li>
                 </ul>
+
+                <!-- 📊 RANKING -->
+                <div class="listeners-ranking" id="listenersRanking" style="display:none">
+                  <div class="ranking-title">🏆 Top Estados Ouvindo Agora</div>
+                  <div class="ranking-list" id="rankingList"></div>
+                </div>
+
                 <div class="listeners-status" id="listenersStatus">
-                  🟢 Atualização em tempo real
+                  🟢 Atualização em tempo real • Dados compartilhados
                 </div>
               </div>
               
@@ -511,7 +777,7 @@
               <div class="player-socials">
                 <p>📲 Peça seu Pagode e Siga a Conexão!</p>
                 <div class="social-buttons">
-                    <a href="https://wa.me/5538998558528" target="_blank" rel="noopener noreferrer" class="whatsapp" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2.01C6.58 2.01 2.13 6.46 2.13 12c0 1.77.46 3.45 1.28 4.95L2.01 22l5.19-1.4c1.47.76 3.12 1.18 4.84 1.18h.01c5.46 0 9.91-4.45 9.91-9.91s-4.45-9.91-9.91-9.91zM12.04 20.28c-1.55 0-3.03-.4-4.32-1.12l-.31-.18-3.21.84.86-3.13-.2-.33a8.22 8.22 0 0 1-1.26-4.48c0-4.54 3.69-8.23 8.23-8.23 4.54 0 8.23 3.69 8.23 8.23 0 4.54-3.69 8.23-8.23 8.23zm4.49-5.93c-.26-.13-1.55-.77-1.79-.85-.24-.08-.42-.13-.59.13-.17.26-.68.85-.83 1.02-.15.17-.3.19-.56.06-.26-.13-1.09-.4-2.07-1.27-.76-.68-1.28-1.52-1.43-1.78-.15-.26-.02-.4.11-.53.12-.12.26-.3.39-.45.13-.15.17-.26.26-.43.08-.17.04-.31-.02-.44s-.59-1.43-.81-1.95c-.22.52-.44-.45-.59-.46-.14-.01-.31-.01-.48-.01-.17 0-.43.06-.66.31-.22.26-.85.83-.85 2.02 0 1.19.87 2.34 1 2.5.13.17 1.73 2.65 4.19 3.7.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.06 1.55-1.04 1.77-2.04.22-1-.15-1.52-.26-1.65z"></path></svg></a>
+                    <a href="https://wa.me/5538998558528" target="_blank" rel="noopener noreferrer" class="whatsapp" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2.01C6.58 2.01 2.13 6.46 2.13 12c0 1.77.46 3.45 1.28 4.95L2.01 22l5.19-1.4c1.47.76 3.12 1.18 4.84 1.18h.01c5.46 0 9.91-4.45 9.91-9.91s-4.45-9.91-9.91-9.91zM12.04 20.28c-1.55 0-3.03-.4-4.32-1.12l-.31-.18-3.21.84.86-3.13-.2-.33a8.22 8.22 0 0 1-1.26-4.48c0-4.54 3.69-8.23 8.23-8.23 4.54 0 8.23 3.69 8.23 8.23 0 4.54-3.69 8.23-8.23 8.23zm4.49-5.93c-.26-.13-1.55-.77-1.79-.85-.24-.08-.42-.13-.59.13-.17.26-.68.85-.83 1.02-.15.17-.3.19-.56.06-.26-.13-1.09-.4-2.07-1.27-.76-.68-1.28-1.52-1.43-1.78-.15-.26-.02-.4.11-.53.12-.12.26-.3.39-.45.13-.15.17-.26.26-.43.08-.17.04-.31-.02-.44s-.59-1.43-.81-1.95c-.22-.52-.44-.45-.59-.46-.14-.01-.31-.01-.48-.01-.17 0-.43.06-.66.31-.22.26-.85.83-.85 2.02 0 1.19.87 2.34 1 2.5.13.17 1.73 2.65 4.19 3.7.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.06 1.55-1.04 1.77-2.04.22-1-.15-1.52-.26-1.65z"></path></svg></a>
                     <a href="https://www.facebook.com/marcostheangel/" target="_blank" rel="noopener noreferrer" class="facebook" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.675 0h-21.35C.59 0 0 .59 0 1.325v21.35C0 23.41.59 24 1.325 24H12.82v-9.29H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h5.694c.735 0 1.325-.59 1.325-1.325V1.325C24 .59 23.41 0 22.675 0z"></path></svg></a>
                     <a href="https://www.instagram.com/markim_miranda2024/" target="_blank" rel="noopener noreferrer" class="instagram" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-1.325.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.286-.057 1.694-.072 4.948-.072zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.286.058 1.694.072 4.948.072s3.662-.014 4.948-.072c4.354-.199 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"></path></svg></a>
                 </div>
@@ -634,7 +900,7 @@
         const totalVisitasEl = document.getElementById('totalVisitas');
 
         // ============================================
-        // 🌍 DETECTAR LOCALIZAÇÃO (3 APIs de fallback)
+        // 🌍 DETECTAR LOCALIZAÇÃO
         // ============================================
         async function detectarLocalizacao() {
             const locationCard = document.getElementById('locationCard');
@@ -691,7 +957,6 @@
                     
                     if (info.city && info.city !== '—') {
                         log(`✅ ${api.name}:`, info);
-                        console.log('🔐 SEU IP COMPLETO:', info.ip);
                         
                         locationCity.textContent = info.city;
                         locationState.textContent = `${info.state || ''}${info.country ? ' • ' + info.country : ''}`.trim();
@@ -727,12 +992,83 @@
         }
 
         // ============================================
-        // 🌍 SISTEMA DE OUINTES ONLINE EM TEMPO REAL
+        // 🌍 SISTEMA DE OUINTES ONLINE - MELHORADO
         // ============================================
         const myUserId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
         let myUserRef = null;
-        let myLocationData = null;
         let heartbeatInterval = null;
+
+        // Cores para avatares
+        const avatarColors = [
+          'linear-gradient(135deg, #ff8c00, #ff6b00)',
+          'linear-gradient(135deg, #00b4d8, #0077b6)',
+          'linear-gradient(135deg, #9d4edd, #5a189a)',
+          'linear-gradient(135deg, #06d6a0, #048a73)',
+          'linear-gradient(135deg, #ef476f, #c1121f)',
+          'linear-gradient(135deg, #ffd60a, #ffba08)',
+          'linear-gradient(135deg, #8338ec, #3a86ff)',
+          'linear-gradient(135deg, #fb5607, #ff006e)'
+        ];
+
+        function getAvatarColor(id) {
+          let hash = 0;
+          for (let i = 0; i < id.length; i++) {
+            hash = id.charCodeAt(i) + ((hash << 5) - hash);
+          }
+          return avatarColors[Math.abs(hash) % avatarColors.length];
+        }
+
+        function getInitials(city) {
+          if (!city) return '?';
+          const parts = city.trim().split(/\s+/);
+          if (parts.length === 1) return parts[0].substring(0, 2).toUpperCase();
+          return (parts[0][0] + parts[parts.length-1][0]).toUpperCase();
+        }
+
+        const stateAbbrToName = {
+          'AC':'Acre','AL':'Alagoas','AP':'Amapá','AM':'Amazonas','BA':'Bahia',
+          'CE':'Ceará','DF':'Distrito Federal','ES':'Espírito Santo','GO':'Goiás',
+          'MA':'Maranhão','MT':'Mato Grosso','MS':'Mato Grosso do Sul','MG':'Minas Gerais',
+          'PA':'Pará','PB':'Paraíba','PR':'Paraná','PE':'Pernambuco','PI':'Piauí',
+          'RJ':'Rio de Janeiro','RN':'Rio Grande do Norte','RS':'Rio Grande do Sul',
+          'RO':'Rondônia','RR':'Roraima','SC':'Santa Catarina','SP':'São Paulo',
+          'SE':'Sergipe','TO':'Tocantins'
+        };
+
+        function getStateAbbr(stateName) {
+          if (!stateName) return null;
+          for (const [abbr, name] of Object.entries(stateAbbrToName)) {
+            if (name.toLowerCase() === stateName.toLowerCase()) return abbr;
+          }
+          return null;
+        }
+
+        function updateMap(statesListening) {
+          document.querySelectorAll('.brazil-state').forEach(el => {
+            el.classList.remove('has-listener');
+          });
+          
+          const pulseGroup = document.getElementById('map-pulse-points');
+          pulseGroup.innerHTML = '';
+          
+          Object.entries(statesListening).forEach(([abbr, data]) => {
+            const stateEl = document.querySelector(`.brazil-state[data-state="${abbr}"]`);
+            if (stateEl) {
+              stateEl.classList.add('has-listener');
+              
+              const bbox = stateEl.getBBox();
+              const cx = bbox.x + bbox.width / 2;
+              const cy = bbox.y + bbox.height / 2;
+              
+              const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+              dot.setAttribute('cx', cx);
+              dot.setAttribute('cy', cy);
+              dot.setAttribute('r', 4);
+              dot.setAttribute('class', 'map-pulse-dot');
+              pulseGroup.appendChild(dot);
+            }
+          });
+        }
 
         async function registerMyPresence(cityData) {
             if (!cityData) return;
@@ -775,57 +1111,105 @@
         }
 
         function displayListeners(snapshot) {
-            const list = document.getElementById('listenersList');
-            const countEl = document.getElementById('listenersCount');
-            
-            if (!list || !countEl) return;
-            
-            const data = snapshot.val() || {};
-            const now = Date.now();
-            const TIME_LIMIT = 5 * 60 * 1000; // 5 minutos
-            const activeListeners = [];
-            const cleanupPromises = [];
+          const list = document.getElementById('listenersList');
+          const countEl = document.getElementById('listenersCount');
+          const rankingBox = document.getElementById('listenersRanking');
+          const rankingList = document.getElementById('rankingList');
+          
+          if (!list || !countEl) return;
+          
+          const data = snapshot.val() || {};
+          const now = Date.now();
+          const TIME_LIMIT = 5 * 60 * 1000;
+          const activeListeners = [];
+          const cleanupPromises = [];
+          const statesCount = {};
+          const statesAbbrMap = {};
 
-            Object.entries(data).forEach(([id, listener]) => {
-                const lastSeen = listener.lastSeen || 0;
-                if (now - lastSeen < TIME_LIMIT && listener.city) {
-                    activeListeners.push({ id, ...listener });
-                } else if (lastSeen > 0) {
-                    cleanupPromises.push(listenersListRef.child(id).remove());
-                }
-            });
-
-            // Ordenar: EU primeiro, depois por cidade
-            activeListeners.sort((a, b) => {
-                if (a.id === myUserId) return -1;
-                if (b.id === myUserId) return 1;
-                return (a.location || '').localeCompare(b.location || '');
-            });
-
-            countEl.textContent = activeListeners.length;
-            list.innerHTML = '';
-
-            if (activeListeners.length === 0) {
-                const li = document.createElement('li');
-                li.className = 'listeners-empty';
-                li.textContent = '🌍 Nenhum ouvinte online no momento. Seja o primeiro!';
-                list.appendChild(li);
-            } else {
-                activeListeners.forEach(listener => {
-                    const li = document.createElement('li');
-                    if (listener.id === myUserId) li.classList.add('me');
-                    
-                    const pinEmoji = listener.id === myUserId ? '🎵' : '📍';
-                    li.innerHTML = `
-                        <span class="pin">${pinEmoji}</span>
-                        <span class="city-text">${listener.location || listener.city}</span>
-                        ${listener.id === myUserId ? '<span class="you-tag">VOCÊ</span>' : ''}
-                    `;
-                    list.appendChild(li);
-                });
+          Object.entries(data).forEach(([id, listener]) => {
+            const lastSeen = listener.lastSeen || 0;
+            if (now - lastSeen < TIME_LIMIT && listener.city) {
+              activeListeners.push({ id, ...listener });
+              
+              const abbr = getStateAbbr(listener.state);
+              if (abbr) {
+                statesAbbrMap[abbr] = true;
+                const stateName = listener.state;
+                statesCount[stateName] = (statesCount[stateName] || 0) + 1;
+              }
+            } else if (lastSeen > 0) {
+              cleanupPromises.push(listenersListRef.child(id).remove());
             }
+          });
 
-            Promise.all(cleanupPromises).catch(() => {});
+          activeListeners.sort((a, b) => {
+            if (a.id === myUserId) return -1;
+            if (b.id === myUserId) return 1;
+            return (a.location || '').localeCompare(b.location || '');
+          });
+
+          countEl.textContent = activeListeners.length;
+          list.innerHTML = '';
+
+          if (activeListeners.length === 0) {
+            const li = document.createElement('li');
+            li.className = 'listeners-empty';
+            li.innerHTML = '🌍 Ninguém ouvindo agora. <br>Seja o primeiro!';
+            list.appendChild(li);
+            rankingBox.style.display = 'none';
+          } else {
+            activeListeners.forEach(listener => {
+              const li = document.createElement('li');
+              li.className = 'listener-item';
+              if (listener.id === myUserId) li.classList.add('me');
+              
+              const initial = getInitials(listener.city);
+              const avatarStyle = listener.id === myUserId 
+                ? '' 
+                : `style="background: ${getAvatarColor(listener.id)}"`;
+              
+              li.innerHTML = `
+                <div class="listener-avatar" ${avatarStyle}>${initial}</div>
+                <div class="listener-info">
+                  <div class="listener-city">${listener.city}</div>
+                  <div class="listener-state">📍 ${listener.state || 'Brasil'}</div>
+                </div>
+                ${listener.id === myUserId ? '<span class="you-tag">VOCÊ</span>' : ''}
+              `;
+              list.appendChild(li);
+            });
+
+            const sortedStates = Object.entries(statesCount)
+              .sort((a, b) => b[1] - a[1])
+              .slice(0, 3);
+            
+            if (sortedStates.length > 0) {
+              rankingBox.style.display = 'block';
+              const maxCount = sortedStates[0][1];
+              const posClass = ['gold', 'silver', 'bronze'];
+              const posEmoji = ['🥇', '🥈', '🥉'];
+              rankingList.innerHTML = sortedStates.map((entry, idx) => {
+                const [name, count] = entry;
+                const pct = (count / maxCount) * 100;
+                return `
+                  <div class="ranking-item">
+                    <span class="ranking-pos ${posClass[idx] || ''}">${posEmoji[idx] || '•'}</span>
+                    <span class="ranking-name">${name}</span>
+                    <div class="ranking-bar-wrap">
+                      <div class="ranking-bar" style="width: ${pct}%"></div>
+                    </div>
+                    <span class="ranking-count">${count}</span>
+                  </div>
+                `;
+              }).join('');
+            } else {
+              rankingBox.style.display = 'none';
+            }
+          }
+
+          updateMap(statesAbbrMap);
+
+          Promise.all(cleanupPromises).catch(() => {});
         }
 
         function setupListenersRealtime() {
@@ -838,9 +1222,28 @@
             });
         }
 
+        // Tooltip do mapa
+        document.addEventListener('mousemove', (e) => {
+          const target = e.target.closest('.brazil-state');
+          const tooltip = document.getElementById('mapTooltip');
+          if (!tooltip) return;
+          
+          if (target && target.classList.contains('has-listener')) {
+            const stateAbbr = target.dataset.state;
+            const stateName = stateAbbrToName[stateAbbr] || stateAbbr;
+            tooltip.textContent = `🔴 ${stateName}`;
+            tooltip.style.display = 'block';
+            const map = document.getElementById('listenersMap');
+            const rect = map.getBoundingClientRect();
+            tooltip.style.left = (e.clientX - rect.left + 10) + 'px';
+            tooltip.style.top = (e.clientY - rect.top - 30) + 'px';
+          } else {
+            tooltip.style.display = 'none';
+          }
+        });
+
         // Detectar localização e registrar presença
         detectarLocalizacao().then(cityData => {
-            myLocationData = cityData;
             if (cityData) {
                 registerMyPresence(cityData);
                 startHeartbeat();
