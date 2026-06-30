@@ -634,17 +634,11 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
   
   <script>
-    // ============================================
-    // 🔧 CONFIGURAÇÃO
-    // ============================================
     const DEBUG_MODE = true;
-    const log = (...a) => DEBUG_MODE && console.log(...a);
+    const log = (...a) => DEBUG_MODE && console.log('🎵', ...a);
 
     document.addEventListener('DOMContentLoaded', () => {
 
-        // ============================================
-        // 🔥 INICIALIZAÇÃO DO FIREBASE
-        // ============================================
         const firebaseConfig = {
             apiKey: "AIzaSyDp5fRdPQbfn2XUmFpaArXoeE4n1-KnKA0",
             authDomain: "radio-conexao-contador.firebaseapp.com",
@@ -664,9 +658,6 @@
         const ouvintesEl = document.getElementById('ouvintes');
         const totalVisitasEl = document.getElementById('totalVisitas');
 
-        // ============================================
-        // 🌍 DETECTAR LOCALIZAÇÃO + IP REAL (3 APIs)
-        // ============================================
         async function detectarLocalizacao() {
             const locationCard = document.getElementById('locationCard');
             const locationCity = document.getElementById('locationCity');
@@ -680,26 +671,12 @@
                 {
                     name: 'ipapi.co',
                     url: 'https://ipapi.co/json/',
-                    parse: (d) => ({
-                        city: d.city, state: d.region, country: d.country_name,
-                        countryCode: d.country_code, isp: d.org, ip: d.ip
-                    })
+                    parse: (d) => ({ city: d.city, state: d.region, country: d.country_name, countryCode: d.country_code, isp: d.org, ip: d.ip })
                 },
                 {
                     name: 'ip-api.com',
                     url: 'https://ip-api.com/json/?fields=status,country,countryCode,region,regionName,city,org,query',
-                    parse: (d) => ({
-                        city: d.city, state: d.regionName, country: d.country,
-                        countryCode: d.countryCode, isp: d.org, ip: d.query
-                    })
-                },
-                {
-                    name: 'ipwho.is',
-                    url: 'https://ipwho.is/',
-                    parse: (d) => ({
-                        city: d.city, state: d.region, country: d.country,
-                        countryCode: d.country_code, isp: d.connection?.org || d.connection?.isp, ip: d.ip
-                    })
+                    parse: (d) => ({ city: d.city, state: d.regionName, country: d.country, countryCode: d.countryCode, isp: d.org, ip: d.query })
                 }
             ];
 
@@ -708,49 +685,32 @@
                     log(`🔄 Tentando ${api.name}...`);
                     const controller = new AbortController();
                     const timeoutId = setTimeout(() => controller.abort(), 5000);
-                    
-                    const response = await fetch(api.url, { 
-                        signal: controller.signal,
-                        cache: 'no-cache'
-                    });
+                    const response = await fetch(api.url, { signal: controller.signal, cache: 'no-cache' });
                     clearTimeout(timeoutId);
-                    
                     if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                    
                     const data = await response.json();
                     const info = api.parse(data);
-                    
                     if (info.city && info.city !== '—') {
-                        log(`✅ ${api.name}:`, info);
-                        
+                        log('✅ Detectado:', info);
                         locationCity.textContent = info.city;
-                        locationState.textContent = `${info.state || ''}${info.country ? ' • ' + info.country : ''}`.trim();
+                        locationState.textContent = `${info.state || ''} • ${info.country || ''}`.trim();
                         locationFlag.textContent = getCountryFlag(info.countryCode);
                         locationIP.textContent = info.ip || '—';
                         locationISP.textContent = info.isp || '—';
-                        
                         locationCard.classList.remove('loading');
-                        locationStatus.innerHTML = `✅ IP real detectado via ${api.name}`;
-                        
-                        return { 
-                            ip: info.ip,
-                            city: info.city, 
-                            state: info.state,
-                            country: info.country,
-                            isp: info.isp
-                        };
+                        locationStatus.innerHTML = `✅ Detectado`;
+                        return info;
                     }
                 } catch (err) {
                     log(`❌ ${api.name} falhou:`, err.message);
                 }
             }
 
-            locationCity.textContent = 'Não foi possível detectar';
-            locationState.textContent = 'Tente desativar AdBlock ou antivírus';
+            locationCity.textContent = 'Não detectado';
+            locationState.textContent = 'Desative AdBlock';
             locationFlag.textContent = '❓';
             locationIP.textContent = '—';
             locationCard.classList.remove('loading');
-            locationStatus.innerHTML = '⚠️ Detecção bloqueada por extensões';
             return null;
         }
 
@@ -760,12 +720,8 @@
             return String.fromCodePoint(...codePoints);
         }
 
-        // ============================================
-        // 🌍 SISTEMA DE OUINTES COM IP
-        // ============================================
         const myUserId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
         let myUserRef = null;
-        let myLocationData = null;
         let heartbeatInterval = null;
 
         function timeAgo(timestamp) {
@@ -779,24 +735,31 @@
         }
 
         async function registerMyPresence(locationData) {
-            if (!locationData || !locationData.ip) return;
+            if (!locationData || !locationData.ip) {
+                log('❌ Sem dados de localização para registrar');
+                return;
+            }
             
             myUserRef = listenersListRef.child(myUserId);
             const locationText = locationData.state ? `${locationData.city}, ${locationData.state}` : locationData.city;
             
+            const dataToSave = {
+                ip: locationData.ip,
+                city: locationData.city,
+                state: locationData.state || '',
+                country: locationData.country || 'BR',
+                isp: locationData.isp || '',
+                location: locationText,
+                lastSeen: firebase.database.ServerValue.TIMESTAMP
+            };
+            
+            log('💾 Salvando no Firebase:', dataToSave);
+            
             try {
-                await myUserRef.set({
-                    ip: locationData.ip,
-                    city: locationData.city,
-                    state: locationData.state || '',
-                    country: locationData.country || 'BR',
-                    isp: locationData.isp || '',
-                    location: locationText,
-                    lastSeen: firebase.database.ServerValue.TIMESTAMP
-                });
-                log('✅ Registrado com IP:', locationData.ip);
+                await myUserRef.set(dataToSave);
+                log('✅ SALVO COM SUCESSO! UserId:', myUserId);
             } catch (err) {
-                log('❌ Erro ao registrar:', err);
+                log('❌ ERRO AO SALVAR:', err);
             }
         }
 
@@ -804,21 +767,15 @@
             if (heartbeatInterval) clearInterval(heartbeatInterval);
             heartbeatInterval = setInterval(() => {
                 if (myUserRef) {
-                    myUserRef.update({
-                        lastSeen: firebase.database.ServerValue.TIMESTAMP
-                    }).catch(err => log('❌ Heartbeat erro:', err));
+                    myUserRef.update({ lastSeen: firebase.database.ServerValue.TIMESTAMP })
+                        .catch(err => log('❌ Heartbeat erro:', err));
                 }
             }, 30000);
         }
 
         function removeMyPresence() {
-            if (myUserRef) {
-                myUserRef.remove().catch(() => {});
-            }
-            if (heartbeatInterval) {
-                clearInterval(heartbeatInterval);
-                heartbeatInterval = null;
-            }
+            if (myUserRef) myUserRef.remove().catch(() => {});
+            if (heartbeatInterval) clearInterval(heartbeatInterval);
         }
 
         function displayListeners(snapshot) {
@@ -828,8 +785,10 @@
           if (!list || !countEl) return;
           
           const data = snapshot.val() || {};
+          log('📋 Listeners recebidos:', Object.keys(data).length);
+          
           const now = Date.now();
-          const TIME_LIMIT = 24 * 60 * 60 * 1000; // ⏰ 24 HORAS
+          const TIME_LIMIT = 24 * 60 * 60 * 1000;
           const activeListeners = [];
           const cleanupPromises = [];
 
@@ -852,13 +811,12 @@
           list.innerHTML = '';
 
           if (activeListeners.length === 0) {
-            list.innerHTML = '<div class="listeners-empty">🔐 Ninguém clicou em Play ainda. Aguardando ouvintes...</div>';
+            list.innerHTML = '<div class="listeners-empty">🔐 Ninguém clicou em Play ainda...</div>';
           } else {
             activeListeners.forEach(listener => {
               const row = document.createElement('div');
               row.className = 'listener-row';
               if (listener.id === myUserId) row.classList.add('me');
-              
               row.innerHTML = `
                 <div class="ip-cell">${listener.ip || '—'}${listener.id === myUserId ? ' (VOCÊ)' : ''}</div>
                 <div class="state-cell">${listener.city || '—'}</div>
@@ -873,20 +831,26 @@
         }
 
         function setupListenersRealtime() {
-            listenersListRef.on('value', displayListeners, (err) => {
-                log('❌ Erro no listener:', err);
+            log('🔌 Conectando ao Firebase...');
+            listenersListRef.on('value', (snapshot) => {
+                log('✅ Dados recebidos em tempo real');
+                displayListeners(snapshot);
+            }, (err) => {
+                log('❌ ERRO DE CONEXÃO Firebase:', err);
+                log('⚠️ Verifique as regras do Realtime Database');
                 const list = document.getElementById('listenersList');
                 if (list) {
-                    list.innerHTML = '<div class="listeners-empty">⚠️ Erro ao conectar. Verifique as regras do Firebase.</div>';
+                    list.innerHTML = '<div class="listeners-empty">⚠️ Erro: Verifique as regras do Firebase</div>';
                 }
             });
         }
 
-        // Detectar localização e registrar presença
         detectarLocalizacao().then(locationData => {
-            if (locationData) {
+            if (locationData && locationData.ip) {
                 registerMyPresence(locationData);
                 startHeartbeat();
+            } else {
+                log('⚠️ Não foi possível detectar IP');
             }
             setupListenersRealtime();
         });
@@ -894,9 +858,6 @@
         window.addEventListener('beforeunload', removeMyPresence);
         window.addEventListener('pagehide', removeMyPresence);
 
-        // ============================================
-        // 🔧 FUNÇÕES AUXILIARES
-        // ============================================
         function extrairNumero(data) {
             if (data === null || data === undefined) return 0;
             if (typeof data === 'object' && data.count !== undefined) return data.count;
@@ -904,17 +865,11 @@
             return 0;
         }
 
-        function formatarNum(n) { 
-            return (n || 0).toLocaleString('pt-BR'); 
-        }
+        function formatarNum(n) { return (n || 0).toLocaleString('pt-BR'); }
 
-        // ============================================
-        // 📈 CONTADORES FIREBASE
-        // ============================================
         async function incrementarVisita() {
-            try {
-                await visitasRef.transaction((atual) => extrairNumero(atual) + 1);
-            } catch (err) { log('❌ Erro visita:', err); }
+            try { await visitasRef.transaction((atual) => extrairNumero(atual) + 1); }
+            catch (err) { log('❌ Erro visita:', err); }
         }
 
         let userIsListening = false;
@@ -922,17 +877,15 @@
         async function adicionarOuvinte() {
             if (userIsListening) return;
             userIsListening = true;
-            try {
-                await ouvintesRef.transaction((atual) => extrairNumero(atual) + 1);
-            } catch (err) { log('❌ Erro ouvinte:', err); }
+            try { await ouvintesRef.transaction((atual) => extrairNumero(atual) + 1); }
+            catch (err) { log('❌ Erro ouvinte:', err); }
         }
 
         async function removerOuvinte() {
             if (!userIsListening) return;
             userIsListening = false;
-            try {
-                await ouvintesRef.transaction((atual) => Math.max(0, extrairNumero(atual) - 1));
-            } catch (err) { log('❌ Erro ouvinte:', err); }
+            try { await ouvintesRef.transaction((atual) => Math.max(0, extrairNumero(atual) - 1)); }
+            catch (err) { log('❌ Erro ouvinte:', err); }
         }
 
         incrementarVisita();
@@ -957,9 +910,6 @@
             else if (typeof v === 'object') ouvintesRef.set(extrairNumero(v));
         });
 
-        // ============================================
-        // 🕐 RELÓGIO
-        // ============================================
         function updateClock() {
             const el = document.getElementById('clock');
             if (!el) return;
@@ -969,9 +919,6 @@
         updateClock();
         setInterval(updateClock, 1000);
 
-        // ============================================
-        // 📻 NOME DO PROGRAMA
-        // ============================================
         function updateCurrentProgram() {
             const el = document.getElementById('current-program-name');
             if (!el) return;
@@ -991,9 +938,6 @@
         updateCurrentProgram();
         setInterval(updateCurrentProgram, 60000);
 
-        // ============================================
-        // 🎵 CONTROLES DO PLAYER
-        // ============================================
         const audioPlayer = document.getElementById('audio-player');
         const playPauseBtn = document.getElementById('play-pause-btn');
         const playIcon = document.getElementById('play-icon');
@@ -1015,11 +959,8 @@
         }
 
         playPauseBtn.addEventListener('click', () => {
-            if (audioPlayer.paused) {
-                audioPlayer.play().catch(err => log('❌ Erro play:', err));
-            } else {
-                audioPlayer.pause();
-            }
+            if (audioPlayer.paused) audioPlayer.play().catch(err => log('❌ Erro play:', err));
+            else audioPlayer.pause();
         });
 
         audioPlayer.addEventListener('play', () => {
@@ -1028,7 +969,7 @@
             incrementarVisita();
             if (locationStatus) {
                 locationStatus.classList.add('listening');
-                locationStatus.innerHTML = '🎵 Você está ouvindo a Rádio Conexão MOC AGORA!';
+                locationStatus.innerHTML = '🎵 Você está ouvindo AGORA!';
             }
         });
 
@@ -1045,20 +986,14 @@
             if (userIsListening) removerOuvinte();
         });
 
-        volumeSlider.addEventListener('input', () => {
-            audioPlayer.volume = volumeSlider.value;
-        });
+        volumeSlider.addEventListener('input', () => { audioPlayer.volume = volumeSlider.value; });
         audioPlayer.volume = volumeSlider.value;
 
         const playPromise = audioPlayer.play();
         if (playPromise !== undefined) {
-            playPromise.then(() => updatePlayPauseIcon())
-                .catch(() => updatePlayPauseIcon());
+            playPromise.then(() => updatePlayPauseIcon()).catch(() => updatePlayPauseIcon());
         }
 
-        // ============================================
-        // 📝 FORMULÁRIO
-        // ============================================
         const form = document.getElementById('music-request-form');
         const formStatus = document.getElementById('form-status');
 
@@ -1066,24 +1001,20 @@
             event.preventDefault();
             const submitButton = form.querySelector('button');
             const data = new FormData(event.target);
-            
             submitButton.disabled = true;
             submitButton.textContent = 'Enviando...';
-            
             try {
                 const response = await fetch(event.target.action, {
-                    method: form.method,
-                    body: data,
-                    headers: { 'Accept': 'application/json' }
+                    method: form.method, body: data, headers: { 'Accept': 'application/json' }
                 });
                 if (response.ok) {
                     formStatus.style.color = '#25D366';
-                    formStatus.textContent = "Seu pedido de pagode foi enviado! Fique ligado!";
+                    formStatus.textContent = "Pedido enviado!";
                     form.reset();
                 } else throw new Error();
             } catch {
                 formStatus.style.color = '#ff4d4d';
-                formStatus.textContent = "Opa! Algo deu errado.";
+                formStatus.textContent = "Erro ao enviar";
             } finally {
                 submitButton.disabled = false;
                 submitButton.textContent = 'Enviar Pedido';
@@ -1091,9 +1022,6 @@
         }
         if(form) form.addEventListener("submit", handleSubmit);
 
-        // ============================================
-        // ✨ FADE-IN
-        // ============================================
         const sections = document.querySelectorAll('.fade-in-section');
         if (sections.length > 0) {
             const observer = new IntersectionObserver((entries) => {
@@ -1104,13 +1032,9 @@
             sections.forEach(section => observer.observe(section));
         }
 
-        // ============================================
-        // 📰 NOTÍCIAS
-        // ============================================
         async function fetchCityNewsFromHTML() {
             const container = document.getElementById('noticias-cidade-container');
             if (!container) return;
-
             try {
                 const response = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent('https://www.montesclaros.mg.gov.br/noticias')}`);
                 const html = await response.text();
@@ -1119,7 +1043,6 @@
                 const today = new Date().toLocaleDateString('pt-BR');
                 container.innerHTML = '';
                 let count = 0;
-
                 articles.forEach(article => {
                     if (count >= 5) return;
                     const date = article.querySelector('.badge')?.textContent.split(' - ')[0].trim();
@@ -1149,9 +1072,6 @@
         fetchCityNewsFromHTML();
     });
 
-    // ============================================
-    // 🎵 NOW PLAYING
-    // ============================================
     function updateNowPlaying() {
         const el = document.getElementById('song-title');
         if (!el) return;
