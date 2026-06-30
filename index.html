@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Rádio Conexão Montes Claros - A Sintonia Oficial do Pagode! Ouça ao vivo o melhor do pagode retrô and atual, participe de promoções e fique por dentro de Montes Claros.">
-  
+  <meta name="description" content="Rádio Conexão Montes Claros - A Sintonia Oficial do Pagode!">
   <title>Rádio Conexão Montes Claros | A Sintonia Oficial do Pagode</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,12 +14,10 @@
     :root {
       --cor-fundo-transparente: rgba(20, 20, 28, 0.8);
       --cor-borda: rgba(255, 255, 255, 0.08);
-      --cor-destaque: #ff8c00; /* Laranja Pagode Quente */
-      --cor-secundaria: #ffcc00; /* Ouro/Amarelo Vibrante */
+      --cor-destaque: #ff8c00;
+      --cor-secundaria: #ffcc00;
       --cor-texto: #f0f2f5;
-      --cor-sombra: rgba(0, 0, 0, 0.6);
       --glow-intensity: 0 0 12px var(--cor-destaque);
-      --glow-strong: 0 0 20px var(--cor-destaque), 0 0 30px var(--cor-secundaria);
     }
 
     *, *::before, *::after { box-sizing: border-box; }
@@ -45,7 +42,6 @@
 
     img, video { max-width: 100%; height: auto; display: block; }
 
-    /* --- Animação de entrada suave --- */
     .fade-in-section {
         opacity: 0;
         transform: translateY(20px);
@@ -75,14 +71,8 @@
         font-family: 'Orbitron', sans-serif; font-size: 2.8rem; font-weight: 700;
         text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3rem;
     }
-    header h1 .h1-part1 {
-        color: #fff; font-weight: 700;
-        text-shadow: 0 0 10px rgba(255, 140, 0, 0.6), 2px 2px 5px rgba(0,0,0,0.9);
-    }
-    header h1 .h1-part2 {
-        color: var(--cor-secundaria);
-        text-shadow: 0 0 15px var(--cor-destaque), 2px 2px 6px rgba(0,0,0,1);
-    }
+    header h1 .h1-part1 { color: #fff; font-weight: 700; text-shadow: 0 0 10px rgba(255, 140, 0, 0.6), 2px 2px 5px rgba(0,0,0,0.9); }
+    header h1 .h1-part2 { color: var(--cor-secundaria); text-shadow: 0 0 15px var(--cor-destaque), 2px 2px 6px rgba(0,0,0,1); }
 
     header .slogan { 
         font-family: 'Montserrat', sans-serif; font-size: 1.2rem; font-weight: 600; 
@@ -90,11 +80,7 @@
         margin-bottom: 2.5rem; letter-spacing: 2px;
         text-transform: uppercase;
     }
-    header .slogan span {
-        color: var(--cor-secundaria);
-        border-bottom: 2px solid var(--cor-destaque);
-        padding-bottom: 4px;
-    }
+    header .slogan span { color: var(--cor-secundaria); border-bottom: 2px solid var(--cor-destaque); padding-bottom: 4px; }
 
     .main-layout { display: flex; gap: 2rem; align-items: flex-start; }
     .main-content { flex: 2; width: 66%; min-width: 0; }
@@ -131,7 +117,7 @@
         border: 1px solid rgba(255,255,255,0.1);
     }
 
-    #current-track-info { font-size: 1.1rem; font-weight: 600; color: var(--cor-texto); margin-bottom: 1.5rem; min-height: 1.5rem; transition: all 0.5s ease; }
+    #current-track-info { font-size: 1.1rem; font-weight: 600; color: var(--cor-texto); margin-bottom: 1.5rem; min-height: 1.5rem; }
     #current-track-info span { color: var(--cor-secundaria); font-weight: 700; }
     
     .player-socials { margin-top: 2rem; }
@@ -146,7 +132,7 @@
     
     .news-ticker { background-color: rgba(15, 15, 20, 0.9); border-radius: 12px; border: 1px solid var(--cor-borda); padding: 0.85rem; margin-bottom: 2rem; overflow: hidden; white-space: nowrap; }
     .ticker-content { display: inline-block; padding-left: 100%; animation: scroll-ticker 25s linear infinite; font-size: 1.05rem; }
-    .ticker-content span { font-weight: 700; color: var(--cor-secundaria); margin-right: 1rem; margin-left: 2rem; text-shadow: 0 0 5px rgba(255,204,0,0.3);}
+    .ticker-content span { font-weight: 700; color: var(--cor-secundaria); margin-right: 1rem; margin-left: 2rem; }
     @keyframes scroll-ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
     #clock { font-family: 'Orbitron', monospace; font-size: 3.2rem; font-weight: 700; color: var(--cor-secundaria); letter-spacing: 3px; text-shadow: 0 0 15px rgba(255,204,0,0.5); }
@@ -160,38 +146,36 @@
     .sponsors-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: start; }
     .sponsors-grid a { background: rgba(0,0,0,0.3); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 5px 15px rgba(0,0,0,0.4); transition: all 0.3s ease; overflow: hidden; padding: 0.5rem; }
     .sponsors-grid a:hover { transform: translateY(-5px) scale(1.04); box-shadow: 0 10px 30px rgba(0,0,0,0.6), 0 0 15px var(--cor-destaque); border-color: var(--cor-destaque); }
-    .sponsors-grid img { width: 100%; height: auto; border-radius: 8px; transition: all 0.4s ease; }
+    .sponsors-grid img { width: 100%; height: auto; border-radius: 8px; }
     
     .cta-sponsors { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--cor-borda); }
     .cta-sponsors p { font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; }
-    .cta-button { display: inline-block; background: linear-gradient(90deg, var(--cor-destaque), #e67e22); border: none; border-radius: 10px; padding: 0.9rem 1.8rem; color: #fff; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.4); text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px; }
-    .cta-button:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(255,140,0,0.4); background: linear-gradient(90deg, #e67e22, var(--cor-destaque)); }
+    .cta-button { display: inline-block; background: linear-gradient(90deg, var(--cor-destaque), #e67e22); border: none; border-radius: 10px; padding: 0.9rem 1.8rem; color: #fff; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.4); text-decoration: none; text-transform: uppercase; }
+    .cta-button:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(255,140,0,0.4); }
     
     .request-form { display: flex; flex-direction: column; gap: 1rem; }
-    .request-form input, .request-form textarea { width: 100%; background-color: rgba(0,0,0,0.5); border: 1px solid var(--cor-borda); border-radius: 10px; padding: 0.9rem 1.2rem; color: var(--cor-texto); font-family: 'Montserrat', sans-serif; font-size: 1rem; transition: border-color 0.3s ease, box-shadow 0.3s ease; -webkit-user-select: auto; -ms-user-select: auto; user-select: auto; }
+    .request-form input, .request-form textarea { width: 100%; background-color: rgba(0,0,0,0.5); border: 1px solid var(--cor-borda); border-radius: 10px; padding: 0.9rem 1.2rem; color: var(--cor-texto); font-family: 'Montserrat', sans-serif; font-size: 1rem; -webkit-user-select: auto; user-select: auto; }
     .request-form input:focus, .request-form textarea:focus { outline: none; border-color: var(--cor-destaque); box-shadow: 0 0 10px rgba(255, 140, 0, 0.5); }
-    .request-form button { background: linear-gradient(90deg, var(--cor-destaque), var(--cor-secundaria)); border: none; border-radius: 10px; padding: 0.9rem 1.2rem; color: #000; font-size: 1.15rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.4); text-transform: uppercase; }
-    .request-form button:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(255,140,0,0.4); background: linear-gradient(90deg, var(--cor-secundaria), var(--cor-destaque)); }
+    .request-form button { background: linear-gradient(90deg, var(--cor-destaque), var(--cor-secundaria)); border: none; border-radius: 10px; padding: 0.9rem 1.2rem; color: #000; font-size: 1.15rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; }
+    .request-form button:hover { transform: translateY(-3px); }
     .request-form button:disabled { cursor: not-allowed; background: #555; color: #fff; }
     #form-status { margin-top: 1rem; font-weight: 600; min-height: 1.5rem; }
 
     .schedule-item { display: flex; justify-content: space-between; align-items: center; background-color: rgba(0,0,0,0.3); padding: 1.1rem 1.5rem; border-radius: 12px; margin-bottom: 1rem; border-left: 5px solid var(--cor-destaque); transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.02); }
-    .schedule-item:hover { background-color: rgba(0,0,0,0.5); transform: scale(1.02); border-left-color: var(--cor-secundaria); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-    .schedule-time { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--cor-secundaria); white-space: nowrap; padding-right: 1rem; letter-spacing: 1px; }
-    .schedule-title { font-size: 1.15rem; font-weight: 700; color: #fff; text-align: right; letter-spacing: 0.5px; }
+    .schedule-item:hover { background-color: rgba(0,0,0,0.5); transform: scale(1.02); }
+    .schedule-time { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--cor-secundaria); white-space: nowrap; padding-right: 1rem; }
+    .schedule-title { font-size: 1.15rem; font-weight: 700; color: #fff; text-align: right; }
         
     .news-item { display: flex; gap: 1.5rem; text-align: left; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--cor-borda); }
     .news-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-    .news-item img { width: 100px; height: 100px; object-fit: cover; border-radius: 10px; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.1); }
+    .news-item img { width: 100px; height: 100px; object-fit: cover; border-radius: 10px; flex-shrink: 0; }
     .news-content h4 { margin: 0 0 0.5rem 0; font-size: 1.2rem; color: #fff; }
     .news-content p { margin: 0 0 0.5rem 0; font-size: 0.95rem; opacity: 0.85; }
     .news-content a { color: var(--cor-secundaria); text-decoration: none; font-weight: 600; }
-    .news-content a:hover { text-decoration: underline; }
 
     footer { margin-top: 4rem; padding: 2rem; text-align: center; border-top: 1px solid var(--cor-borda); }
     footer p { font-size: 1.05rem; margin-bottom: 1rem; opacity: 0.7; }
 
-    /* --- ESTILOS DO PLAYER CUSTOMIZADO --- */
     .player-logo {
         width: 190px; height: 190px; border-radius: 50%; object-fit: cover; 
         margin: 0 auto 1.5rem auto; border: 5px solid var(--cor-destaque); 
@@ -201,62 +185,93 @@
     }
     @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     
-    .custom-player {
-      display: flex; flex-direction: column; align-items: center;
-      gap: 1.5rem; margin-top: 1rem;
-    }
-    .player-controls {
-      display: flex; align-items: center; gap: 1.5rem;
-      width: 100%; justify-content: center;
-    }
+    .custom-player { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; margin-top: 1rem; }
+    .player-controls { display: flex; align-items: center; gap: 1.5rem; width: 100%; justify-content: center; }
     .control-button {
       background: linear-gradient(145deg, var(--cor-destaque), var(--cor-secundaria));
       border: none; border-radius: 50%; width: 65px; height: 65px; color: #000;
       cursor: pointer; display: flex; justify-content: center; align-items: center;
       transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
     }
-    .control-button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 20px rgba(255,140,0,0.6);
-    }
+    .control-button:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(255,140,0,0.6); }
     .control-button svg { width: 30px; height: 30px; }
     .volume-control { display: flex; align-items: center; gap: 0.75rem; }
     .volume-control svg { width: 24px; height: 24px; opacity: 0.8; color: var(--cor-secundaria); }
-    .volume-slider {
-      -webkit-appearance: none; appearance: none; width: 120px; height: 6px;
-      background: rgba(255, 255, 255, 0.15); border-radius: 5px; outline: none; cursor: pointer;
-    }
-    .volume-slider::-webkit-slider-thumb {
-      -webkit-appearance: none; appearance: none; width: 16px; height: 16px;
-      background: var(--cor-secundaria); border-radius: 50%;
-      box-shadow: 0 0 8px var(--cor-secundaria);
-    }
+    .volume-slider { -webkit-appearance: none; appearance: none; width: 120px; height: 6px; background: rgba(255, 255, 255, 0.15); border-radius: 5px; outline: none; cursor: pointer; }
+    .volume-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; background: var(--cor-secundaria); border-radius: 50%; }
 
-    /* ============== ESTILOS DO CONTADOR ============== */
-    .estatisticas {
+    .estatisticas { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 25px; padding-top: 18px; border-top: 1px solid var(--cor-borda); }
+    .estatisticas div { color: var(--cor-texto); font-size: 0.95rem; opacity: 0.85; font-weight: 500; }
+    .estatisticas strong { color: var(--cor-secundaria); font-size: 1.4rem; font-weight: 700; display: block; margin-top: 4px; font-family: 'Orbitron', sans-serif; text-shadow: var(--glow-intensity); }
+
+    /* 🌍 CARD DE LOCALIZAÇÃO */
+    .location-card {
+      margin-top: 20px;
+      padding: 18px;
+      background: linear-gradient(135deg, rgba(37, 211, 102, 0.1), rgba(0, 153, 255, 0.05));
+      border: 1px solid rgba(37, 211, 102, 0.3);
+      border-radius: 14px;
+      text-align: left;
+    }
+    .location-card.loading { opacity: 0.7; text-align: center; }
+    .location-header {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-      margin-top: 25px;
-      padding-top: 18px;
-      border-top: 1px solid var(--cor-borda);
-    }
-    .estatisticas div {
-      color: var(--cor-texto);
-      font-size: 0.95rem;
-      opacity: 0.85;
-      font-weight: 500;
-    }
-    .estatisticas strong {
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-size: 0.85rem;
       color: var(--cor-secundaria);
-      font-size: 1.4rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       font-weight: 700;
-      display: block;
-      margin-top: 4px;
-      font-family: 'Orbitron', sans-serif;
-      text-shadow: var(--glow-intensity);
     }
+    .location-header .pulse-dot {
+      width: 8px; height: 8px;
+      background: #25D366;
+      border-radius: 50%;
+      animation: pulse-dot 1.5s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
+    }
+    .location-main {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 12px;
+    }
+    .location-flag {
+      font-size: 3rem;
+      line-height: 1;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+    }
+    .location-info { flex-grow: 1; min-width: 0; }
+    .location-city { font-size: 1.4rem; font-weight: 700; color: #fff; margin: 0; line-height: 1.2; }
+    .location-state { font-size: 0.95rem; color: var(--cor-secundaria); margin: 2px 0 0 0; }
+    .location-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+      font-size: 0.85rem;
+    }
+    .location-detail {
+      background: rgba(0,0,0,0.3);
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .location-detail-label {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 3px;
+    }
+    .location-detail-value { color: #fff; font-weight: 600; font-size: 0.9rem; word-break: break-word; }
+    .location-status { margin-top: 12px; font-size: 0.8rem; text-align: center; color: rgba(255,255,255,0.6); font-style: italic; }
+    .location-status.listening { color: #25D366; font-weight: 700; font-style: normal; }
 
     @media (max-width: 992px) {
         .main-layout { flex-direction: column; }
@@ -267,22 +282,13 @@
     @media (max-width: 600px) {
       body { padding: 1rem 0.5rem; }
       header h1 { font-size: 1.6rem; letter-spacing: 0; }
-      header .slogan { font-size: 0.95rem; }
       .glass-card { padding: 1.5rem; }
       .news-item { flex-direction: column; align-items: center; text-align: center; }
       .schedule-item { flex-direction: column; gap: 0.5rem; text-align: center; }
-      .schedule-time { padding-right: 0; }
-      .schedule-title { text-align: center; }
+      .location-main { flex-direction: column; text-align: center; }
+      .location-details { grid-template-columns: 1fr; }
     }
   </style>
-  
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JKDH8V8Y81"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-JKDH8V8Y81');
-  </script>
 </head>
 <body>
   <div class="background-ambientes"></div> 
@@ -296,10 +302,9 @@
     <div class="main-layout">
         <div class="main-content">
             <section class="glass-card player-card fade-in-section">
-              <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/logodaradio.jpg" alt="Logo da Rádio conexão Montes Claros" class="player-logo">
+              <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/logodaradio.jpg" alt="Logo da Rádio" class="player-logo">
               <h2>NO AR</h2>
 
-              <!-- NOW PLAYING - Zeno.fm SSE Listener -->
               <div id="now-playing">
                   <strong>🎧 Tocando agora:</strong>
                   <span id="song-title" style="margin-left: 8px; color: #fff; font-weight: 700;">Buscando faixa...</span>
@@ -316,19 +321,47 @@
                   </button>
                   <div class="volume-control">
                     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path></svg>
-                    <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1" class="volume-slider">
+                    <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1" class="volume-slider" aria-label="Volume">
                   </div>
                 </div>
               </div>
               
-              <!-- ============== CONTADORES PRECISOS EM TEMPO REAL EM NUVEM ============== -->
               <div class="estatisticas">
-                <div>👥 Ouvintes agora<br><strong id="ouvintes">0</strong></div>
+                <div>👥 Ouvintes no site<br><strong id="ouvintes">0</strong></div>
                 <div>👁️ Total de visitas<br><strong id="totalVisitas">0</strong></div>
               </div>
-              <!-- ======================================================================= -->
+
+              <!-- 🌍 CARD DE LOCALIZAÇÃO -->
+              <div class="location-card loading" id="locationCard">
+                <div class="location-header">
+                  <span class="pulse-dot"></span>
+                  <span>📍 Sua Localização (Você está ouvindo de...)</span>
+                </div>
+                
+                <div class="location-main">
+                  <div class="location-flag" id="locationFlag">🌍</div>
+                  <div class="location-info">
+                    <h3 class="location-city" id="locationCity">Detectando...</h3>
+                    <p class="location-state" id="locationState">Aguarde enquanto localizamos você</p>
+                  </div>
+                </div>
+                
+                <div class="location-details">
+                  <div class="location-detail">
+                    <div class="location-detail-label">Provedor</div>
+                    <div class="location-detail-value" id="locationISP">—</div>
+                  </div>
+                  <div class="location-detail">
+                    <div class="location-detail-label">Conexão</div>
+                    <div class="location-detail-value" id="locationConnection">—</div>
+                  </div>
+                </div>
+                
+                <div class="location-status" id="locationStatus">
+                  💡 Detectando sua cidade/região automaticamente...
+                </div>
+              </div>
               
-              <!-- LINK CORRIGIDO: Modificado de link.zeno.fm para stream.zeno.fm para tocar no player HTML5 nativo -->
               <audio id="audio-player" preload="none">
                   <source src="https://stream.zeno.fm/7heeu8w1pzzuv" type="audio/mpeg">
                   Seu navegador não suporta áudio online.
@@ -337,9 +370,9 @@
               <div class="player-socials">
                 <p>📲 Peça seu Pagode e Siga a Conexão!</p>
                 <div class="social-buttons">
-                    <a href="https://wa.me/5538998558528" target="_blank" rel="noopener noreferrer" class="whatsapp" aria-label="Link para o WhatsApp da rádio"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2.01C6.58 2.01 2.13 6.46 2.13 12c0 1.77.46 3.45 1.28 4.95L2.01 22l5.19-1.4c1.47.76 3.12 1.18 4.84 1.18h.01c5.46 0 9.91-4.45 9.91-9.91s-4.45-9.91-9.91-9.91zM12.04 20.28c-1.55 0-3.03-.4-4.32-1.12l-.31-.18-3.21.84.86-3.13-.2-.33a8.22 8.22 0 0 1-1.26-4.48c0-4.54 3.69-8.23 8.23-8.23 4.54 0 8.23 3.69 8.23 8.23 0 4.54-3.69 8.23-8.23 8.23zm4.49-5.93c-.26-.13-1.55-.77-1.79-.85-.24-.08-.42-.13-.59.13-.17.26-.68.85-.83 1.02-.15.17-.3.19-.56.06-.26-.13-1.09-.4-2.07-1.27-.76-.68-1.28-1.52-1.43-1.78-.15-.26-.02-.4.11-.53.12-.12.26-.3.39-.45.13-.15.17-.26.26-.43.08-.17.04-.31-.02-.44s-.59-1.43-.81-1.95c-.22-.52-.44-.45-.59-.46-.14-.01-.31-.01-.48-.01-.17 0-.43.06-.66.31-.22.26-.85.83-.85 2.02 0 1.19.87 2.34 1 2.5.13.17 1.73 2.65 4.19 3.7.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.06 1.55-1.04 1.77-2.04.22-1-.15-1.52-.26-1.65z"></path></svg></a>
-                    <a href="https://www.facebook.com/marcostheangel/" target="_blank" rel="noopener noreferrer" class="facebook" aria-label="Link para o Facebook da rádio"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.675 0h-21.35C.59 0 0 .59 0 1.325v21.35C0 23.41.59 24 1.325 24H12.82v-9.29H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h5.694c.735 0 1.325-.59 1.325-1.325V1.325C24 .59 23.41 0 22.675 0z"></path></svg></a>
-                    <a href="https://www.instagram.com/markim_miranda2024/" target="_blank" rel="noopener noreferrer" class="instagram" aria-label="Link para o Instagram da rádio"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-1.325.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.286-.057 1.694-.072 4.948-.072zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.286.058 1.694.072 4.948.072s3.662-.014 4.948-.072c4.354-.199 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"></path></svg></a>
+                    <a href="https://wa.me/5538998558528" target="_blank" rel="noopener noreferrer" class="whatsapp" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2.01C6.58 2.01 2.13 6.46 2.13 12c0 1.77.46 3.45 1.28 4.95L2.01 22l5.19-1.4c1.47.76 3.12 1.18 4.84 1.18h.01c5.46 0 9.91-4.45 9.91-9.91s-4.45-9.91-9.91-9.91zM12.04 20.28c-1.55 0-3.03-.4-4.32-1.12l-.31-.18-3.21.84.86-3.13-.2-.33a8.22 8.22 0 0 1-1.26-4.48c0-4.54 3.69-8.23 8.23-8.23 4.54 0 8.23 3.69 8.23 8.23 0 4.54-3.69 8.23-8.23 8.23zm4.49-5.93c-.26-.13-1.55-.77-1.79-.85-.24-.08-.42-.13-.59.13-.17.26-.68.85-.83 1.02-.15.17-.3.19-.56.06-.26-.13-1.09-.4-2.07-1.27-.76-.68-1.28-1.52-1.43-1.78-.15-.26-.02-.4.11-.53.12-.12.26-.3.39-.45.13-.15.17-.26.26-.43.08-.17.04-.31-.02-.44s-.59-1.43-.81-1.95c-.22-.52-.44-.45-.59-.46-.14-.01-.31-.01-.48-.01-.17 0-.43.06-.66.31-.22.26-.85.83-.85 2.02 0 1.19.87 2.34 1 2.5.13.17 1.73 2.65 4.19 3.7.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.06 1.55-1.04 1.77-2.04.22-1-.15-1.52-.26-1.65z"></path></svg></a>
+                    <a href="https://www.facebook.com/marcostheangel/" target="_blank" rel="noopener noreferrer" class="facebook" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.675 0h-21.35C.59 0 0 .59 0 1.325v21.35C0 23.41.59 24 1.325 24H12.82v-9.29H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h5.694c.735 0 1.325-.59 1.325-1.325V1.325C24 .59 23.41 0 22.675 0z"></path></svg></a>
+                    <a href="https://www.instagram.com/markim_miranda2024/" target="_blank" rel="noopener noreferrer" class="instagram" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-1.325.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.286-.057 1.694-.072 4.948-.072zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.286.058 1.694.072 4.948.072s3.662-.014 4.948-.072c4.354-.199 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"></path></svg></a>
                 </div>
               </div>
             </section>
@@ -355,7 +388,6 @@
                 <div id="clock">Carregando...</div>
             </section>
         
-            <!-- GRADE DE PROGRAMAÇÃO -->
             <section class="glass-card fade-in-section">
                 <h3 class="content-section">📅 Programação</h3>
                 <div class="schedule-item"><span class="schedule-time">00:00 - 05:59</span><span class="schedule-title">PAGODE NA MADRUGADA</span></div>
@@ -371,10 +403,10 @@
             <section class="glass-card fade-in-section">
                 <h3 class="content-section">📻 Notícias da Rádio</h3>
                 <div class="news-item">
-                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/microfone.jpg" alt="Microfone de estúdio de rádio">
+                  <img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/microfone.jpg" alt="Microfone de rádio">
                   <div class="news-content">
                     <h4>Participe e Ganhe Prêmios na Roda de Pagode!</h4>
-                    <p>Mande sua mensagem em nosso WhatsApp durante a programação, peça o seu pagode favorito e concorra a prêmios exclusivos dos nossos parceiros locais. Sua participação faz a nossa alegria!</p>
+                    <p>Mande sua mensagem em nosso WhatsApp durante a programação, peça o seu pagode favorito e concorra a prêmios exclusivos dos nossos parceiros locais.</p>
                   </div>
                 </div>
             </section>
@@ -405,13 +437,13 @@
             <section class="glass-card sidebar-section fade-in-section">
               <h3>🌟 Nossos Parceiros</h3>
               <div class="sponsors-grid">
-                   <a href="#" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/logodaradio.jpg" alt="radiosnet"></a>
-                   <a href="#" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/radiosnet.png" alt="radiosnet"></a>
-                   <a href="#" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/dj.jpg" alt="Logotipo de um DJ parceiro"></a>
-                   <a href="https://wa.me/5538998558528" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/markim.jpg" alt="Foto do parceiro Markim Divulgações"></a>
-                   <a href="https://wa.me/5538988429992" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/Vitrine.jpg" alt="Logotipo do parceiro Vitrine Shows e Eventos"></a>
-                   <a href="https://wa.me/5538991963125" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/djdaniel.png" alt="Foto do parceiro DJ Daniel"></a>
-                   <a href="https://wa.me/5538997440909" target="_blank"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/cleidepatrocinadora.jpeg" alt="parceiro Cleide Turismo"></a>
+                   <a href="#" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/logodaradio.jpg" alt="Logo da rádio"></a>
+                   <a href="#" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/radiosnet.png" alt="RadiosNet"></a>
+                   <a href="#" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/dj.jpg" alt="DJ parceiro"></a>
+                   <a href="https://wa.me/5538998558528" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/markim.jpg" alt="Markim"></a>
+                   <a href="https://wa.me/5538988429992" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/Vitrine.jpg" alt="Vitrine Shows"></a>
+                   <a href="https://wa.me/5538991963125" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/djdaniel.png" alt="DJ Daniel"></a>
+                   <a href="https://wa.me/5538997440909" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/cleidepatrocinadora.jpeg" alt="Cleide Turismo"></a>
               </div>
               <div class="cta-sponsors">
                 <p>Quer anunciar na rádio de pagode que mais cresce?</p>
@@ -426,296 +458,240 @@
     </footer>
   </div>
 
-  <!-- BIBLIOTECAS COMPATÍVEIS DO FIREBASE SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
   
   <script>
+    // ============================================
+    // 🔧 CONFIGURAÇÃO
+    // ============================================
+    const DEBUG_MODE = true;
+    const log = (...a) => DEBUG_MODE && console.log(...a);
+
     document.addEventListener('DOMContentLoaded', () => {
 
-        // --- INICIALIZAÇÃO DO FIREBASE COM AS SUAS CREDENCIAIS ---
+        // ============================================
+        // 🔥 INICIALIZAÇÃO DO FIREBASE
+        // ============================================
         const firebaseConfig = {
-          apiKey: "AIzaSyDp5fRdPQbfn2XUmFpaArXoeE4n1-KnKA0",
-          authDomain: "radio-conexao-contador.firebaseapp.com",
-          databaseURL: "https://radio-conexao-contador-default-rtdb.firebaseio.com",
-          projectId: "radio-conexao-contador",
-          storageBucket: "radio-conexao-contador.firebasestorage.app",
-          messagingSenderId: "861783522837",
-          appId: "1:861783522837:web:954b3d81a722d7e70dd81c",
-          measurementId: "G-X57WJP95X8"
+            apiKey: "AIzaSyDp5fRdPQbfn2XUmFpaArXoeE4n1-KnKA0",
+            authDomain: "radio-conexao-contador.firebaseapp.com",
+            databaseURL: "https://radio-conexao-contador-default-rtdb.firebaseio.com",
+            projectId: "radio-conexao-contador",
+            storageBucket: "radio-conexao-contador.firebasestorage.app",
+            messagingSenderId: "861783522837",
+            appId: "1:861783522837:web:954b3d81a722d7e70dd81c"
         };
 
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
-        }
+        if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
         const visitasRef = database.ref('radio/totalVisitas');
         const ouvintesRef = database.ref('radio/ouvintesAgora');
 
-        // --- ELEMENTOS DE TELA DO CONTADOR ---
         const ouvintesEl = document.getElementById('ouvintes');
         const totalVisitasEl = document.getElementById('totalVisitas');
 
-        function formatarNum(n) { return (n || 0).toLocaleString('pt-BR'); }
-        
-        // Variáveis para gerenciar contador avançado
-        let globalTotalVisitors = 0;
-        let lastSyncTime = 0;
-        let firebaseListener = null;
+        // ============================================
+        // 🌍 DETECTAR LOCALIZAÇÃO (3 APIs de fallback)
+        // ============================================
+        async function detectarLocalizacao() {
+            const locationCard = document.getElementById('locationCard');
+            const locationCity = document.getElementById('locationCity');
+            const locationState = document.getElementById('locationState');
+            const locationFlag = document.getElementById('locationFlag');
+            const locationISP = document.getElementById('locationISP');
+            const locationConnection = document.getElementById('locationConnection');
+            const locationStatus = document.getElementById('locationStatus');
 
-        // Sistema de Broadcast Channel para sincronização entre abas/janelas do MESMO navegador
-        let broadcastChannel = null;
-        try {
-            if ('BroadcastChannel' in window) {
-                broadcastChannel = new BroadcastChannel('radio_conexao_counter');
-                broadcastChannel.onmessage = (event) => {
-                    if (event.data && event.data.type === 'counter_update') {
-                        console.log('📡 Recebido update via BroadcastChannel:', event.data.value);
-                        // Compatibilidade com nova lógica de contagem
-                        const totalVisitasEl = document.getElementById('totalVisitas');
-                        if (totalVisitasEl) totalVisitasEl.textContent = event.data.value;
-                    }
-                };
-                console.log('✅ BroadcastChannel inicializado');
-            }
-        } catch (e) {
-            console.log('⚠️ BroadcastChannel não suportado');
-        }
+            const apis = [
+                {
+                    name: 'ipapi.co',
+                    url: 'https://ipapi.co/json/',
+                    parse: (d) => ({
+                        city: d.city, state: d.region, country: d.country_name,
+                        countryCode: d.country_code, isp: d.org, ip: d.ip
+                    })
+                },
+                {
+                    name: 'ip-api.com',
+                    url: 'https://ip-api.com/json/?fields=status,country,countryCode,region,regionName,city,org,query',
+                    parse: (d) => ({
+                        city: d.city, state: d.regionName, country: d.country,
+                        countryCode: d.countryCode, isp: d.org, ip: d.query
+                    })
+                },
+                {
+                    name: 'ipwho.is',
+                    url: 'https://ipwho.is/',
+                    parse: (d) => ({
+                        city: d.city, state: d.region, country: d.country,
+                        countryCode: d.country_code, isp: d.connection?.org || d.connection?.isp, ip: d.ip
+                    })
+                }
+            ];
 
-        function animateCounter(elementId, targetValue) {
-            const element = document.getElementById(elementId);
-            if (!element) return;
-            
-            element.textContent = formatarNum(targetValue);
-        }
-
-        async function initializeVisitorCounter() {
-            console.log('📊 Inicializando contador com Firebase...');
-            
-            // Verifica se Firebase está disponível
-            if (!firebase.apps.length) {
-                console.error('❌ Firebase não inicializado! Usando fallback localStorage.');
-                const localValue = parseInt(localStorage.getItem('radio_local_total') || '0');
-                globalTotalVisitors = localValue > 0 ? localValue : Math.floor(Math.random() * 10) + 5;
-                animateCounter('totalVisitas', globalTotalVisitors);
-                localStorage.setItem('radio_local_total', globalTotalVisitors.toString());
-                return;
-            }
-            
-            const database = firebase.database();
-            const visitasRef = database.ref('radio/totalVisitas');
-            
-            // Escuta mudanças em tempo real no Firebase
-            visitasRef.on('value', (snapshot) => {
-                const data = snapshot.val();
-                
-                if (data !== null) {
-                    const firebaseCount = data;
+            for (const api of apis) {
+                try {
+                    log(`🔄 Tentando ${api.name}...`);
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 5000);
                     
-                    // Só atualiza se for diferente
-                    if (firebaseCount !== globalTotalVisitors) {
-                        globalTotalVisitors = firebaseCount;
-                        animateCounter('totalVisitas', globalTotalVisitors);
-                        lastSyncTime = Date.now();
-                        console.log('🔥 Firebase sync:', globalTotalVisitors);
-                        
-                        // Salva no localStorage como backup
-                        localStorage.setItem('radio_local_total', globalTotalVisitors.toString());
-                        
-                        // Envia update via BroadcastChannel
-                        if (broadcastChannel) {
-                            broadcastChannel.postMessage({
-                                type: 'counter_update',
-                                value: globalTotalVisitors,
-                                timestamp: Date.now()
-                            });
-                        }
-                    }
-                } else {
-                    // Primeiro acesso - inicializa contador no Firebase
-                    console.log('🆕 Inicializando contador no Firebase...');
-                    const initialValue = Math.floor(Math.random() * 10) + 5; // 5-15
-                    
-                    visitasRef.set({
-                        count: initialValue,
-                        last_updated: Date.now()
-                    }).then(() => {
-                        globalTotalVisitors = initialValue;
-                        animateCounter('totalVisitas', initialValue);
-                        localStorage.setItem('radio_local_total', initialValue.toString());
-                        console.log('✅ Contador Firebase inicializado:', initialValue);
-                    }).catch((error) => {
-                        console.error('❌ Erro ao inicializar Firebase:', error);
-                        // Fallback para localStorage
-                        globalTotalVisitors = initialValue;
-                        animateCounter('totalVisitas', globalTotalVisitors);
+                    const response = await fetch(api.url, { 
+                        signal: controller.signal,
+                        cache: 'no-cache'
                     });
+                    clearTimeout(timeoutId);
+                    
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                    
+                    const data = await response.json();
+                    const info = api.parse(data);
+                    
+                    if (info.city && info.city !== '—') {
+                        log(`✅ ${api.name}:`, info);
+                        console.log('🔐 SEU IP COMPLETO:', info.ip);
+                        
+                        locationCity.textContent = info.city;
+                        locationState.textContent = `${info.state || ''}${info.country ? ' • ' + info.country : ''}`.trim();
+                        locationFlag.textContent = getCountryFlag(info.countryCode);
+                        locationISP.textContent = info.isp || 'Provedor não identificado';
+                        locationConnection.textContent = `IP: ${info.ip || '—'}`;
+                        
+                        locationCard.classList.remove('loading');
+                        if (locationStatus) {
+                            locationStatus.innerHTML = `✅ Detectado via ${api.name}`;
+                        }
+                        return;
+                    }
+                } catch (err) {
+                    log(`❌ ${api.name} falhou:`, err.message);
                 }
-            });
-        }
-
-        // Sincroniza contador periodicamente (Firebase já faz sync automático)
-        function startCounterSync() {
-            // Firebase Realtime Database já sincroniza em tempo real!
-            // Não precisamos de polling manual
-            console.log('✅ Firebase Realtime Database ativo - sincronização automática');
-        }
-        
-        async function incrementVisitorCounter() {
-            console.log('🎵 Incrementando contador de visitantes...');
-            
-            // Verifica se Firebase está disponível
-            if (!firebase.apps.length) {
-                console.warn('⚠️ Firebase não disponível, usando localStorage');
-                globalTotalVisitors++;
-                localStorage.setItem('radio_local_total', globalTotalVisitors.toString());
-                animateCounter('totalVisitas', globalTotalVisitors);
-                return;
             }
-            
-            const database = firebase.database();
-            const visitasRef = database.ref('radio/totalVisitas');
-            
-            // Usa transação do Firebase para incremento atômico (thread-safe)
-            visitasRef.transaction((currentData) => {
-                if (currentData === null) {
-                    // Primeiro acesso
-                    return {
-                        count: 1,
-                        last_updated: Date.now()
-                    };
-                } else {
-                    // Incrementa contador existente
-                    return {
-                        count: (currentData.count || 0) + 1,
-                        last_updated: Date.now()
-                    };
-                }
-            }).then((result) => {
-                const newCount = result.snapshot.val();
-                if(newCount && newCount.count !== undefined) {
-                    globalTotalVisitors = newCount.count;
-                    animateCounter('totalVisitas', newCount.count);
-                    localStorage.setItem('radio_local_total', newCount.count.toString());
-                    console.log('✅ Firebase incrementado:', newCount.count);
-                    
-                    // Envia update via BroadcastChannel
-                    if (broadcastChannel) {
-                        broadcastChannel.postMessage({
-                            type: 'counter_update',
-                            value: newCount.count,
-                            timestamp: Date.now()
-                        });
-                    }
-                } else {
-                    globalTotalVisitors = newCount;
-                    animateCounter('totalVisitas', newCount);
-                    localStorage.setItem('radio_local_total', newCount.toString());
-                    console.log('✅ Firebase incrementado:', newCount);
-                    
-                    // Envia update via BroadcastChannel
-                    if (broadcastChannel) {
-                        broadcastChannel.postMessage({
-                            type: 'counter_update',
-                            value: newCount,
-                            timestamp: Date.now()
-                        });
-                    }
-                }
-            }).catch((error) => {
-                console.error('❌ Erro ao incrementar no Firebase:', error);
-                // Fallback: incrementa localmente
-                globalTotalVisitors++;
-                localStorage.setItem('radio_local_total', globalTotalVisitors.toString());
-                animateCounter('totalVisitas', globalTotalVisitors);
-            });
+
+            locationCity.textContent = 'Não foi possível detectar';
+            locationState.textContent = 'Tente desativar AdBlock ou antivírus';
+            locationFlag.textContent = '❓';
+            locationCard.classList.remove('loading');
+            if (locationStatus) {
+                locationStatus.innerHTML = '⚠️ Detecção bloqueada';
+            }
         }
 
-        // Função para sincronização manual do contador (força refresh)
-        async function manualSyncCounter() {
-            console.log('🔄 Sincronização manual solicitada...');
-            // Implementação simplificada para o contexto do index(7).html
-            const visitasRef = firebase.database().ref('radio/totalVisitas');
-            
-            visitasRef.once('value').then((snapshot) => {
-                const data = snapshot.val();
-                if (data !== null) {
-                    globalTotalVisitors = data;
-                    animateCounter('totalVisitas', data);
-                    console.log('✅ Contador sincronizado manualmente:', data);
-                }
-            }).catch((error) => {
-                console.error('❌ Erro ao sincronizar contador:', error);
-            });
+        function getCountryFlag(countryCode) {
+            if (!countryCode || countryCode.length !== 2) return '🌍';
+            const codePoints = countryCode.toUpperCase().split('').map(char => 127397 + char.charCodeAt(0));
+            return String.fromCodePoint(...codePoints);
         }
 
-        // 1. Incrementa +1 Visita Global ao abrir a página
-        incrementVisitorCounter();
+        detectarLocalizacao();
 
-        // 2. Escuta mudanças em tempo real na nuvem e atualiza a tela
+        // ============================================
+        // 🔧 FUNÇÕES AUXILIARES
+        // ============================================
+        function extrairNumero(data) {
+            if (data === null || data === undefined) return 0;
+            if (typeof data === 'object' && data.count !== undefined) return data.count;
+            if (typeof data === 'number') return data;
+            return 0;
+        }
+
+        function formatarNum(n) { 
+            return (n || 0).toLocaleString('pt-BR'); 
+        }
+
+        // ============================================
+        // 📈 CONTADORES FIREBASE
+        // ============================================
+        async function incrementarVisita() {
+            try {
+                await visitasRef.transaction((atual) => extrairNumero(atual) + 1);
+            } catch (err) { log('❌ Erro visita:', err); }
+        }
+
+        let userIsListening = false;
+
+        async function adicionarOuvinte() {
+            if (userIsListening) return;
+            userIsListening = true;
+            try {
+                await ouvintesRef.transaction((atual) => extrairNumero(atual) + 1);
+            } catch (err) { log('❌ Erro ouvinte:', err); }
+        }
+
+        async function removerOuvinte() {
+            if (!userIsListening) return;
+            userIsListening = false;
+            try {
+                await ouvintesRef.transaction((atual) => Math.max(0, extrairNumero(atual) - 1));
+            } catch (err) { log('❌ Erro ouvinte:', err); }
+        }
+
+        incrementarVisita();
+
         visitasRef.on('value', (snapshot) => {
-            if (totalVisitasEl) totalVisitasEl.textContent = formatarNum(snapshot.val());
+            if (totalVisitasEl) totalVisitasEl.textContent = formatarNum(extrairNumero(snapshot.val()));
         });
 
         ouvintesRef.on('value', (snapshot) => {
-            if (ouvintesEl) ouvintesEl.textContent = formatarNum(snapshot.val());
+            if (ouvintesEl) ouvintesEl.textContent = formatarNum(extrairNumero(snapshot.val()));
         });
 
-        // 3. Modifica os ouvintes na nuvem de forma segura
-        function alterarOuvintesNuvem(valor) {
-            ouvintesRef.transaction((atual) => {
-                let resultado = (atual || 0) + valor;
-                return resultado < 0 ? 0 : resultado;
-            });
-        }
+        visitasRef.once('value', (snapshot) => {
+            const v = snapshot.val();
+            if (v === null || v === undefined) visitasRef.set(0);
+            else if (typeof v === 'object') visitasRef.set(extrairNumero(v));
+        });
 
-        // Inicializar contador de visitantes avançado
-        initializeVisitorCounter();
-        startCounterSync();
+        ouvintesRef.once('value', (snapshot) => {
+            const v = snapshot.val();
+            if (v === null || v === undefined) ouvintesRef.set(0);
+            else if (typeof v === 'object') ouvintesRef.set(extrairNumero(v));
+        });
 
-        // --- FUNÇÃO DO RELÓGIO ---
+        // ============================================
+        // 🕐 RELÓGIO
+        // ============================================
         function updateClock() {
-            const clockElement = document.getElementById('clock');
-            if (!clockElement) return;
+            const el = document.getElementById('clock');
+            if (!el) return;
             const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            clockElement.textContent = `${hours}:${minutes}:${seconds}`;
+            el.textContent = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
         }
-        setInterval(updateClock, 1000);
         updateClock();
+        setInterval(updateClock, 1000);
 
-        // --- FUNÇÃO PARA ATUALIZAR O NOME DO PROGRAMA ---
+        // ============================================
+        // 📻 NOME DO PROGRAMA
+        // ============================================
         function updateCurrentProgram() {
-            const programElement = document.getElementById('current-program-name');
-            if (!programElement) return;
-            const currentHour = new Date().getHours();
-            let programName = "Pagode na Madrugada";
-
-            if (currentHour >= 0 && currentHour < 6) { programName = "Pagode na Madrugada"; } 
-            else if (currentHour >= 6 && currentHour < 9) { programName = "Acorda, Pagodeiro!"; } 
-            else if (currentHour >= 9 && currentHour < 12) { programName = "Pagodão de Elite"; } 
-            else if (currentHour >= 12 && currentHour < 14) { programName = "Almoço com Samba"; }
-            else if (currentHour >= 14 && currentHour < 17) { programName = "Conexão Retrô"; } 
-            else if (currentHour >= 17 && currentHour < 20) { programName = "Happy Hour do Pagode"; } 
-            else if (currentHour >= 20 && currentHour < 22) { programName = "Pagode Romântico"; } 
-            else if (currentHour >= 22 && currentHour < 24) { programName = "Resenha da Conexão"; }
-                        
-            programElement.textContent = programName;
+            const el = document.getElementById('current-program-name');
+            if (!el) return;
+            const h = new Date().getHours();
+            const programs = [
+                [0, 6, "Pagode na Madrugada"],
+                [6, 9, "Acorda, Pagodeiro!"],
+                [9, 12, "Pagodão de Elite"],
+                [12, 14, "Almoço com Samba"],
+                [14, 17, "Conexão Retrô"],
+                [17, 20, "Happy Hour do Pagode"],
+                [20, 22, "Pagode Romântico"],
+                [22, 24, "Resenha da Conexão"]
+            ];
+            el.textContent = programs.find(p => h >= p[0] && h < p[1])?.[2] || "Pagode na Madrugada";
         }
-        setInterval(updateCurrentProgram, 60000);
         updateCurrentProgram();
+        setInterval(updateCurrentProgram, 60000);
 
-
-        // --- CONTROLES DO PLAYER CUSTOMIZADO ---
+        // ============================================
+        // 🎵 CONTROLES DO PLAYER
+        // ============================================
         const audioPlayer = document.getElementById('audio-player');
         const playPauseBtn = document.getElementById('play-pause-btn');
         const playIcon = document.getElementById('play-icon');
         const pauseIcon = document.getElementById('pause-icon');
         const volumeSlider = document.getElementById('volume-slider');
-        const playerLogo = document.querySelector('.player-logo'); 
-        let estouTocandoGlobal = false;
+        const playerLogo = document.querySelector('.player-logo');
+        const locationStatus = document.getElementById('locationStatus');
 
         function updatePlayPauseIcon() {
             if (audioPlayer.paused) {
@@ -731,61 +707,49 @@
 
         playPauseBtn.addEventListener('click', () => {
             if (audioPlayer.paused) {
-                audioPlayer.play().catch(error => console.error("Erro ao reproduzir áudio:", error));
+                audioPlayer.play().catch(err => log('❌ Erro play:', err));
             } else {
                 audioPlayer.pause();
             }
         });
 
-        // Quando o player realmente começa a tocar
         audioPlayer.addEventListener('play', () => {
             updatePlayPauseIcon();
-            if (!estouTocandoGlobal) {
-                estouTocandoGlobal = true;
-                alterarOuvintesNuvem(1); // Soma +1 ouvinte global no Firebase
+            adicionarOuvinte();
+            incrementarVisita();
+            if (locationStatus) {
+                locationStatus.classList.add('listening');
+                locationStatus.innerHTML = '🎵 Você está ouvindo a Rádio Conexão MOC AGORA!';
             }
         });
 
-        // Quando o áudio é pausado
         audioPlayer.addEventListener('pause', () => {
             updatePlayPauseIcon();
-            if (estouTocandoGlobal) {
-                estouTocandoGlobal = false;
-                alterarOuvintesNuvem(-1); // Remove -1 ouvinte global no Firebase
+            removerOuvinte();
+            if (locationStatus) {
+                locationStatus.classList.remove('listening');
+                locationStatus.innerHTML = '⏸️ Áudio pausado';
             }
         });
 
-        // Caso o usuário feche a aba sem pausar antes
         window.addEventListener('beforeunload', () => {
-            if (estouTocandoGlobal) {
-                ouvintesRef.transaction((atual) => {
-                    return (atual || 1) - 1;
-                });
-            }
+            if (userIsListening) removerOuvinte();
         });
 
         volumeSlider.addEventListener('input', () => {
             audioPlayer.volume = volumeSlider.value;
         });
-        
         audioPlayer.volume = volumeSlider.value;
 
-        audioPlayer.addEventListener('volumechange', () => {
-             if (volumeSlider) volumeSlider.value = audioPlayer.volume;
-        });
-
-        // Tenta iniciar se permitido pelo navegador
         const playPromise = audioPlayer.play();
         if (playPromise !== undefined) {
-            playPromise.then(_ => {
-                updatePlayPauseIcon();
-            }).catch(error => {
-                console.log("Autoplay bloqueado. Interação do usuário necessária.");
-                updatePlayPauseIcon();
-            });
+            playPromise.then(() => updatePlayPauseIcon())
+                .catch(() => updatePlayPauseIcon());
         }
-        
-        // --- FORMULÁRIO DE PEDIDOS SEM RECARREGAR ---
+
+        // ============================================
+        // 📝 FORMULÁRIO
+        // ============================================
         const form = document.getElementById('music-request-form');
         const formStatus = document.getElementById('form-status');
 
@@ -796,139 +760,100 @@
             
             submitButton.disabled = true;
             submitButton.textContent = 'Enviando...';
-            formStatus.style.color = 'var(--cor-secundaria)';
-            formStatus.textContent = '';
-
+            
             try {
                 const response = await fetch(event.target.action, {
                     method: form.method,
                     body: data,
                     headers: { 'Accept': 'application/json' }
                 });
-
                 if (response.ok) {
                     formStatus.style.color = '#25D366';
-                    formStatus.textContent = "Seu pedido de pagode foi enviado! Fique ligado na programação!";
+                    formStatus.textContent = "Seu pedido de pagode foi enviado! Fique ligado!";
                     form.reset();
-                } else {
-                    throw new Error('Erro no envio.');
-                }
-            } catch (error) {
+                } else throw new Error();
+            } catch {
                 formStatus.style.color = '#ff4d4d';
-                formStatus.textContent = "Opa! Algo deu errado. Tente novamente mais tarde.";
+                formStatus.textContent = "Opa! Algo deu errado.";
             } finally {
-                 submitButton.disabled = false;
-                 submitButton.textContent = 'Enviar Pedido';
+                submitButton.disabled = false;
+                submitButton.textContent = 'Enviar Pedido';
             }
         }
         if(form) form.addEventListener("submit", handleSubmit);
-        
-        // --- ANIMAÇÃO DE SCROLL (FADE-IN) ---
+
+        // ============================================
+        // ✨ FADE-IN
+        // ============================================
         const sections = document.querySelectorAll('.fade-in-section');
         if (sections.length > 0) {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    }
+                    if (entry.isIntersecting) entry.target.classList.add('is-visible');
                 });
             }, { threshold: 0.1 });
-
-            sections.forEach(section => { observer.observe(section); });
+            sections.forEach(section => observer.observe(section));
         }
 
-        // --- BUSCADOR DE NOTÍCIAS DA CIDADE ---
+        // ============================================
+        // 📰 NOTÍCIAS
+        // ============================================
         async function fetchCityNewsFromHTML() {
-            const newsContainer = document.getElementById('noticias-cidade-container');
-            if (!newsContainer) return;
-
-            const targetUrl = 'https://www.montesclaros.mg.gov.br/noticias';
-            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`;
+            const container = document.getElementById('noticias-cidade-container');
+            if (!container) return;
 
             try {
-                const response = await fetch(proxyUrl);
-                if (!response.ok) throw new Error(`Erro na rede: ${response.statusText}`);
-                const htmlString = await response.text();
+                const response = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent('https://www.montesclaros.mg.gov.br/noticias')}`);
+                const html = await response.text();
+                const doc = new DOMParser().parseFromString(html, 'text/html');
+                const articles = doc.querySelectorAll('.card-noticias');
+                const today = new Date().toLocaleDateString('pt-BR');
+                container.innerHTML = '';
+                let count = 0;
 
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(htmlString, 'text/html');
-                const newsArticles = doc.querySelectorAll('.card-noticias');
-
-                newsContainer.innerHTML = ''; 
-
-                if (newsArticles.length > 0) {
-                    let newsCount = 0;
-                    const today = new Date();
-                    const todayString = today.toLocaleDateString('pt-BR');
-
-                    newsArticles.forEach(article => {
-                        if (newsCount >= 5) return; 
-
-                        const dateElement = article.querySelector('.badge');
-                        const newsDate = dateElement ? dateElement.textContent.split(' - ')[0].trim() : '';
-
-                        if (newsDate === todayString) {
-                            const linkElement = article.querySelector('a');
-                            const imgElement = article.querySelector('img');
-                            const imageUrl = imgElement ? imgElement.getAttribute('data-src') : 'https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/noticia.jpg';
-                            const titleElement = article.querySelector('h2.title-small');
-
-                            if (linkElement && titleElement) {
-                                const link = linkElement.href;
-                                const title = titleElement.textContent.trim();
-                                
-                                const newsItem = document.createElement('div');
-                                newsItem.className = 'news-item';
-                                newsItem.innerHTML = `
-                                    <img src="${imageUrl}" alt="Imagem da notícia">
+                articles.forEach(article => {
+                    if (count >= 5) return;
+                    const date = article.querySelector('.badge')?.textContent.split(' - ')[0].trim();
+                    if (date === today) {
+                        const link = article.querySelector('a')?.href;
+                        const img = article.querySelector('img')?.getAttribute('data-src') || 'https://raw.githubusercontent.com/marcostheangels/webradio/main/imagens/noticia.jpg';
+                        const title = article.querySelector('h2.title-small')?.textContent.trim();
+                        if (link && title) {
+                            container.innerHTML += `
+                                <div class="news-item">
+                                    <img src="${img}" alt="Notícia">
                                     <div class="news-content">
                                         <h4>${title}</h4>
-                                        <p>${newsDate}</p>
+                                        <p>${date}</p>
                                         <a href="${link}" target="_blank" rel="noopener noreferrer">Leia a matéria completa</a>
                                     </div>
-                                `;
-                                newsContainer.appendChild(newsItem);
-                                newsCount++;
-                            }
+                                </div>`;
+                            count++;
                         }
-                    });
-
-                    if (newsCount === 0) {
-                        newsContainer.innerHTML = '<p>Nenhuma notícia da cidade foi publicada hoje.</p>';
                     }
-                } else {
-                    newsContainer.innerHTML = '<p>Nenhuma notícia encontrada na página da prefeitura.</p>';
-                }
-            } catch (error) {
-                console.error("Erro ao buscar notícias:", error);
-                newsContainer.innerHTML = '<p>Não foi possível carregar as notícias no momento.</p>';
+                });
+                if (count === 0) container.innerHTML = '<p>Nenhuma notícia publicada hoje.</p>';
+            } catch (err) {
+                container.innerHTML = '<p>Não foi possível carregar as notícias.</p>';
             }
         }
         fetchCityNewsFromHTML();
     });
 
-    // --- CONEXÃO METADADOS DA TRANSMISSÃO (NOW PLAYING) ---
-    const ZENO_API = 'https://api.zeno.fm/mounts/metadata/subscribe/7heeu8w1pzzuv';
-
+    // ============================================
+    // 🎵 NOW PLAYING
+    // ============================================
     function updateNowPlaying() {
-        const songElement = document.getElementById('song-title');
-        const eventSource = new EventSource(ZENO_API);
-        
-        eventSource.onmessage = function(event) {
+        const el = document.getElementById('song-title');
+        if (!el) return;
+        const es = new EventSource('https://api.zeno.fm/mounts/metadata/subscribe/7heeu8w1pzzuv');
+        es.onmessage = (e) => {
             try {
-                const data = JSON.parse(event.data);
-                const streamTitle = data.streamTitle || 'Programação Musical';
-                songElement.textContent = streamTitle;
-            } catch (error) {
-                console.error('Erro ao processar os metadados:', error);
-            }
+                const d = JSON.parse(e.data);
+                el.textContent = d.streamTitle || 'Programação Musical';
+            } catch {}
         };
-        
-        eventSource.onerror = function(error) {
-            console.error('Erro na conexão com a API da Zeno:', error);
-            eventSource.close();
-            setTimeout(updateNowPlaying, 5000);
-        };
+        es.onerror = () => { es.close(); setTimeout(updateNowPlaying, 5000); };
     }
     updateNowPlaying();
   </script>
